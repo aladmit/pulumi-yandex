@@ -622,7 +622,7 @@
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi/pulumi-yandex/sdk/go/yandex"
+            "importBasePath": "github.com/aladmit/pulumi-yandex/sdk/go/yandex"
         },
         "nodejs": {
             "dependencies": {
