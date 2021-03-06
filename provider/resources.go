@@ -126,11 +126,17 @@ func Provider() tfbridge.ProviderInfo {
 			// 		"tags": {Type: makeType(mainPkg, "Tags")},
 			// 	},
 			// },
+			
+			"yandex_vpc_network": {Tok: makeResource(mainMod, "VpcNetwork")},
+			"yandex_vpc_subnet": {Tok: makeResource(mainMod, "VpcSubnet")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example
 			// is below.
 			// "aws_ami": {Tok: makeDataSource(mainMod, "getAmi")},
+			
+			"yandex_vpc_network": {Tok: makeDataSource(mainMod, "getVpcNetwork")},
+			"yandex_vpc_subnet": {Tok: makeDataSource(mainMod, "getVpcSubnet")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			// List any npm dependencies and their versions

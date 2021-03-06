@@ -5,14 +5,40 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export * from "./getVpcNetwork";
+export * from "./getVpcSubnet";
 export * from "./provider";
+export * from "./vpcNetwork";
+export * from "./vpcSubnet";
 
 // Export sub-modules:
 import * as config from "./config";
+import * as types from "./types";
 
 export {
     config,
+    types,
 };
+
+// Import resources to register:
+import { VpcNetwork } from "./vpcNetwork";
+import { VpcSubnet } from "./vpcSubnet";
+
+const _module = {
+    version: utilities.getVersion(),
+    construct: (name: string, type: string, urn: string): pulumi.Resource => {
+        switch (type) {
+            case "yandex:index/vpcNetwork:VpcNetwork":
+                return new VpcNetwork(name, <any>undefined, { urn })
+            case "yandex:index/vpcSubnet:VpcSubnet":
+                return new VpcSubnet(name, <any>undefined, { urn })
+            default:
+                throw new Error(`unknown resource type ${type}`);
+        }
+    },
+};
+pulumi.runtime.registerResourceModule("yandex", "index/vpcNetwork", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/vpcSubnet", _module)
 
 import { Provider } from "./provider";
 

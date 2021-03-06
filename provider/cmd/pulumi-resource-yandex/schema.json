@@ -76,6 +76,88 @@
             }
         }
     },
+    "types": {
+        "yandex:index/VpcSubnetDhcpOptions:VpcSubnetDhcpOptions": {
+            "properties": {
+                "domainName": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "domainNameServers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "ntpServers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "yandex:index/getVpcSubnetDhcpOptions:getVpcSubnetDhcpOptions": {
+            "properties": {
+                "domainName": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "domainNameServers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "ntpServers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "domainName",
+                "domainNameServers",
+                "ntpServers"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
     "provider": {
         "description": "The provider type for the yandex package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
         "inputProperties": {
@@ -138,6 +220,395 @@
             "zone": {
                 "type": "string",
                 "description": "The zone where operations will take place. Examples are ru-central1-a, ru-central2-c, etc.\n"
+            }
+        }
+    },
+    "resources": {
+        "yandex:index/vpcNetwork:VpcNetwork": {
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "defaultSecurityGroupId": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "folderId": {
+                    "type": "string"
+                },
+                "labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "subnetIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "createdAt",
+                "defaultSecurityGroupId",
+                "folderId",
+                "name",
+                "subnetIds"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string"
+                },
+                "folderId": {
+                    "type": "string"
+                },
+                "labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering VpcNetwork resources.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "defaultSecurityGroupId": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "folderId": {
+                        "type": "string"
+                    },
+                    "labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "subnetIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "yandex:index/vpcSubnet:VpcSubnet": {
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "dhcpOptions": {
+                    "$ref": "#/types/yandex:index/VpcSubnetDhcpOptions:VpcSubnetDhcpOptions"
+                },
+                "folderId": {
+                    "type": "string"
+                },
+                "labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "networkId": {
+                    "type": "string"
+                },
+                "routeTableId": {
+                    "type": "string"
+                },
+                "v4CidrBlocks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "v6CidrBlocks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "zone": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "createdAt",
+                "folderId",
+                "name",
+                "networkId",
+                "v4CidrBlocks",
+                "v6CidrBlocks",
+                "zone"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string"
+                },
+                "dhcpOptions": {
+                    "$ref": "#/types/yandex:index/VpcSubnetDhcpOptions:VpcSubnetDhcpOptions"
+                },
+                "folderId": {
+                    "type": "string"
+                },
+                "labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "networkId": {
+                    "type": "string"
+                },
+                "routeTableId": {
+                    "type": "string"
+                },
+                "v4CidrBlocks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "zone": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "networkId",
+                "v4CidrBlocks"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering VpcSubnet resources.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "dhcpOptions": {
+                        "$ref": "#/types/yandex:index/VpcSubnetDhcpOptions:VpcSubnetDhcpOptions"
+                    },
+                    "folderId": {
+                        "type": "string"
+                    },
+                    "labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "networkId": {
+                        "type": "string"
+                    },
+                    "routeTableId": {
+                        "type": "string"
+                    },
+                    "v4CidrBlocks": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "v6CidrBlocks": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "zone": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "yandex:index/getVpcNetwork:getVpcNetwork": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getVpcNetwork.\n",
+                "properties": {
+                    "folderId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "networkId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getVpcNetwork.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "defaultSecurityGroupId": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "folderId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "networkId": {
+                        "type": "string"
+                    },
+                    "subnetIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "createdAt",
+                    "defaultSecurityGroupId",
+                    "description",
+                    "folderId",
+                    "labels",
+                    "name",
+                    "networkId",
+                    "subnetIds",
+                    "id"
+                ]
+            }
+        },
+        "yandex:index/getVpcSubnet:getVpcSubnet": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getVpcSubnet.\n",
+                "properties": {
+                    "folderId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "subnetId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getVpcSubnet.\n",
+                "properties": {
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "dhcpOptions": {
+                        "$ref": "#/types/yandex:index/getVpcSubnetDhcpOptions:getVpcSubnetDhcpOptions"
+                    },
+                    "folderId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "networkId": {
+                        "type": "string"
+                    },
+                    "routeTableId": {
+                        "type": "string"
+                    },
+                    "subnetId": {
+                        "type": "string"
+                    },
+                    "v4CidrBlocks": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "v6CidrBlocks": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "zone": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "createdAt",
+                    "description",
+                    "dhcpOptions",
+                    "folderId",
+                    "labels",
+                    "name",
+                    "networkId",
+                    "routeTableId",
+                    "subnetId",
+                    "v4CidrBlocks",
+                    "v6CidrBlocks",
+                    "zone",
+                    "id"
+                ]
             }
         }
     },
