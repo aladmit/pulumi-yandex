@@ -11,4 +11,5 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk v1.9.1
 	github.com/pulumi/pulumi-terraform-bridge/v2 v2.18.1
 	github.com/pulumi/pulumi/sdk/v2 v2.18.0
+	github.com/yandex-cloud/terraform-provider-yandex v0.51.1 // indirect
 )
