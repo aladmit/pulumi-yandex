@@ -26,7 +26,7 @@ import (
 	shimv1 "github.com/pulumi/pulumi-terraform-bridge/v2/pkg/tfshim/sdk-v1"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/resource"
 	"github.com/pulumi/pulumi/sdk/v2/go/common/tokens"
-	"github.com/terraform-providers/terraform-provider-xyz/xyz"
+	"github.com/yandex-cloud/terraform-provider-yandex/yandex"
 )
 
 // all of the token components used below.
