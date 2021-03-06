@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/provider
+module github.com/aladmit/pulumi-yandex/provider
 
 go 1.16
 

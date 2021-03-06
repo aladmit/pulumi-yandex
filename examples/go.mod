@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/examples
+module github.com/aladmit/pulumi-yandex/examples
 
 go 1.16
 

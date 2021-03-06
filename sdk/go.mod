@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/sdk
+module github.com/aladmit/pulumi-yandex/sdk
 
 go 1.16
 
