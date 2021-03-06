@@ -1,0 +1,177 @@
+{
+    "name": "yandex",
+    "description": "A Pulumi package for creating and managing yandex cloud resources.",
+    "keywords": [
+        "pulumi",
+        "yandex"
+    ],
+    "homepage": "https://pulumi.io",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`yandex` Terraform Provider](https://github.com/terraform-providers/terraform-provider-yandex).",
+    "repository": "https://github.com/aladmit/pulumi-yandex",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "config": {
+        "variables": {
+            "cloudId": {
+                "type": "string",
+                "description": "ID of Yandex.Cloud tenant.\n"
+            },
+            "endpoint": {
+                "type": "string",
+                "description": "The API endpoint for Yandex.Cloud SDK client.\n"
+            },
+            "folderId": {
+                "type": "string",
+                "description": "The default folder ID where resources will be placed.\n"
+            },
+            "insecure": {
+                "type": "boolean",
+                "description": "Explicitly allow the provider to perform \"insecure\" SSL requests. If omitted,default value is `false`.\n"
+            },
+            "maxRetries": {
+                "type": "integer",
+                "description": "The maximum number of times an API request is being executed. If the API request still fails, an error is thrown.\n"
+            },
+            "plaintext": {
+                "type": "boolean",
+                "description": "Disable use of TLS. Default value is `false`.\n"
+            },
+            "serviceAccountKeyFile": {
+                "type": "string",
+                "description": "Either the path to or the contents of a Service Account key file in JSON format.\n"
+            },
+            "storageAccessKey": {
+                "type": "string",
+                "description": "Yandex.Cloud storage service access key. Used when a storage data/resource doesn't have an access key explicitly\nspecified.\n"
+            },
+            "storageEndpoint": {
+                "type": "string",
+                "description": "Yandex.Cloud storage service endpoint. Default is storage.yandexcloud.net\n"
+            },
+            "storageSecretKey": {
+                "type": "string",
+                "description": "Yandex.Cloud storage service secret key. Used when a storage data/resource doesn't have a secret key explicitly\nspecified.\n"
+            },
+            "token": {
+                "type": "string",
+                "description": "The access token for API operations.\n"
+            },
+            "ymqAccessKey": {
+                "type": "string",
+                "description": "Yandex.Cloud Message Queue service access key. Used when a message queue resource doesn't have an access key explicitly\nspecified.\n"
+            },
+            "ymqEndpoint": {
+                "type": "string",
+                "description": "Yandex.Cloud Message Queue service endpoint. Default is message-queue.api.cloud.yandex.net\n"
+            },
+            "ymqSecretKey": {
+                "type": "string",
+                "description": "Yandex.Cloud Message Queue service secret key. Used when a message queue resource doesn't have a secret key explicitly\nspecified.\n"
+            },
+            "zone": {
+                "type": "string",
+                "description": "The zone where operations will take place. Examples are ru-central1-a, ru-central2-c, etc.\n"
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the yandex package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "inputProperties": {
+            "cloudId": {
+                "type": "string",
+                "description": "ID of Yandex.Cloud tenant.\n"
+            },
+            "endpoint": {
+                "type": "string",
+                "description": "The API endpoint for Yandex.Cloud SDK client.\n"
+            },
+            "folderId": {
+                "type": "string",
+                "description": "The default folder ID where resources will be placed.\n"
+            },
+            "insecure": {
+                "type": "boolean",
+                "description": "Explicitly allow the provider to perform \"insecure\" SSL requests. If omitted,default value is `false`.\n"
+            },
+            "maxRetries": {
+                "type": "integer",
+                "description": "The maximum number of times an API request is being executed. If the API request still fails, an error is thrown.\n"
+            },
+            "plaintext": {
+                "type": "boolean",
+                "description": "Disable use of TLS. Default value is `false`.\n"
+            },
+            "serviceAccountKeyFile": {
+                "type": "string",
+                "description": "Either the path to or the contents of a Service Account key file in JSON format.\n"
+            },
+            "storageAccessKey": {
+                "type": "string",
+                "description": "Yandex.Cloud storage service access key. Used when a storage data/resource doesn't have an access key explicitly\nspecified.\n"
+            },
+            "storageEndpoint": {
+                "type": "string",
+                "description": "Yandex.Cloud storage service endpoint. Default is storage.yandexcloud.net\n"
+            },
+            "storageSecretKey": {
+                "type": "string",
+                "description": "Yandex.Cloud storage service secret key. Used when a storage data/resource doesn't have a secret key explicitly\nspecified.\n"
+            },
+            "token": {
+                "type": "string",
+                "description": "The access token for API operations.\n"
+            },
+            "ymqAccessKey": {
+                "type": "string",
+                "description": "Yandex.Cloud Message Queue service access key. Used when a message queue resource doesn't have an access key explicitly\nspecified.\n"
+            },
+            "ymqEndpoint": {
+                "type": "string",
+                "description": "Yandex.Cloud Message Queue service endpoint. Default is message-queue.api.cloud.yandex.net\n"
+            },
+            "ymqSecretKey": {
+                "type": "string",
+                "description": "Yandex.Cloud Message Queue service secret key. Used when a message queue resource doesn't have a secret key explicitly\nspecified.\n"
+            },
+            "zone": {
+                "type": "string",
+                "description": "The zone where operations will take place. Examples are ru-central1-a, ru-central2-c, etc.\n"
+            }
+        }
+    },
+    "language": {
+        "csharp": {
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "2.*",
+                "System.Collections.Immutable": "1.6.0"
+            }
+        },
+        "go": {
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/pulumi/pulumi-yandex/sdk/go/yandex"
+        },
+        "nodejs": {
+            "dependencies": {
+                "@pulumi/pulumi": "^2.15.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^8.0.25"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing yandex cloud resources.",
+            "packageName": "",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-yandex)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-yandex` repo](https://github.com/pulumi/pulumi-yandex/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-yandex` repo](https://github.com/terraform-providers/terraform-provider-yandex/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-yandex)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-yandex` repo](https://github.com/pulumi/pulumi-yandex/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-yandex` repo](https://github.com/terraform-providers/terraform-provider-yandex/issues).",
+            "requires": {
+                "pulumi": "\u003e=2.15.0,\u003c3.0.0"
+            }
+        }
+    }
+}
