@@ -4,6 +4,1266 @@
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 
+export interface ComputeDiskDiskPlacementPolicy {
+    diskPlacementGroupId: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceBootDisk {
+    autoDelete?: pulumi.Input<boolean>;
+    deviceName?: pulumi.Input<string>;
+    diskId?: pulumi.Input<string>;
+    initializeParams?: pulumi.Input<inputs.ComputeInstanceBootDiskInitializeParams>;
+    mode?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceBootDiskInitializeParams {
+    description?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
+    size?: pulumi.Input<number>;
+    snapshotId?: pulumi.Input<string>;
+    type?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupAllocationPolicy {
+    zones: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ComputeInstanceGroupDeployPolicy {
+    maxCreating?: pulumi.Input<number>;
+    maxDeleting?: pulumi.Input<number>;
+    maxExpansion: pulumi.Input<number>;
+    maxUnavailable: pulumi.Input<number>;
+    startupDuration?: pulumi.Input<number>;
+    strategy?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupHealthCheck {
+    healthyThreshold?: pulumi.Input<number>;
+    httpOptions?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupHealthCheckHttpOption>[]>;
+    interval?: pulumi.Input<number>;
+    tcpOptions?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupHealthCheckTcpOption>[]>;
+    timeout?: pulumi.Input<number>;
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupHealthCheckHttpOption {
+    path: pulumi.Input<string>;
+    port: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupHealthCheckTcpOption {
+    port: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupInstance {
+    fqdn?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
+    networkInterfaces?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceNetworkInterface>[]>;
+    status?: pulumi.Input<string>;
+    statusChangedAt?: pulumi.Input<string>;
+    statusMessage?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceNetworkInterface {
+    index?: pulumi.Input<number>;
+    ipAddress?: pulumi.Input<string>;
+    ipv4?: pulumi.Input<boolean>;
+    ipv6?: pulumi.Input<boolean>;
+    ipv6Address?: pulumi.Input<string>;
+    macAddress?: pulumi.Input<string>;
+    nat?: pulumi.Input<boolean>;
+    natIpAddress?: pulumi.Input<string>;
+    natIpVersion?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplate {
+    bootDisk: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateBootDisk>;
+    description?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    metadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    name?: pulumi.Input<string>;
+    networkInterfaces: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateNetworkInterface>[]>;
+    networkSettings?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateNetworkSetting>[]>;
+    placementPolicy?: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplatePlacementPolicy>;
+    platformId?: pulumi.Input<string>;
+    resources: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateResources>;
+    schedulingPolicy?: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateSchedulingPolicy>;
+    secondaryDisks?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateSecondaryDisk>[]>;
+    serviceAccountId?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateBootDisk {
+    deviceName?: pulumi.Input<string>;
+    initializeParams: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams>;
+    mode?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams {
+    description?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string>;
+    size?: pulumi.Input<number>;
+    snapshotId?: pulumi.Input<string>;
+    type?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateNetworkInterface {
+    ipv4?: pulumi.Input<boolean>;
+    ipv6?: pulumi.Input<boolean>;
+    nat?: pulumi.Input<boolean>;
+    networkId?: pulumi.Input<string>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateNetworkSetting {
+    type?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplatePlacementPolicy {
+    placementGroupId: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateResources {
+    coreFraction?: pulumi.Input<number>;
+    cores: pulumi.Input<number>;
+    gpus?: pulumi.Input<number>;
+    memory: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateSchedulingPolicy {
+    preemptible?: pulumi.Input<boolean>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateSecondaryDisk {
+    deviceName?: pulumi.Input<string>;
+    initializeParams: pulumi.Input<inputs.ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams>;
+    mode?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams {
+    description?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string>;
+    size?: pulumi.Input<number>;
+    snapshotId?: pulumi.Input<string>;
+    type?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupLoadBalancer {
+    statusMessage?: pulumi.Input<string>;
+    targetGroupDescription?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string>;
+    targetGroupLabels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    targetGroupName?: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceGroupScalePolicy {
+    autoScale?: pulumi.Input<inputs.ComputeInstanceGroupScalePolicyAutoScale>;
+    fixedScale?: pulumi.Input<inputs.ComputeInstanceGroupScalePolicyFixedScale>;
+    testAutoScale?: pulumi.Input<inputs.ComputeInstanceGroupScalePolicyTestAutoScale>;
+}
+
+export interface ComputeInstanceGroupScalePolicyAutoScale {
+    cpuUtilizationTarget?: pulumi.Input<number>;
+    customRules?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupScalePolicyAutoScaleCustomRule>[]>;
+    initialSize: pulumi.Input<number>;
+    maxSize?: pulumi.Input<number>;
+    measurementDuration: pulumi.Input<number>;
+    minZoneSize?: pulumi.Input<number>;
+    stabilizationDuration?: pulumi.Input<number>;
+    warmupDuration?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupScalePolicyAutoScaleCustomRule {
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    metricName: pulumi.Input<string>;
+    metricType: pulumi.Input<string>;
+    ruleType: pulumi.Input<string>;
+    target: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupScalePolicyFixedScale {
+    size: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupScalePolicyTestAutoScale {
+    cpuUtilizationTarget?: pulumi.Input<number>;
+    customRules?: pulumi.Input<pulumi.Input<inputs.ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule>[]>;
+    initialSize: pulumi.Input<number>;
+    maxSize?: pulumi.Input<number>;
+    measurementDuration: pulumi.Input<number>;
+    minZoneSize?: pulumi.Input<number>;
+    stabilizationDuration?: pulumi.Input<number>;
+    warmupDuration?: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule {
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    metricName: pulumi.Input<string>;
+    metricType: pulumi.Input<string>;
+    ruleType: pulumi.Input<string>;
+    target: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceNetworkInterface {
+    index?: pulumi.Input<number>;
+    ipAddress?: pulumi.Input<string>;
+    ipv4?: pulumi.Input<boolean>;
+    ipv6?: pulumi.Input<boolean>;
+    ipv6Address?: pulumi.Input<string>;
+    macAddress?: pulumi.Input<string>;
+    nat?: pulumi.Input<boolean>;
+    natIpAddress?: pulumi.Input<string>;
+    natIpVersion?: pulumi.Input<string>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    subnetId: pulumi.Input<string>;
+}
+
+export interface ComputeInstancePlacementPolicy {
+    placementGroupId: pulumi.Input<string>;
+}
+
+export interface ComputeInstanceResources {
+    coreFraction?: pulumi.Input<number>;
+    cores: pulumi.Input<number>;
+    gpus?: pulumi.Input<number>;
+    memory: pulumi.Input<number>;
+}
+
+export interface ComputeInstanceSchedulingPolicy {
+    preemptible?: pulumi.Input<boolean>;
+}
+
+export interface ComputeInstanceSecondaryDisk {
+    autoDelete?: pulumi.Input<boolean>;
+    deviceName?: pulumi.Input<string>;
+    diskId: pulumi.Input<string>;
+    mode?: pulumi.Input<string>;
+}
+
+export interface DataprocClusterClusterConfig {
+    hadoop?: pulumi.Input<inputs.DataprocClusterClusterConfigHadoop>;
+    subclusterSpecs: pulumi.Input<pulumi.Input<inputs.DataprocClusterClusterConfigSubclusterSpec>[]>;
+    versionId?: pulumi.Input<string>;
+}
+
+export interface DataprocClusterClusterConfigHadoop {
+    properties?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    services?: pulumi.Input<pulumi.Input<string>[]>;
+    sshPublicKeys?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DataprocClusterClusterConfigSubclusterSpec {
+    hostsCount: pulumi.Input<number>;
+    id?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    resources: pulumi.Input<inputs.DataprocClusterClusterConfigSubclusterSpecResources>;
+    role: pulumi.Input<string>;
+    subnetId: pulumi.Input<string>;
+}
+
+export interface DataprocClusterClusterConfigSubclusterSpecResources {
+    diskSize: pulumi.Input<number>;
+    diskTypeId?: pulumi.Input<string>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface FunctionContent {
+    zipFilename: pulumi.Input<string>;
+}
+
+export interface FunctionPackage {
+    bucketName: pulumi.Input<string>;
+    objectName: pulumi.Input<string>;
+    sha256?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerDlq {
+    queueId: pulumi.Input<string>;
+    serviceAccountId: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerFunction {
+    id: pulumi.Input<string>;
+    retryAttempts?: pulumi.Input<string>;
+    retryInterval?: pulumi.Input<string>;
+    serviceAccountId?: pulumi.Input<string>;
+    tag?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerIot {
+    deviceId?: pulumi.Input<string>;
+    registryId: pulumi.Input<string>;
+    topic?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerMessageQueue {
+    batchCutoff: pulumi.Input<string>;
+    batchSize?: pulumi.Input<string>;
+    queueId: pulumi.Input<string>;
+    serviceAccountId: pulumi.Input<string>;
+    visibilityTimeout?: pulumi.Input<string>;
+}
+
+export interface FunctionTriggerObjectStorage {
+    bucketId: pulumi.Input<string>;
+    create?: pulumi.Input<boolean>;
+    delete?: pulumi.Input<boolean>;
+    prefix?: pulumi.Input<string>;
+    suffix?: pulumi.Input<string>;
+    update?: pulumi.Input<boolean>;
+}
+
+export interface FunctionTriggerTimer {
+    cronExpression: pulumi.Input<string>;
+}
+
+export interface GetComputeDiskDiskPlacementPolicy {
+    diskPlacementGroupId: string;
+}
+
+export interface GetComputeInstancePlacementPolicy {
+    placementGroupId: string;
+}
+
+export interface GetComputeInstanceSchedulingPolicy {
+    preemptible?: boolean;
+}
+
+export interface GetIamPolicyBinding {
+    members: string[];
+    role: string;
+}
+
+export interface GetMdbKafkaClusterConfig {
+    assignPublicIp?: boolean;
+    brokersCount?: number;
+    kafka: inputs.GetMdbKafkaClusterConfigKafka;
+    version: string;
+    zones: string[];
+    zookeeper?: inputs.GetMdbKafkaClusterConfigZookeeper;
+}
+
+export interface GetMdbKafkaClusterConfigKafka {
+    kafkaConfig?: inputs.GetMdbKafkaClusterConfigKafkaKafkaConfig;
+    resources: inputs.GetMdbKafkaClusterConfigKafkaResources;
+}
+
+export interface GetMdbKafkaClusterConfigKafkaKafkaConfig {
+    compressionType?: string;
+    logFlushIntervalMessages?: number;
+    logFlushIntervalMs?: number;
+    logFlushSchedulerIntervalMs?: number;
+    logPreallocate?: boolean;
+    logRetentionBytes?: number;
+    logRetentionHours?: number;
+    logRetentionMinutes?: number;
+    logRetentionMs?: number;
+    logSegmentBytes?: number;
+}
+
+export interface GetMdbKafkaClusterConfigKafkaResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetMdbKafkaClusterConfigZookeeper {
+    resources: inputs.GetMdbKafkaClusterConfigZookeeperResources;
+}
+
+export interface GetMdbKafkaClusterConfigZookeeperResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetMdbKafkaClusterTopic {
+    name: string;
+    partitions: number;
+    replicationFactor: number;
+    topicConfig?: inputs.GetMdbKafkaClusterTopicTopicConfig;
+}
+
+export interface GetMdbKafkaClusterTopicTopicConfig {
+    cleanupPolicy?: string;
+    compressionType?: string;
+    deleteRetentionMs?: number;
+    fileDeleteDelayMs?: number;
+    flushMessages?: number;
+    flushMs?: number;
+    maxMessageBytes?: number;
+    minCompactionLagMs?: number;
+    minInsyncReplicas?: number;
+    preallocate?: boolean;
+    retentionBytes?: number;
+    retentionMs?: number;
+    segmentBytes?: number;
+}
+
+export interface GetMdbKafkaClusterUser {
+    name: string;
+    password: string;
+    permissions?: inputs.GetMdbKafkaClusterUserPermission[];
+}
+
+export interface GetMdbKafkaClusterUserPermission {
+    role: string;
+    topicName: string;
+}
+
+export interface GetMdbMysqlClusterAccess {
+    dataLens?: boolean;
+    webSql?: boolean;
+}
+
+export interface KubernetesClusterKmsProvider {
+    keyId?: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMaster {
+    clusterCaCertificate?: pulumi.Input<string>;
+    externalV4Address?: pulumi.Input<string>;
+    externalV4Endpoint?: pulumi.Input<string>;
+    internalV4Address?: pulumi.Input<string>;
+    internalV4Endpoint?: pulumi.Input<string>;
+    maintenancePolicy?: pulumi.Input<inputs.KubernetesClusterMasterMaintenancePolicy>;
+    publicIp?: pulumi.Input<boolean>;
+    regional?: pulumi.Input<inputs.KubernetesClusterMasterRegional>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    version?: pulumi.Input<string>;
+    versionInfo?: pulumi.Input<inputs.KubernetesClusterMasterVersionInfo>;
+    zonal?: pulumi.Input<inputs.KubernetesClusterMasterZonal>;
+}
+
+export interface KubernetesClusterMasterMaintenancePolicy {
+    autoUpgrade: pulumi.Input<boolean>;
+    maintenanceWindows?: pulumi.Input<pulumi.Input<inputs.KubernetesClusterMasterMaintenancePolicyMaintenanceWindow>[]>;
+}
+
+export interface KubernetesClusterMasterMaintenancePolicyMaintenanceWindow {
+    day?: pulumi.Input<string>;
+    duration: pulumi.Input<string>;
+    startTime: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMasterRegional {
+    locations?: pulumi.Input<pulumi.Input<inputs.KubernetesClusterMasterRegionalLocation>[]>;
+    region: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMasterRegionalLocation {
+    subnetId?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
+}
+
+export interface KubernetesClusterMasterVersionInfo {
+    currentVersion?: pulumi.Input<string>;
+    newRevisionAvailable?: pulumi.Input<boolean>;
+    newRevisionSummary?: pulumi.Input<string>;
+    versionDeprecated?: pulumi.Input<boolean>;
+}
+
+export interface KubernetesClusterMasterZonal {
+    subnetId?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupAllocationPolicy {
+    locations?: pulumi.Input<pulumi.Input<inputs.KubernetesNodeGroupAllocationPolicyLocation>[]>;
+}
+
+export interface KubernetesNodeGroupAllocationPolicyLocation {
+    subnetId?: pulumi.Input<string>;
+    zone?: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupDeployPolicy {
+    maxExpansion: pulumi.Input<number>;
+    maxUnavailable: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplate {
+    bootDisk?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateBootDisk>;
+    metadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    nat?: pulumi.Input<boolean>;
+    platformId?: pulumi.Input<string>;
+    resources?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateResources>;
+    schedulingPolicy?: pulumi.Input<inputs.KubernetesNodeGroupInstanceTemplateSchedulingPolicy>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateBootDisk {
+    size?: pulumi.Input<number>;
+    type?: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateResources {
+    coreFraction?: pulumi.Input<number>;
+    cores?: pulumi.Input<number>;
+    gpus?: pulumi.Input<number>;
+    memory?: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateSchedulingPolicy {
+    preemptible?: pulumi.Input<boolean>;
+}
+
+export interface KubernetesNodeGroupMaintenancePolicy {
+    autoRepair: pulumi.Input<boolean>;
+    autoUpgrade: pulumi.Input<boolean>;
+    maintenanceWindows?: pulumi.Input<pulumi.Input<inputs.KubernetesNodeGroupMaintenancePolicyMaintenanceWindow>[]>;
+}
+
+export interface KubernetesNodeGroupMaintenancePolicyMaintenanceWindow {
+    day?: pulumi.Input<string>;
+    duration: pulumi.Input<string>;
+    startTime: pulumi.Input<string>;
+}
+
+export interface KubernetesNodeGroupScalePolicy {
+    autoScale?: pulumi.Input<inputs.KubernetesNodeGroupScalePolicyAutoScale>;
+    fixedScale?: pulumi.Input<inputs.KubernetesNodeGroupScalePolicyFixedScale>;
+}
+
+export interface KubernetesNodeGroupScalePolicyAutoScale {
+    initial: pulumi.Input<number>;
+    max: pulumi.Input<number>;
+    min: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupScalePolicyFixedScale {
+    size?: pulumi.Input<number>;
+}
+
+export interface KubernetesNodeGroupVersionInfo {
+    currentVersion?: pulumi.Input<string>;
+    newRevisionAvailable?: pulumi.Input<boolean>;
+    newRevisionSummary?: pulumi.Input<string>;
+    versionDeprecated?: pulumi.Input<boolean>;
+}
+
+export interface LbNetworkLoad_balancerAttachedTargetGroup {
+    healthchecks: pulumi.Input<pulumi.Input<inputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheck>[]>;
+    targetGroupId: pulumi.Input<string>;
+}
+
+export interface LbNetworkLoad_balancerAttachedTargetGroupHealthcheck {
+    healthyThreshold?: pulumi.Input<number>;
+    httpOptions?: pulumi.Input<inputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheckHttpOptions>;
+    interval?: pulumi.Input<number>;
+    name: pulumi.Input<string>;
+    tcpOptions?: pulumi.Input<inputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheckTcpOptions>;
+    timeout?: pulumi.Input<number>;
+    unhealthyThreshold?: pulumi.Input<number>;
+}
+
+export interface LbNetworkLoad_balancerAttachedTargetGroupHealthcheckHttpOptions {
+    path?: pulumi.Input<string>;
+    port: pulumi.Input<number>;
+}
+
+export interface LbNetworkLoad_balancerAttachedTargetGroupHealthcheckTcpOptions {
+    port: pulumi.Input<number>;
+}
+
+export interface LbNetworkLoad_balancerListener {
+    externalAddressSpec?: pulumi.Input<inputs.LbNetworkLoad_balancerListenerExternalAddressSpec>;
+    internalAddressSpec?: pulumi.Input<inputs.LbNetworkLoad_balancerListenerInternalAddressSpec>;
+    name: pulumi.Input<string>;
+    port: pulumi.Input<number>;
+    protocol?: pulumi.Input<string>;
+    targetPort?: pulumi.Input<number>;
+}
+
+export interface LbNetworkLoad_balancerListenerExternalAddressSpec {
+    address?: pulumi.Input<string>;
+    ipVersion?: pulumi.Input<string>;
+}
+
+export interface LbNetworkLoad_balancerListenerInternalAddressSpec {
+    address?: pulumi.Input<string>;
+    ipVersion?: pulumi.Input<string>;
+    subnetId: pulumi.Input<string>;
+}
+
+export interface LbTargetGroupTarget {
+    address: pulumi.Input<string>;
+    subnetId: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterAccess {
+    dataLens?: pulumi.Input<boolean>;
+    metrika?: pulumi.Input<boolean>;
+    serverless?: pulumi.Input<boolean>;
+    webSql?: pulumi.Input<boolean>;
+}
+
+export interface MdbClickhouseClusterBackupWindowStart {
+    hours?: pulumi.Input<number>;
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouse {
+    config?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfig>;
+    resources: pulumi.Input<inputs.MdbClickhouseClusterClickhouseResources>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfig {
+    backgroundPoolSize?: pulumi.Input<number>;
+    backgroundSchedulePoolSize?: pulumi.Input<number>;
+    compressions?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigCompression>[]>;
+    geobaseUri?: pulumi.Input<string>;
+    graphiteRollups?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigGraphiteRollup>[]>;
+    kafka?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigKafka>;
+    kafkaTopics?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigKafkaTopic>[]>;
+    keepAliveTimeout?: pulumi.Input<number>;
+    logLevel?: pulumi.Input<string>;
+    markCacheSize?: pulumi.Input<number>;
+    maxConcurrentQueries?: pulumi.Input<number>;
+    maxConnections?: pulumi.Input<number>;
+    maxPartitionSizeToDrop?: pulumi.Input<number>;
+    maxTableSizeToDrop?: pulumi.Input<number>;
+    mergeTree?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigMergeTree>;
+    metricLogEnabled?: pulumi.Input<boolean>;
+    metricLogRetentionSize?: pulumi.Input<number>;
+    metricLogRetentionTime?: pulumi.Input<number>;
+    partLogRetentionSize?: pulumi.Input<number>;
+    partLogRetentionTime?: pulumi.Input<number>;
+    queryLogRetentionSize?: pulumi.Input<number>;
+    queryLogRetentionTime?: pulumi.Input<number>;
+    queryThreadLogEnabled?: pulumi.Input<boolean>;
+    queryThreadLogRetentionSize?: pulumi.Input<number>;
+    queryThreadLogRetentionTime?: pulumi.Input<number>;
+    rabbitmq?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigRabbitmq>;
+    textLogEnabled?: pulumi.Input<boolean>;
+    textLogLevel?: pulumi.Input<string>;
+    textLogRetentionSize?: pulumi.Input<number>;
+    textLogRetentionTime?: pulumi.Input<number>;
+    timezone?: pulumi.Input<string>;
+    traceLogEnabled?: pulumi.Input<boolean>;
+    traceLogRetentionSize?: pulumi.Input<number>;
+    traceLogRetentionTime?: pulumi.Input<number>;
+    uncompressedCacheSize?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigCompression {
+    method: pulumi.Input<string>;
+    minPartSize: pulumi.Input<number>;
+    minPartSizeRatio: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigGraphiteRollup {
+    name: pulumi.Input<string>;
+    patterns?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern>[]>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern {
+    function: pulumi.Input<string>;
+    regexp?: pulumi.Input<string>;
+    retentions?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention>[]>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention {
+    age: pulumi.Input<number>;
+    precision: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigKafka {
+    saslMechanism?: pulumi.Input<string>;
+    saslPassword?: pulumi.Input<string>;
+    saslUsername?: pulumi.Input<string>;
+    securityProtocol?: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigKafkaTopic {
+    name: pulumi.Input<string>;
+    settings?: pulumi.Input<inputs.MdbClickhouseClusterClickhouseConfigKafkaTopicSettings>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigKafkaTopicSettings {
+    saslMechanism?: pulumi.Input<string>;
+    saslPassword?: pulumi.Input<string>;
+    saslUsername?: pulumi.Input<string>;
+    securityProtocol?: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigMergeTree {
+    maxBytesToMergeAtMinSpaceInPool?: pulumi.Input<number>;
+    maxReplicatedMergesInQueue?: pulumi.Input<number>;
+    numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge?: pulumi.Input<number>;
+    partsToDelayInsert?: pulumi.Input<number>;
+    partsToThrowInsert?: pulumi.Input<number>;
+    replicatedDeduplicationWindow?: pulumi.Input<number>;
+    replicatedDeduplicationWindowSeconds?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigRabbitmq {
+    password?: pulumi.Input<string>;
+    username?: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterClickhouseResources {
+    diskSize: pulumi.Input<number>;
+    diskTypeId: pulumi.Input<string>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterDatabase {
+    name: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterFormatSchema {
+    name: pulumi.Input<string>;
+    type: pulumi.Input<string>;
+    uri: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterHost {
+    assignPublicIp?: pulumi.Input<boolean>;
+    fqdn?: pulumi.Input<string>;
+    shardName?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string>;
+    type: pulumi.Input<string>;
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterMlModel {
+    name: pulumi.Input<string>;
+    type: pulumi.Input<string>;
+    uri: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterShardGroup {
+    description?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    shardNames: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MdbClickhouseClusterUser {
+    name: pulumi.Input<string>;
+    password: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterUserPermission>[]>;
+    quotas?: pulumi.Input<pulumi.Input<inputs.MdbClickhouseClusterUserQuota>[]>;
+    settings?: pulumi.Input<inputs.MdbClickhouseClusterUserSettings>;
+}
+
+export interface MdbClickhouseClusterUserPermission {
+    databaseName: pulumi.Input<string>;
+}
+
+export interface MdbClickhouseClusterUserQuota {
+    errors?: pulumi.Input<number>;
+    executionTime?: pulumi.Input<number>;
+    intervalDuration: pulumi.Input<number>;
+    queries?: pulumi.Input<number>;
+    readRows?: pulumi.Input<number>;
+    resultRows?: pulumi.Input<number>;
+}
+
+export interface MdbClickhouseClusterUserSettings {
+    addHttpCorsHeader?: pulumi.Input<boolean>;
+    allowDdl?: pulumi.Input<boolean>;
+    compile?: pulumi.Input<boolean>;
+    compileExpressions?: pulumi.Input<boolean>;
+    connectTimeout?: pulumi.Input<number>;
+    countDistinctImplementation?: pulumi.Input<string>;
+    distinctOverflowMode?: pulumi.Input<string>;
+    distributedAggregationMemoryEfficient?: pulumi.Input<boolean>;
+    distributedDdlTaskTimeout?: pulumi.Input<number>;
+    distributedProductMode?: pulumi.Input<string>;
+    emptyResultForAggregationByEmptySet?: pulumi.Input<boolean>;
+    enableHttpCompression?: pulumi.Input<boolean>;
+    fallbackToStaleReplicasForDistributedQueries?: pulumi.Input<boolean>;
+    forceIndexByDate?: pulumi.Input<boolean>;
+    forcePrimaryKey?: pulumi.Input<boolean>;
+    groupByOverflowMode?: pulumi.Input<string>;
+    groupByTwoLevelThreshold?: pulumi.Input<number>;
+    groupByTwoLevelThresholdBytes?: pulumi.Input<number>;
+    httpConnectionTimeout?: pulumi.Input<number>;
+    httpHeadersProgressInterval?: pulumi.Input<number>;
+    httpReceiveTimeout?: pulumi.Input<number>;
+    httpSendTimeout?: pulumi.Input<number>;
+    inputFormatDefaultsForOmittedFields?: pulumi.Input<boolean>;
+    inputFormatValuesInterpretExpressions?: pulumi.Input<boolean>;
+    insertQuorum?: pulumi.Input<number>;
+    insertQuorumTimeout?: pulumi.Input<number>;
+    joinOverflowMode?: pulumi.Input<string>;
+    joinUseNulls?: pulumi.Input<boolean>;
+    joinedSubqueryRequiresAlias?: pulumi.Input<boolean>;
+    lowCardinalityAllowInNativeFormat?: pulumi.Input<boolean>;
+    maxAstDepth?: pulumi.Input<number>;
+    maxAstElements?: pulumi.Input<number>;
+    maxBlockSize?: pulumi.Input<number>;
+    maxBytesBeforeExternalGroupBy?: pulumi.Input<number>;
+    maxBytesBeforeExternalSort?: pulumi.Input<number>;
+    maxBytesInDistinct?: pulumi.Input<number>;
+    maxBytesInJoin?: pulumi.Input<number>;
+    maxBytesInSet?: pulumi.Input<number>;
+    maxBytesToRead?: pulumi.Input<number>;
+    maxBytesToSort?: pulumi.Input<number>;
+    maxBytesToTransfer?: pulumi.Input<number>;
+    maxColumnsToRead?: pulumi.Input<number>;
+    maxExecutionTime?: pulumi.Input<number>;
+    maxExpandedAstElements?: pulumi.Input<number>;
+    maxInsertBlockSize?: pulumi.Input<number>;
+    maxMemoryUsage?: pulumi.Input<number>;
+    maxMemoryUsageForUser?: pulumi.Input<number>;
+    maxNetworkBandwidth?: pulumi.Input<number>;
+    maxNetworkBandwidthForUser?: pulumi.Input<number>;
+    maxQuerySize?: pulumi.Input<number>;
+    maxReplicaDelayForDistributedQueries?: pulumi.Input<number>;
+    maxResultBytes?: pulumi.Input<number>;
+    maxResultRows?: pulumi.Input<number>;
+    maxRowsInDistinct?: pulumi.Input<number>;
+    maxRowsInJoin?: pulumi.Input<number>;
+    maxRowsInSet?: pulumi.Input<number>;
+    maxRowsToGroupBy?: pulumi.Input<number>;
+    maxRowsToRead?: pulumi.Input<number>;
+    maxRowsToSort?: pulumi.Input<number>;
+    maxRowsToTransfer?: pulumi.Input<number>;
+    maxTemporaryColumns?: pulumi.Input<number>;
+    maxTemporaryNonConstColumns?: pulumi.Input<number>;
+    maxThreads?: pulumi.Input<number>;
+    mergeTreeMaxBytesToUseCache?: pulumi.Input<number>;
+    mergeTreeMaxRowsToUseCache?: pulumi.Input<number>;
+    mergeTreeMinBytesForConcurrentRead?: pulumi.Input<number>;
+    mergeTreeMinRowsForConcurrentRead?: pulumi.Input<number>;
+    minBytesToUseDirectIo?: pulumi.Input<number>;
+    minCountToCompile?: pulumi.Input<number>;
+    minCountToCompileExpression?: pulumi.Input<number>;
+    minExecutionSpeed?: pulumi.Input<number>;
+    minExecutionSpeedBytes?: pulumi.Input<number>;
+    minInsertBlockSizeBytes?: pulumi.Input<number>;
+    minInsertBlockSizeRows?: pulumi.Input<number>;
+    outputFormatJsonQuote64bitIntegers?: pulumi.Input<boolean>;
+    outputFormatJsonQuoteDenormals?: pulumi.Input<boolean>;
+    priority?: pulumi.Input<number>;
+    quotaMode?: pulumi.Input<string>;
+    readOverflowMode?: pulumi.Input<string>;
+    readonly?: pulumi.Input<number>;
+    receiveTimeout?: pulumi.Input<number>;
+    replicationAlterPartitionsSync?: pulumi.Input<number>;
+    resultOverflowMode?: pulumi.Input<string>;
+    selectSequentialConsistency?: pulumi.Input<boolean>;
+    sendProgressInHttpHeaders?: pulumi.Input<boolean>;
+    sendTimeout?: pulumi.Input<number>;
+    setOverflowMode?: pulumi.Input<string>;
+    skipUnavailableShards?: pulumi.Input<boolean>;
+    sortOverflowMode?: pulumi.Input<string>;
+    timeoutOverflowMode?: pulumi.Input<string>;
+    transferOverflowMode?: pulumi.Input<string>;
+    transformNullIn?: pulumi.Input<boolean>;
+    useUncompressedCache?: pulumi.Input<boolean>;
+}
+
+export interface MdbClickhouseClusterZookeeper {
+    resources?: pulumi.Input<inputs.MdbClickhouseClusterZookeeperResources>;
+}
+
+export interface MdbClickhouseClusterZookeeperResources {
+    diskSize?: pulumi.Input<number>;
+    diskTypeId?: pulumi.Input<string>;
+    resourcePresetId?: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterConfig {
+    assignPublicIp?: pulumi.Input<boolean>;
+    brokersCount?: pulumi.Input<number>;
+    kafka: pulumi.Input<inputs.MdbKafkaClusterConfigKafka>;
+    version: pulumi.Input<string>;
+    zones: pulumi.Input<pulumi.Input<string>[]>;
+    zookeeper?: pulumi.Input<inputs.MdbKafkaClusterConfigZookeeper>;
+}
+
+export interface MdbKafkaClusterConfigKafka {
+    kafkaConfig?: pulumi.Input<inputs.MdbKafkaClusterConfigKafkaKafkaConfig>;
+    resources: pulumi.Input<inputs.MdbKafkaClusterConfigKafkaResources>;
+}
+
+export interface MdbKafkaClusterConfigKafkaKafkaConfig {
+    compressionType?: pulumi.Input<string>;
+    logFlushIntervalMessages?: pulumi.Input<number>;
+    logFlushIntervalMs?: pulumi.Input<number>;
+    logFlushSchedulerIntervalMs?: pulumi.Input<number>;
+    logPreallocate?: pulumi.Input<boolean>;
+    logRetentionBytes?: pulumi.Input<number>;
+    logRetentionHours?: pulumi.Input<number>;
+    logRetentionMinutes?: pulumi.Input<number>;
+    logRetentionMs?: pulumi.Input<number>;
+    logSegmentBytes?: pulumi.Input<number>;
+}
+
+export interface MdbKafkaClusterConfigKafkaResources {
+    diskSize: pulumi.Input<number>;
+    diskTypeId: pulumi.Input<string>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterConfigZookeeper {
+    resources: pulumi.Input<inputs.MdbKafkaClusterConfigZookeeperResources>;
+}
+
+export interface MdbKafkaClusterConfigZookeeperResources {
+    diskSize: pulumi.Input<number>;
+    diskTypeId: pulumi.Input<string>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbKafkaClusterTopic {
+    name: pulumi.Input<string>;
+    partitions: pulumi.Input<number>;
+    replicationFactor: pulumi.Input<number>;
+    topicConfig?: pulumi.Input<inputs.MdbKafkaClusterTopicTopicConfig>;
+}
+
+export interface MdbKafkaClusterTopicTopicConfig {
+    cleanupPolicy?: pulumi.Input<string>;
+    compressionType?: pulumi.Input<string>;
+    deleteRetentionMs?: pulumi.Input<number>;
+    fileDeleteDelayMs?: pulumi.Input<number>;
+    flushMessages?: pulumi.Input<number>;
+    flushMs?: pulumi.Input<number>;
+    maxMessageBytes?: pulumi.Input<number>;
+    minCompactionLagMs?: pulumi.Input<number>;
+    minInsyncReplicas?: pulumi.Input<number>;
+    preallocate?: pulumi.Input<boolean>;
+    retentionBytes?: pulumi.Input<number>;
+    retentionMs?: pulumi.Input<number>;
+    segmentBytes?: pulumi.Input<number>;
+}
+
+export interface MdbKafkaClusterUser {
+    name: pulumi.Input<string>;
+    password: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbKafkaClusterUserPermission>[]>;
+}
+
+export interface MdbKafkaClusterUserPermission {
+    role: pulumi.Input<string>;
+    topicName: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterClusterConfig {
+    access?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigAccess>;
+    backupWindowStart?: pulumi.Input<inputs.MdbMongodbClusterClusterConfigBackupWindowStart>;
+    featureCompatibilityVersion?: pulumi.Input<string>;
+    version: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterClusterConfigAccess {
+    dataLens?: pulumi.Input<boolean>;
+}
+
+export interface MdbMongodbClusterClusterConfigBackupWindowStart {
+    hours?: pulumi.Input<number>;
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbMongodbClusterDatabase {
+    name: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterHost {
+    assignPublicIp?: pulumi.Input<boolean>;
+    health?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
+    role?: pulumi.Input<string>;
+    shardName?: pulumi.Input<string>;
+    subnetId: pulumi.Input<string>;
+    type?: pulumi.Input<string>;
+    zoneId: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterResources {
+    diskSize: pulumi.Input<number>;
+    diskTypeId: pulumi.Input<string>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbMongodbClusterUser {
+    name: pulumi.Input<string>;
+    password: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbMongodbClusterUserPermission>[]>;
+}
+
+export interface MdbMongodbClusterUserPermission {
+    databaseName: pulumi.Input<string>;
+    roles?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MdbMysqlClusterAccess {
+    dataLens?: pulumi.Input<boolean>;
+    webSql?: pulumi.Input<boolean>;
+}
+
+export interface MdbMysqlClusterBackupWindowStart {
+    hours?: pulumi.Input<number>;
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbMysqlClusterDatabase {
+    name: pulumi.Input<string>;
+}
+
+export interface MdbMysqlClusterHost {
+    assignPublicIp?: pulumi.Input<boolean>;
+    fqdn?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string>;
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbMysqlClusterResources {
+    diskSize: pulumi.Input<number>;
+    diskTypeId: pulumi.Input<string>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbMysqlClusterRestore {
+    backupId: pulumi.Input<string>;
+    time?: pulumi.Input<string>;
+}
+
+export interface MdbMysqlClusterUser {
+    authenticationPlugin?: pulumi.Input<string>;
+    connectionLimits?: pulumi.Input<inputs.MdbMysqlClusterUserConnectionLimits>;
+    globalPermissions?: pulumi.Input<pulumi.Input<string>[]>;
+    name: pulumi.Input<string>;
+    password: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbMysqlClusterUserPermission>[]>;
+}
+
+export interface MdbMysqlClusterUserConnectionLimits {
+    maxConnectionsPerHour?: pulumi.Input<number>;
+    maxQuestionsPerHour?: pulumi.Input<number>;
+    maxUpdatesPerHour?: pulumi.Input<number>;
+    maxUserConnections?: pulumi.Input<number>;
+}
+
+export interface MdbMysqlClusterUserPermission {
+    databaseName: pulumi.Input<string>;
+    roles?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface MdbPostgresqlClusterConfig {
+    access?: pulumi.Input<inputs.MdbPostgresqlClusterConfigAccess>;
+    autofailover?: pulumi.Input<boolean>;
+    backupWindowStart?: pulumi.Input<inputs.MdbPostgresqlClusterConfigBackupWindowStart>;
+    performanceDiagnostics?: pulumi.Input<inputs.MdbPostgresqlClusterConfigPerformanceDiagnostics>;
+    poolerConfig?: pulumi.Input<inputs.MdbPostgresqlClusterConfigPoolerConfig>;
+    postgresqlConfig?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    resources: pulumi.Input<inputs.MdbPostgresqlClusterConfigResources>;
+    version: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterConfigAccess {
+    dataLens?: pulumi.Input<boolean>;
+    webSql?: pulumi.Input<boolean>;
+}
+
+export interface MdbPostgresqlClusterConfigBackupWindowStart {
+    hours?: pulumi.Input<number>;
+    minutes?: pulumi.Input<number>;
+}
+
+export interface MdbPostgresqlClusterConfigPerformanceDiagnostics {
+    enabled?: pulumi.Input<boolean>;
+    sessionsSamplingInterval: pulumi.Input<number>;
+    statementsSamplingInterval: pulumi.Input<number>;
+}
+
+export interface MdbPostgresqlClusterConfigPoolerConfig {
+    poolDiscard?: pulumi.Input<boolean>;
+    poolingMode?: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterConfigResources {
+    diskSize: pulumi.Input<number>;
+    diskTypeId?: pulumi.Input<string>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterDatabase {
+    extensions?: pulumi.Input<pulumi.Input<inputs.MdbPostgresqlClusterDatabaseExtension>[]>;
+    lcCollate?: pulumi.Input<string>;
+    lcType?: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    owner: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterDatabaseExtension {
+    name: pulumi.Input<string>;
+    version?: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterHost {
+    assignPublicIp?: pulumi.Input<boolean>;
+    fqdn?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
+    priority?: pulumi.Input<number>;
+    replicationSource?: pulumi.Input<string>;
+    replicationSourceName?: pulumi.Input<string>;
+    role?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string>;
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbPostgresqlClusterRestore {
+    backupId: pulumi.Input<string>;
+    time?: pulumi.Input<string>;
+    timeInclusive?: pulumi.Input<boolean>;
+}
+
+export interface MdbPostgresqlClusterUser {
+    connLimit?: pulumi.Input<number>;
+    grants?: pulumi.Input<pulumi.Input<string>[]>;
+    login?: pulumi.Input<boolean>;
+    name: pulumi.Input<string>;
+    password: pulumi.Input<string>;
+    permissions?: pulumi.Input<pulumi.Input<inputs.MdbPostgresqlClusterUserPermission>[]>;
+    settings?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface MdbPostgresqlClusterUserPermission {
+    databaseName: pulumi.Input<string>;
+}
+
+export interface MdbRedisClusterConfig {
+    maxmemoryPolicy?: pulumi.Input<string>;
+    password: pulumi.Input<string>;
+    timeout?: pulumi.Input<number>;
+    version: pulumi.Input<string>;
+}
+
+export interface MdbRedisClusterHost {
+    fqdn?: pulumi.Input<string>;
+    shardName?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string>;
+    zone: pulumi.Input<string>;
+}
+
+export interface MdbRedisClusterResources {
+    diskSize: pulumi.Input<number>;
+    resourcePresetId: pulumi.Input<string>;
+}
+
+export interface StorageBucketCorsRule {
+    allowedHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    allowedMethods: pulumi.Input<pulumi.Input<string>[]>;
+    allowedOrigins: pulumi.Input<pulumi.Input<string>[]>;
+    exposeHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    maxAgeSeconds?: pulumi.Input<number>;
+}
+
+export interface StorageBucketGrant {
+    id?: pulumi.Input<string>;
+    permissions: pulumi.Input<pulumi.Input<string>[]>;
+    type: pulumi.Input<string>;
+    uri?: pulumi.Input<string>;
+}
+
+export interface StorageBucketLifecycleRule {
+    abortIncompleteMultipartUploadDays?: pulumi.Input<number>;
+    enabled: pulumi.Input<boolean>;
+    expiration?: pulumi.Input<inputs.StorageBucketLifecycleRuleExpiration>;
+    id?: pulumi.Input<string>;
+    noncurrentVersionExpiration?: pulumi.Input<inputs.StorageBucketLifecycleRuleNoncurrentVersionExpiration>;
+    noncurrentVersionTransitions?: pulumi.Input<pulumi.Input<inputs.StorageBucketLifecycleRuleNoncurrentVersionTransition>[]>;
+    prefix?: pulumi.Input<string>;
+    transitions?: pulumi.Input<pulumi.Input<inputs.StorageBucketLifecycleRuleTransition>[]>;
+}
+
+export interface StorageBucketLifecycleRuleExpiration {
+    date?: pulumi.Input<string>;
+    days?: pulumi.Input<number>;
+    expiredObjectDeleteMarker?: pulumi.Input<boolean>;
+}
+
+export interface StorageBucketLifecycleRuleNoncurrentVersionExpiration {
+    days?: pulumi.Input<number>;
+}
+
+export interface StorageBucketLifecycleRuleNoncurrentVersionTransition {
+    days?: pulumi.Input<number>;
+    storageClass: pulumi.Input<string>;
+}
+
+export interface StorageBucketLifecycleRuleTransition {
+    date?: pulumi.Input<string>;
+    days?: pulumi.Input<number>;
+    storageClass: pulumi.Input<string>;
+}
+
+export interface StorageBucketLogging {
+    targetBucket: pulumi.Input<string>;
+    targetPrefix?: pulumi.Input<string>;
+}
+
+export interface StorageBucketServerSideEncryptionConfiguration {
+    rule: pulumi.Input<inputs.StorageBucketServerSideEncryptionConfigurationRule>;
+}
+
+export interface StorageBucketServerSideEncryptionConfigurationRule {
+    applyServerSideEncryptionByDefault: pulumi.Input<inputs.StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault>;
+}
+
+export interface StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault {
+    kmsMasterKeyId: pulumi.Input<string>;
+    sseAlgorithm: pulumi.Input<string>;
+}
+
+export interface StorageBucketVersioning {
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface StorageBucketWebsite {
+    errorDocument?: pulumi.Input<string>;
+    indexDocument?: pulumi.Input<string>;
+}
+
+export interface VpcAddressExternalIpv4Address {
+    address?: pulumi.Input<string>;
+    ddosProtectionProvider?: pulumi.Input<string>;
+    outgoingSmtpCapability?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string>;
+}
+
+export interface VpcRouteTableStaticRoute {
+    destinationPrefix?: pulumi.Input<string>;
+    nextHopAddress?: pulumi.Input<string>;
+}
+
+export interface VpcSecurityGroupEgress {
+    description?: pulumi.Input<string>;
+    fromPort?: pulumi.Input<number>;
+    id?: pulumi.Input<string>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    port?: pulumi.Input<number>;
+    predefinedTarget?: pulumi.Input<string>;
+    protocol: pulumi.Input<string>;
+    securityGroupId?: pulumi.Input<string>;
+    toPort?: pulumi.Input<number>;
+    v4CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+    v6CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface VpcSecurityGroupIngress {
+    description?: pulumi.Input<string>;
+    fromPort?: pulumi.Input<number>;
+    id?: pulumi.Input<string>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    port?: pulumi.Input<number>;
+    predefinedTarget?: pulumi.Input<string>;
+    protocol: pulumi.Input<string>;
+    securityGroupId?: pulumi.Input<string>;
+    toPort?: pulumi.Input<number>;
+    v4CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+    v6CidrBlocks?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface VpcSubnetDhcpOptions {
     domainName?: pulumi.Input<string>;
     domainNameServers?: pulumi.Input<pulumi.Input<string>[]>;

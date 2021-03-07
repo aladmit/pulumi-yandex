@@ -7,11 +7,6913 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union
 from . import _utilities, _tables
+from . import outputs
 
 __all__ = [
+    'ComputeDiskDiskPlacementPolicy',
+    'ComputeInstanceBootDisk',
+    'ComputeInstanceBootDiskInitializeParams',
+    'ComputeInstanceGroupAllocationPolicy',
+    'ComputeInstanceGroupDeployPolicy',
+    'ComputeInstanceGroupHealthCheck',
+    'ComputeInstanceGroupHealthCheckHttpOption',
+    'ComputeInstanceGroupHealthCheckTcpOption',
+    'ComputeInstanceGroupInstance',
+    'ComputeInstanceGroupInstanceNetworkInterface',
+    'ComputeInstanceGroupInstanceTemplate',
+    'ComputeInstanceGroupInstanceTemplateBootDisk',
+    'ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams',
+    'ComputeInstanceGroupInstanceTemplateNetworkInterface',
+    'ComputeInstanceGroupInstanceTemplateNetworkSetting',
+    'ComputeInstanceGroupInstanceTemplatePlacementPolicy',
+    'ComputeInstanceGroupInstanceTemplateResources',
+    'ComputeInstanceGroupInstanceTemplateSchedulingPolicy',
+    'ComputeInstanceGroupInstanceTemplateSecondaryDisk',
+    'ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams',
+    'ComputeInstanceGroupLoadBalancer',
+    'ComputeInstanceGroupScalePolicy',
+    'ComputeInstanceGroupScalePolicyAutoScale',
+    'ComputeInstanceGroupScalePolicyAutoScaleCustomRule',
+    'ComputeInstanceGroupScalePolicyFixedScale',
+    'ComputeInstanceGroupScalePolicyTestAutoScale',
+    'ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule',
+    'ComputeInstanceNetworkInterface',
+    'ComputeInstancePlacementPolicy',
+    'ComputeInstanceResources',
+    'ComputeInstanceSchedulingPolicy',
+    'ComputeInstanceSecondaryDisk',
+    'DataprocClusterClusterConfig',
+    'DataprocClusterClusterConfigHadoop',
+    'DataprocClusterClusterConfigSubclusterSpec',
+    'DataprocClusterClusterConfigSubclusterSpecResources',
+    'FunctionContent',
+    'FunctionPackage',
+    'FunctionTriggerDlq',
+    'FunctionTriggerFunction',
+    'FunctionTriggerIot',
+    'FunctionTriggerMessageQueue',
+    'FunctionTriggerObjectStorage',
+    'FunctionTriggerTimer',
+    'KubernetesClusterKmsProvider',
+    'KubernetesClusterMaster',
+    'KubernetesClusterMasterMaintenancePolicy',
+    'KubernetesClusterMasterMaintenancePolicyMaintenanceWindow',
+    'KubernetesClusterMasterRegional',
+    'KubernetesClusterMasterRegionalLocation',
+    'KubernetesClusterMasterVersionInfo',
+    'KubernetesClusterMasterZonal',
+    'KubernetesNodeGroupAllocationPolicy',
+    'KubernetesNodeGroupAllocationPolicyLocation',
+    'KubernetesNodeGroupDeployPolicy',
+    'KubernetesNodeGroupInstanceTemplate',
+    'KubernetesNodeGroupInstanceTemplateBootDisk',
+    'KubernetesNodeGroupInstanceTemplateResources',
+    'KubernetesNodeGroupInstanceTemplateSchedulingPolicy',
+    'KubernetesNodeGroupMaintenancePolicy',
+    'KubernetesNodeGroupMaintenancePolicyMaintenanceWindow',
+    'KubernetesNodeGroupScalePolicy',
+    'KubernetesNodeGroupScalePolicyAutoScale',
+    'KubernetesNodeGroupScalePolicyFixedScale',
+    'KubernetesNodeGroupVersionInfo',
+    'LbNetworkLoad_balancerAttachedTargetGroup',
+    'LbNetworkLoad_balancerAttachedTargetGroupHealthcheck',
+    'LbNetworkLoad_balancerAttachedTargetGroupHealthcheckHttpOptions',
+    'LbNetworkLoad_balancerAttachedTargetGroupHealthcheckTcpOptions',
+    'LbNetworkLoad_balancerListener',
+    'LbNetworkLoad_balancerListenerExternalAddressSpec',
+    'LbNetworkLoad_balancerListenerInternalAddressSpec',
+    'LbTargetGroupTarget',
+    'MdbClickhouseClusterAccess',
+    'MdbClickhouseClusterBackupWindowStart',
+    'MdbClickhouseClusterClickhouse',
+    'MdbClickhouseClusterClickhouseConfig',
+    'MdbClickhouseClusterClickhouseConfigCompression',
+    'MdbClickhouseClusterClickhouseConfigGraphiteRollup',
+    'MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern',
+    'MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention',
+    'MdbClickhouseClusterClickhouseConfigKafka',
+    'MdbClickhouseClusterClickhouseConfigKafkaTopic',
+    'MdbClickhouseClusterClickhouseConfigKafkaTopicSettings',
+    'MdbClickhouseClusterClickhouseConfigMergeTree',
+    'MdbClickhouseClusterClickhouseConfigRabbitmq',
+    'MdbClickhouseClusterClickhouseResources',
+    'MdbClickhouseClusterDatabase',
+    'MdbClickhouseClusterFormatSchema',
+    'MdbClickhouseClusterHost',
+    'MdbClickhouseClusterMlModel',
+    'MdbClickhouseClusterShardGroup',
+    'MdbClickhouseClusterUser',
+    'MdbClickhouseClusterUserPermission',
+    'MdbClickhouseClusterUserQuota',
+    'MdbClickhouseClusterUserSettings',
+    'MdbClickhouseClusterZookeeper',
+    'MdbClickhouseClusterZookeeperResources',
+    'MdbKafkaClusterConfig',
+    'MdbKafkaClusterConfigKafka',
+    'MdbKafkaClusterConfigKafkaKafkaConfig',
+    'MdbKafkaClusterConfigKafkaResources',
+    'MdbKafkaClusterConfigZookeeper',
+    'MdbKafkaClusterConfigZookeeperResources',
+    'MdbKafkaClusterTopic',
+    'MdbKafkaClusterTopicTopicConfig',
+    'MdbKafkaClusterUser',
+    'MdbKafkaClusterUserPermission',
+    'MdbMongodbClusterClusterConfig',
+    'MdbMongodbClusterClusterConfigAccess',
+    'MdbMongodbClusterClusterConfigBackupWindowStart',
+    'MdbMongodbClusterDatabase',
+    'MdbMongodbClusterHost',
+    'MdbMongodbClusterResources',
+    'MdbMongodbClusterUser',
+    'MdbMongodbClusterUserPermission',
+    'MdbMysqlClusterAccess',
+    'MdbMysqlClusterBackupWindowStart',
+    'MdbMysqlClusterDatabase',
+    'MdbMysqlClusterHost',
+    'MdbMysqlClusterResources',
+    'MdbMysqlClusterRestore',
+    'MdbMysqlClusterUser',
+    'MdbMysqlClusterUserConnectionLimits',
+    'MdbMysqlClusterUserPermission',
+    'MdbPostgresqlClusterConfig',
+    'MdbPostgresqlClusterConfigAccess',
+    'MdbPostgresqlClusterConfigBackupWindowStart',
+    'MdbPostgresqlClusterConfigPerformanceDiagnostics',
+    'MdbPostgresqlClusterConfigPoolerConfig',
+    'MdbPostgresqlClusterConfigResources',
+    'MdbPostgresqlClusterDatabase',
+    'MdbPostgresqlClusterDatabaseExtension',
+    'MdbPostgresqlClusterHost',
+    'MdbPostgresqlClusterRestore',
+    'MdbPostgresqlClusterUser',
+    'MdbPostgresqlClusterUserPermission',
+    'MdbRedisClusterConfig',
+    'MdbRedisClusterHost',
+    'MdbRedisClusterResources',
+    'StorageBucketCorsRule',
+    'StorageBucketGrant',
+    'StorageBucketLifecycleRule',
+    'StorageBucketLifecycleRuleExpiration',
+    'StorageBucketLifecycleRuleNoncurrentVersionExpiration',
+    'StorageBucketLifecycleRuleNoncurrentVersionTransition',
+    'StorageBucketLifecycleRuleTransition',
+    'StorageBucketLogging',
+    'StorageBucketServerSideEncryptionConfiguration',
+    'StorageBucketServerSideEncryptionConfigurationRule',
+    'StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault',
+    'StorageBucketVersioning',
+    'StorageBucketWebsite',
+    'VpcAddressExternalIpv4Address',
+    'VpcRouteTableStaticRoute',
+    'VpcSecurityGroupEgress',
+    'VpcSecurityGroupIngress',
     'VpcSubnetDhcpOptions',
+    'GetComputeDiskDiskPlacementPolicyResult',
+    'GetComputeInstanceBootDiskResult',
+    'GetComputeInstanceBootDiskInitializeParamResult',
+    'GetComputeInstanceGroupAllocationPolicyResult',
+    'GetComputeInstanceGroupDeployPolicyResult',
+    'GetComputeInstanceGroupHealthCheckResult',
+    'GetComputeInstanceGroupHealthCheckHttpOptionResult',
+    'GetComputeInstanceGroupHealthCheckTcpOptionResult',
+    'GetComputeInstanceGroupInstanceResult',
+    'GetComputeInstanceGroupInstanceNetworkInterfaceResult',
+    'GetComputeInstanceGroupInstanceTemplateResult',
+    'GetComputeInstanceGroupInstanceTemplateBootDiskResult',
+    'GetComputeInstanceGroupInstanceTemplateBootDiskInitializeParamsResult',
+    'GetComputeInstanceGroupInstanceTemplateNetworkInterfaceResult',
+    'GetComputeInstanceGroupInstanceTemplateNetworkSettingResult',
+    'GetComputeInstanceGroupInstanceTemplatePlacementPolicyResult',
+    'GetComputeInstanceGroupInstanceTemplateResourcesResult',
+    'GetComputeInstanceGroupInstanceTemplateSchedulingPolicyResult',
+    'GetComputeInstanceGroupInstanceTemplateSecondaryDiskResult',
+    'GetComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParamsResult',
+    'GetComputeInstanceGroupLoadBalancerResult',
+    'GetComputeInstanceGroupLoadBalancerStateResult',
+    'GetComputeInstanceGroupScalePolicyResult',
+    'GetComputeInstanceGroupScalePolicyAutoScaleResult',
+    'GetComputeInstanceGroupScalePolicyAutoScaleCustomRuleResult',
+    'GetComputeInstanceGroupScalePolicyFixedScaleResult',
+    'GetComputeInstanceGroupScalePolicyTestAutoScaleResult',
+    'GetComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleResult',
+    'GetComputeInstanceNetworkInterfaceResult',
+    'GetComputeInstancePlacementPolicyResult',
+    'GetComputeInstanceResourcesResult',
+    'GetComputeInstanceSchedulingPolicyResult',
+    'GetComputeInstanceSecondaryDiskResult',
+    'GetDataprocClusterClusterConfigResult',
+    'GetDataprocClusterClusterConfigHadoopResult',
+    'GetDataprocClusterClusterConfigSubclusterSpecResult',
+    'GetDataprocClusterClusterConfigSubclusterSpecResourcesResult',
+    'GetFunctionTriggerDlqResult',
+    'GetFunctionTriggerFunctionResult',
+    'GetFunctionTriggerIotResult',
+    'GetFunctionTriggerMessageQueueResult',
+    'GetFunctionTriggerObjectStorageResult',
+    'GetFunctionTriggerTimerResult',
+    'GetIamPolicyBindingResult',
+    'GetKubernetesClusterKmsProviderResult',
+    'GetKubernetesClusterMasterResult',
+    'GetKubernetesClusterMasterMaintenancePolicyResult',
+    'GetKubernetesClusterMasterMaintenancePolicyMaintenanceWindowResult',
+    'GetKubernetesClusterMasterRegionalResult',
+    'GetKubernetesClusterMasterVersionInfoResult',
+    'GetKubernetesClusterMasterZonalResult',
+    'GetKubernetesNodeGroupAllocationPolicyResult',
+    'GetKubernetesNodeGroupAllocationPolicyLocationResult',
+    'GetKubernetesNodeGroupDeployPolicyResult',
+    'GetKubernetesNodeGroupInstanceTemplateResult',
+    'GetKubernetesNodeGroupInstanceTemplateBootDiskResult',
+    'GetKubernetesNodeGroupInstanceTemplateResourcesResult',
+    'GetKubernetesNodeGroupInstanceTemplateSchedulingPolicyResult',
+    'GetKubernetesNodeGroupMaintenancePolicyResult',
+    'GetKubernetesNodeGroupMaintenancePolicyMaintenanceWindowResult',
+    'GetKubernetesNodeGroupScalePolicyResult',
+    'GetKubernetesNodeGroupScalePolicyAutoScaleResult',
+    'GetKubernetesNodeGroupScalePolicyFixedScaleResult',
+    'GetKubernetesNodeGroupVersionInfoResult',
+    'GetLbNetworkLoadBalancerAttachedTargetGroupResult',
+    'GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckResult',
+    'GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptionsResult',
+    'GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptionsResult',
+    'GetLbNetworkLoadBalancerListenerResult',
+    'GetLbNetworkLoadBalancerListenerExternalAddressSpecResult',
+    'GetLbNetworkLoadBalancerListenerInternalAddressSpecResult',
+    'GetLbTargetGroupTargetResult',
+    'GetMdbClickhouseClusterAccessResult',
+    'GetMdbClickhouseClusterBackupWindowStartResult',
+    'GetMdbClickhouseClusterClickhouseResult',
+    'GetMdbClickhouseClusterClickhouseConfigResult',
+    'GetMdbClickhouseClusterClickhouseConfigCompressionResult',
+    'GetMdbClickhouseClusterClickhouseConfigGraphiteRollupResult',
+    'GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternResult',
+    'GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionResult',
+    'GetMdbClickhouseClusterClickhouseConfigKafkaResult',
+    'GetMdbClickhouseClusterClickhouseConfigKafkaTopicResult',
+    'GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettingsResult',
+    'GetMdbClickhouseClusterClickhouseConfigMergeTreeResult',
+    'GetMdbClickhouseClusterClickhouseConfigRabbitmqResult',
+    'GetMdbClickhouseClusterClickhouseResourcesResult',
+    'GetMdbClickhouseClusterDatabaseResult',
+    'GetMdbClickhouseClusterFormatSchemaResult',
+    'GetMdbClickhouseClusterHostResult',
+    'GetMdbClickhouseClusterMlModelResult',
+    'GetMdbClickhouseClusterShardGroupResult',
+    'GetMdbClickhouseClusterUserResult',
+    'GetMdbClickhouseClusterUserPermissionResult',
+    'GetMdbClickhouseClusterUserQuotaResult',
+    'GetMdbClickhouseClusterUserSettingsResult',
+    'GetMdbClickhouseClusterZookeeperResult',
+    'GetMdbClickhouseClusterZookeeperResourcesResult',
+    'GetMdbKafkaClusterConfigResult',
+    'GetMdbKafkaClusterConfigKafkaResult',
+    'GetMdbKafkaClusterConfigKafkaKafkaConfigResult',
+    'GetMdbKafkaClusterConfigKafkaResourcesResult',
+    'GetMdbKafkaClusterConfigZookeeperResult',
+    'GetMdbKafkaClusterConfigZookeeperResourcesResult',
+    'GetMdbKafkaClusterTopicResult',
+    'GetMdbKafkaClusterTopicTopicConfigResult',
+    'GetMdbKafkaClusterUserResult',
+    'GetMdbKafkaClusterUserPermissionResult',
+    'GetMdbMongodbClusterClusterConfigResult',
+    'GetMdbMongodbClusterClusterConfigAccessResult',
+    'GetMdbMongodbClusterClusterConfigBackupWindowStartResult',
+    'GetMdbMongodbClusterDatabaseResult',
+    'GetMdbMongodbClusterHostResult',
+    'GetMdbMongodbClusterResourcesResult',
+    'GetMdbMongodbClusterUserResult',
+    'GetMdbMongodbClusterUserPermissionResult',
+    'GetMdbMysqlClusterAccessResult',
+    'GetMdbMysqlClusterBackupWindowStartResult',
+    'GetMdbMysqlClusterDatabaseResult',
+    'GetMdbMysqlClusterHostResult',
+    'GetMdbMysqlClusterResourcesResult',
+    'GetMdbMysqlClusterUserResult',
+    'GetMdbMysqlClusterUserConnectionLimitsResult',
+    'GetMdbMysqlClusterUserPermissionResult',
+    'GetMdbPostgresqlClusterConfigResult',
+    'GetMdbPostgresqlClusterConfigAccessResult',
+    'GetMdbPostgresqlClusterConfigBackupWindowStartResult',
+    'GetMdbPostgresqlClusterConfigPerformanceDiagnosticsResult',
+    'GetMdbPostgresqlClusterConfigPoolerConfigResult',
+    'GetMdbPostgresqlClusterConfigResourcesResult',
+    'GetMdbPostgresqlClusterDatabaseResult',
+    'GetMdbPostgresqlClusterDatabaseExtensionResult',
+    'GetMdbPostgresqlClusterHostResult',
+    'GetMdbPostgresqlClusterUserResult',
+    'GetMdbPostgresqlClusterUserPermissionResult',
+    'GetMdbRedisClusterConfigResult',
+    'GetMdbRedisClusterHostResult',
+    'GetMdbRedisClusterResourcesResult',
+    'GetVpcAddressExternalIpv4AddressResult',
+    'GetVpcRouteTableStaticRouteResult',
+    'GetVpcSecurityGroupEgressResult',
+    'GetVpcSecurityGroupIngressResult',
     'GetVpcSubnetDhcpOptionsResult',
 ]
+
+@pulumi.output_type
+class ComputeDiskDiskPlacementPolicy(dict):
+    def __init__(__self__, *,
+                 disk_placement_group_id: str):
+        pulumi.set(__self__, "disk_placement_group_id", disk_placement_group_id)
+
+    @property
+    @pulumi.getter(name="diskPlacementGroupId")
+    def disk_placement_group_id(self) -> str:
+        return pulumi.get(self, "disk_placement_group_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceBootDisk(dict):
+    def __init__(__self__, *,
+                 auto_delete: Optional[bool] = None,
+                 device_name: Optional[str] = None,
+                 disk_id: Optional[str] = None,
+                 initialize_params: Optional['outputs.ComputeInstanceBootDiskInitializeParams'] = None,
+                 mode: Optional[str] = None):
+        if auto_delete is not None:
+            pulumi.set(__self__, "auto_delete", auto_delete)
+        if device_name is not None:
+            pulumi.set(__self__, "device_name", device_name)
+        if disk_id is not None:
+            pulumi.set(__self__, "disk_id", disk_id)
+        if initialize_params is not None:
+            pulumi.set(__self__, "initialize_params", initialize_params)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+
+    @property
+    @pulumi.getter(name="autoDelete")
+    def auto_delete(self) -> Optional[bool]:
+        return pulumi.get(self, "auto_delete")
+
+    @property
+    @pulumi.getter(name="deviceName")
+    def device_name(self) -> Optional[str]:
+        return pulumi.get(self, "device_name")
+
+    @property
+    @pulumi.getter(name="diskId")
+    def disk_id(self) -> Optional[str]:
+        return pulumi.get(self, "disk_id")
+
+    @property
+    @pulumi.getter(name="initializeParams")
+    def initialize_params(self) -> Optional['outputs.ComputeInstanceBootDiskInitializeParams']:
+        return pulumi.get(self, "initialize_params")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[str]:
+        return pulumi.get(self, "mode")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceBootDiskInitializeParams(dict):
+    def __init__(__self__, *,
+                 description: Optional[str] = None,
+                 image_id: Optional[str] = None,
+                 name: Optional[str] = None,
+                 size: Optional[int] = None,
+                 snapshot_id: Optional[str] = None,
+                 type: Optional[str] = None):
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if image_id is not None:
+            pulumi.set(__self__, "image_id", image_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if snapshot_id is not None:
+            pulumi.set(__self__, "snapshot_id", snapshot_id)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> Optional[str]:
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[int]:
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> Optional[str]:
+        return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        return pulumi.get(self, "type")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupAllocationPolicy(dict):
+    def __init__(__self__, *,
+                 zones: Sequence[str]):
+        pulumi.set(__self__, "zones", zones)
+
+    @property
+    @pulumi.getter
+    def zones(self) -> Sequence[str]:
+        return pulumi.get(self, "zones")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupDeployPolicy(dict):
+    def __init__(__self__, *,
+                 max_expansion: int,
+                 max_unavailable: int,
+                 max_creating: Optional[int] = None,
+                 max_deleting: Optional[int] = None,
+                 startup_duration: Optional[int] = None,
+                 strategy: Optional[str] = None):
+        pulumi.set(__self__, "max_expansion", max_expansion)
+        pulumi.set(__self__, "max_unavailable", max_unavailable)
+        if max_creating is not None:
+            pulumi.set(__self__, "max_creating", max_creating)
+        if max_deleting is not None:
+            pulumi.set(__self__, "max_deleting", max_deleting)
+        if startup_duration is not None:
+            pulumi.set(__self__, "startup_duration", startup_duration)
+        if strategy is not None:
+            pulumi.set(__self__, "strategy", strategy)
+
+    @property
+    @pulumi.getter(name="maxExpansion")
+    def max_expansion(self) -> int:
+        return pulumi.get(self, "max_expansion")
+
+    @property
+    @pulumi.getter(name="maxUnavailable")
+    def max_unavailable(self) -> int:
+        return pulumi.get(self, "max_unavailable")
+
+    @property
+    @pulumi.getter(name="maxCreating")
+    def max_creating(self) -> Optional[int]:
+        return pulumi.get(self, "max_creating")
+
+    @property
+    @pulumi.getter(name="maxDeleting")
+    def max_deleting(self) -> Optional[int]:
+        return pulumi.get(self, "max_deleting")
+
+    @property
+    @pulumi.getter(name="startupDuration")
+    def startup_duration(self) -> Optional[int]:
+        return pulumi.get(self, "startup_duration")
+
+    @property
+    @pulumi.getter
+    def strategy(self) -> Optional[str]:
+        return pulumi.get(self, "strategy")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupHealthCheck(dict):
+    def __init__(__self__, *,
+                 healthy_threshold: Optional[int] = None,
+                 http_options: Optional[Sequence['outputs.ComputeInstanceGroupHealthCheckHttpOption']] = None,
+                 interval: Optional[int] = None,
+                 tcp_options: Optional[Sequence['outputs.ComputeInstanceGroupHealthCheckTcpOption']] = None,
+                 timeout: Optional[int] = None,
+                 unhealthy_threshold: Optional[int] = None):
+        if healthy_threshold is not None:
+            pulumi.set(__self__, "healthy_threshold", healthy_threshold)
+        if http_options is not None:
+            pulumi.set(__self__, "http_options", http_options)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+        if tcp_options is not None:
+            pulumi.set(__self__, "tcp_options", tcp_options)
+        if timeout is not None:
+            pulumi.set(__self__, "timeout", timeout)
+        if unhealthy_threshold is not None:
+            pulumi.set(__self__, "unhealthy_threshold", unhealthy_threshold)
+
+    @property
+    @pulumi.getter(name="healthyThreshold")
+    def healthy_threshold(self) -> Optional[int]:
+        return pulumi.get(self, "healthy_threshold")
+
+    @property
+    @pulumi.getter(name="httpOptions")
+    def http_options(self) -> Optional[Sequence['outputs.ComputeInstanceGroupHealthCheckHttpOption']]:
+        return pulumi.get(self, "http_options")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> Optional[int]:
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter(name="tcpOptions")
+    def tcp_options(self) -> Optional[Sequence['outputs.ComputeInstanceGroupHealthCheckTcpOption']]:
+        return pulumi.get(self, "tcp_options")
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> Optional[int]:
+        return pulumi.get(self, "timeout")
+
+    @property
+    @pulumi.getter(name="unhealthyThreshold")
+    def unhealthy_threshold(self) -> Optional[int]:
+        return pulumi.get(self, "unhealthy_threshold")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupHealthCheckHttpOption(dict):
+    def __init__(__self__, *,
+                 path: str,
+                 port: int):
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupHealthCheckTcpOption(dict):
+    def __init__(__self__, *,
+                 port: int):
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstance(dict):
+    def __init__(__self__, *,
+                 fqdn: Optional[str] = None,
+                 instance_id: Optional[str] = None,
+                 name: Optional[str] = None,
+                 network_interfaces: Optional[Sequence['outputs.ComputeInstanceGroupInstanceNetworkInterface']] = None,
+                 status: Optional[str] = None,
+                 status_changed_at: Optional[str] = None,
+                 status_message: Optional[str] = None,
+                 zone_id: Optional[str] = None):
+        if fqdn is not None:
+            pulumi.set(__self__, "fqdn", fqdn)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if network_interfaces is not None:
+            pulumi.set(__self__, "network_interfaces", network_interfaces)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+        if status_changed_at is not None:
+            pulumi.set(__self__, "status_changed_at", status_changed_at)
+        if status_message is not None:
+            pulumi.set(__self__, "status_message", status_message)
+        if zone_id is not None:
+            pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> Optional[str]:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> Optional[str]:
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="networkInterfaces")
+    def network_interfaces(self) -> Optional[Sequence['outputs.ComputeInstanceGroupInstanceNetworkInterface']]:
+        return pulumi.get(self, "network_interfaces")
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[str]:
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="statusChangedAt")
+    def status_changed_at(self) -> Optional[str]:
+        return pulumi.get(self, "status_changed_at")
+
+    @property
+    @pulumi.getter(name="statusMessage")
+    def status_message(self) -> Optional[str]:
+        return pulumi.get(self, "status_message")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> Optional[str]:
+        return pulumi.get(self, "zone_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceNetworkInterface(dict):
+    def __init__(__self__, *,
+                 index: Optional[int] = None,
+                 ip_address: Optional[str] = None,
+                 ipv4: Optional[bool] = None,
+                 ipv6: Optional[bool] = None,
+                 ipv6_address: Optional[str] = None,
+                 mac_address: Optional[str] = None,
+                 nat: Optional[bool] = None,
+                 nat_ip_address: Optional[str] = None,
+                 nat_ip_version: Optional[str] = None,
+                 subnet_id: Optional[str] = None):
+        if index is not None:
+            pulumi.set(__self__, "index", index)
+        if ip_address is not None:
+            pulumi.set(__self__, "ip_address", ip_address)
+        if ipv4 is not None:
+            pulumi.set(__self__, "ipv4", ipv4)
+        if ipv6 is not None:
+            pulumi.set(__self__, "ipv6", ipv6)
+        if ipv6_address is not None:
+            pulumi.set(__self__, "ipv6_address", ipv6_address)
+        if mac_address is not None:
+            pulumi.set(__self__, "mac_address", mac_address)
+        if nat is not None:
+            pulumi.set(__self__, "nat", nat)
+        if nat_ip_address is not None:
+            pulumi.set(__self__, "nat_ip_address", nat_ip_address)
+        if nat_ip_version is not None:
+            pulumi.set(__self__, "nat_ip_version", nat_ip_version)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def index(self) -> Optional[int]:
+        return pulumi.get(self, "index")
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> Optional[str]:
+        return pulumi.get(self, "ip_address")
+
+    @property
+    @pulumi.getter
+    def ipv4(self) -> Optional[bool]:
+        return pulumi.get(self, "ipv4")
+
+    @property
+    @pulumi.getter
+    def ipv6(self) -> Optional[bool]:
+        return pulumi.get(self, "ipv6")
+
+    @property
+    @pulumi.getter(name="ipv6Address")
+    def ipv6_address(self) -> Optional[str]:
+        return pulumi.get(self, "ipv6_address")
+
+    @property
+    @pulumi.getter(name="macAddress")
+    def mac_address(self) -> Optional[str]:
+        return pulumi.get(self, "mac_address")
+
+    @property
+    @pulumi.getter
+    def nat(self) -> Optional[bool]:
+        return pulumi.get(self, "nat")
+
+    @property
+    @pulumi.getter(name="natIpAddress")
+    def nat_ip_address(self) -> Optional[str]:
+        return pulumi.get(self, "nat_ip_address")
+
+    @property
+    @pulumi.getter(name="natIpVersion")
+    def nat_ip_version(self) -> Optional[str]:
+        return pulumi.get(self, "nat_ip_version")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        return pulumi.get(self, "subnet_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplate(dict):
+    def __init__(__self__, *,
+                 boot_disk: 'outputs.ComputeInstanceGroupInstanceTemplateBootDisk',
+                 network_interfaces: Sequence['outputs.ComputeInstanceGroupInstanceTemplateNetworkInterface'],
+                 resources: 'outputs.ComputeInstanceGroupInstanceTemplateResources',
+                 description: Optional[str] = None,
+                 hostname: Optional[str] = None,
+                 labels: Optional[Mapping[str, str]] = None,
+                 metadata: Optional[Mapping[str, str]] = None,
+                 name: Optional[str] = None,
+                 network_settings: Optional[Sequence['outputs.ComputeInstanceGroupInstanceTemplateNetworkSetting']] = None,
+                 placement_policy: Optional['outputs.ComputeInstanceGroupInstanceTemplatePlacementPolicy'] = None,
+                 platform_id: Optional[str] = None,
+                 scheduling_policy: Optional['outputs.ComputeInstanceGroupInstanceTemplateSchedulingPolicy'] = None,
+                 secondary_disks: Optional[Sequence['outputs.ComputeInstanceGroupInstanceTemplateSecondaryDisk']] = None,
+                 service_account_id: Optional[str] = None):
+        pulumi.set(__self__, "boot_disk", boot_disk)
+        pulumi.set(__self__, "network_interfaces", network_interfaces)
+        pulumi.set(__self__, "resources", resources)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if hostname is not None:
+            pulumi.set(__self__, "hostname", hostname)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if metadata is not None:
+            pulumi.set(__self__, "metadata", metadata)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if network_settings is not None:
+            pulumi.set(__self__, "network_settings", network_settings)
+        if placement_policy is not None:
+            pulumi.set(__self__, "placement_policy", placement_policy)
+        if platform_id is not None:
+            pulumi.set(__self__, "platform_id", platform_id)
+        if scheduling_policy is not None:
+            pulumi.set(__self__, "scheduling_policy", scheduling_policy)
+        if secondary_disks is not None:
+            pulumi.set(__self__, "secondary_disks", secondary_disks)
+        if service_account_id is not None:
+            pulumi.set(__self__, "service_account_id", service_account_id)
+
+    @property
+    @pulumi.getter(name="bootDisk")
+    def boot_disk(self) -> 'outputs.ComputeInstanceGroupInstanceTemplateBootDisk':
+        return pulumi.get(self, "boot_disk")
+
+    @property
+    @pulumi.getter(name="networkInterfaces")
+    def network_interfaces(self) -> Sequence['outputs.ComputeInstanceGroupInstanceTemplateNetworkInterface']:
+        return pulumi.get(self, "network_interfaces")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.ComputeInstanceGroupInstanceTemplateResources':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def hostname(self) -> Optional[str]:
+        return pulumi.get(self, "hostname")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def metadata(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "metadata")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="networkSettings")
+    def network_settings(self) -> Optional[Sequence['outputs.ComputeInstanceGroupInstanceTemplateNetworkSetting']]:
+        return pulumi.get(self, "network_settings")
+
+    @property
+    @pulumi.getter(name="placementPolicy")
+    def placement_policy(self) -> Optional['outputs.ComputeInstanceGroupInstanceTemplatePlacementPolicy']:
+        return pulumi.get(self, "placement_policy")
+
+    @property
+    @pulumi.getter(name="platformId")
+    def platform_id(self) -> Optional[str]:
+        return pulumi.get(self, "platform_id")
+
+    @property
+    @pulumi.getter(name="schedulingPolicy")
+    def scheduling_policy(self) -> Optional['outputs.ComputeInstanceGroupInstanceTemplateSchedulingPolicy']:
+        return pulumi.get(self, "scheduling_policy")
+
+    @property
+    @pulumi.getter(name="secondaryDisks")
+    def secondary_disks(self) -> Optional[Sequence['outputs.ComputeInstanceGroupInstanceTemplateSecondaryDisk']]:
+        return pulumi.get(self, "secondary_disks")
+
+    @property
+    @pulumi.getter(name="serviceAccountId")
+    def service_account_id(self) -> Optional[str]:
+        return pulumi.get(self, "service_account_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplateBootDisk(dict):
+    def __init__(__self__, *,
+                 initialize_params: 'outputs.ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams',
+                 device_name: Optional[str] = None,
+                 mode: Optional[str] = None):
+        pulumi.set(__self__, "initialize_params", initialize_params)
+        if device_name is not None:
+            pulumi.set(__self__, "device_name", device_name)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+
+    @property
+    @pulumi.getter(name="initializeParams")
+    def initialize_params(self) -> 'outputs.ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams':
+        return pulumi.get(self, "initialize_params")
+
+    @property
+    @pulumi.getter(name="deviceName")
+    def device_name(self) -> Optional[str]:
+        return pulumi.get(self, "device_name")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[str]:
+        return pulumi.get(self, "mode")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams(dict):
+    def __init__(__self__, *,
+                 description: Optional[str] = None,
+                 image_id: Optional[str] = None,
+                 size: Optional[int] = None,
+                 snapshot_id: Optional[str] = None,
+                 type: Optional[str] = None):
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if image_id is not None:
+            pulumi.set(__self__, "image_id", image_id)
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if snapshot_id is not None:
+            pulumi.set(__self__, "snapshot_id", snapshot_id)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> Optional[str]:
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[int]:
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> Optional[str]:
+        return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        return pulumi.get(self, "type")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplateNetworkInterface(dict):
+    def __init__(__self__, *,
+                 ipv4: Optional[bool] = None,
+                 ipv6: Optional[bool] = None,
+                 nat: Optional[bool] = None,
+                 network_id: Optional[str] = None,
+                 security_group_ids: Optional[Sequence[str]] = None,
+                 subnet_ids: Optional[Sequence[str]] = None):
+        if ipv4 is not None:
+            pulumi.set(__self__, "ipv4", ipv4)
+        if ipv6 is not None:
+            pulumi.set(__self__, "ipv6", ipv6)
+        if nat is not None:
+            pulumi.set(__self__, "nat", nat)
+        if network_id is not None:
+            pulumi.set(__self__, "network_id", network_id)
+        if security_group_ids is not None:
+            pulumi.set(__self__, "security_group_ids", security_group_ids)
+        if subnet_ids is not None:
+            pulumi.set(__self__, "subnet_ids", subnet_ids)
+
+    @property
+    @pulumi.getter
+    def ipv4(self) -> Optional[bool]:
+        return pulumi.get(self, "ipv4")
+
+    @property
+    @pulumi.getter
+    def ipv6(self) -> Optional[bool]:
+        return pulumi.get(self, "ipv6")
+
+    @property
+    @pulumi.getter
+    def nat(self) -> Optional[bool]:
+        return pulumi.get(self, "nat")
+
+    @property
+    @pulumi.getter(name="networkId")
+    def network_id(self) -> Optional[str]:
+        return pulumi.get(self, "network_id")
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "security_group_ids")
+
+    @property
+    @pulumi.getter(name="subnetIds")
+    def subnet_ids(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "subnet_ids")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplateNetworkSetting(dict):
+    def __init__(__self__, *,
+                 type: Optional[str] = None):
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        return pulumi.get(self, "type")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplatePlacementPolicy(dict):
+    def __init__(__self__, *,
+                 placement_group_id: str):
+        pulumi.set(__self__, "placement_group_id", placement_group_id)
+
+    @property
+    @pulumi.getter(name="placementGroupId")
+    def placement_group_id(self) -> str:
+        return pulumi.get(self, "placement_group_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplateResources(dict):
+    def __init__(__self__, *,
+                 cores: int,
+                 memory: float,
+                 core_fraction: Optional[int] = None,
+                 gpus: Optional[int] = None):
+        pulumi.set(__self__, "cores", cores)
+        pulumi.set(__self__, "memory", memory)
+        if core_fraction is not None:
+            pulumi.set(__self__, "core_fraction", core_fraction)
+        if gpus is not None:
+            pulumi.set(__self__, "gpus", gpus)
+
+    @property
+    @pulumi.getter
+    def cores(self) -> int:
+        return pulumi.get(self, "cores")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> float:
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="coreFraction")
+    def core_fraction(self) -> Optional[int]:
+        return pulumi.get(self, "core_fraction")
+
+    @property
+    @pulumi.getter
+    def gpus(self) -> Optional[int]:
+        return pulumi.get(self, "gpus")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplateSchedulingPolicy(dict):
+    def __init__(__self__, *,
+                 preemptible: Optional[bool] = None):
+        if preemptible is not None:
+            pulumi.set(__self__, "preemptible", preemptible)
+
+    @property
+    @pulumi.getter
+    def preemptible(self) -> Optional[bool]:
+        return pulumi.get(self, "preemptible")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplateSecondaryDisk(dict):
+    def __init__(__self__, *,
+                 initialize_params: 'outputs.ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams',
+                 device_name: Optional[str] = None,
+                 mode: Optional[str] = None):
+        pulumi.set(__self__, "initialize_params", initialize_params)
+        if device_name is not None:
+            pulumi.set(__self__, "device_name", device_name)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+
+    @property
+    @pulumi.getter(name="initializeParams")
+    def initialize_params(self) -> 'outputs.ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams':
+        return pulumi.get(self, "initialize_params")
+
+    @property
+    @pulumi.getter(name="deviceName")
+    def device_name(self) -> Optional[str]:
+        return pulumi.get(self, "device_name")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[str]:
+        return pulumi.get(self, "mode")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams(dict):
+    def __init__(__self__, *,
+                 description: Optional[str] = None,
+                 image_id: Optional[str] = None,
+                 size: Optional[int] = None,
+                 snapshot_id: Optional[str] = None,
+                 type: Optional[str] = None):
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if image_id is not None:
+            pulumi.set(__self__, "image_id", image_id)
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if snapshot_id is not None:
+            pulumi.set(__self__, "snapshot_id", snapshot_id)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> Optional[str]:
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[int]:
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> Optional[str]:
+        return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        return pulumi.get(self, "type")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupLoadBalancer(dict):
+    def __init__(__self__, *,
+                 status_message: Optional[str] = None,
+                 target_group_description: Optional[str] = None,
+                 target_group_id: Optional[str] = None,
+                 target_group_labels: Optional[Mapping[str, str]] = None,
+                 target_group_name: Optional[str] = None):
+        if status_message is not None:
+            pulumi.set(__self__, "status_message", status_message)
+        if target_group_description is not None:
+            pulumi.set(__self__, "target_group_description", target_group_description)
+        if target_group_id is not None:
+            pulumi.set(__self__, "target_group_id", target_group_id)
+        if target_group_labels is not None:
+            pulumi.set(__self__, "target_group_labels", target_group_labels)
+        if target_group_name is not None:
+            pulumi.set(__self__, "target_group_name", target_group_name)
+
+    @property
+    @pulumi.getter(name="statusMessage")
+    def status_message(self) -> Optional[str]:
+        return pulumi.get(self, "status_message")
+
+    @property
+    @pulumi.getter(name="targetGroupDescription")
+    def target_group_description(self) -> Optional[str]:
+        return pulumi.get(self, "target_group_description")
+
+    @property
+    @pulumi.getter(name="targetGroupId")
+    def target_group_id(self) -> Optional[str]:
+        return pulumi.get(self, "target_group_id")
+
+    @property
+    @pulumi.getter(name="targetGroupLabels")
+    def target_group_labels(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "target_group_labels")
+
+    @property
+    @pulumi.getter(name="targetGroupName")
+    def target_group_name(self) -> Optional[str]:
+        return pulumi.get(self, "target_group_name")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupScalePolicy(dict):
+    def __init__(__self__, *,
+                 auto_scale: Optional['outputs.ComputeInstanceGroupScalePolicyAutoScale'] = None,
+                 fixed_scale: Optional['outputs.ComputeInstanceGroupScalePolicyFixedScale'] = None,
+                 test_auto_scale: Optional['outputs.ComputeInstanceGroupScalePolicyTestAutoScale'] = None):
+        if auto_scale is not None:
+            pulumi.set(__self__, "auto_scale", auto_scale)
+        if fixed_scale is not None:
+            pulumi.set(__self__, "fixed_scale", fixed_scale)
+        if test_auto_scale is not None:
+            pulumi.set(__self__, "test_auto_scale", test_auto_scale)
+
+    @property
+    @pulumi.getter(name="autoScale")
+    def auto_scale(self) -> Optional['outputs.ComputeInstanceGroupScalePolicyAutoScale']:
+        return pulumi.get(self, "auto_scale")
+
+    @property
+    @pulumi.getter(name="fixedScale")
+    def fixed_scale(self) -> Optional['outputs.ComputeInstanceGroupScalePolicyFixedScale']:
+        return pulumi.get(self, "fixed_scale")
+
+    @property
+    @pulumi.getter(name="testAutoScale")
+    def test_auto_scale(self) -> Optional['outputs.ComputeInstanceGroupScalePolicyTestAutoScale']:
+        return pulumi.get(self, "test_auto_scale")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupScalePolicyAutoScale(dict):
+    def __init__(__self__, *,
+                 initial_size: int,
+                 measurement_duration: int,
+                 cpu_utilization_target: Optional[float] = None,
+                 custom_rules: Optional[Sequence['outputs.ComputeInstanceGroupScalePolicyAutoScaleCustomRule']] = None,
+                 max_size: Optional[int] = None,
+                 min_zone_size: Optional[int] = None,
+                 stabilization_duration: Optional[int] = None,
+                 warmup_duration: Optional[int] = None):
+        pulumi.set(__self__, "initial_size", initial_size)
+        pulumi.set(__self__, "measurement_duration", measurement_duration)
+        if cpu_utilization_target is not None:
+            pulumi.set(__self__, "cpu_utilization_target", cpu_utilization_target)
+        if custom_rules is not None:
+            pulumi.set(__self__, "custom_rules", custom_rules)
+        if max_size is not None:
+            pulumi.set(__self__, "max_size", max_size)
+        if min_zone_size is not None:
+            pulumi.set(__self__, "min_zone_size", min_zone_size)
+        if stabilization_duration is not None:
+            pulumi.set(__self__, "stabilization_duration", stabilization_duration)
+        if warmup_duration is not None:
+            pulumi.set(__self__, "warmup_duration", warmup_duration)
+
+    @property
+    @pulumi.getter(name="initialSize")
+    def initial_size(self) -> int:
+        return pulumi.get(self, "initial_size")
+
+    @property
+    @pulumi.getter(name="measurementDuration")
+    def measurement_duration(self) -> int:
+        return pulumi.get(self, "measurement_duration")
+
+    @property
+    @pulumi.getter(name="cpuUtilizationTarget")
+    def cpu_utilization_target(self) -> Optional[float]:
+        return pulumi.get(self, "cpu_utilization_target")
+
+    @property
+    @pulumi.getter(name="customRules")
+    def custom_rules(self) -> Optional[Sequence['outputs.ComputeInstanceGroupScalePolicyAutoScaleCustomRule']]:
+        return pulumi.get(self, "custom_rules")
+
+    @property
+    @pulumi.getter(name="maxSize")
+    def max_size(self) -> Optional[int]:
+        return pulumi.get(self, "max_size")
+
+    @property
+    @pulumi.getter(name="minZoneSize")
+    def min_zone_size(self) -> Optional[int]:
+        return pulumi.get(self, "min_zone_size")
+
+    @property
+    @pulumi.getter(name="stabilizationDuration")
+    def stabilization_duration(self) -> Optional[int]:
+        return pulumi.get(self, "stabilization_duration")
+
+    @property
+    @pulumi.getter(name="warmupDuration")
+    def warmup_duration(self) -> Optional[int]:
+        return pulumi.get(self, "warmup_duration")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupScalePolicyAutoScaleCustomRule(dict):
+    def __init__(__self__, *,
+                 metric_name: str,
+                 metric_type: str,
+                 rule_type: str,
+                 target: float,
+                 labels: Optional[Mapping[str, str]] = None):
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "metric_type", metric_type)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "target", target)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter(name="metricType")
+    def metric_type(self) -> str:
+        return pulumi.get(self, "metric_type")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter
+    def target(self) -> float:
+        return pulumi.get(self, "target")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "labels")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupScalePolicyFixedScale(dict):
+    def __init__(__self__, *,
+                 size: int):
+        pulumi.set(__self__, "size", size)
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        return pulumi.get(self, "size")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupScalePolicyTestAutoScale(dict):
+    def __init__(__self__, *,
+                 initial_size: int,
+                 measurement_duration: int,
+                 cpu_utilization_target: Optional[float] = None,
+                 custom_rules: Optional[Sequence['outputs.ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule']] = None,
+                 max_size: Optional[int] = None,
+                 min_zone_size: Optional[int] = None,
+                 stabilization_duration: Optional[int] = None,
+                 warmup_duration: Optional[int] = None):
+        pulumi.set(__self__, "initial_size", initial_size)
+        pulumi.set(__self__, "measurement_duration", measurement_duration)
+        if cpu_utilization_target is not None:
+            pulumi.set(__self__, "cpu_utilization_target", cpu_utilization_target)
+        if custom_rules is not None:
+            pulumi.set(__self__, "custom_rules", custom_rules)
+        if max_size is not None:
+            pulumi.set(__self__, "max_size", max_size)
+        if min_zone_size is not None:
+            pulumi.set(__self__, "min_zone_size", min_zone_size)
+        if stabilization_duration is not None:
+            pulumi.set(__self__, "stabilization_duration", stabilization_duration)
+        if warmup_duration is not None:
+            pulumi.set(__self__, "warmup_duration", warmup_duration)
+
+    @property
+    @pulumi.getter(name="initialSize")
+    def initial_size(self) -> int:
+        return pulumi.get(self, "initial_size")
+
+    @property
+    @pulumi.getter(name="measurementDuration")
+    def measurement_duration(self) -> int:
+        return pulumi.get(self, "measurement_duration")
+
+    @property
+    @pulumi.getter(name="cpuUtilizationTarget")
+    def cpu_utilization_target(self) -> Optional[float]:
+        return pulumi.get(self, "cpu_utilization_target")
+
+    @property
+    @pulumi.getter(name="customRules")
+    def custom_rules(self) -> Optional[Sequence['outputs.ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule']]:
+        return pulumi.get(self, "custom_rules")
+
+    @property
+    @pulumi.getter(name="maxSize")
+    def max_size(self) -> Optional[int]:
+        return pulumi.get(self, "max_size")
+
+    @property
+    @pulumi.getter(name="minZoneSize")
+    def min_zone_size(self) -> Optional[int]:
+        return pulumi.get(self, "min_zone_size")
+
+    @property
+    @pulumi.getter(name="stabilizationDuration")
+    def stabilization_duration(self) -> Optional[int]:
+        return pulumi.get(self, "stabilization_duration")
+
+    @property
+    @pulumi.getter(name="warmupDuration")
+    def warmup_duration(self) -> Optional[int]:
+        return pulumi.get(self, "warmup_duration")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule(dict):
+    def __init__(__self__, *,
+                 metric_name: str,
+                 metric_type: str,
+                 rule_type: str,
+                 target: float,
+                 labels: Optional[Mapping[str, str]] = None):
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "metric_type", metric_type)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "target", target)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter(name="metricType")
+    def metric_type(self) -> str:
+        return pulumi.get(self, "metric_type")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter
+    def target(self) -> float:
+        return pulumi.get(self, "target")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "labels")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceNetworkInterface(dict):
+    def __init__(__self__, *,
+                 subnet_id: str,
+                 index: Optional[int] = None,
+                 ip_address: Optional[str] = None,
+                 ipv4: Optional[bool] = None,
+                 ipv6: Optional[bool] = None,
+                 ipv6_address: Optional[str] = None,
+                 mac_address: Optional[str] = None,
+                 nat: Optional[bool] = None,
+                 nat_ip_address: Optional[str] = None,
+                 nat_ip_version: Optional[str] = None,
+                 security_group_ids: Optional[Sequence[str]] = None):
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        if index is not None:
+            pulumi.set(__self__, "index", index)
+        if ip_address is not None:
+            pulumi.set(__self__, "ip_address", ip_address)
+        if ipv4 is not None:
+            pulumi.set(__self__, "ipv4", ipv4)
+        if ipv6 is not None:
+            pulumi.set(__self__, "ipv6", ipv6)
+        if ipv6_address is not None:
+            pulumi.set(__self__, "ipv6_address", ipv6_address)
+        if mac_address is not None:
+            pulumi.set(__self__, "mac_address", mac_address)
+        if nat is not None:
+            pulumi.set(__self__, "nat", nat)
+        if nat_ip_address is not None:
+            pulumi.set(__self__, "nat_ip_address", nat_ip_address)
+        if nat_ip_version is not None:
+            pulumi.set(__self__, "nat_ip_version", nat_ip_version)
+        if security_group_ids is not None:
+            pulumi.set(__self__, "security_group_ids", security_group_ids)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def index(self) -> Optional[int]:
+        return pulumi.get(self, "index")
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> Optional[str]:
+        return pulumi.get(self, "ip_address")
+
+    @property
+    @pulumi.getter
+    def ipv4(self) -> Optional[bool]:
+        return pulumi.get(self, "ipv4")
+
+    @property
+    @pulumi.getter
+    def ipv6(self) -> Optional[bool]:
+        return pulumi.get(self, "ipv6")
+
+    @property
+    @pulumi.getter(name="ipv6Address")
+    def ipv6_address(self) -> Optional[str]:
+        return pulumi.get(self, "ipv6_address")
+
+    @property
+    @pulumi.getter(name="macAddress")
+    def mac_address(self) -> Optional[str]:
+        return pulumi.get(self, "mac_address")
+
+    @property
+    @pulumi.getter
+    def nat(self) -> Optional[bool]:
+        return pulumi.get(self, "nat")
+
+    @property
+    @pulumi.getter(name="natIpAddress")
+    def nat_ip_address(self) -> Optional[str]:
+        return pulumi.get(self, "nat_ip_address")
+
+    @property
+    @pulumi.getter(name="natIpVersion")
+    def nat_ip_version(self) -> Optional[str]:
+        return pulumi.get(self, "nat_ip_version")
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "security_group_ids")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstancePlacementPolicy(dict):
+    def __init__(__self__, *,
+                 placement_group_id: str):
+        pulumi.set(__self__, "placement_group_id", placement_group_id)
+
+    @property
+    @pulumi.getter(name="placementGroupId")
+    def placement_group_id(self) -> str:
+        return pulumi.get(self, "placement_group_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceResources(dict):
+    def __init__(__self__, *,
+                 cores: int,
+                 memory: float,
+                 core_fraction: Optional[int] = None,
+                 gpus: Optional[int] = None):
+        pulumi.set(__self__, "cores", cores)
+        pulumi.set(__self__, "memory", memory)
+        if core_fraction is not None:
+            pulumi.set(__self__, "core_fraction", core_fraction)
+        if gpus is not None:
+            pulumi.set(__self__, "gpus", gpus)
+
+    @property
+    @pulumi.getter
+    def cores(self) -> int:
+        return pulumi.get(self, "cores")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> float:
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter(name="coreFraction")
+    def core_fraction(self) -> Optional[int]:
+        return pulumi.get(self, "core_fraction")
+
+    @property
+    @pulumi.getter
+    def gpus(self) -> Optional[int]:
+        return pulumi.get(self, "gpus")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceSchedulingPolicy(dict):
+    def __init__(__self__, *,
+                 preemptible: Optional[bool] = None):
+        if preemptible is not None:
+            pulumi.set(__self__, "preemptible", preemptible)
+
+    @property
+    @pulumi.getter
+    def preemptible(self) -> Optional[bool]:
+        return pulumi.get(self, "preemptible")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class ComputeInstanceSecondaryDisk(dict):
+    def __init__(__self__, *,
+                 disk_id: str,
+                 auto_delete: Optional[bool] = None,
+                 device_name: Optional[str] = None,
+                 mode: Optional[str] = None):
+        pulumi.set(__self__, "disk_id", disk_id)
+        if auto_delete is not None:
+            pulumi.set(__self__, "auto_delete", auto_delete)
+        if device_name is not None:
+            pulumi.set(__self__, "device_name", device_name)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+
+    @property
+    @pulumi.getter(name="diskId")
+    def disk_id(self) -> str:
+        return pulumi.get(self, "disk_id")
+
+    @property
+    @pulumi.getter(name="autoDelete")
+    def auto_delete(self) -> Optional[bool]:
+        return pulumi.get(self, "auto_delete")
+
+    @property
+    @pulumi.getter(name="deviceName")
+    def device_name(self) -> Optional[str]:
+        return pulumi.get(self, "device_name")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[str]:
+        return pulumi.get(self, "mode")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class DataprocClusterClusterConfig(dict):
+    def __init__(__self__, *,
+                 subcluster_specs: Sequence['outputs.DataprocClusterClusterConfigSubclusterSpec'],
+                 hadoop: Optional['outputs.DataprocClusterClusterConfigHadoop'] = None,
+                 version_id: Optional[str] = None):
+        pulumi.set(__self__, "subcluster_specs", subcluster_specs)
+        if hadoop is not None:
+            pulumi.set(__self__, "hadoop", hadoop)
+        if version_id is not None:
+            pulumi.set(__self__, "version_id", version_id)
+
+    @property
+    @pulumi.getter(name="subclusterSpecs")
+    def subcluster_specs(self) -> Sequence['outputs.DataprocClusterClusterConfigSubclusterSpec']:
+        return pulumi.get(self, "subcluster_specs")
+
+    @property
+    @pulumi.getter
+    def hadoop(self) -> Optional['outputs.DataprocClusterClusterConfigHadoop']:
+        return pulumi.get(self, "hadoop")
+
+    @property
+    @pulumi.getter(name="versionId")
+    def version_id(self) -> Optional[str]:
+        return pulumi.get(self, "version_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class DataprocClusterClusterConfigHadoop(dict):
+    def __init__(__self__, *,
+                 properties: Optional[Mapping[str, str]] = None,
+                 services: Optional[Sequence[str]] = None,
+                 ssh_public_keys: Optional[Sequence[str]] = None):
+        if properties is not None:
+            pulumi.set(__self__, "properties", properties)
+        if services is not None:
+            pulumi.set(__self__, "services", services)
+        if ssh_public_keys is not None:
+            pulumi.set(__self__, "ssh_public_keys", ssh_public_keys)
+
+    @property
+    @pulumi.getter
+    def properties(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "properties")
+
+    @property
+    @pulumi.getter
+    def services(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "services")
+
+    @property
+    @pulumi.getter(name="sshPublicKeys")
+    def ssh_public_keys(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "ssh_public_keys")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class DataprocClusterClusterConfigSubclusterSpec(dict):
+    def __init__(__self__, *,
+                 hosts_count: int,
+                 name: str,
+                 resources: 'outputs.DataprocClusterClusterConfigSubclusterSpecResources',
+                 role: str,
+                 subnet_id: str,
+                 id: Optional[str] = None):
+        pulumi.set(__self__, "hosts_count", hosts_count)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @property
+    @pulumi.getter(name="hostsCount")
+    def hosts_count(self) -> int:
+        return pulumi.get(self, "hosts_count")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.DataprocClusterClusterConfigSubclusterSpecResources':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class DataprocClusterClusterConfigSubclusterSpecResources(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 resource_preset_id: str,
+                 disk_type_id: Optional[str] = None):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+        if disk_type_id is not None:
+            pulumi.set(__self__, "disk_type_id", disk_type_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> Optional[str]:
+        return pulumi.get(self, "disk_type_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class FunctionContent(dict):
+    def __init__(__self__, *,
+                 zip_filename: str):
+        pulumi.set(__self__, "zip_filename", zip_filename)
+
+    @property
+    @pulumi.getter(name="zipFilename")
+    def zip_filename(self) -> str:
+        return pulumi.get(self, "zip_filename")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class FunctionPackage(dict):
+    def __init__(__self__, *,
+                 bucket_name: str,
+                 object_name: str,
+                 sha256: Optional[str] = None):
+        pulumi.set(__self__, "bucket_name", bucket_name)
+        pulumi.set(__self__, "object_name", object_name)
+        if sha256 is not None:
+            pulumi.set(__self__, "sha256", sha256)
+
+    @property
+    @pulumi.getter(name="bucketName")
+    def bucket_name(self) -> str:
+        return pulumi.get(self, "bucket_name")
+
+    @property
+    @pulumi.getter(name="objectName")
+    def object_name(self) -> str:
+        return pulumi.get(self, "object_name")
+
+    @property
+    @pulumi.getter
+    def sha256(self) -> Optional[str]:
+        return pulumi.get(self, "sha256")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class FunctionTriggerDlq(dict):
+    def __init__(__self__, *,
+                 queue_id: str,
+                 service_account_id: str):
+        pulumi.set(__self__, "queue_id", queue_id)
+        pulumi.set(__self__, "service_account_id", service_account_id)
+
+    @property
+    @pulumi.getter(name="queueId")
+    def queue_id(self) -> str:
+        return pulumi.get(self, "queue_id")
+
+    @property
+    @pulumi.getter(name="serviceAccountId")
+    def service_account_id(self) -> str:
+        return pulumi.get(self, "service_account_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class FunctionTriggerFunction(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 retry_attempts: Optional[str] = None,
+                 retry_interval: Optional[str] = None,
+                 service_account_id: Optional[str] = None,
+                 tag: Optional[str] = None):
+        pulumi.set(__self__, "id", id)
+        if retry_attempts is not None:
+            pulumi.set(__self__, "retry_attempts", retry_attempts)
+        if retry_interval is not None:
+            pulumi.set(__self__, "retry_interval", retry_interval)
+        if service_account_id is not None:
+            pulumi.set(__self__, "service_account_id", service_account_id)
+        if tag is not None:
+            pulumi.set(__self__, "tag", tag)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="retryAttempts")
+    def retry_attempts(self) -> Optional[str]:
+        return pulumi.get(self, "retry_attempts")
+
+    @property
+    @pulumi.getter(name="retryInterval")
+    def retry_interval(self) -> Optional[str]:
+        return pulumi.get(self, "retry_interval")
+
+    @property
+    @pulumi.getter(name="serviceAccountId")
+    def service_account_id(self) -> Optional[str]:
+        return pulumi.get(self, "service_account_id")
+
+    @property
+    @pulumi.getter
+    def tag(self) -> Optional[str]:
+        return pulumi.get(self, "tag")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class FunctionTriggerIot(dict):
+    def __init__(__self__, *,
+                 registry_id: str,
+                 device_id: Optional[str] = None,
+                 topic: Optional[str] = None):
+        pulumi.set(__self__, "registry_id", registry_id)
+        if device_id is not None:
+            pulumi.set(__self__, "device_id", device_id)
+        if topic is not None:
+            pulumi.set(__self__, "topic", topic)
+
+    @property
+    @pulumi.getter(name="registryId")
+    def registry_id(self) -> str:
+        return pulumi.get(self, "registry_id")
+
+    @property
+    @pulumi.getter(name="deviceId")
+    def device_id(self) -> Optional[str]:
+        return pulumi.get(self, "device_id")
+
+    @property
+    @pulumi.getter
+    def topic(self) -> Optional[str]:
+        return pulumi.get(self, "topic")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class FunctionTriggerMessageQueue(dict):
+    def __init__(__self__, *,
+                 batch_cutoff: str,
+                 queue_id: str,
+                 service_account_id: str,
+                 batch_size: Optional[str] = None,
+                 visibility_timeout: Optional[str] = None):
+        pulumi.set(__self__, "batch_cutoff", batch_cutoff)
+        pulumi.set(__self__, "queue_id", queue_id)
+        pulumi.set(__self__, "service_account_id", service_account_id)
+        if batch_size is not None:
+            pulumi.set(__self__, "batch_size", batch_size)
+        if visibility_timeout is not None:
+            pulumi.set(__self__, "visibility_timeout", visibility_timeout)
+
+    @property
+    @pulumi.getter(name="batchCutoff")
+    def batch_cutoff(self) -> str:
+        return pulumi.get(self, "batch_cutoff")
+
+    @property
+    @pulumi.getter(name="queueId")
+    def queue_id(self) -> str:
+        return pulumi.get(self, "queue_id")
+
+    @property
+    @pulumi.getter(name="serviceAccountId")
+    def service_account_id(self) -> str:
+        return pulumi.get(self, "service_account_id")
+
+    @property
+    @pulumi.getter(name="batchSize")
+    def batch_size(self) -> Optional[str]:
+        return pulumi.get(self, "batch_size")
+
+    @property
+    @pulumi.getter(name="visibilityTimeout")
+    def visibility_timeout(self) -> Optional[str]:
+        return pulumi.get(self, "visibility_timeout")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class FunctionTriggerObjectStorage(dict):
+    def __init__(__self__, *,
+                 bucket_id: str,
+                 create: Optional[bool] = None,
+                 delete: Optional[bool] = None,
+                 prefix: Optional[str] = None,
+                 suffix: Optional[str] = None,
+                 update: Optional[bool] = None):
+        pulumi.set(__self__, "bucket_id", bucket_id)
+        if create is not None:
+            pulumi.set(__self__, "create", create)
+        if delete is not None:
+            pulumi.set(__self__, "delete", delete)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+        if suffix is not None:
+            pulumi.set(__self__, "suffix", suffix)
+        if update is not None:
+            pulumi.set(__self__, "update", update)
+
+    @property
+    @pulumi.getter(name="bucketId")
+    def bucket_id(self) -> str:
+        return pulumi.get(self, "bucket_id")
+
+    @property
+    @pulumi.getter
+    def create(self) -> Optional[bool]:
+        return pulumi.get(self, "create")
+
+    @property
+    @pulumi.getter
+    def delete(self) -> Optional[bool]:
+        return pulumi.get(self, "delete")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[str]:
+        return pulumi.get(self, "prefix")
+
+    @property
+    @pulumi.getter
+    def suffix(self) -> Optional[str]:
+        return pulumi.get(self, "suffix")
+
+    @property
+    @pulumi.getter
+    def update(self) -> Optional[bool]:
+        return pulumi.get(self, "update")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class FunctionTriggerTimer(dict):
+    def __init__(__self__, *,
+                 cron_expression: str):
+        pulumi.set(__self__, "cron_expression", cron_expression)
+
+    @property
+    @pulumi.getter(name="cronExpression")
+    def cron_expression(self) -> str:
+        return pulumi.get(self, "cron_expression")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesClusterKmsProvider(dict):
+    def __init__(__self__, *,
+                 key_id: Optional[str] = None):
+        if key_id is not None:
+            pulumi.set(__self__, "key_id", key_id)
+
+    @property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> Optional[str]:
+        return pulumi.get(self, "key_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesClusterMaster(dict):
+    def __init__(__self__, *,
+                 cluster_ca_certificate: Optional[str] = None,
+                 external_v4_address: Optional[str] = None,
+                 external_v4_endpoint: Optional[str] = None,
+                 internal_v4_address: Optional[str] = None,
+                 internal_v4_endpoint: Optional[str] = None,
+                 maintenance_policy: Optional['outputs.KubernetesClusterMasterMaintenancePolicy'] = None,
+                 public_ip: Optional[bool] = None,
+                 regional: Optional['outputs.KubernetesClusterMasterRegional'] = None,
+                 security_group_ids: Optional[Sequence[str]] = None,
+                 version: Optional[str] = None,
+                 version_info: Optional['outputs.KubernetesClusterMasterVersionInfo'] = None,
+                 zonal: Optional['outputs.KubernetesClusterMasterZonal'] = None):
+        if cluster_ca_certificate is not None:
+            pulumi.set(__self__, "cluster_ca_certificate", cluster_ca_certificate)
+        if external_v4_address is not None:
+            pulumi.set(__self__, "external_v4_address", external_v4_address)
+        if external_v4_endpoint is not None:
+            pulumi.set(__self__, "external_v4_endpoint", external_v4_endpoint)
+        if internal_v4_address is not None:
+            pulumi.set(__self__, "internal_v4_address", internal_v4_address)
+        if internal_v4_endpoint is not None:
+            pulumi.set(__self__, "internal_v4_endpoint", internal_v4_endpoint)
+        if maintenance_policy is not None:
+            pulumi.set(__self__, "maintenance_policy", maintenance_policy)
+        if public_ip is not None:
+            pulumi.set(__self__, "public_ip", public_ip)
+        if regional is not None:
+            pulumi.set(__self__, "regional", regional)
+        if security_group_ids is not None:
+            pulumi.set(__self__, "security_group_ids", security_group_ids)
+        if version is not None:
+            pulumi.set(__self__, "version", version)
+        if version_info is not None:
+            pulumi.set(__self__, "version_info", version_info)
+        if zonal is not None:
+            pulumi.set(__self__, "zonal", zonal)
+
+    @property
+    @pulumi.getter(name="clusterCaCertificate")
+    def cluster_ca_certificate(self) -> Optional[str]:
+        return pulumi.get(self, "cluster_ca_certificate")
+
+    @property
+    @pulumi.getter(name="externalV4Address")
+    def external_v4_address(self) -> Optional[str]:
+        return pulumi.get(self, "external_v4_address")
+
+    @property
+    @pulumi.getter(name="externalV4Endpoint")
+    def external_v4_endpoint(self) -> Optional[str]:
+        return pulumi.get(self, "external_v4_endpoint")
+
+    @property
+    @pulumi.getter(name="internalV4Address")
+    def internal_v4_address(self) -> Optional[str]:
+        return pulumi.get(self, "internal_v4_address")
+
+    @property
+    @pulumi.getter(name="internalV4Endpoint")
+    def internal_v4_endpoint(self) -> Optional[str]:
+        return pulumi.get(self, "internal_v4_endpoint")
+
+    @property
+    @pulumi.getter(name="maintenancePolicy")
+    def maintenance_policy(self) -> Optional['outputs.KubernetesClusterMasterMaintenancePolicy']:
+        return pulumi.get(self, "maintenance_policy")
+
+    @property
+    @pulumi.getter(name="publicIp")
+    def public_ip(self) -> Optional[bool]:
+        return pulumi.get(self, "public_ip")
+
+    @property
+    @pulumi.getter
+    def regional(self) -> Optional['outputs.KubernetesClusterMasterRegional']:
+        return pulumi.get(self, "regional")
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "security_group_ids")
+
+    @property
+    @pulumi.getter
+    def version(self) -> Optional[str]:
+        return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter(name="versionInfo")
+    def version_info(self) -> Optional['outputs.KubernetesClusterMasterVersionInfo']:
+        return pulumi.get(self, "version_info")
+
+    @property
+    @pulumi.getter
+    def zonal(self) -> Optional['outputs.KubernetesClusterMasterZonal']:
+        return pulumi.get(self, "zonal")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesClusterMasterMaintenancePolicy(dict):
+    def __init__(__self__, *,
+                 auto_upgrade: bool,
+                 maintenance_windows: Optional[Sequence['outputs.KubernetesClusterMasterMaintenancePolicyMaintenanceWindow']] = None):
+        pulumi.set(__self__, "auto_upgrade", auto_upgrade)
+        if maintenance_windows is not None:
+            pulumi.set(__self__, "maintenance_windows", maintenance_windows)
+
+    @property
+    @pulumi.getter(name="autoUpgrade")
+    def auto_upgrade(self) -> bool:
+        return pulumi.get(self, "auto_upgrade")
+
+    @property
+    @pulumi.getter(name="maintenanceWindows")
+    def maintenance_windows(self) -> Optional[Sequence['outputs.KubernetesClusterMasterMaintenancePolicyMaintenanceWindow']]:
+        return pulumi.get(self, "maintenance_windows")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesClusterMasterMaintenancePolicyMaintenanceWindow(dict):
+    def __init__(__self__, *,
+                 duration: str,
+                 start_time: str,
+                 day: Optional[str] = None):
+        pulumi.set(__self__, "duration", duration)
+        pulumi.set(__self__, "start_time", start_time)
+        if day is not None:
+            pulumi.set(__self__, "day", day)
+
+    @property
+    @pulumi.getter
+    def duration(self) -> str:
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def day(self) -> Optional[str]:
+        return pulumi.get(self, "day")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesClusterMasterRegional(dict):
+    def __init__(__self__, *,
+                 region: str,
+                 locations: Optional[Sequence['outputs.KubernetesClusterMasterRegionalLocation']] = None):
+        pulumi.set(__self__, "region", region)
+        if locations is not None:
+            pulumi.set(__self__, "locations", locations)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        return pulumi.get(self, "region")
+
+    @property
+    @pulumi.getter
+    def locations(self) -> Optional[Sequence['outputs.KubernetesClusterMasterRegionalLocation']]:
+        return pulumi.get(self, "locations")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesClusterMasterRegionalLocation(dict):
+    def __init__(__self__, *,
+                 subnet_id: Optional[str] = None,
+                 zone: Optional[str] = None):
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[str]:
+        return pulumi.get(self, "zone")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesClusterMasterVersionInfo(dict):
+    def __init__(__self__, *,
+                 current_version: Optional[str] = None,
+                 new_revision_available: Optional[bool] = None,
+                 new_revision_summary: Optional[str] = None,
+                 version_deprecated: Optional[bool] = None):
+        if current_version is not None:
+            pulumi.set(__self__, "current_version", current_version)
+        if new_revision_available is not None:
+            pulumi.set(__self__, "new_revision_available", new_revision_available)
+        if new_revision_summary is not None:
+            pulumi.set(__self__, "new_revision_summary", new_revision_summary)
+        if version_deprecated is not None:
+            pulumi.set(__self__, "version_deprecated", version_deprecated)
+
+    @property
+    @pulumi.getter(name="currentVersion")
+    def current_version(self) -> Optional[str]:
+        return pulumi.get(self, "current_version")
+
+    @property
+    @pulumi.getter(name="newRevisionAvailable")
+    def new_revision_available(self) -> Optional[bool]:
+        return pulumi.get(self, "new_revision_available")
+
+    @property
+    @pulumi.getter(name="newRevisionSummary")
+    def new_revision_summary(self) -> Optional[str]:
+        return pulumi.get(self, "new_revision_summary")
+
+    @property
+    @pulumi.getter(name="versionDeprecated")
+    def version_deprecated(self) -> Optional[bool]:
+        return pulumi.get(self, "version_deprecated")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesClusterMasterZonal(dict):
+    def __init__(__self__, *,
+                 subnet_id: Optional[str] = None,
+                 zone: Optional[str] = None):
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[str]:
+        return pulumi.get(self, "zone")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupAllocationPolicy(dict):
+    def __init__(__self__, *,
+                 locations: Optional[Sequence['outputs.KubernetesNodeGroupAllocationPolicyLocation']] = None):
+        if locations is not None:
+            pulumi.set(__self__, "locations", locations)
+
+    @property
+    @pulumi.getter
+    def locations(self) -> Optional[Sequence['outputs.KubernetesNodeGroupAllocationPolicyLocation']]:
+        return pulumi.get(self, "locations")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupAllocationPolicyLocation(dict):
+    def __init__(__self__, *,
+                 subnet_id: Optional[str] = None,
+                 zone: Optional[str] = None):
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> Optional[str]:
+        return pulumi.get(self, "zone")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupDeployPolicy(dict):
+    def __init__(__self__, *,
+                 max_expansion: int,
+                 max_unavailable: int):
+        pulumi.set(__self__, "max_expansion", max_expansion)
+        pulumi.set(__self__, "max_unavailable", max_unavailable)
+
+    @property
+    @pulumi.getter(name="maxExpansion")
+    def max_expansion(self) -> int:
+        return pulumi.get(self, "max_expansion")
+
+    @property
+    @pulumi.getter(name="maxUnavailable")
+    def max_unavailable(self) -> int:
+        return pulumi.get(self, "max_unavailable")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupInstanceTemplate(dict):
+    def __init__(__self__, *,
+                 boot_disk: Optional['outputs.KubernetesNodeGroupInstanceTemplateBootDisk'] = None,
+                 metadata: Optional[Mapping[str, str]] = None,
+                 nat: Optional[bool] = None,
+                 platform_id: Optional[str] = None,
+                 resources: Optional['outputs.KubernetesNodeGroupInstanceTemplateResources'] = None,
+                 scheduling_policy: Optional['outputs.KubernetesNodeGroupInstanceTemplateSchedulingPolicy'] = None):
+        if boot_disk is not None:
+            pulumi.set(__self__, "boot_disk", boot_disk)
+        if metadata is not None:
+            pulumi.set(__self__, "metadata", metadata)
+        if nat is not None:
+            pulumi.set(__self__, "nat", nat)
+        if platform_id is not None:
+            pulumi.set(__self__, "platform_id", platform_id)
+        if resources is not None:
+            pulumi.set(__self__, "resources", resources)
+        if scheduling_policy is not None:
+            pulumi.set(__self__, "scheduling_policy", scheduling_policy)
+
+    @property
+    @pulumi.getter(name="bootDisk")
+    def boot_disk(self) -> Optional['outputs.KubernetesNodeGroupInstanceTemplateBootDisk']:
+        return pulumi.get(self, "boot_disk")
+
+    @property
+    @pulumi.getter
+    def metadata(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "metadata")
+
+    @property
+    @pulumi.getter
+    def nat(self) -> Optional[bool]:
+        return pulumi.get(self, "nat")
+
+    @property
+    @pulumi.getter(name="platformId")
+    def platform_id(self) -> Optional[str]:
+        return pulumi.get(self, "platform_id")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> Optional['outputs.KubernetesNodeGroupInstanceTemplateResources']:
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter(name="schedulingPolicy")
+    def scheduling_policy(self) -> Optional['outputs.KubernetesNodeGroupInstanceTemplateSchedulingPolicy']:
+        return pulumi.get(self, "scheduling_policy")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupInstanceTemplateBootDisk(dict):
+    def __init__(__self__, *,
+                 size: Optional[int] = None,
+                 type: Optional[str] = None):
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[int]:
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        return pulumi.get(self, "type")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupInstanceTemplateResources(dict):
+    def __init__(__self__, *,
+                 core_fraction: Optional[int] = None,
+                 cores: Optional[int] = None,
+                 gpus: Optional[int] = None,
+                 memory: Optional[float] = None):
+        if core_fraction is not None:
+            pulumi.set(__self__, "core_fraction", core_fraction)
+        if cores is not None:
+            pulumi.set(__self__, "cores", cores)
+        if gpus is not None:
+            pulumi.set(__self__, "gpus", gpus)
+        if memory is not None:
+            pulumi.set(__self__, "memory", memory)
+
+    @property
+    @pulumi.getter(name="coreFraction")
+    def core_fraction(self) -> Optional[int]:
+        return pulumi.get(self, "core_fraction")
+
+    @property
+    @pulumi.getter
+    def cores(self) -> Optional[int]:
+        return pulumi.get(self, "cores")
+
+    @property
+    @pulumi.getter
+    def gpus(self) -> Optional[int]:
+        return pulumi.get(self, "gpus")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> Optional[float]:
+        return pulumi.get(self, "memory")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupInstanceTemplateSchedulingPolicy(dict):
+    def __init__(__self__, *,
+                 preemptible: Optional[bool] = None):
+        if preemptible is not None:
+            pulumi.set(__self__, "preemptible", preemptible)
+
+    @property
+    @pulumi.getter
+    def preemptible(self) -> Optional[bool]:
+        return pulumi.get(self, "preemptible")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupMaintenancePolicy(dict):
+    def __init__(__self__, *,
+                 auto_repair: bool,
+                 auto_upgrade: bool,
+                 maintenance_windows: Optional[Sequence['outputs.KubernetesNodeGroupMaintenancePolicyMaintenanceWindow']] = None):
+        pulumi.set(__self__, "auto_repair", auto_repair)
+        pulumi.set(__self__, "auto_upgrade", auto_upgrade)
+        if maintenance_windows is not None:
+            pulumi.set(__self__, "maintenance_windows", maintenance_windows)
+
+    @property
+    @pulumi.getter(name="autoRepair")
+    def auto_repair(self) -> bool:
+        return pulumi.get(self, "auto_repair")
+
+    @property
+    @pulumi.getter(name="autoUpgrade")
+    def auto_upgrade(self) -> bool:
+        return pulumi.get(self, "auto_upgrade")
+
+    @property
+    @pulumi.getter(name="maintenanceWindows")
+    def maintenance_windows(self) -> Optional[Sequence['outputs.KubernetesNodeGroupMaintenancePolicyMaintenanceWindow']]:
+        return pulumi.get(self, "maintenance_windows")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupMaintenancePolicyMaintenanceWindow(dict):
+    def __init__(__self__, *,
+                 duration: str,
+                 start_time: str,
+                 day: Optional[str] = None):
+        pulumi.set(__self__, "duration", duration)
+        pulumi.set(__self__, "start_time", start_time)
+        if day is not None:
+            pulumi.set(__self__, "day", day)
+
+    @property
+    @pulumi.getter
+    def duration(self) -> str:
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        return pulumi.get(self, "start_time")
+
+    @property
+    @pulumi.getter
+    def day(self) -> Optional[str]:
+        return pulumi.get(self, "day")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupScalePolicy(dict):
+    def __init__(__self__, *,
+                 auto_scale: Optional['outputs.KubernetesNodeGroupScalePolicyAutoScale'] = None,
+                 fixed_scale: Optional['outputs.KubernetesNodeGroupScalePolicyFixedScale'] = None):
+        if auto_scale is not None:
+            pulumi.set(__self__, "auto_scale", auto_scale)
+        if fixed_scale is not None:
+            pulumi.set(__self__, "fixed_scale", fixed_scale)
+
+    @property
+    @pulumi.getter(name="autoScale")
+    def auto_scale(self) -> Optional['outputs.KubernetesNodeGroupScalePolicyAutoScale']:
+        return pulumi.get(self, "auto_scale")
+
+    @property
+    @pulumi.getter(name="fixedScale")
+    def fixed_scale(self) -> Optional['outputs.KubernetesNodeGroupScalePolicyFixedScale']:
+        return pulumi.get(self, "fixed_scale")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupScalePolicyAutoScale(dict):
+    def __init__(__self__, *,
+                 initial: int,
+                 max: int,
+                 min: int):
+        pulumi.set(__self__, "initial", initial)
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "min", min)
+
+    @property
+    @pulumi.getter
+    def initial(self) -> int:
+        return pulumi.get(self, "initial")
+
+    @property
+    @pulumi.getter
+    def max(self) -> int:
+        return pulumi.get(self, "max")
+
+    @property
+    @pulumi.getter
+    def min(self) -> int:
+        return pulumi.get(self, "min")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupScalePolicyFixedScale(dict):
+    def __init__(__self__, *,
+                 size: Optional[int] = None):
+        if size is not None:
+            pulumi.set(__self__, "size", size)
+
+    @property
+    @pulumi.getter
+    def size(self) -> Optional[int]:
+        return pulumi.get(self, "size")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class KubernetesNodeGroupVersionInfo(dict):
+    def __init__(__self__, *,
+                 current_version: Optional[str] = None,
+                 new_revision_available: Optional[bool] = None,
+                 new_revision_summary: Optional[str] = None,
+                 version_deprecated: Optional[bool] = None):
+        if current_version is not None:
+            pulumi.set(__self__, "current_version", current_version)
+        if new_revision_available is not None:
+            pulumi.set(__self__, "new_revision_available", new_revision_available)
+        if new_revision_summary is not None:
+            pulumi.set(__self__, "new_revision_summary", new_revision_summary)
+        if version_deprecated is not None:
+            pulumi.set(__self__, "version_deprecated", version_deprecated)
+
+    @property
+    @pulumi.getter(name="currentVersion")
+    def current_version(self) -> Optional[str]:
+        return pulumi.get(self, "current_version")
+
+    @property
+    @pulumi.getter(name="newRevisionAvailable")
+    def new_revision_available(self) -> Optional[bool]:
+        return pulumi.get(self, "new_revision_available")
+
+    @property
+    @pulumi.getter(name="newRevisionSummary")
+    def new_revision_summary(self) -> Optional[str]:
+        return pulumi.get(self, "new_revision_summary")
+
+    @property
+    @pulumi.getter(name="versionDeprecated")
+    def version_deprecated(self) -> Optional[bool]:
+        return pulumi.get(self, "version_deprecated")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class LbNetworkLoad_balancerAttachedTargetGroup(dict):
+    def __init__(__self__, *,
+                 healthchecks: Sequence['outputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheck'],
+                 target_group_id: str):
+        pulumi.set(__self__, "healthchecks", healthchecks)
+        pulumi.set(__self__, "target_group_id", target_group_id)
+
+    @property
+    @pulumi.getter
+    def healthchecks(self) -> Sequence['outputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheck']:
+        return pulumi.get(self, "healthchecks")
+
+    @property
+    @pulumi.getter(name="targetGroupId")
+    def target_group_id(self) -> str:
+        return pulumi.get(self, "target_group_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class LbNetworkLoad_balancerAttachedTargetGroupHealthcheck(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 healthy_threshold: Optional[int] = None,
+                 http_options: Optional['outputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheckHttpOptions'] = None,
+                 interval: Optional[int] = None,
+                 tcp_options: Optional['outputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheckTcpOptions'] = None,
+                 timeout: Optional[int] = None,
+                 unhealthy_threshold: Optional[int] = None):
+        pulumi.set(__self__, "name", name)
+        if healthy_threshold is not None:
+            pulumi.set(__self__, "healthy_threshold", healthy_threshold)
+        if http_options is not None:
+            pulumi.set(__self__, "http_options", http_options)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+        if tcp_options is not None:
+            pulumi.set(__self__, "tcp_options", tcp_options)
+        if timeout is not None:
+            pulumi.set(__self__, "timeout", timeout)
+        if unhealthy_threshold is not None:
+            pulumi.set(__self__, "unhealthy_threshold", unhealthy_threshold)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="healthyThreshold")
+    def healthy_threshold(self) -> Optional[int]:
+        return pulumi.get(self, "healthy_threshold")
+
+    @property
+    @pulumi.getter(name="httpOptions")
+    def http_options(self) -> Optional['outputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheckHttpOptions']:
+        return pulumi.get(self, "http_options")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> Optional[int]:
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter(name="tcpOptions")
+    def tcp_options(self) -> Optional['outputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheckTcpOptions']:
+        return pulumi.get(self, "tcp_options")
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> Optional[int]:
+        return pulumi.get(self, "timeout")
+
+    @property
+    @pulumi.getter(name="unhealthyThreshold")
+    def unhealthy_threshold(self) -> Optional[int]:
+        return pulumi.get(self, "unhealthy_threshold")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class LbNetworkLoad_balancerAttachedTargetGroupHealthcheckHttpOptions(dict):
+    def __init__(__self__, *,
+                 port: int,
+                 path: Optional[str] = None):
+        pulumi.set(__self__, "port", port)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[str]:
+        return pulumi.get(self, "path")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class LbNetworkLoad_balancerAttachedTargetGroupHealthcheckTcpOptions(dict):
+    def __init__(__self__, *,
+                 port: int):
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class LbNetworkLoad_balancerListener(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 port: int,
+                 external_address_spec: Optional['outputs.LbNetworkLoad_balancerListenerExternalAddressSpec'] = None,
+                 internal_address_spec: Optional['outputs.LbNetworkLoad_balancerListenerInternalAddressSpec'] = None,
+                 protocol: Optional[str] = None,
+                 target_port: Optional[int] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "port", port)
+        if external_address_spec is not None:
+            pulumi.set(__self__, "external_address_spec", external_address_spec)
+        if internal_address_spec is not None:
+            pulumi.set(__self__, "internal_address_spec", internal_address_spec)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
+        if target_port is not None:
+            pulumi.set(__self__, "target_port", target_port)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="externalAddressSpec")
+    def external_address_spec(self) -> Optional['outputs.LbNetworkLoad_balancerListenerExternalAddressSpec']:
+        return pulumi.get(self, "external_address_spec")
+
+    @property
+    @pulumi.getter(name="internalAddressSpec")
+    def internal_address_spec(self) -> Optional['outputs.LbNetworkLoad_balancerListenerInternalAddressSpec']:
+        return pulumi.get(self, "internal_address_spec")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[str]:
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="targetPort")
+    def target_port(self) -> Optional[int]:
+        return pulumi.get(self, "target_port")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class LbNetworkLoad_balancerListenerExternalAddressSpec(dict):
+    def __init__(__self__, *,
+                 address: Optional[str] = None,
+                 ip_version: Optional[str] = None):
+        if address is not None:
+            pulumi.set(__self__, "address", address)
+        if ip_version is not None:
+            pulumi.set(__self__, "ip_version", ip_version)
+
+    @property
+    @pulumi.getter
+    def address(self) -> Optional[str]:
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="ipVersion")
+    def ip_version(self) -> Optional[str]:
+        return pulumi.get(self, "ip_version")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class LbNetworkLoad_balancerListenerInternalAddressSpec(dict):
+    def __init__(__self__, *,
+                 subnet_id: str,
+                 address: Optional[str] = None,
+                 ip_version: Optional[str] = None):
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        if address is not None:
+            pulumi.set(__self__, "address", address)
+        if ip_version is not None:
+            pulumi.set(__self__, "ip_version", ip_version)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def address(self) -> Optional[str]:
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="ipVersion")
+    def ip_version(self) -> Optional[str]:
+        return pulumi.get(self, "ip_version")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class LbTargetGroupTarget(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 subnet_id: str):
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterAccess(dict):
+    def __init__(__self__, *,
+                 data_lens: Optional[bool] = None,
+                 metrika: Optional[bool] = None,
+                 serverless: Optional[bool] = None,
+                 web_sql: Optional[bool] = None):
+        if data_lens is not None:
+            pulumi.set(__self__, "data_lens", data_lens)
+        if metrika is not None:
+            pulumi.set(__self__, "metrika", metrika)
+        if serverless is not None:
+            pulumi.set(__self__, "serverless", serverless)
+        if web_sql is not None:
+            pulumi.set(__self__, "web_sql", web_sql)
+
+    @property
+    @pulumi.getter(name="dataLens")
+    def data_lens(self) -> Optional[bool]:
+        return pulumi.get(self, "data_lens")
+
+    @property
+    @pulumi.getter
+    def metrika(self) -> Optional[bool]:
+        return pulumi.get(self, "metrika")
+
+    @property
+    @pulumi.getter
+    def serverless(self) -> Optional[bool]:
+        return pulumi.get(self, "serverless")
+
+    @property
+    @pulumi.getter(name="webSql")
+    def web_sql(self) -> Optional[bool]:
+        return pulumi.get(self, "web_sql")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterBackupWindowStart(dict):
+    def __init__(__self__, *,
+                 hours: Optional[int] = None,
+                 minutes: Optional[int] = None):
+        if hours is not None:
+            pulumi.set(__self__, "hours", hours)
+        if minutes is not None:
+            pulumi.set(__self__, "minutes", minutes)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> Optional[int]:
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> Optional[int]:
+        return pulumi.get(self, "minutes")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouse(dict):
+    def __init__(__self__, *,
+                 resources: 'outputs.MdbClickhouseClusterClickhouseResources',
+                 config: Optional['outputs.MdbClickhouseClusterClickhouseConfig'] = None):
+        pulumi.set(__self__, "resources", resources)
+        if config is not None:
+            pulumi.set(__self__, "config", config)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.MdbClickhouseClusterClickhouseResources':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter
+    def config(self) -> Optional['outputs.MdbClickhouseClusterClickhouseConfig']:
+        return pulumi.get(self, "config")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfig(dict):
+    def __init__(__self__, *,
+                 background_pool_size: Optional[int] = None,
+                 background_schedule_pool_size: Optional[int] = None,
+                 compressions: Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigCompression']] = None,
+                 geobase_uri: Optional[str] = None,
+                 graphite_rollups: Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigGraphiteRollup']] = None,
+                 kafka: Optional['outputs.MdbClickhouseClusterClickhouseConfigKafka'] = None,
+                 kafka_topics: Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigKafkaTopic']] = None,
+                 keep_alive_timeout: Optional[int] = None,
+                 log_level: Optional[str] = None,
+                 mark_cache_size: Optional[int] = None,
+                 max_concurrent_queries: Optional[int] = None,
+                 max_connections: Optional[int] = None,
+                 max_partition_size_to_drop: Optional[int] = None,
+                 max_table_size_to_drop: Optional[int] = None,
+                 merge_tree: Optional['outputs.MdbClickhouseClusterClickhouseConfigMergeTree'] = None,
+                 metric_log_enabled: Optional[bool] = None,
+                 metric_log_retention_size: Optional[int] = None,
+                 metric_log_retention_time: Optional[int] = None,
+                 part_log_retention_size: Optional[int] = None,
+                 part_log_retention_time: Optional[int] = None,
+                 query_log_retention_size: Optional[int] = None,
+                 query_log_retention_time: Optional[int] = None,
+                 query_thread_log_enabled: Optional[bool] = None,
+                 query_thread_log_retention_size: Optional[int] = None,
+                 query_thread_log_retention_time: Optional[int] = None,
+                 rabbitmq: Optional['outputs.MdbClickhouseClusterClickhouseConfigRabbitmq'] = None,
+                 text_log_enabled: Optional[bool] = None,
+                 text_log_level: Optional[str] = None,
+                 text_log_retention_size: Optional[int] = None,
+                 text_log_retention_time: Optional[int] = None,
+                 timezone: Optional[str] = None,
+                 trace_log_enabled: Optional[bool] = None,
+                 trace_log_retention_size: Optional[int] = None,
+                 trace_log_retention_time: Optional[int] = None,
+                 uncompressed_cache_size: Optional[int] = None):
+        if background_pool_size is not None:
+            pulumi.set(__self__, "background_pool_size", background_pool_size)
+        if background_schedule_pool_size is not None:
+            pulumi.set(__self__, "background_schedule_pool_size", background_schedule_pool_size)
+        if compressions is not None:
+            pulumi.set(__self__, "compressions", compressions)
+        if geobase_uri is not None:
+            pulumi.set(__self__, "geobase_uri", geobase_uri)
+        if graphite_rollups is not None:
+            pulumi.set(__self__, "graphite_rollups", graphite_rollups)
+        if kafka is not None:
+            pulumi.set(__self__, "kafka", kafka)
+        if kafka_topics is not None:
+            pulumi.set(__self__, "kafka_topics", kafka_topics)
+        if keep_alive_timeout is not None:
+            pulumi.set(__self__, "keep_alive_timeout", keep_alive_timeout)
+        if log_level is not None:
+            pulumi.set(__self__, "log_level", log_level)
+        if mark_cache_size is not None:
+            pulumi.set(__self__, "mark_cache_size", mark_cache_size)
+        if max_concurrent_queries is not None:
+            pulumi.set(__self__, "max_concurrent_queries", max_concurrent_queries)
+        if max_connections is not None:
+            pulumi.set(__self__, "max_connections", max_connections)
+        if max_partition_size_to_drop is not None:
+            pulumi.set(__self__, "max_partition_size_to_drop", max_partition_size_to_drop)
+        if max_table_size_to_drop is not None:
+            pulumi.set(__self__, "max_table_size_to_drop", max_table_size_to_drop)
+        if merge_tree is not None:
+            pulumi.set(__self__, "merge_tree", merge_tree)
+        if metric_log_enabled is not None:
+            pulumi.set(__self__, "metric_log_enabled", metric_log_enabled)
+        if metric_log_retention_size is not None:
+            pulumi.set(__self__, "metric_log_retention_size", metric_log_retention_size)
+        if metric_log_retention_time is not None:
+            pulumi.set(__self__, "metric_log_retention_time", metric_log_retention_time)
+        if part_log_retention_size is not None:
+            pulumi.set(__self__, "part_log_retention_size", part_log_retention_size)
+        if part_log_retention_time is not None:
+            pulumi.set(__self__, "part_log_retention_time", part_log_retention_time)
+        if query_log_retention_size is not None:
+            pulumi.set(__self__, "query_log_retention_size", query_log_retention_size)
+        if query_log_retention_time is not None:
+            pulumi.set(__self__, "query_log_retention_time", query_log_retention_time)
+        if query_thread_log_enabled is not None:
+            pulumi.set(__self__, "query_thread_log_enabled", query_thread_log_enabled)
+        if query_thread_log_retention_size is not None:
+            pulumi.set(__self__, "query_thread_log_retention_size", query_thread_log_retention_size)
+        if query_thread_log_retention_time is not None:
+            pulumi.set(__self__, "query_thread_log_retention_time", query_thread_log_retention_time)
+        if rabbitmq is not None:
+            pulumi.set(__self__, "rabbitmq", rabbitmq)
+        if text_log_enabled is not None:
+            pulumi.set(__self__, "text_log_enabled", text_log_enabled)
+        if text_log_level is not None:
+            pulumi.set(__self__, "text_log_level", text_log_level)
+        if text_log_retention_size is not None:
+            pulumi.set(__self__, "text_log_retention_size", text_log_retention_size)
+        if text_log_retention_time is not None:
+            pulumi.set(__self__, "text_log_retention_time", text_log_retention_time)
+        if timezone is not None:
+            pulumi.set(__self__, "timezone", timezone)
+        if trace_log_enabled is not None:
+            pulumi.set(__self__, "trace_log_enabled", trace_log_enabled)
+        if trace_log_retention_size is not None:
+            pulumi.set(__self__, "trace_log_retention_size", trace_log_retention_size)
+        if trace_log_retention_time is not None:
+            pulumi.set(__self__, "trace_log_retention_time", trace_log_retention_time)
+        if uncompressed_cache_size is not None:
+            pulumi.set(__self__, "uncompressed_cache_size", uncompressed_cache_size)
+
+    @property
+    @pulumi.getter(name="backgroundPoolSize")
+    def background_pool_size(self) -> Optional[int]:
+        return pulumi.get(self, "background_pool_size")
+
+    @property
+    @pulumi.getter(name="backgroundSchedulePoolSize")
+    def background_schedule_pool_size(self) -> Optional[int]:
+        return pulumi.get(self, "background_schedule_pool_size")
+
+    @property
+    @pulumi.getter
+    def compressions(self) -> Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigCompression']]:
+        return pulumi.get(self, "compressions")
+
+    @property
+    @pulumi.getter(name="geobaseUri")
+    def geobase_uri(self) -> Optional[str]:
+        return pulumi.get(self, "geobase_uri")
+
+    @property
+    @pulumi.getter(name="graphiteRollups")
+    def graphite_rollups(self) -> Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigGraphiteRollup']]:
+        return pulumi.get(self, "graphite_rollups")
+
+    @property
+    @pulumi.getter
+    def kafka(self) -> Optional['outputs.MdbClickhouseClusterClickhouseConfigKafka']:
+        return pulumi.get(self, "kafka")
+
+    @property
+    @pulumi.getter(name="kafkaTopics")
+    def kafka_topics(self) -> Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigKafkaTopic']]:
+        return pulumi.get(self, "kafka_topics")
+
+    @property
+    @pulumi.getter(name="keepAliveTimeout")
+    def keep_alive_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "keep_alive_timeout")
+
+    @property
+    @pulumi.getter(name="logLevel")
+    def log_level(self) -> Optional[str]:
+        return pulumi.get(self, "log_level")
+
+    @property
+    @pulumi.getter(name="markCacheSize")
+    def mark_cache_size(self) -> Optional[int]:
+        return pulumi.get(self, "mark_cache_size")
+
+    @property
+    @pulumi.getter(name="maxConcurrentQueries")
+    def max_concurrent_queries(self) -> Optional[int]:
+        return pulumi.get(self, "max_concurrent_queries")
+
+    @property
+    @pulumi.getter(name="maxConnections")
+    def max_connections(self) -> Optional[int]:
+        return pulumi.get(self, "max_connections")
+
+    @property
+    @pulumi.getter(name="maxPartitionSizeToDrop")
+    def max_partition_size_to_drop(self) -> Optional[int]:
+        return pulumi.get(self, "max_partition_size_to_drop")
+
+    @property
+    @pulumi.getter(name="maxTableSizeToDrop")
+    def max_table_size_to_drop(self) -> Optional[int]:
+        return pulumi.get(self, "max_table_size_to_drop")
+
+    @property
+    @pulumi.getter(name="mergeTree")
+    def merge_tree(self) -> Optional['outputs.MdbClickhouseClusterClickhouseConfigMergeTree']:
+        return pulumi.get(self, "merge_tree")
+
+    @property
+    @pulumi.getter(name="metricLogEnabled")
+    def metric_log_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "metric_log_enabled")
+
+    @property
+    @pulumi.getter(name="metricLogRetentionSize")
+    def metric_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "metric_log_retention_size")
+
+    @property
+    @pulumi.getter(name="metricLogRetentionTime")
+    def metric_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "metric_log_retention_time")
+
+    @property
+    @pulumi.getter(name="partLogRetentionSize")
+    def part_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "part_log_retention_size")
+
+    @property
+    @pulumi.getter(name="partLogRetentionTime")
+    def part_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "part_log_retention_time")
+
+    @property
+    @pulumi.getter(name="queryLogRetentionSize")
+    def query_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "query_log_retention_size")
+
+    @property
+    @pulumi.getter(name="queryLogRetentionTime")
+    def query_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "query_log_retention_time")
+
+    @property
+    @pulumi.getter(name="queryThreadLogEnabled")
+    def query_thread_log_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "query_thread_log_enabled")
+
+    @property
+    @pulumi.getter(name="queryThreadLogRetentionSize")
+    def query_thread_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "query_thread_log_retention_size")
+
+    @property
+    @pulumi.getter(name="queryThreadLogRetentionTime")
+    def query_thread_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "query_thread_log_retention_time")
+
+    @property
+    @pulumi.getter
+    def rabbitmq(self) -> Optional['outputs.MdbClickhouseClusterClickhouseConfigRabbitmq']:
+        return pulumi.get(self, "rabbitmq")
+
+    @property
+    @pulumi.getter(name="textLogEnabled")
+    def text_log_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "text_log_enabled")
+
+    @property
+    @pulumi.getter(name="textLogLevel")
+    def text_log_level(self) -> Optional[str]:
+        return pulumi.get(self, "text_log_level")
+
+    @property
+    @pulumi.getter(name="textLogRetentionSize")
+    def text_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "text_log_retention_size")
+
+    @property
+    @pulumi.getter(name="textLogRetentionTime")
+    def text_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "text_log_retention_time")
+
+    @property
+    @pulumi.getter
+    def timezone(self) -> Optional[str]:
+        return pulumi.get(self, "timezone")
+
+    @property
+    @pulumi.getter(name="traceLogEnabled")
+    def trace_log_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "trace_log_enabled")
+
+    @property
+    @pulumi.getter(name="traceLogRetentionSize")
+    def trace_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "trace_log_retention_size")
+
+    @property
+    @pulumi.getter(name="traceLogRetentionTime")
+    def trace_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "trace_log_retention_time")
+
+    @property
+    @pulumi.getter(name="uncompressedCacheSize")
+    def uncompressed_cache_size(self) -> Optional[int]:
+        return pulumi.get(self, "uncompressed_cache_size")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfigCompression(dict):
+    def __init__(__self__, *,
+                 method: str,
+                 min_part_size: int,
+                 min_part_size_ratio: float):
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "min_part_size", min_part_size)
+        pulumi.set(__self__, "min_part_size_ratio", min_part_size_ratio)
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter(name="minPartSize")
+    def min_part_size(self) -> int:
+        return pulumi.get(self, "min_part_size")
+
+    @property
+    @pulumi.getter(name="minPartSizeRatio")
+    def min_part_size_ratio(self) -> float:
+        return pulumi.get(self, "min_part_size_ratio")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfigGraphiteRollup(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 patterns: Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern']] = None):
+        pulumi.set(__self__, "name", name)
+        if patterns is not None:
+            pulumi.set(__self__, "patterns", patterns)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def patterns(self) -> Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern']]:
+        return pulumi.get(self, "patterns")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern(dict):
+    def __init__(__self__, *,
+                 function: str,
+                 regexp: Optional[str] = None,
+                 retentions: Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention']] = None):
+        pulumi.set(__self__, "function", function)
+        if regexp is not None:
+            pulumi.set(__self__, "regexp", regexp)
+        if retentions is not None:
+            pulumi.set(__self__, "retentions", retentions)
+
+    @property
+    @pulumi.getter
+    def function(self) -> str:
+        return pulumi.get(self, "function")
+
+    @property
+    @pulumi.getter
+    def regexp(self) -> Optional[str]:
+        return pulumi.get(self, "regexp")
+
+    @property
+    @pulumi.getter
+    def retentions(self) -> Optional[Sequence['outputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention']]:
+        return pulumi.get(self, "retentions")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention(dict):
+    def __init__(__self__, *,
+                 age: int,
+                 precision: int):
+        pulumi.set(__self__, "age", age)
+        pulumi.set(__self__, "precision", precision)
+
+    @property
+    @pulumi.getter
+    def age(self) -> int:
+        return pulumi.get(self, "age")
+
+    @property
+    @pulumi.getter
+    def precision(self) -> int:
+        return pulumi.get(self, "precision")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfigKafka(dict):
+    def __init__(__self__, *,
+                 sasl_mechanism: Optional[str] = None,
+                 sasl_password: Optional[str] = None,
+                 sasl_username: Optional[str] = None,
+                 security_protocol: Optional[str] = None):
+        if sasl_mechanism is not None:
+            pulumi.set(__self__, "sasl_mechanism", sasl_mechanism)
+        if sasl_password is not None:
+            pulumi.set(__self__, "sasl_password", sasl_password)
+        if sasl_username is not None:
+            pulumi.set(__self__, "sasl_username", sasl_username)
+        if security_protocol is not None:
+            pulumi.set(__self__, "security_protocol", security_protocol)
+
+    @property
+    @pulumi.getter(name="saslMechanism")
+    def sasl_mechanism(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_mechanism")
+
+    @property
+    @pulumi.getter(name="saslPassword")
+    def sasl_password(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_password")
+
+    @property
+    @pulumi.getter(name="saslUsername")
+    def sasl_username(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_username")
+
+    @property
+    @pulumi.getter(name="securityProtocol")
+    def security_protocol(self) -> Optional[str]:
+        return pulumi.get(self, "security_protocol")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfigKafkaTopic(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 settings: Optional['outputs.MdbClickhouseClusterClickhouseConfigKafkaTopicSettings'] = None):
+        pulumi.set(__self__, "name", name)
+        if settings is not None:
+            pulumi.set(__self__, "settings", settings)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def settings(self) -> Optional['outputs.MdbClickhouseClusterClickhouseConfigKafkaTopicSettings']:
+        return pulumi.get(self, "settings")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfigKafkaTopicSettings(dict):
+    def __init__(__self__, *,
+                 sasl_mechanism: Optional[str] = None,
+                 sasl_password: Optional[str] = None,
+                 sasl_username: Optional[str] = None,
+                 security_protocol: Optional[str] = None):
+        if sasl_mechanism is not None:
+            pulumi.set(__self__, "sasl_mechanism", sasl_mechanism)
+        if sasl_password is not None:
+            pulumi.set(__self__, "sasl_password", sasl_password)
+        if sasl_username is not None:
+            pulumi.set(__self__, "sasl_username", sasl_username)
+        if security_protocol is not None:
+            pulumi.set(__self__, "security_protocol", security_protocol)
+
+    @property
+    @pulumi.getter(name="saslMechanism")
+    def sasl_mechanism(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_mechanism")
+
+    @property
+    @pulumi.getter(name="saslPassword")
+    def sasl_password(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_password")
+
+    @property
+    @pulumi.getter(name="saslUsername")
+    def sasl_username(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_username")
+
+    @property
+    @pulumi.getter(name="securityProtocol")
+    def security_protocol(self) -> Optional[str]:
+        return pulumi.get(self, "security_protocol")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfigMergeTree(dict):
+    def __init__(__self__, *,
+                 max_bytes_to_merge_at_min_space_in_pool: Optional[int] = None,
+                 max_replicated_merges_in_queue: Optional[int] = None,
+                 number_of_free_entries_in_pool_to_lower_max_size_of_merge: Optional[int] = None,
+                 parts_to_delay_insert: Optional[int] = None,
+                 parts_to_throw_insert: Optional[int] = None,
+                 replicated_deduplication_window: Optional[int] = None,
+                 replicated_deduplication_window_seconds: Optional[int] = None):
+        if max_bytes_to_merge_at_min_space_in_pool is not None:
+            pulumi.set(__self__, "max_bytes_to_merge_at_min_space_in_pool", max_bytes_to_merge_at_min_space_in_pool)
+        if max_replicated_merges_in_queue is not None:
+            pulumi.set(__self__, "max_replicated_merges_in_queue", max_replicated_merges_in_queue)
+        if number_of_free_entries_in_pool_to_lower_max_size_of_merge is not None:
+            pulumi.set(__self__, "number_of_free_entries_in_pool_to_lower_max_size_of_merge", number_of_free_entries_in_pool_to_lower_max_size_of_merge)
+        if parts_to_delay_insert is not None:
+            pulumi.set(__self__, "parts_to_delay_insert", parts_to_delay_insert)
+        if parts_to_throw_insert is not None:
+            pulumi.set(__self__, "parts_to_throw_insert", parts_to_throw_insert)
+        if replicated_deduplication_window is not None:
+            pulumi.set(__self__, "replicated_deduplication_window", replicated_deduplication_window)
+        if replicated_deduplication_window_seconds is not None:
+            pulumi.set(__self__, "replicated_deduplication_window_seconds", replicated_deduplication_window_seconds)
+
+    @property
+    @pulumi.getter(name="maxBytesToMergeAtMinSpaceInPool")
+    def max_bytes_to_merge_at_min_space_in_pool(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_to_merge_at_min_space_in_pool")
+
+    @property
+    @pulumi.getter(name="maxReplicatedMergesInQueue")
+    def max_replicated_merges_in_queue(self) -> Optional[int]:
+        return pulumi.get(self, "max_replicated_merges_in_queue")
+
+    @property
+    @pulumi.getter(name="numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge")
+    def number_of_free_entries_in_pool_to_lower_max_size_of_merge(self) -> Optional[int]:
+        return pulumi.get(self, "number_of_free_entries_in_pool_to_lower_max_size_of_merge")
+
+    @property
+    @pulumi.getter(name="partsToDelayInsert")
+    def parts_to_delay_insert(self) -> Optional[int]:
+        return pulumi.get(self, "parts_to_delay_insert")
+
+    @property
+    @pulumi.getter(name="partsToThrowInsert")
+    def parts_to_throw_insert(self) -> Optional[int]:
+        return pulumi.get(self, "parts_to_throw_insert")
+
+    @property
+    @pulumi.getter(name="replicatedDeduplicationWindow")
+    def replicated_deduplication_window(self) -> Optional[int]:
+        return pulumi.get(self, "replicated_deduplication_window")
+
+    @property
+    @pulumi.getter(name="replicatedDeduplicationWindowSeconds")
+    def replicated_deduplication_window_seconds(self) -> Optional[int]:
+        return pulumi.get(self, "replicated_deduplication_window_seconds")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseConfigRabbitmq(dict):
+    def __init__(__self__, *,
+                 password: Optional[str] = None,
+                 username: Optional[str] = None):
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[str]:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def username(self) -> Optional[str]:
+        return pulumi.get(self, "username")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterClickhouseResources(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterDatabase(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterFormatSchema(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 type: str,
+                 uri: str):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "uri", uri)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def uri(self) -> str:
+        return pulumi.get(self, "uri")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterHost(dict):
+    def __init__(__self__, *,
+                 type: str,
+                 zone: str,
+                 assign_public_ip: Optional[bool] = None,
+                 fqdn: Optional[str] = None,
+                 shard_name: Optional[str] = None,
+                 subnet_id: Optional[str] = None):
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "zone", zone)
+        if assign_public_ip is not None:
+            pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+        if fqdn is not None:
+            pulumi.set(__self__, "fqdn", fqdn)
+        if shard_name is not None:
+            pulumi.set(__self__, "shard_name", shard_name)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> Optional[bool]:
+        return pulumi.get(self, "assign_public_ip")
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> Optional[str]:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter(name="shardName")
+    def shard_name(self) -> Optional[str]:
+        return pulumi.get(self, "shard_name")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        return pulumi.get(self, "subnet_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterMlModel(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 type: str,
+                 uri: str):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "uri", uri)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def uri(self) -> str:
+        return pulumi.get(self, "uri")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterShardGroup(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 shard_names: Sequence[str],
+                 description: Optional[str] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "shard_names", shard_names)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="shardNames")
+    def shard_names(self) -> Sequence[str]:
+        return pulumi.get(self, "shard_names")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterUser(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 password: str,
+                 permissions: Optional[Sequence['outputs.MdbClickhouseClusterUserPermission']] = None,
+                 quotas: Optional[Sequence['outputs.MdbClickhouseClusterUserQuota']] = None,
+                 settings: Optional['outputs.MdbClickhouseClusterUserSettings'] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "password", password)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+        if quotas is not None:
+            pulumi.set(__self__, "quotas", quotas)
+        if settings is not None:
+            pulumi.set(__self__, "settings", settings)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence['outputs.MdbClickhouseClusterUserPermission']]:
+        return pulumi.get(self, "permissions")
+
+    @property
+    @pulumi.getter
+    def quotas(self) -> Optional[Sequence['outputs.MdbClickhouseClusterUserQuota']]:
+        return pulumi.get(self, "quotas")
+
+    @property
+    @pulumi.getter
+    def settings(self) -> Optional['outputs.MdbClickhouseClusterUserSettings']:
+        return pulumi.get(self, "settings")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterUserPermission(dict):
+    def __init__(__self__, *,
+                 database_name: str):
+        pulumi.set(__self__, "database_name", database_name)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        return pulumi.get(self, "database_name")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterUserQuota(dict):
+    def __init__(__self__, *,
+                 interval_duration: int,
+                 errors: Optional[int] = None,
+                 execution_time: Optional[int] = None,
+                 queries: Optional[int] = None,
+                 read_rows: Optional[int] = None,
+                 result_rows: Optional[int] = None):
+        pulumi.set(__self__, "interval_duration", interval_duration)
+        if errors is not None:
+            pulumi.set(__self__, "errors", errors)
+        if execution_time is not None:
+            pulumi.set(__self__, "execution_time", execution_time)
+        if queries is not None:
+            pulumi.set(__self__, "queries", queries)
+        if read_rows is not None:
+            pulumi.set(__self__, "read_rows", read_rows)
+        if result_rows is not None:
+            pulumi.set(__self__, "result_rows", result_rows)
+
+    @property
+    @pulumi.getter(name="intervalDuration")
+    def interval_duration(self) -> int:
+        return pulumi.get(self, "interval_duration")
+
+    @property
+    @pulumi.getter
+    def errors(self) -> Optional[int]:
+        return pulumi.get(self, "errors")
+
+    @property
+    @pulumi.getter(name="executionTime")
+    def execution_time(self) -> Optional[int]:
+        return pulumi.get(self, "execution_time")
+
+    @property
+    @pulumi.getter
+    def queries(self) -> Optional[int]:
+        return pulumi.get(self, "queries")
+
+    @property
+    @pulumi.getter(name="readRows")
+    def read_rows(self) -> Optional[int]:
+        return pulumi.get(self, "read_rows")
+
+    @property
+    @pulumi.getter(name="resultRows")
+    def result_rows(self) -> Optional[int]:
+        return pulumi.get(self, "result_rows")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterUserSettings(dict):
+    def __init__(__self__, *,
+                 add_http_cors_header: Optional[bool] = None,
+                 allow_ddl: Optional[bool] = None,
+                 compile: Optional[bool] = None,
+                 compile_expressions: Optional[bool] = None,
+                 connect_timeout: Optional[int] = None,
+                 count_distinct_implementation: Optional[str] = None,
+                 distinct_overflow_mode: Optional[str] = None,
+                 distributed_aggregation_memory_efficient: Optional[bool] = None,
+                 distributed_ddl_task_timeout: Optional[int] = None,
+                 distributed_product_mode: Optional[str] = None,
+                 empty_result_for_aggregation_by_empty_set: Optional[bool] = None,
+                 enable_http_compression: Optional[bool] = None,
+                 fallback_to_stale_replicas_for_distributed_queries: Optional[bool] = None,
+                 force_index_by_date: Optional[bool] = None,
+                 force_primary_key: Optional[bool] = None,
+                 group_by_overflow_mode: Optional[str] = None,
+                 group_by_two_level_threshold: Optional[int] = None,
+                 group_by_two_level_threshold_bytes: Optional[int] = None,
+                 http_connection_timeout: Optional[int] = None,
+                 http_headers_progress_interval: Optional[int] = None,
+                 http_receive_timeout: Optional[int] = None,
+                 http_send_timeout: Optional[int] = None,
+                 input_format_defaults_for_omitted_fields: Optional[bool] = None,
+                 input_format_values_interpret_expressions: Optional[bool] = None,
+                 insert_quorum: Optional[int] = None,
+                 insert_quorum_timeout: Optional[int] = None,
+                 join_overflow_mode: Optional[str] = None,
+                 join_use_nulls: Optional[bool] = None,
+                 joined_subquery_requires_alias: Optional[bool] = None,
+                 low_cardinality_allow_in_native_format: Optional[bool] = None,
+                 max_ast_depth: Optional[int] = None,
+                 max_ast_elements: Optional[int] = None,
+                 max_block_size: Optional[int] = None,
+                 max_bytes_before_external_group_by: Optional[int] = None,
+                 max_bytes_before_external_sort: Optional[int] = None,
+                 max_bytes_in_distinct: Optional[int] = None,
+                 max_bytes_in_join: Optional[int] = None,
+                 max_bytes_in_set: Optional[int] = None,
+                 max_bytes_to_read: Optional[int] = None,
+                 max_bytes_to_sort: Optional[int] = None,
+                 max_bytes_to_transfer: Optional[int] = None,
+                 max_columns_to_read: Optional[int] = None,
+                 max_execution_time: Optional[int] = None,
+                 max_expanded_ast_elements: Optional[int] = None,
+                 max_insert_block_size: Optional[int] = None,
+                 max_memory_usage: Optional[int] = None,
+                 max_memory_usage_for_user: Optional[int] = None,
+                 max_network_bandwidth: Optional[int] = None,
+                 max_network_bandwidth_for_user: Optional[int] = None,
+                 max_query_size: Optional[int] = None,
+                 max_replica_delay_for_distributed_queries: Optional[int] = None,
+                 max_result_bytes: Optional[int] = None,
+                 max_result_rows: Optional[int] = None,
+                 max_rows_in_distinct: Optional[int] = None,
+                 max_rows_in_join: Optional[int] = None,
+                 max_rows_in_set: Optional[int] = None,
+                 max_rows_to_group_by: Optional[int] = None,
+                 max_rows_to_read: Optional[int] = None,
+                 max_rows_to_sort: Optional[int] = None,
+                 max_rows_to_transfer: Optional[int] = None,
+                 max_temporary_columns: Optional[int] = None,
+                 max_temporary_non_const_columns: Optional[int] = None,
+                 max_threads: Optional[int] = None,
+                 merge_tree_max_bytes_to_use_cache: Optional[int] = None,
+                 merge_tree_max_rows_to_use_cache: Optional[int] = None,
+                 merge_tree_min_bytes_for_concurrent_read: Optional[int] = None,
+                 merge_tree_min_rows_for_concurrent_read: Optional[int] = None,
+                 min_bytes_to_use_direct_io: Optional[int] = None,
+                 min_count_to_compile: Optional[int] = None,
+                 min_count_to_compile_expression: Optional[int] = None,
+                 min_execution_speed: Optional[int] = None,
+                 min_execution_speed_bytes: Optional[int] = None,
+                 min_insert_block_size_bytes: Optional[int] = None,
+                 min_insert_block_size_rows: Optional[int] = None,
+                 output_format_json_quote64bit_integers: Optional[bool] = None,
+                 output_format_json_quote_denormals: Optional[bool] = None,
+                 priority: Optional[int] = None,
+                 quota_mode: Optional[str] = None,
+                 read_overflow_mode: Optional[str] = None,
+                 readonly: Optional[int] = None,
+                 receive_timeout: Optional[int] = None,
+                 replication_alter_partitions_sync: Optional[int] = None,
+                 result_overflow_mode: Optional[str] = None,
+                 select_sequential_consistency: Optional[bool] = None,
+                 send_progress_in_http_headers: Optional[bool] = None,
+                 send_timeout: Optional[int] = None,
+                 set_overflow_mode: Optional[str] = None,
+                 skip_unavailable_shards: Optional[bool] = None,
+                 sort_overflow_mode: Optional[str] = None,
+                 timeout_overflow_mode: Optional[str] = None,
+                 transfer_overflow_mode: Optional[str] = None,
+                 transform_null_in: Optional[bool] = None,
+                 use_uncompressed_cache: Optional[bool] = None):
+        if add_http_cors_header is not None:
+            pulumi.set(__self__, "add_http_cors_header", add_http_cors_header)
+        if allow_ddl is not None:
+            pulumi.set(__self__, "allow_ddl", allow_ddl)
+        if compile is not None:
+            pulumi.set(__self__, "compile", compile)
+        if compile_expressions is not None:
+            pulumi.set(__self__, "compile_expressions", compile_expressions)
+        if connect_timeout is not None:
+            pulumi.set(__self__, "connect_timeout", connect_timeout)
+        if count_distinct_implementation is not None:
+            pulumi.set(__self__, "count_distinct_implementation", count_distinct_implementation)
+        if distinct_overflow_mode is not None:
+            pulumi.set(__self__, "distinct_overflow_mode", distinct_overflow_mode)
+        if distributed_aggregation_memory_efficient is not None:
+            pulumi.set(__self__, "distributed_aggregation_memory_efficient", distributed_aggregation_memory_efficient)
+        if distributed_ddl_task_timeout is not None:
+            pulumi.set(__self__, "distributed_ddl_task_timeout", distributed_ddl_task_timeout)
+        if distributed_product_mode is not None:
+            pulumi.set(__self__, "distributed_product_mode", distributed_product_mode)
+        if empty_result_for_aggregation_by_empty_set is not None:
+            pulumi.set(__self__, "empty_result_for_aggregation_by_empty_set", empty_result_for_aggregation_by_empty_set)
+        if enable_http_compression is not None:
+            pulumi.set(__self__, "enable_http_compression", enable_http_compression)
+        if fallback_to_stale_replicas_for_distributed_queries is not None:
+            pulumi.set(__self__, "fallback_to_stale_replicas_for_distributed_queries", fallback_to_stale_replicas_for_distributed_queries)
+        if force_index_by_date is not None:
+            pulumi.set(__self__, "force_index_by_date", force_index_by_date)
+        if force_primary_key is not None:
+            pulumi.set(__self__, "force_primary_key", force_primary_key)
+        if group_by_overflow_mode is not None:
+            pulumi.set(__self__, "group_by_overflow_mode", group_by_overflow_mode)
+        if group_by_two_level_threshold is not None:
+            pulumi.set(__self__, "group_by_two_level_threshold", group_by_two_level_threshold)
+        if group_by_two_level_threshold_bytes is not None:
+            pulumi.set(__self__, "group_by_two_level_threshold_bytes", group_by_two_level_threshold_bytes)
+        if http_connection_timeout is not None:
+            pulumi.set(__self__, "http_connection_timeout", http_connection_timeout)
+        if http_headers_progress_interval is not None:
+            pulumi.set(__self__, "http_headers_progress_interval", http_headers_progress_interval)
+        if http_receive_timeout is not None:
+            pulumi.set(__self__, "http_receive_timeout", http_receive_timeout)
+        if http_send_timeout is not None:
+            pulumi.set(__self__, "http_send_timeout", http_send_timeout)
+        if input_format_defaults_for_omitted_fields is not None:
+            pulumi.set(__self__, "input_format_defaults_for_omitted_fields", input_format_defaults_for_omitted_fields)
+        if input_format_values_interpret_expressions is not None:
+            pulumi.set(__self__, "input_format_values_interpret_expressions", input_format_values_interpret_expressions)
+        if insert_quorum is not None:
+            pulumi.set(__self__, "insert_quorum", insert_quorum)
+        if insert_quorum_timeout is not None:
+            pulumi.set(__self__, "insert_quorum_timeout", insert_quorum_timeout)
+        if join_overflow_mode is not None:
+            pulumi.set(__self__, "join_overflow_mode", join_overflow_mode)
+        if join_use_nulls is not None:
+            pulumi.set(__self__, "join_use_nulls", join_use_nulls)
+        if joined_subquery_requires_alias is not None:
+            pulumi.set(__self__, "joined_subquery_requires_alias", joined_subquery_requires_alias)
+        if low_cardinality_allow_in_native_format is not None:
+            pulumi.set(__self__, "low_cardinality_allow_in_native_format", low_cardinality_allow_in_native_format)
+        if max_ast_depth is not None:
+            pulumi.set(__self__, "max_ast_depth", max_ast_depth)
+        if max_ast_elements is not None:
+            pulumi.set(__self__, "max_ast_elements", max_ast_elements)
+        if max_block_size is not None:
+            pulumi.set(__self__, "max_block_size", max_block_size)
+        if max_bytes_before_external_group_by is not None:
+            pulumi.set(__self__, "max_bytes_before_external_group_by", max_bytes_before_external_group_by)
+        if max_bytes_before_external_sort is not None:
+            pulumi.set(__self__, "max_bytes_before_external_sort", max_bytes_before_external_sort)
+        if max_bytes_in_distinct is not None:
+            pulumi.set(__self__, "max_bytes_in_distinct", max_bytes_in_distinct)
+        if max_bytes_in_join is not None:
+            pulumi.set(__self__, "max_bytes_in_join", max_bytes_in_join)
+        if max_bytes_in_set is not None:
+            pulumi.set(__self__, "max_bytes_in_set", max_bytes_in_set)
+        if max_bytes_to_read is not None:
+            pulumi.set(__self__, "max_bytes_to_read", max_bytes_to_read)
+        if max_bytes_to_sort is not None:
+            pulumi.set(__self__, "max_bytes_to_sort", max_bytes_to_sort)
+        if max_bytes_to_transfer is not None:
+            pulumi.set(__self__, "max_bytes_to_transfer", max_bytes_to_transfer)
+        if max_columns_to_read is not None:
+            pulumi.set(__self__, "max_columns_to_read", max_columns_to_read)
+        if max_execution_time is not None:
+            pulumi.set(__self__, "max_execution_time", max_execution_time)
+        if max_expanded_ast_elements is not None:
+            pulumi.set(__self__, "max_expanded_ast_elements", max_expanded_ast_elements)
+        if max_insert_block_size is not None:
+            pulumi.set(__self__, "max_insert_block_size", max_insert_block_size)
+        if max_memory_usage is not None:
+            pulumi.set(__self__, "max_memory_usage", max_memory_usage)
+        if max_memory_usage_for_user is not None:
+            pulumi.set(__self__, "max_memory_usage_for_user", max_memory_usage_for_user)
+        if max_network_bandwidth is not None:
+            pulumi.set(__self__, "max_network_bandwidth", max_network_bandwidth)
+        if max_network_bandwidth_for_user is not None:
+            pulumi.set(__self__, "max_network_bandwidth_for_user", max_network_bandwidth_for_user)
+        if max_query_size is not None:
+            pulumi.set(__self__, "max_query_size", max_query_size)
+        if max_replica_delay_for_distributed_queries is not None:
+            pulumi.set(__self__, "max_replica_delay_for_distributed_queries", max_replica_delay_for_distributed_queries)
+        if max_result_bytes is not None:
+            pulumi.set(__self__, "max_result_bytes", max_result_bytes)
+        if max_result_rows is not None:
+            pulumi.set(__self__, "max_result_rows", max_result_rows)
+        if max_rows_in_distinct is not None:
+            pulumi.set(__self__, "max_rows_in_distinct", max_rows_in_distinct)
+        if max_rows_in_join is not None:
+            pulumi.set(__self__, "max_rows_in_join", max_rows_in_join)
+        if max_rows_in_set is not None:
+            pulumi.set(__self__, "max_rows_in_set", max_rows_in_set)
+        if max_rows_to_group_by is not None:
+            pulumi.set(__self__, "max_rows_to_group_by", max_rows_to_group_by)
+        if max_rows_to_read is not None:
+            pulumi.set(__self__, "max_rows_to_read", max_rows_to_read)
+        if max_rows_to_sort is not None:
+            pulumi.set(__self__, "max_rows_to_sort", max_rows_to_sort)
+        if max_rows_to_transfer is not None:
+            pulumi.set(__self__, "max_rows_to_transfer", max_rows_to_transfer)
+        if max_temporary_columns is not None:
+            pulumi.set(__self__, "max_temporary_columns", max_temporary_columns)
+        if max_temporary_non_const_columns is not None:
+            pulumi.set(__self__, "max_temporary_non_const_columns", max_temporary_non_const_columns)
+        if max_threads is not None:
+            pulumi.set(__self__, "max_threads", max_threads)
+        if merge_tree_max_bytes_to_use_cache is not None:
+            pulumi.set(__self__, "merge_tree_max_bytes_to_use_cache", merge_tree_max_bytes_to_use_cache)
+        if merge_tree_max_rows_to_use_cache is not None:
+            pulumi.set(__self__, "merge_tree_max_rows_to_use_cache", merge_tree_max_rows_to_use_cache)
+        if merge_tree_min_bytes_for_concurrent_read is not None:
+            pulumi.set(__self__, "merge_tree_min_bytes_for_concurrent_read", merge_tree_min_bytes_for_concurrent_read)
+        if merge_tree_min_rows_for_concurrent_read is not None:
+            pulumi.set(__self__, "merge_tree_min_rows_for_concurrent_read", merge_tree_min_rows_for_concurrent_read)
+        if min_bytes_to_use_direct_io is not None:
+            pulumi.set(__self__, "min_bytes_to_use_direct_io", min_bytes_to_use_direct_io)
+        if min_count_to_compile is not None:
+            pulumi.set(__self__, "min_count_to_compile", min_count_to_compile)
+        if min_count_to_compile_expression is not None:
+            pulumi.set(__self__, "min_count_to_compile_expression", min_count_to_compile_expression)
+        if min_execution_speed is not None:
+            pulumi.set(__self__, "min_execution_speed", min_execution_speed)
+        if min_execution_speed_bytes is not None:
+            pulumi.set(__self__, "min_execution_speed_bytes", min_execution_speed_bytes)
+        if min_insert_block_size_bytes is not None:
+            pulumi.set(__self__, "min_insert_block_size_bytes", min_insert_block_size_bytes)
+        if min_insert_block_size_rows is not None:
+            pulumi.set(__self__, "min_insert_block_size_rows", min_insert_block_size_rows)
+        if output_format_json_quote64bit_integers is not None:
+            pulumi.set(__self__, "output_format_json_quote64bit_integers", output_format_json_quote64bit_integers)
+        if output_format_json_quote_denormals is not None:
+            pulumi.set(__self__, "output_format_json_quote_denormals", output_format_json_quote_denormals)
+        if priority is not None:
+            pulumi.set(__self__, "priority", priority)
+        if quota_mode is not None:
+            pulumi.set(__self__, "quota_mode", quota_mode)
+        if read_overflow_mode is not None:
+            pulumi.set(__self__, "read_overflow_mode", read_overflow_mode)
+        if readonly is not None:
+            pulumi.set(__self__, "readonly", readonly)
+        if receive_timeout is not None:
+            pulumi.set(__self__, "receive_timeout", receive_timeout)
+        if replication_alter_partitions_sync is not None:
+            pulumi.set(__self__, "replication_alter_partitions_sync", replication_alter_partitions_sync)
+        if result_overflow_mode is not None:
+            pulumi.set(__self__, "result_overflow_mode", result_overflow_mode)
+        if select_sequential_consistency is not None:
+            pulumi.set(__self__, "select_sequential_consistency", select_sequential_consistency)
+        if send_progress_in_http_headers is not None:
+            pulumi.set(__self__, "send_progress_in_http_headers", send_progress_in_http_headers)
+        if send_timeout is not None:
+            pulumi.set(__self__, "send_timeout", send_timeout)
+        if set_overflow_mode is not None:
+            pulumi.set(__self__, "set_overflow_mode", set_overflow_mode)
+        if skip_unavailable_shards is not None:
+            pulumi.set(__self__, "skip_unavailable_shards", skip_unavailable_shards)
+        if sort_overflow_mode is not None:
+            pulumi.set(__self__, "sort_overflow_mode", sort_overflow_mode)
+        if timeout_overflow_mode is not None:
+            pulumi.set(__self__, "timeout_overflow_mode", timeout_overflow_mode)
+        if transfer_overflow_mode is not None:
+            pulumi.set(__self__, "transfer_overflow_mode", transfer_overflow_mode)
+        if transform_null_in is not None:
+            pulumi.set(__self__, "transform_null_in", transform_null_in)
+        if use_uncompressed_cache is not None:
+            pulumi.set(__self__, "use_uncompressed_cache", use_uncompressed_cache)
+
+    @property
+    @pulumi.getter(name="addHttpCorsHeader")
+    def add_http_cors_header(self) -> Optional[bool]:
+        return pulumi.get(self, "add_http_cors_header")
+
+    @property
+    @pulumi.getter(name="allowDdl")
+    def allow_ddl(self) -> Optional[bool]:
+        return pulumi.get(self, "allow_ddl")
+
+    @property
+    @pulumi.getter
+    def compile(self) -> Optional[bool]:
+        return pulumi.get(self, "compile")
+
+    @property
+    @pulumi.getter(name="compileExpressions")
+    def compile_expressions(self) -> Optional[bool]:
+        return pulumi.get(self, "compile_expressions")
+
+    @property
+    @pulumi.getter(name="connectTimeout")
+    def connect_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "connect_timeout")
+
+    @property
+    @pulumi.getter(name="countDistinctImplementation")
+    def count_distinct_implementation(self) -> Optional[str]:
+        return pulumi.get(self, "count_distinct_implementation")
+
+    @property
+    @pulumi.getter(name="distinctOverflowMode")
+    def distinct_overflow_mode(self) -> Optional[str]:
+        return pulumi.get(self, "distinct_overflow_mode")
+
+    @property
+    @pulumi.getter(name="distributedAggregationMemoryEfficient")
+    def distributed_aggregation_memory_efficient(self) -> Optional[bool]:
+        return pulumi.get(self, "distributed_aggregation_memory_efficient")
+
+    @property
+    @pulumi.getter(name="distributedDdlTaskTimeout")
+    def distributed_ddl_task_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "distributed_ddl_task_timeout")
+
+    @property
+    @pulumi.getter(name="distributedProductMode")
+    def distributed_product_mode(self) -> Optional[str]:
+        return pulumi.get(self, "distributed_product_mode")
+
+    @property
+    @pulumi.getter(name="emptyResultForAggregationByEmptySet")
+    def empty_result_for_aggregation_by_empty_set(self) -> Optional[bool]:
+        return pulumi.get(self, "empty_result_for_aggregation_by_empty_set")
+
+    @property
+    @pulumi.getter(name="enableHttpCompression")
+    def enable_http_compression(self) -> Optional[bool]:
+        return pulumi.get(self, "enable_http_compression")
+
+    @property
+    @pulumi.getter(name="fallbackToStaleReplicasForDistributedQueries")
+    def fallback_to_stale_replicas_for_distributed_queries(self) -> Optional[bool]:
+        return pulumi.get(self, "fallback_to_stale_replicas_for_distributed_queries")
+
+    @property
+    @pulumi.getter(name="forceIndexByDate")
+    def force_index_by_date(self) -> Optional[bool]:
+        return pulumi.get(self, "force_index_by_date")
+
+    @property
+    @pulumi.getter(name="forcePrimaryKey")
+    def force_primary_key(self) -> Optional[bool]:
+        return pulumi.get(self, "force_primary_key")
+
+    @property
+    @pulumi.getter(name="groupByOverflowMode")
+    def group_by_overflow_mode(self) -> Optional[str]:
+        return pulumi.get(self, "group_by_overflow_mode")
+
+    @property
+    @pulumi.getter(name="groupByTwoLevelThreshold")
+    def group_by_two_level_threshold(self) -> Optional[int]:
+        return pulumi.get(self, "group_by_two_level_threshold")
+
+    @property
+    @pulumi.getter(name="groupByTwoLevelThresholdBytes")
+    def group_by_two_level_threshold_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "group_by_two_level_threshold_bytes")
+
+    @property
+    @pulumi.getter(name="httpConnectionTimeout")
+    def http_connection_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "http_connection_timeout")
+
+    @property
+    @pulumi.getter(name="httpHeadersProgressInterval")
+    def http_headers_progress_interval(self) -> Optional[int]:
+        return pulumi.get(self, "http_headers_progress_interval")
+
+    @property
+    @pulumi.getter(name="httpReceiveTimeout")
+    def http_receive_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "http_receive_timeout")
+
+    @property
+    @pulumi.getter(name="httpSendTimeout")
+    def http_send_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "http_send_timeout")
+
+    @property
+    @pulumi.getter(name="inputFormatDefaultsForOmittedFields")
+    def input_format_defaults_for_omitted_fields(self) -> Optional[bool]:
+        return pulumi.get(self, "input_format_defaults_for_omitted_fields")
+
+    @property
+    @pulumi.getter(name="inputFormatValuesInterpretExpressions")
+    def input_format_values_interpret_expressions(self) -> Optional[bool]:
+        return pulumi.get(self, "input_format_values_interpret_expressions")
+
+    @property
+    @pulumi.getter(name="insertQuorum")
+    def insert_quorum(self) -> Optional[int]:
+        return pulumi.get(self, "insert_quorum")
+
+    @property
+    @pulumi.getter(name="insertQuorumTimeout")
+    def insert_quorum_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "insert_quorum_timeout")
+
+    @property
+    @pulumi.getter(name="joinOverflowMode")
+    def join_overflow_mode(self) -> Optional[str]:
+        return pulumi.get(self, "join_overflow_mode")
+
+    @property
+    @pulumi.getter(name="joinUseNulls")
+    def join_use_nulls(self) -> Optional[bool]:
+        return pulumi.get(self, "join_use_nulls")
+
+    @property
+    @pulumi.getter(name="joinedSubqueryRequiresAlias")
+    def joined_subquery_requires_alias(self) -> Optional[bool]:
+        return pulumi.get(self, "joined_subquery_requires_alias")
+
+    @property
+    @pulumi.getter(name="lowCardinalityAllowInNativeFormat")
+    def low_cardinality_allow_in_native_format(self) -> Optional[bool]:
+        return pulumi.get(self, "low_cardinality_allow_in_native_format")
+
+    @property
+    @pulumi.getter(name="maxAstDepth")
+    def max_ast_depth(self) -> Optional[int]:
+        return pulumi.get(self, "max_ast_depth")
+
+    @property
+    @pulumi.getter(name="maxAstElements")
+    def max_ast_elements(self) -> Optional[int]:
+        return pulumi.get(self, "max_ast_elements")
+
+    @property
+    @pulumi.getter(name="maxBlockSize")
+    def max_block_size(self) -> Optional[int]:
+        return pulumi.get(self, "max_block_size")
+
+    @property
+    @pulumi.getter(name="maxBytesBeforeExternalGroupBy")
+    def max_bytes_before_external_group_by(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_before_external_group_by")
+
+    @property
+    @pulumi.getter(name="maxBytesBeforeExternalSort")
+    def max_bytes_before_external_sort(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_before_external_sort")
+
+    @property
+    @pulumi.getter(name="maxBytesInDistinct")
+    def max_bytes_in_distinct(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_in_distinct")
+
+    @property
+    @pulumi.getter(name="maxBytesInJoin")
+    def max_bytes_in_join(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_in_join")
+
+    @property
+    @pulumi.getter(name="maxBytesInSet")
+    def max_bytes_in_set(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_in_set")
+
+    @property
+    @pulumi.getter(name="maxBytesToRead")
+    def max_bytes_to_read(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_to_read")
+
+    @property
+    @pulumi.getter(name="maxBytesToSort")
+    def max_bytes_to_sort(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_to_sort")
+
+    @property
+    @pulumi.getter(name="maxBytesToTransfer")
+    def max_bytes_to_transfer(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_to_transfer")
+
+    @property
+    @pulumi.getter(name="maxColumnsToRead")
+    def max_columns_to_read(self) -> Optional[int]:
+        return pulumi.get(self, "max_columns_to_read")
+
+    @property
+    @pulumi.getter(name="maxExecutionTime")
+    def max_execution_time(self) -> Optional[int]:
+        return pulumi.get(self, "max_execution_time")
+
+    @property
+    @pulumi.getter(name="maxExpandedAstElements")
+    def max_expanded_ast_elements(self) -> Optional[int]:
+        return pulumi.get(self, "max_expanded_ast_elements")
+
+    @property
+    @pulumi.getter(name="maxInsertBlockSize")
+    def max_insert_block_size(self) -> Optional[int]:
+        return pulumi.get(self, "max_insert_block_size")
+
+    @property
+    @pulumi.getter(name="maxMemoryUsage")
+    def max_memory_usage(self) -> Optional[int]:
+        return pulumi.get(self, "max_memory_usage")
+
+    @property
+    @pulumi.getter(name="maxMemoryUsageForUser")
+    def max_memory_usage_for_user(self) -> Optional[int]:
+        return pulumi.get(self, "max_memory_usage_for_user")
+
+    @property
+    @pulumi.getter(name="maxNetworkBandwidth")
+    def max_network_bandwidth(self) -> Optional[int]:
+        return pulumi.get(self, "max_network_bandwidth")
+
+    @property
+    @pulumi.getter(name="maxNetworkBandwidthForUser")
+    def max_network_bandwidth_for_user(self) -> Optional[int]:
+        return pulumi.get(self, "max_network_bandwidth_for_user")
+
+    @property
+    @pulumi.getter(name="maxQuerySize")
+    def max_query_size(self) -> Optional[int]:
+        return pulumi.get(self, "max_query_size")
+
+    @property
+    @pulumi.getter(name="maxReplicaDelayForDistributedQueries")
+    def max_replica_delay_for_distributed_queries(self) -> Optional[int]:
+        return pulumi.get(self, "max_replica_delay_for_distributed_queries")
+
+    @property
+    @pulumi.getter(name="maxResultBytes")
+    def max_result_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "max_result_bytes")
+
+    @property
+    @pulumi.getter(name="maxResultRows")
+    def max_result_rows(self) -> Optional[int]:
+        return pulumi.get(self, "max_result_rows")
+
+    @property
+    @pulumi.getter(name="maxRowsInDistinct")
+    def max_rows_in_distinct(self) -> Optional[int]:
+        return pulumi.get(self, "max_rows_in_distinct")
+
+    @property
+    @pulumi.getter(name="maxRowsInJoin")
+    def max_rows_in_join(self) -> Optional[int]:
+        return pulumi.get(self, "max_rows_in_join")
+
+    @property
+    @pulumi.getter(name="maxRowsInSet")
+    def max_rows_in_set(self) -> Optional[int]:
+        return pulumi.get(self, "max_rows_in_set")
+
+    @property
+    @pulumi.getter(name="maxRowsToGroupBy")
+    def max_rows_to_group_by(self) -> Optional[int]:
+        return pulumi.get(self, "max_rows_to_group_by")
+
+    @property
+    @pulumi.getter(name="maxRowsToRead")
+    def max_rows_to_read(self) -> Optional[int]:
+        return pulumi.get(self, "max_rows_to_read")
+
+    @property
+    @pulumi.getter(name="maxRowsToSort")
+    def max_rows_to_sort(self) -> Optional[int]:
+        return pulumi.get(self, "max_rows_to_sort")
+
+    @property
+    @pulumi.getter(name="maxRowsToTransfer")
+    def max_rows_to_transfer(self) -> Optional[int]:
+        return pulumi.get(self, "max_rows_to_transfer")
+
+    @property
+    @pulumi.getter(name="maxTemporaryColumns")
+    def max_temporary_columns(self) -> Optional[int]:
+        return pulumi.get(self, "max_temporary_columns")
+
+    @property
+    @pulumi.getter(name="maxTemporaryNonConstColumns")
+    def max_temporary_non_const_columns(self) -> Optional[int]:
+        return pulumi.get(self, "max_temporary_non_const_columns")
+
+    @property
+    @pulumi.getter(name="maxThreads")
+    def max_threads(self) -> Optional[int]:
+        return pulumi.get(self, "max_threads")
+
+    @property
+    @pulumi.getter(name="mergeTreeMaxBytesToUseCache")
+    def merge_tree_max_bytes_to_use_cache(self) -> Optional[int]:
+        return pulumi.get(self, "merge_tree_max_bytes_to_use_cache")
+
+    @property
+    @pulumi.getter(name="mergeTreeMaxRowsToUseCache")
+    def merge_tree_max_rows_to_use_cache(self) -> Optional[int]:
+        return pulumi.get(self, "merge_tree_max_rows_to_use_cache")
+
+    @property
+    @pulumi.getter(name="mergeTreeMinBytesForConcurrentRead")
+    def merge_tree_min_bytes_for_concurrent_read(self) -> Optional[int]:
+        return pulumi.get(self, "merge_tree_min_bytes_for_concurrent_read")
+
+    @property
+    @pulumi.getter(name="mergeTreeMinRowsForConcurrentRead")
+    def merge_tree_min_rows_for_concurrent_read(self) -> Optional[int]:
+        return pulumi.get(self, "merge_tree_min_rows_for_concurrent_read")
+
+    @property
+    @pulumi.getter(name="minBytesToUseDirectIo")
+    def min_bytes_to_use_direct_io(self) -> Optional[int]:
+        return pulumi.get(self, "min_bytes_to_use_direct_io")
+
+    @property
+    @pulumi.getter(name="minCountToCompile")
+    def min_count_to_compile(self) -> Optional[int]:
+        return pulumi.get(self, "min_count_to_compile")
+
+    @property
+    @pulumi.getter(name="minCountToCompileExpression")
+    def min_count_to_compile_expression(self) -> Optional[int]:
+        return pulumi.get(self, "min_count_to_compile_expression")
+
+    @property
+    @pulumi.getter(name="minExecutionSpeed")
+    def min_execution_speed(self) -> Optional[int]:
+        return pulumi.get(self, "min_execution_speed")
+
+    @property
+    @pulumi.getter(name="minExecutionSpeedBytes")
+    def min_execution_speed_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "min_execution_speed_bytes")
+
+    @property
+    @pulumi.getter(name="minInsertBlockSizeBytes")
+    def min_insert_block_size_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "min_insert_block_size_bytes")
+
+    @property
+    @pulumi.getter(name="minInsertBlockSizeRows")
+    def min_insert_block_size_rows(self) -> Optional[int]:
+        return pulumi.get(self, "min_insert_block_size_rows")
+
+    @property
+    @pulumi.getter(name="outputFormatJsonQuote64bitIntegers")
+    def output_format_json_quote64bit_integers(self) -> Optional[bool]:
+        return pulumi.get(self, "output_format_json_quote64bit_integers")
+
+    @property
+    @pulumi.getter(name="outputFormatJsonQuoteDenormals")
+    def output_format_json_quote_denormals(self) -> Optional[bool]:
+        return pulumi.get(self, "output_format_json_quote_denormals")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> Optional[int]:
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter(name="quotaMode")
+    def quota_mode(self) -> Optional[str]:
+        return pulumi.get(self, "quota_mode")
+
+    @property
+    @pulumi.getter(name="readOverflowMode")
+    def read_overflow_mode(self) -> Optional[str]:
+        return pulumi.get(self, "read_overflow_mode")
+
+    @property
+    @pulumi.getter
+    def readonly(self) -> Optional[int]:
+        return pulumi.get(self, "readonly")
+
+    @property
+    @pulumi.getter(name="receiveTimeout")
+    def receive_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "receive_timeout")
+
+    @property
+    @pulumi.getter(name="replicationAlterPartitionsSync")
+    def replication_alter_partitions_sync(self) -> Optional[int]:
+        return pulumi.get(self, "replication_alter_partitions_sync")
+
+    @property
+    @pulumi.getter(name="resultOverflowMode")
+    def result_overflow_mode(self) -> Optional[str]:
+        return pulumi.get(self, "result_overflow_mode")
+
+    @property
+    @pulumi.getter(name="selectSequentialConsistency")
+    def select_sequential_consistency(self) -> Optional[bool]:
+        return pulumi.get(self, "select_sequential_consistency")
+
+    @property
+    @pulumi.getter(name="sendProgressInHttpHeaders")
+    def send_progress_in_http_headers(self) -> Optional[bool]:
+        return pulumi.get(self, "send_progress_in_http_headers")
+
+    @property
+    @pulumi.getter(name="sendTimeout")
+    def send_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "send_timeout")
+
+    @property
+    @pulumi.getter(name="setOverflowMode")
+    def set_overflow_mode(self) -> Optional[str]:
+        return pulumi.get(self, "set_overflow_mode")
+
+    @property
+    @pulumi.getter(name="skipUnavailableShards")
+    def skip_unavailable_shards(self) -> Optional[bool]:
+        return pulumi.get(self, "skip_unavailable_shards")
+
+    @property
+    @pulumi.getter(name="sortOverflowMode")
+    def sort_overflow_mode(self) -> Optional[str]:
+        return pulumi.get(self, "sort_overflow_mode")
+
+    @property
+    @pulumi.getter(name="timeoutOverflowMode")
+    def timeout_overflow_mode(self) -> Optional[str]:
+        return pulumi.get(self, "timeout_overflow_mode")
+
+    @property
+    @pulumi.getter(name="transferOverflowMode")
+    def transfer_overflow_mode(self) -> Optional[str]:
+        return pulumi.get(self, "transfer_overflow_mode")
+
+    @property
+    @pulumi.getter(name="transformNullIn")
+    def transform_null_in(self) -> Optional[bool]:
+        return pulumi.get(self, "transform_null_in")
+
+    @property
+    @pulumi.getter(name="useUncompressedCache")
+    def use_uncompressed_cache(self) -> Optional[bool]:
+        return pulumi.get(self, "use_uncompressed_cache")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterZookeeper(dict):
+    def __init__(__self__, *,
+                 resources: Optional['outputs.MdbClickhouseClusterZookeeperResources'] = None):
+        if resources is not None:
+            pulumi.set(__self__, "resources", resources)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> Optional['outputs.MdbClickhouseClusterZookeeperResources']:
+        return pulumi.get(self, "resources")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbClickhouseClusterZookeeperResources(dict):
+    def __init__(__self__, *,
+                 disk_size: Optional[int] = None,
+                 disk_type_id: Optional[str] = None,
+                 resource_preset_id: Optional[str] = None):
+        if disk_size is not None:
+            pulumi.set(__self__, "disk_size", disk_size)
+        if disk_type_id is not None:
+            pulumi.set(__self__, "disk_type_id", disk_type_id)
+        if resource_preset_id is not None:
+            pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> Optional[int]:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> Optional[str]:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> Optional[str]:
+        return pulumi.get(self, "resource_preset_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterConfig(dict):
+    def __init__(__self__, *,
+                 kafka: 'outputs.MdbKafkaClusterConfigKafka',
+                 version: str,
+                 zones: Sequence[str],
+                 assign_public_ip: Optional[bool] = None,
+                 brokers_count: Optional[int] = None,
+                 zookeeper: Optional['outputs.MdbKafkaClusterConfigZookeeper'] = None):
+        pulumi.set(__self__, "kafka", kafka)
+        pulumi.set(__self__, "version", version)
+        pulumi.set(__self__, "zones", zones)
+        if assign_public_ip is not None:
+            pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+        if brokers_count is not None:
+            pulumi.set(__self__, "brokers_count", brokers_count)
+        if zookeeper is not None:
+            pulumi.set(__self__, "zookeeper", zookeeper)
+
+    @property
+    @pulumi.getter
+    def kafka(self) -> 'outputs.MdbKafkaClusterConfigKafka':
+        return pulumi.get(self, "kafka")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter
+    def zones(self) -> Sequence[str]:
+        return pulumi.get(self, "zones")
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> Optional[bool]:
+        return pulumi.get(self, "assign_public_ip")
+
+    @property
+    @pulumi.getter(name="brokersCount")
+    def brokers_count(self) -> Optional[int]:
+        return pulumi.get(self, "brokers_count")
+
+    @property
+    @pulumi.getter
+    def zookeeper(self) -> Optional['outputs.MdbKafkaClusterConfigZookeeper']:
+        return pulumi.get(self, "zookeeper")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterConfigKafka(dict):
+    def __init__(__self__, *,
+                 resources: 'outputs.MdbKafkaClusterConfigKafkaResources',
+                 kafka_config: Optional['outputs.MdbKafkaClusterConfigKafkaKafkaConfig'] = None):
+        pulumi.set(__self__, "resources", resources)
+        if kafka_config is not None:
+            pulumi.set(__self__, "kafka_config", kafka_config)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.MdbKafkaClusterConfigKafkaResources':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter(name="kafkaConfig")
+    def kafka_config(self) -> Optional['outputs.MdbKafkaClusterConfigKafkaKafkaConfig']:
+        return pulumi.get(self, "kafka_config")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterConfigKafkaKafkaConfig(dict):
+    def __init__(__self__, *,
+                 compression_type: Optional[str] = None,
+                 log_flush_interval_messages: Optional[int] = None,
+                 log_flush_interval_ms: Optional[int] = None,
+                 log_flush_scheduler_interval_ms: Optional[int] = None,
+                 log_preallocate: Optional[bool] = None,
+                 log_retention_bytes: Optional[int] = None,
+                 log_retention_hours: Optional[int] = None,
+                 log_retention_minutes: Optional[int] = None,
+                 log_retention_ms: Optional[int] = None,
+                 log_segment_bytes: Optional[int] = None):
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if log_flush_interval_messages is not None:
+            pulumi.set(__self__, "log_flush_interval_messages", log_flush_interval_messages)
+        if log_flush_interval_ms is not None:
+            pulumi.set(__self__, "log_flush_interval_ms", log_flush_interval_ms)
+        if log_flush_scheduler_interval_ms is not None:
+            pulumi.set(__self__, "log_flush_scheduler_interval_ms", log_flush_scheduler_interval_ms)
+        if log_preallocate is not None:
+            pulumi.set(__self__, "log_preallocate", log_preallocate)
+        if log_retention_bytes is not None:
+            pulumi.set(__self__, "log_retention_bytes", log_retention_bytes)
+        if log_retention_hours is not None:
+            pulumi.set(__self__, "log_retention_hours", log_retention_hours)
+        if log_retention_minutes is not None:
+            pulumi.set(__self__, "log_retention_minutes", log_retention_minutes)
+        if log_retention_ms is not None:
+            pulumi.set(__self__, "log_retention_ms", log_retention_ms)
+        if log_segment_bytes is not None:
+            pulumi.set(__self__, "log_segment_bytes", log_segment_bytes)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[str]:
+        return pulumi.get(self, "compression_type")
+
+    @property
+    @pulumi.getter(name="logFlushIntervalMessages")
+    def log_flush_interval_messages(self) -> Optional[int]:
+        return pulumi.get(self, "log_flush_interval_messages")
+
+    @property
+    @pulumi.getter(name="logFlushIntervalMs")
+    def log_flush_interval_ms(self) -> Optional[int]:
+        return pulumi.get(self, "log_flush_interval_ms")
+
+    @property
+    @pulumi.getter(name="logFlushSchedulerIntervalMs")
+    def log_flush_scheduler_interval_ms(self) -> Optional[int]:
+        return pulumi.get(self, "log_flush_scheduler_interval_ms")
+
+    @property
+    @pulumi.getter(name="logPreallocate")
+    def log_preallocate(self) -> Optional[bool]:
+        return pulumi.get(self, "log_preallocate")
+
+    @property
+    @pulumi.getter(name="logRetentionBytes")
+    def log_retention_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "log_retention_bytes")
+
+    @property
+    @pulumi.getter(name="logRetentionHours")
+    def log_retention_hours(self) -> Optional[int]:
+        return pulumi.get(self, "log_retention_hours")
+
+    @property
+    @pulumi.getter(name="logRetentionMinutes")
+    def log_retention_minutes(self) -> Optional[int]:
+        return pulumi.get(self, "log_retention_minutes")
+
+    @property
+    @pulumi.getter(name="logRetentionMs")
+    def log_retention_ms(self) -> Optional[int]:
+        return pulumi.get(self, "log_retention_ms")
+
+    @property
+    @pulumi.getter(name="logSegmentBytes")
+    def log_segment_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "log_segment_bytes")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterConfigKafkaResources(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterConfigZookeeper(dict):
+    def __init__(__self__, *,
+                 resources: 'outputs.MdbKafkaClusterConfigZookeeperResources'):
+        pulumi.set(__self__, "resources", resources)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.MdbKafkaClusterConfigZookeeperResources':
+        return pulumi.get(self, "resources")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterConfigZookeeperResources(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterTopic(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 partitions: int,
+                 replication_factor: int,
+                 topic_config: Optional['outputs.MdbKafkaClusterTopicTopicConfig'] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "partitions", partitions)
+        pulumi.set(__self__, "replication_factor", replication_factor)
+        if topic_config is not None:
+            pulumi.set(__self__, "topic_config", topic_config)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def partitions(self) -> int:
+        return pulumi.get(self, "partitions")
+
+    @property
+    @pulumi.getter(name="replicationFactor")
+    def replication_factor(self) -> int:
+        return pulumi.get(self, "replication_factor")
+
+    @property
+    @pulumi.getter(name="topicConfig")
+    def topic_config(self) -> Optional['outputs.MdbKafkaClusterTopicTopicConfig']:
+        return pulumi.get(self, "topic_config")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterTopicTopicConfig(dict):
+    def __init__(__self__, *,
+                 cleanup_policy: Optional[str] = None,
+                 compression_type: Optional[str] = None,
+                 delete_retention_ms: Optional[int] = None,
+                 file_delete_delay_ms: Optional[int] = None,
+                 flush_messages: Optional[int] = None,
+                 flush_ms: Optional[int] = None,
+                 max_message_bytes: Optional[int] = None,
+                 min_compaction_lag_ms: Optional[int] = None,
+                 min_insync_replicas: Optional[int] = None,
+                 preallocate: Optional[bool] = None,
+                 retention_bytes: Optional[int] = None,
+                 retention_ms: Optional[int] = None,
+                 segment_bytes: Optional[int] = None):
+        if cleanup_policy is not None:
+            pulumi.set(__self__, "cleanup_policy", cleanup_policy)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if delete_retention_ms is not None:
+            pulumi.set(__self__, "delete_retention_ms", delete_retention_ms)
+        if file_delete_delay_ms is not None:
+            pulumi.set(__self__, "file_delete_delay_ms", file_delete_delay_ms)
+        if flush_messages is not None:
+            pulumi.set(__self__, "flush_messages", flush_messages)
+        if flush_ms is not None:
+            pulumi.set(__self__, "flush_ms", flush_ms)
+        if max_message_bytes is not None:
+            pulumi.set(__self__, "max_message_bytes", max_message_bytes)
+        if min_compaction_lag_ms is not None:
+            pulumi.set(__self__, "min_compaction_lag_ms", min_compaction_lag_ms)
+        if min_insync_replicas is not None:
+            pulumi.set(__self__, "min_insync_replicas", min_insync_replicas)
+        if preallocate is not None:
+            pulumi.set(__self__, "preallocate", preallocate)
+        if retention_bytes is not None:
+            pulumi.set(__self__, "retention_bytes", retention_bytes)
+        if retention_ms is not None:
+            pulumi.set(__self__, "retention_ms", retention_ms)
+        if segment_bytes is not None:
+            pulumi.set(__self__, "segment_bytes", segment_bytes)
+
+    @property
+    @pulumi.getter(name="cleanupPolicy")
+    def cleanup_policy(self) -> Optional[str]:
+        return pulumi.get(self, "cleanup_policy")
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[str]:
+        return pulumi.get(self, "compression_type")
+
+    @property
+    @pulumi.getter(name="deleteRetentionMs")
+    def delete_retention_ms(self) -> Optional[int]:
+        return pulumi.get(self, "delete_retention_ms")
+
+    @property
+    @pulumi.getter(name="fileDeleteDelayMs")
+    def file_delete_delay_ms(self) -> Optional[int]:
+        return pulumi.get(self, "file_delete_delay_ms")
+
+    @property
+    @pulumi.getter(name="flushMessages")
+    def flush_messages(self) -> Optional[int]:
+        return pulumi.get(self, "flush_messages")
+
+    @property
+    @pulumi.getter(name="flushMs")
+    def flush_ms(self) -> Optional[int]:
+        return pulumi.get(self, "flush_ms")
+
+    @property
+    @pulumi.getter(name="maxMessageBytes")
+    def max_message_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "max_message_bytes")
+
+    @property
+    @pulumi.getter(name="minCompactionLagMs")
+    def min_compaction_lag_ms(self) -> Optional[int]:
+        return pulumi.get(self, "min_compaction_lag_ms")
+
+    @property
+    @pulumi.getter(name="minInsyncReplicas")
+    def min_insync_replicas(self) -> Optional[int]:
+        return pulumi.get(self, "min_insync_replicas")
+
+    @property
+    @pulumi.getter
+    def preallocate(self) -> Optional[bool]:
+        return pulumi.get(self, "preallocate")
+
+    @property
+    @pulumi.getter(name="retentionBytes")
+    def retention_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "retention_bytes")
+
+    @property
+    @pulumi.getter(name="retentionMs")
+    def retention_ms(self) -> Optional[int]:
+        return pulumi.get(self, "retention_ms")
+
+    @property
+    @pulumi.getter(name="segmentBytes")
+    def segment_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "segment_bytes")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterUser(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 password: str,
+                 permissions: Optional[Sequence['outputs.MdbKafkaClusterUserPermission']] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "password", password)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence['outputs.MdbKafkaClusterUserPermission']]:
+        return pulumi.get(self, "permissions")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbKafkaClusterUserPermission(dict):
+    def __init__(__self__, *,
+                 role: str,
+                 topic_name: str):
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> str:
+        return pulumi.get(self, "topic_name")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMongodbClusterClusterConfig(dict):
+    def __init__(__self__, *,
+                 version: str,
+                 access: Optional['outputs.MdbMongodbClusterClusterConfigAccess'] = None,
+                 backup_window_start: Optional['outputs.MdbMongodbClusterClusterConfigBackupWindowStart'] = None,
+                 feature_compatibility_version: Optional[str] = None):
+        pulumi.set(__self__, "version", version)
+        if access is not None:
+            pulumi.set(__self__, "access", access)
+        if backup_window_start is not None:
+            pulumi.set(__self__, "backup_window_start", backup_window_start)
+        if feature_compatibility_version is not None:
+            pulumi.set(__self__, "feature_compatibility_version", feature_compatibility_version)
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter
+    def access(self) -> Optional['outputs.MdbMongodbClusterClusterConfigAccess']:
+        return pulumi.get(self, "access")
+
+    @property
+    @pulumi.getter(name="backupWindowStart")
+    def backup_window_start(self) -> Optional['outputs.MdbMongodbClusterClusterConfigBackupWindowStart']:
+        return pulumi.get(self, "backup_window_start")
+
+    @property
+    @pulumi.getter(name="featureCompatibilityVersion")
+    def feature_compatibility_version(self) -> Optional[str]:
+        return pulumi.get(self, "feature_compatibility_version")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMongodbClusterClusterConfigAccess(dict):
+    def __init__(__self__, *,
+                 data_lens: Optional[bool] = None):
+        if data_lens is not None:
+            pulumi.set(__self__, "data_lens", data_lens)
+
+    @property
+    @pulumi.getter(name="dataLens")
+    def data_lens(self) -> Optional[bool]:
+        return pulumi.get(self, "data_lens")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMongodbClusterClusterConfigBackupWindowStart(dict):
+    def __init__(__self__, *,
+                 hours: Optional[int] = None,
+                 minutes: Optional[int] = None):
+        if hours is not None:
+            pulumi.set(__self__, "hours", hours)
+        if minutes is not None:
+            pulumi.set(__self__, "minutes", minutes)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> Optional[int]:
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> Optional[int]:
+        return pulumi.get(self, "minutes")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMongodbClusterDatabase(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMongodbClusterHost(dict):
+    def __init__(__self__, *,
+                 subnet_id: str,
+                 zone_id: str,
+                 assign_public_ip: Optional[bool] = None,
+                 health: Optional[str] = None,
+                 name: Optional[str] = None,
+                 role: Optional[str] = None,
+                 shard_name: Optional[str] = None,
+                 type: Optional[str] = None):
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "zone_id", zone_id)
+        if assign_public_ip is not None:
+            pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+        if health is not None:
+            pulumi.set(__self__, "health", health)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if role is not None:
+            pulumi.set(__self__, "role", role)
+        if shard_name is not None:
+            pulumi.set(__self__, "shard_name", shard_name)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        return pulumi.get(self, "zone_id")
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> Optional[bool]:
+        return pulumi.get(self, "assign_public_ip")
+
+    @property
+    @pulumi.getter
+    def health(self) -> Optional[str]:
+        return pulumi.get(self, "health")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def role(self) -> Optional[str]:
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="shardName")
+    def shard_name(self) -> Optional[str]:
+        return pulumi.get(self, "shard_name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        return pulumi.get(self, "type")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMongodbClusterResources(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMongodbClusterUser(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 password: str,
+                 permissions: Optional[Sequence['outputs.MdbMongodbClusterUserPermission']] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "password", password)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence['outputs.MdbMongodbClusterUserPermission']]:
+        return pulumi.get(self, "permissions")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMongodbClusterUserPermission(dict):
+    def __init__(__self__, *,
+                 database_name: str,
+                 roles: Optional[Sequence[str]] = None):
+        pulumi.set(__self__, "database_name", database_name)
+        if roles is not None:
+            pulumi.set(__self__, "roles", roles)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        return pulumi.get(self, "database_name")
+
+    @property
+    @pulumi.getter
+    def roles(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "roles")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMysqlClusterAccess(dict):
+    def __init__(__self__, *,
+                 data_lens: Optional[bool] = None,
+                 web_sql: Optional[bool] = None):
+        if data_lens is not None:
+            pulumi.set(__self__, "data_lens", data_lens)
+        if web_sql is not None:
+            pulumi.set(__self__, "web_sql", web_sql)
+
+    @property
+    @pulumi.getter(name="dataLens")
+    def data_lens(self) -> Optional[bool]:
+        return pulumi.get(self, "data_lens")
+
+    @property
+    @pulumi.getter(name="webSql")
+    def web_sql(self) -> Optional[bool]:
+        return pulumi.get(self, "web_sql")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMysqlClusterBackupWindowStart(dict):
+    def __init__(__self__, *,
+                 hours: Optional[int] = None,
+                 minutes: Optional[int] = None):
+        if hours is not None:
+            pulumi.set(__self__, "hours", hours)
+        if minutes is not None:
+            pulumi.set(__self__, "minutes", minutes)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> Optional[int]:
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> Optional[int]:
+        return pulumi.get(self, "minutes")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMysqlClusterDatabase(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMysqlClusterHost(dict):
+    def __init__(__self__, *,
+                 zone: str,
+                 assign_public_ip: Optional[bool] = None,
+                 fqdn: Optional[str] = None,
+                 subnet_id: Optional[str] = None):
+        pulumi.set(__self__, "zone", zone)
+        if assign_public_ip is not None:
+            pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+        if fqdn is not None:
+            pulumi.set(__self__, "fqdn", fqdn)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> Optional[bool]:
+        return pulumi.get(self, "assign_public_ip")
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> Optional[str]:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        return pulumi.get(self, "subnet_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMysqlClusterResources(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMysqlClusterRestore(dict):
+    def __init__(__self__, *,
+                 backup_id: str,
+                 time: Optional[str] = None):
+        pulumi.set(__self__, "backup_id", backup_id)
+        if time is not None:
+            pulumi.set(__self__, "time", time)
+
+    @property
+    @pulumi.getter(name="backupId")
+    def backup_id(self) -> str:
+        return pulumi.get(self, "backup_id")
+
+    @property
+    @pulumi.getter
+    def time(self) -> Optional[str]:
+        return pulumi.get(self, "time")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMysqlClusterUser(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 password: str,
+                 authentication_plugin: Optional[str] = None,
+                 connection_limits: Optional['outputs.MdbMysqlClusterUserConnectionLimits'] = None,
+                 global_permissions: Optional[Sequence[str]] = None,
+                 permissions: Optional[Sequence['outputs.MdbMysqlClusterUserPermission']] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "password", password)
+        if authentication_plugin is not None:
+            pulumi.set(__self__, "authentication_plugin", authentication_plugin)
+        if connection_limits is not None:
+            pulumi.set(__self__, "connection_limits", connection_limits)
+        if global_permissions is not None:
+            pulumi.set(__self__, "global_permissions", global_permissions)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter(name="authenticationPlugin")
+    def authentication_plugin(self) -> Optional[str]:
+        return pulumi.get(self, "authentication_plugin")
+
+    @property
+    @pulumi.getter(name="connectionLimits")
+    def connection_limits(self) -> Optional['outputs.MdbMysqlClusterUserConnectionLimits']:
+        return pulumi.get(self, "connection_limits")
+
+    @property
+    @pulumi.getter(name="globalPermissions")
+    def global_permissions(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "global_permissions")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence['outputs.MdbMysqlClusterUserPermission']]:
+        return pulumi.get(self, "permissions")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMysqlClusterUserConnectionLimits(dict):
+    def __init__(__self__, *,
+                 max_connections_per_hour: Optional[int] = None,
+                 max_questions_per_hour: Optional[int] = None,
+                 max_updates_per_hour: Optional[int] = None,
+                 max_user_connections: Optional[int] = None):
+        if max_connections_per_hour is not None:
+            pulumi.set(__self__, "max_connections_per_hour", max_connections_per_hour)
+        if max_questions_per_hour is not None:
+            pulumi.set(__self__, "max_questions_per_hour", max_questions_per_hour)
+        if max_updates_per_hour is not None:
+            pulumi.set(__self__, "max_updates_per_hour", max_updates_per_hour)
+        if max_user_connections is not None:
+            pulumi.set(__self__, "max_user_connections", max_user_connections)
+
+    @property
+    @pulumi.getter(name="maxConnectionsPerHour")
+    def max_connections_per_hour(self) -> Optional[int]:
+        return pulumi.get(self, "max_connections_per_hour")
+
+    @property
+    @pulumi.getter(name="maxQuestionsPerHour")
+    def max_questions_per_hour(self) -> Optional[int]:
+        return pulumi.get(self, "max_questions_per_hour")
+
+    @property
+    @pulumi.getter(name="maxUpdatesPerHour")
+    def max_updates_per_hour(self) -> Optional[int]:
+        return pulumi.get(self, "max_updates_per_hour")
+
+    @property
+    @pulumi.getter(name="maxUserConnections")
+    def max_user_connections(self) -> Optional[int]:
+        return pulumi.get(self, "max_user_connections")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbMysqlClusterUserPermission(dict):
+    def __init__(__self__, *,
+                 database_name: str,
+                 roles: Optional[Sequence[str]] = None):
+        pulumi.set(__self__, "database_name", database_name)
+        if roles is not None:
+            pulumi.set(__self__, "roles", roles)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        return pulumi.get(self, "database_name")
+
+    @property
+    @pulumi.getter
+    def roles(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "roles")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterConfig(dict):
+    def __init__(__self__, *,
+                 resources: 'outputs.MdbPostgresqlClusterConfigResources',
+                 version: str,
+                 access: Optional['outputs.MdbPostgresqlClusterConfigAccess'] = None,
+                 autofailover: Optional[bool] = None,
+                 backup_window_start: Optional['outputs.MdbPostgresqlClusterConfigBackupWindowStart'] = None,
+                 performance_diagnostics: Optional['outputs.MdbPostgresqlClusterConfigPerformanceDiagnostics'] = None,
+                 pooler_config: Optional['outputs.MdbPostgresqlClusterConfigPoolerConfig'] = None,
+                 postgresql_config: Optional[Mapping[str, str]] = None):
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "version", version)
+        if access is not None:
+            pulumi.set(__self__, "access", access)
+        if autofailover is not None:
+            pulumi.set(__self__, "autofailover", autofailover)
+        if backup_window_start is not None:
+            pulumi.set(__self__, "backup_window_start", backup_window_start)
+        if performance_diagnostics is not None:
+            pulumi.set(__self__, "performance_diagnostics", performance_diagnostics)
+        if pooler_config is not None:
+            pulumi.set(__self__, "pooler_config", pooler_config)
+        if postgresql_config is not None:
+            pulumi.set(__self__, "postgresql_config", postgresql_config)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.MdbPostgresqlClusterConfigResources':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter
+    def access(self) -> Optional['outputs.MdbPostgresqlClusterConfigAccess']:
+        return pulumi.get(self, "access")
+
+    @property
+    @pulumi.getter
+    def autofailover(self) -> Optional[bool]:
+        return pulumi.get(self, "autofailover")
+
+    @property
+    @pulumi.getter(name="backupWindowStart")
+    def backup_window_start(self) -> Optional['outputs.MdbPostgresqlClusterConfigBackupWindowStart']:
+        return pulumi.get(self, "backup_window_start")
+
+    @property
+    @pulumi.getter(name="performanceDiagnostics")
+    def performance_diagnostics(self) -> Optional['outputs.MdbPostgresqlClusterConfigPerformanceDiagnostics']:
+        return pulumi.get(self, "performance_diagnostics")
+
+    @property
+    @pulumi.getter(name="poolerConfig")
+    def pooler_config(self) -> Optional['outputs.MdbPostgresqlClusterConfigPoolerConfig']:
+        return pulumi.get(self, "pooler_config")
+
+    @property
+    @pulumi.getter(name="postgresqlConfig")
+    def postgresql_config(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "postgresql_config")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterConfigAccess(dict):
+    def __init__(__self__, *,
+                 data_lens: Optional[bool] = None,
+                 web_sql: Optional[bool] = None):
+        if data_lens is not None:
+            pulumi.set(__self__, "data_lens", data_lens)
+        if web_sql is not None:
+            pulumi.set(__self__, "web_sql", web_sql)
+
+    @property
+    @pulumi.getter(name="dataLens")
+    def data_lens(self) -> Optional[bool]:
+        return pulumi.get(self, "data_lens")
+
+    @property
+    @pulumi.getter(name="webSql")
+    def web_sql(self) -> Optional[bool]:
+        return pulumi.get(self, "web_sql")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterConfigBackupWindowStart(dict):
+    def __init__(__self__, *,
+                 hours: Optional[int] = None,
+                 minutes: Optional[int] = None):
+        if hours is not None:
+            pulumi.set(__self__, "hours", hours)
+        if minutes is not None:
+            pulumi.set(__self__, "minutes", minutes)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> Optional[int]:
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> Optional[int]:
+        return pulumi.get(self, "minutes")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterConfigPerformanceDiagnostics(dict):
+    def __init__(__self__, *,
+                 sessions_sampling_interval: int,
+                 statements_sampling_interval: int,
+                 enabled: Optional[bool] = None):
+        pulumi.set(__self__, "sessions_sampling_interval", sessions_sampling_interval)
+        pulumi.set(__self__, "statements_sampling_interval", statements_sampling_interval)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter(name="sessionsSamplingInterval")
+    def sessions_sampling_interval(self) -> int:
+        return pulumi.get(self, "sessions_sampling_interval")
+
+    @property
+    @pulumi.getter(name="statementsSamplingInterval")
+    def statements_sampling_interval(self) -> int:
+        return pulumi.get(self, "statements_sampling_interval")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "enabled")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterConfigPoolerConfig(dict):
+    def __init__(__self__, *,
+                 pool_discard: Optional[bool] = None,
+                 pooling_mode: Optional[str] = None):
+        if pool_discard is not None:
+            pulumi.set(__self__, "pool_discard", pool_discard)
+        if pooling_mode is not None:
+            pulumi.set(__self__, "pooling_mode", pooling_mode)
+
+    @property
+    @pulumi.getter(name="poolDiscard")
+    def pool_discard(self) -> Optional[bool]:
+        return pulumi.get(self, "pool_discard")
+
+    @property
+    @pulumi.getter(name="poolingMode")
+    def pooling_mode(self) -> Optional[str]:
+        return pulumi.get(self, "pooling_mode")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterConfigResources(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 resource_preset_id: str,
+                 disk_type_id: Optional[str] = None):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+        if disk_type_id is not None:
+            pulumi.set(__self__, "disk_type_id", disk_type_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> Optional[str]:
+        return pulumi.get(self, "disk_type_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterDatabase(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 owner: str,
+                 extensions: Optional[Sequence['outputs.MdbPostgresqlClusterDatabaseExtension']] = None,
+                 lc_collate: Optional[str] = None,
+                 lc_type: Optional[str] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "owner", owner)
+        if extensions is not None:
+            pulumi.set(__self__, "extensions", extensions)
+        if lc_collate is not None:
+            pulumi.set(__self__, "lc_collate", lc_collate)
+        if lc_type is not None:
+            pulumi.set(__self__, "lc_type", lc_type)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def owner(self) -> str:
+        return pulumi.get(self, "owner")
+
+    @property
+    @pulumi.getter
+    def extensions(self) -> Optional[Sequence['outputs.MdbPostgresqlClusterDatabaseExtension']]:
+        return pulumi.get(self, "extensions")
+
+    @property
+    @pulumi.getter(name="lcCollate")
+    def lc_collate(self) -> Optional[str]:
+        return pulumi.get(self, "lc_collate")
+
+    @property
+    @pulumi.getter(name="lcType")
+    def lc_type(self) -> Optional[str]:
+        return pulumi.get(self, "lc_type")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterDatabaseExtension(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 version: Optional[str] = None):
+        pulumi.set(__self__, "name", name)
+        if version is not None:
+            pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def version(self) -> Optional[str]:
+        return pulumi.get(self, "version")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterHost(dict):
+    def __init__(__self__, *,
+                 zone: str,
+                 assign_public_ip: Optional[bool] = None,
+                 fqdn: Optional[str] = None,
+                 name: Optional[str] = None,
+                 priority: Optional[int] = None,
+                 replication_source: Optional[str] = None,
+                 replication_source_name: Optional[str] = None,
+                 role: Optional[str] = None,
+                 subnet_id: Optional[str] = None):
+        pulumi.set(__self__, "zone", zone)
+        if assign_public_ip is not None:
+            pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+        if fqdn is not None:
+            pulumi.set(__self__, "fqdn", fqdn)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if priority is not None:
+            pulumi.set(__self__, "priority", priority)
+        if replication_source is not None:
+            pulumi.set(__self__, "replication_source", replication_source)
+        if replication_source_name is not None:
+            pulumi.set(__self__, "replication_source_name", replication_source_name)
+        if role is not None:
+            pulumi.set(__self__, "role", role)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> Optional[bool]:
+        return pulumi.get(self, "assign_public_ip")
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> Optional[str]:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> Optional[int]:
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter(name="replicationSource")
+    def replication_source(self) -> Optional[str]:
+        return pulumi.get(self, "replication_source")
+
+    @property
+    @pulumi.getter(name="replicationSourceName")
+    def replication_source_name(self) -> Optional[str]:
+        return pulumi.get(self, "replication_source_name")
+
+    @property
+    @pulumi.getter
+    def role(self) -> Optional[str]:
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        return pulumi.get(self, "subnet_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterRestore(dict):
+    def __init__(__self__, *,
+                 backup_id: str,
+                 time: Optional[str] = None,
+                 time_inclusive: Optional[bool] = None):
+        pulumi.set(__self__, "backup_id", backup_id)
+        if time is not None:
+            pulumi.set(__self__, "time", time)
+        if time_inclusive is not None:
+            pulumi.set(__self__, "time_inclusive", time_inclusive)
+
+    @property
+    @pulumi.getter(name="backupId")
+    def backup_id(self) -> str:
+        return pulumi.get(self, "backup_id")
+
+    @property
+    @pulumi.getter
+    def time(self) -> Optional[str]:
+        return pulumi.get(self, "time")
+
+    @property
+    @pulumi.getter(name="timeInclusive")
+    def time_inclusive(self) -> Optional[bool]:
+        return pulumi.get(self, "time_inclusive")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterUser(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 password: str,
+                 conn_limit: Optional[int] = None,
+                 grants: Optional[Sequence[str]] = None,
+                 login: Optional[bool] = None,
+                 permissions: Optional[Sequence['outputs.MdbPostgresqlClusterUserPermission']] = None,
+                 settings: Optional[Mapping[str, str]] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "password", password)
+        if conn_limit is not None:
+            pulumi.set(__self__, "conn_limit", conn_limit)
+        if grants is not None:
+            pulumi.set(__self__, "grants", grants)
+        if login is not None:
+            pulumi.set(__self__, "login", login)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+        if settings is not None:
+            pulumi.set(__self__, "settings", settings)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter(name="connLimit")
+    def conn_limit(self) -> Optional[int]:
+        return pulumi.get(self, "conn_limit")
+
+    @property
+    @pulumi.getter
+    def grants(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "grants")
+
+    @property
+    @pulumi.getter
+    def login(self) -> Optional[bool]:
+        return pulumi.get(self, "login")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence['outputs.MdbPostgresqlClusterUserPermission']]:
+        return pulumi.get(self, "permissions")
+
+    @property
+    @pulumi.getter
+    def settings(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "settings")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbPostgresqlClusterUserPermission(dict):
+    def __init__(__self__, *,
+                 database_name: str):
+        pulumi.set(__self__, "database_name", database_name)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        return pulumi.get(self, "database_name")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbRedisClusterConfig(dict):
+    def __init__(__self__, *,
+                 password: str,
+                 version: str,
+                 maxmemory_policy: Optional[str] = None,
+                 timeout: Optional[int] = None):
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "version", version)
+        if maxmemory_policy is not None:
+            pulumi.set(__self__, "maxmemory_policy", maxmemory_policy)
+        if timeout is not None:
+            pulumi.set(__self__, "timeout", timeout)
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter(name="maxmemoryPolicy")
+    def maxmemory_policy(self) -> Optional[str]:
+        return pulumi.get(self, "maxmemory_policy")
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> Optional[int]:
+        return pulumi.get(self, "timeout")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbRedisClusterHost(dict):
+    def __init__(__self__, *,
+                 zone: str,
+                 fqdn: Optional[str] = None,
+                 shard_name: Optional[str] = None,
+                 subnet_id: Optional[str] = None):
+        pulumi.set(__self__, "zone", zone)
+        if fqdn is not None:
+            pulumi.set(__self__, "fqdn", fqdn)
+        if shard_name is not None:
+            pulumi.set(__self__, "shard_name", shard_name)
+        if subnet_id is not None:
+            pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> Optional[str]:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter(name="shardName")
+    def shard_name(self) -> Optional[str]:
+        return pulumi.get(self, "shard_name")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> Optional[str]:
+        return pulumi.get(self, "subnet_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class MdbRedisClusterResources(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketCorsRule(dict):
+    def __init__(__self__, *,
+                 allowed_methods: Sequence[str],
+                 allowed_origins: Sequence[str],
+                 allowed_headers: Optional[Sequence[str]] = None,
+                 expose_headers: Optional[Sequence[str]] = None,
+                 max_age_seconds: Optional[int] = None):
+        pulumi.set(__self__, "allowed_methods", allowed_methods)
+        pulumi.set(__self__, "allowed_origins", allowed_origins)
+        if allowed_headers is not None:
+            pulumi.set(__self__, "allowed_headers", allowed_headers)
+        if expose_headers is not None:
+            pulumi.set(__self__, "expose_headers", expose_headers)
+        if max_age_seconds is not None:
+            pulumi.set(__self__, "max_age_seconds", max_age_seconds)
+
+    @property
+    @pulumi.getter(name="allowedMethods")
+    def allowed_methods(self) -> Sequence[str]:
+        return pulumi.get(self, "allowed_methods")
+
+    @property
+    @pulumi.getter(name="allowedOrigins")
+    def allowed_origins(self) -> Sequence[str]:
+        return pulumi.get(self, "allowed_origins")
+
+    @property
+    @pulumi.getter(name="allowedHeaders")
+    def allowed_headers(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "allowed_headers")
+
+    @property
+    @pulumi.getter(name="exposeHeaders")
+    def expose_headers(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "expose_headers")
+
+    @property
+    @pulumi.getter(name="maxAgeSeconds")
+    def max_age_seconds(self) -> Optional[int]:
+        return pulumi.get(self, "max_age_seconds")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketGrant(dict):
+    def __init__(__self__, *,
+                 permissions: Sequence[str],
+                 type: str,
+                 id: Optional[str] = None,
+                 uri: Optional[str] = None):
+        pulumi.set(__self__, "permissions", permissions)
+        pulumi.set(__self__, "type", type)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if uri is not None:
+            pulumi.set(__self__, "uri", uri)
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Sequence[str]:
+        return pulumi.get(self, "permissions")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def uri(self) -> Optional[str]:
+        return pulumi.get(self, "uri")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketLifecycleRule(dict):
+    def __init__(__self__, *,
+                 enabled: bool,
+                 abort_incomplete_multipart_upload_days: Optional[int] = None,
+                 expiration: Optional['outputs.StorageBucketLifecycleRuleExpiration'] = None,
+                 id: Optional[str] = None,
+                 noncurrent_version_expiration: Optional['outputs.StorageBucketLifecycleRuleNoncurrentVersionExpiration'] = None,
+                 noncurrent_version_transitions: Optional[Sequence['outputs.StorageBucketLifecycleRuleNoncurrentVersionTransition']] = None,
+                 prefix: Optional[str] = None,
+                 transitions: Optional[Sequence['outputs.StorageBucketLifecycleRuleTransition']] = None):
+        pulumi.set(__self__, "enabled", enabled)
+        if abort_incomplete_multipart_upload_days is not None:
+            pulumi.set(__self__, "abort_incomplete_multipart_upload_days", abort_incomplete_multipart_upload_days)
+        if expiration is not None:
+            pulumi.set(__self__, "expiration", expiration)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if noncurrent_version_expiration is not None:
+            pulumi.set(__self__, "noncurrent_version_expiration", noncurrent_version_expiration)
+        if noncurrent_version_transitions is not None:
+            pulumi.set(__self__, "noncurrent_version_transitions", noncurrent_version_transitions)
+        if prefix is not None:
+            pulumi.set(__self__, "prefix", prefix)
+        if transitions is not None:
+            pulumi.set(__self__, "transitions", transitions)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="abortIncompleteMultipartUploadDays")
+    def abort_incomplete_multipart_upload_days(self) -> Optional[int]:
+        return pulumi.get(self, "abort_incomplete_multipart_upload_days")
+
+    @property
+    @pulumi.getter
+    def expiration(self) -> Optional['outputs.StorageBucketLifecycleRuleExpiration']:
+        return pulumi.get(self, "expiration")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="noncurrentVersionExpiration")
+    def noncurrent_version_expiration(self) -> Optional['outputs.StorageBucketLifecycleRuleNoncurrentVersionExpiration']:
+        return pulumi.get(self, "noncurrent_version_expiration")
+
+    @property
+    @pulumi.getter(name="noncurrentVersionTransitions")
+    def noncurrent_version_transitions(self) -> Optional[Sequence['outputs.StorageBucketLifecycleRuleNoncurrentVersionTransition']]:
+        return pulumi.get(self, "noncurrent_version_transitions")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> Optional[str]:
+        return pulumi.get(self, "prefix")
+
+    @property
+    @pulumi.getter
+    def transitions(self) -> Optional[Sequence['outputs.StorageBucketLifecycleRuleTransition']]:
+        return pulumi.get(self, "transitions")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketLifecycleRuleExpiration(dict):
+    def __init__(__self__, *,
+                 date: Optional[str] = None,
+                 days: Optional[int] = None,
+                 expired_object_delete_marker: Optional[bool] = None):
+        if date is not None:
+            pulumi.set(__self__, "date", date)
+        if days is not None:
+            pulumi.set(__self__, "days", days)
+        if expired_object_delete_marker is not None:
+            pulumi.set(__self__, "expired_object_delete_marker", expired_object_delete_marker)
+
+    @property
+    @pulumi.getter
+    def date(self) -> Optional[str]:
+        return pulumi.get(self, "date")
+
+    @property
+    @pulumi.getter
+    def days(self) -> Optional[int]:
+        return pulumi.get(self, "days")
+
+    @property
+    @pulumi.getter(name="expiredObjectDeleteMarker")
+    def expired_object_delete_marker(self) -> Optional[bool]:
+        return pulumi.get(self, "expired_object_delete_marker")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketLifecycleRuleNoncurrentVersionExpiration(dict):
+    def __init__(__self__, *,
+                 days: Optional[int] = None):
+        if days is not None:
+            pulumi.set(__self__, "days", days)
+
+    @property
+    @pulumi.getter
+    def days(self) -> Optional[int]:
+        return pulumi.get(self, "days")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketLifecycleRuleNoncurrentVersionTransition(dict):
+    def __init__(__self__, *,
+                 storage_class: str,
+                 days: Optional[int] = None):
+        pulumi.set(__self__, "storage_class", storage_class)
+        if days is not None:
+            pulumi.set(__self__, "days", days)
+
+    @property
+    @pulumi.getter(name="storageClass")
+    def storage_class(self) -> str:
+        return pulumi.get(self, "storage_class")
+
+    @property
+    @pulumi.getter
+    def days(self) -> Optional[int]:
+        return pulumi.get(self, "days")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketLifecycleRuleTransition(dict):
+    def __init__(__self__, *,
+                 storage_class: str,
+                 date: Optional[str] = None,
+                 days: Optional[int] = None):
+        pulumi.set(__self__, "storage_class", storage_class)
+        if date is not None:
+            pulumi.set(__self__, "date", date)
+        if days is not None:
+            pulumi.set(__self__, "days", days)
+
+    @property
+    @pulumi.getter(name="storageClass")
+    def storage_class(self) -> str:
+        return pulumi.get(self, "storage_class")
+
+    @property
+    @pulumi.getter
+    def date(self) -> Optional[str]:
+        return pulumi.get(self, "date")
+
+    @property
+    @pulumi.getter
+    def days(self) -> Optional[int]:
+        return pulumi.get(self, "days")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketLogging(dict):
+    def __init__(__self__, *,
+                 target_bucket: str,
+                 target_prefix: Optional[str] = None):
+        pulumi.set(__self__, "target_bucket", target_bucket)
+        if target_prefix is not None:
+            pulumi.set(__self__, "target_prefix", target_prefix)
+
+    @property
+    @pulumi.getter(name="targetBucket")
+    def target_bucket(self) -> str:
+        return pulumi.get(self, "target_bucket")
+
+    @property
+    @pulumi.getter(name="targetPrefix")
+    def target_prefix(self) -> Optional[str]:
+        return pulumi.get(self, "target_prefix")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketServerSideEncryptionConfiguration(dict):
+    def __init__(__self__, *,
+                 rule: 'outputs.StorageBucketServerSideEncryptionConfigurationRule'):
+        pulumi.set(__self__, "rule", rule)
+
+    @property
+    @pulumi.getter
+    def rule(self) -> 'outputs.StorageBucketServerSideEncryptionConfigurationRule':
+        return pulumi.get(self, "rule")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketServerSideEncryptionConfigurationRule(dict):
+    def __init__(__self__, *,
+                 apply_server_side_encryption_by_default: 'outputs.StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault'):
+        pulumi.set(__self__, "apply_server_side_encryption_by_default", apply_server_side_encryption_by_default)
+
+    @property
+    @pulumi.getter(name="applyServerSideEncryptionByDefault")
+    def apply_server_side_encryption_by_default(self) -> 'outputs.StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault':
+        return pulumi.get(self, "apply_server_side_encryption_by_default")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault(dict):
+    def __init__(__self__, *,
+                 kms_master_key_id: str,
+                 sse_algorithm: str):
+        pulumi.set(__self__, "kms_master_key_id", kms_master_key_id)
+        pulumi.set(__self__, "sse_algorithm", sse_algorithm)
+
+    @property
+    @pulumi.getter(name="kmsMasterKeyId")
+    def kms_master_key_id(self) -> str:
+        return pulumi.get(self, "kms_master_key_id")
+
+    @property
+    @pulumi.getter(name="sseAlgorithm")
+    def sse_algorithm(self) -> str:
+        return pulumi.get(self, "sse_algorithm")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketVersioning(dict):
+    def __init__(__self__, *,
+                 enabled: Optional[bool] = None):
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "enabled")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class StorageBucketWebsite(dict):
+    def __init__(__self__, *,
+                 error_document: Optional[str] = None,
+                 index_document: Optional[str] = None):
+        if error_document is not None:
+            pulumi.set(__self__, "error_document", error_document)
+        if index_document is not None:
+            pulumi.set(__self__, "index_document", index_document)
+
+    @property
+    @pulumi.getter(name="errorDocument")
+    def error_document(self) -> Optional[str]:
+        return pulumi.get(self, "error_document")
+
+    @property
+    @pulumi.getter(name="indexDocument")
+    def index_document(self) -> Optional[str]:
+        return pulumi.get(self, "index_document")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class VpcAddressExternalIpv4Address(dict):
+    def __init__(__self__, *,
+                 address: Optional[str] = None,
+                 ddos_protection_provider: Optional[str] = None,
+                 outgoing_smtp_capability: Optional[str] = None,
+                 zone_id: Optional[str] = None):
+        if address is not None:
+            pulumi.set(__self__, "address", address)
+        if ddos_protection_provider is not None:
+            pulumi.set(__self__, "ddos_protection_provider", ddos_protection_provider)
+        if outgoing_smtp_capability is not None:
+            pulumi.set(__self__, "outgoing_smtp_capability", outgoing_smtp_capability)
+        if zone_id is not None:
+            pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def address(self) -> Optional[str]:
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="ddosProtectionProvider")
+    def ddos_protection_provider(self) -> Optional[str]:
+        return pulumi.get(self, "ddos_protection_provider")
+
+    @property
+    @pulumi.getter(name="outgoingSmtpCapability")
+    def outgoing_smtp_capability(self) -> Optional[str]:
+        return pulumi.get(self, "outgoing_smtp_capability")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> Optional[str]:
+        return pulumi.get(self, "zone_id")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class VpcRouteTableStaticRoute(dict):
+    def __init__(__self__, *,
+                 destination_prefix: Optional[str] = None,
+                 next_hop_address: Optional[str] = None):
+        if destination_prefix is not None:
+            pulumi.set(__self__, "destination_prefix", destination_prefix)
+        if next_hop_address is not None:
+            pulumi.set(__self__, "next_hop_address", next_hop_address)
+
+    @property
+    @pulumi.getter(name="destinationPrefix")
+    def destination_prefix(self) -> Optional[str]:
+        return pulumi.get(self, "destination_prefix")
+
+    @property
+    @pulumi.getter(name="nextHopAddress")
+    def next_hop_address(self) -> Optional[str]:
+        return pulumi.get(self, "next_hop_address")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class VpcSecurityGroupEgress(dict):
+    def __init__(__self__, *,
+                 protocol: str,
+                 description: Optional[str] = None,
+                 from_port: Optional[int] = None,
+                 id: Optional[str] = None,
+                 labels: Optional[Mapping[str, str]] = None,
+                 port: Optional[int] = None,
+                 predefined_target: Optional[str] = None,
+                 security_group_id: Optional[str] = None,
+                 to_port: Optional[int] = None,
+                 v4_cidr_blocks: Optional[Sequence[str]] = None,
+                 v6_cidr_blocks: Optional[Sequence[str]] = None):
+        pulumi.set(__self__, "protocol", protocol)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if from_port is not None:
+            pulumi.set(__self__, "from_port", from_port)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if predefined_target is not None:
+            pulumi.set(__self__, "predefined_target", predefined_target)
+        if security_group_id is not None:
+            pulumi.set(__self__, "security_group_id", security_group_id)
+        if to_port is not None:
+            pulumi.set(__self__, "to_port", to_port)
+        if v4_cidr_blocks is not None:
+            pulumi.set(__self__, "v4_cidr_blocks", v4_cidr_blocks)
+        if v6_cidr_blocks is not None:
+            pulumi.set(__self__, "v6_cidr_blocks", v6_cidr_blocks)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="fromPort")
+    def from_port(self) -> Optional[int]:
+        return pulumi.get(self, "from_port")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[int]:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="predefinedTarget")
+    def predefined_target(self) -> Optional[str]:
+        return pulumi.get(self, "predefined_target")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> Optional[str]:
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="toPort")
+    def to_port(self) -> Optional[int]:
+        return pulumi.get(self, "to_port")
+
+    @property
+    @pulumi.getter(name="v4CidrBlocks")
+    def v4_cidr_blocks(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "v4_cidr_blocks")
+
+    @property
+    @pulumi.getter(name="v6CidrBlocks")
+    def v6_cidr_blocks(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "v6_cidr_blocks")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class VpcSecurityGroupIngress(dict):
+    def __init__(__self__, *,
+                 protocol: str,
+                 description: Optional[str] = None,
+                 from_port: Optional[int] = None,
+                 id: Optional[str] = None,
+                 labels: Optional[Mapping[str, str]] = None,
+                 port: Optional[int] = None,
+                 predefined_target: Optional[str] = None,
+                 security_group_id: Optional[str] = None,
+                 to_port: Optional[int] = None,
+                 v4_cidr_blocks: Optional[Sequence[str]] = None,
+                 v6_cidr_blocks: Optional[Sequence[str]] = None):
+        pulumi.set(__self__, "protocol", protocol)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if from_port is not None:
+            pulumi.set(__self__, "from_port", from_port)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if predefined_target is not None:
+            pulumi.set(__self__, "predefined_target", predefined_target)
+        if security_group_id is not None:
+            pulumi.set(__self__, "security_group_id", security_group_id)
+        if to_port is not None:
+            pulumi.set(__self__, "to_port", to_port)
+        if v4_cidr_blocks is not None:
+            pulumi.set(__self__, "v4_cidr_blocks", v4_cidr_blocks)
+        if v6_cidr_blocks is not None:
+            pulumi.set(__self__, "v6_cidr_blocks", v6_cidr_blocks)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[str]:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="fromPort")
+    def from_port(self) -> Optional[int]:
+        return pulumi.get(self, "from_port")
+
+    @property
+    @pulumi.getter
+    def id(self) -> Optional[str]:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[int]:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="predefinedTarget")
+    def predefined_target(self) -> Optional[str]:
+        return pulumi.get(self, "predefined_target")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> Optional[str]:
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="toPort")
+    def to_port(self) -> Optional[int]:
+        return pulumi.get(self, "to_port")
+
+    @property
+    @pulumi.getter(name="v4CidrBlocks")
+    def v4_cidr_blocks(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "v4_cidr_blocks")
+
+    @property
+    @pulumi.getter(name="v6CidrBlocks")
+    def v6_cidr_blocks(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "v6_cidr_blocks")
+
+    def _translate_property(self, prop):
+        return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
 
 @pulumi.output_type
 class VpcSubnetDhcpOptions(dict):
@@ -43,6 +6945,5291 @@ class VpcSubnetDhcpOptions(dict):
 
     def _translate_property(self, prop):
         return _tables.CAMEL_TO_SNAKE_CASE_TABLE.get(prop) or prop
+
+
+@pulumi.output_type
+class GetComputeDiskDiskPlacementPolicyResult(dict):
+    def __init__(__self__, *,
+                 disk_placement_group_id: str):
+        pulumi.set(__self__, "disk_placement_group_id", disk_placement_group_id)
+
+    @property
+    @pulumi.getter(name="diskPlacementGroupId")
+    def disk_placement_group_id(self) -> str:
+        return pulumi.get(self, "disk_placement_group_id")
+
+
+@pulumi.output_type
+class GetComputeInstanceBootDiskResult(dict):
+    def __init__(__self__, *,
+                 auto_delete: bool,
+                 device_name: str,
+                 disk_id: str,
+                 initialize_params: Sequence['outputs.GetComputeInstanceBootDiskInitializeParamResult'],
+                 mode: str):
+        pulumi.set(__self__, "auto_delete", auto_delete)
+        pulumi.set(__self__, "device_name", device_name)
+        pulumi.set(__self__, "disk_id", disk_id)
+        pulumi.set(__self__, "initialize_params", initialize_params)
+        pulumi.set(__self__, "mode", mode)
+
+    @property
+    @pulumi.getter(name="autoDelete")
+    def auto_delete(self) -> bool:
+        return pulumi.get(self, "auto_delete")
+
+    @property
+    @pulumi.getter(name="deviceName")
+    def device_name(self) -> str:
+        return pulumi.get(self, "device_name")
+
+    @property
+    @pulumi.getter(name="diskId")
+    def disk_id(self) -> str:
+        return pulumi.get(self, "disk_id")
+
+    @property
+    @pulumi.getter(name="initializeParams")
+    def initialize_params(self) -> Sequence['outputs.GetComputeInstanceBootDiskInitializeParamResult']:
+        return pulumi.get(self, "initialize_params")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> str:
+        return pulumi.get(self, "mode")
+
+
+@pulumi.output_type
+class GetComputeInstanceBootDiskInitializeParamResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 image_id: str,
+                 name: str,
+                 size: int,
+                 snapshot_id: str,
+                 type: str):
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "image_id", image_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "snapshot_id", snapshot_id)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> str:
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> str:
+        return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupAllocationPolicyResult(dict):
+    def __init__(__self__, *,
+                 zones: Sequence[str]):
+        pulumi.set(__self__, "zones", zones)
+
+    @property
+    @pulumi.getter
+    def zones(self) -> Sequence[str]:
+        return pulumi.get(self, "zones")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupDeployPolicyResult(dict):
+    def __init__(__self__, *,
+                 max_creating: int,
+                 max_deleting: int,
+                 max_expansion: int,
+                 max_unavailable: int,
+                 startup_duration: int,
+                 strategy: str):
+        pulumi.set(__self__, "max_creating", max_creating)
+        pulumi.set(__self__, "max_deleting", max_deleting)
+        pulumi.set(__self__, "max_expansion", max_expansion)
+        pulumi.set(__self__, "max_unavailable", max_unavailable)
+        pulumi.set(__self__, "startup_duration", startup_duration)
+        pulumi.set(__self__, "strategy", strategy)
+
+    @property
+    @pulumi.getter(name="maxCreating")
+    def max_creating(self) -> int:
+        return pulumi.get(self, "max_creating")
+
+    @property
+    @pulumi.getter(name="maxDeleting")
+    def max_deleting(self) -> int:
+        return pulumi.get(self, "max_deleting")
+
+    @property
+    @pulumi.getter(name="maxExpansion")
+    def max_expansion(self) -> int:
+        return pulumi.get(self, "max_expansion")
+
+    @property
+    @pulumi.getter(name="maxUnavailable")
+    def max_unavailable(self) -> int:
+        return pulumi.get(self, "max_unavailable")
+
+    @property
+    @pulumi.getter(name="startupDuration")
+    def startup_duration(self) -> int:
+        return pulumi.get(self, "startup_duration")
+
+    @property
+    @pulumi.getter
+    def strategy(self) -> str:
+        return pulumi.get(self, "strategy")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupHealthCheckResult(dict):
+    def __init__(__self__, *,
+                 healthy_threshold: int,
+                 http_options: Sequence['outputs.GetComputeInstanceGroupHealthCheckHttpOptionResult'],
+                 interval: int,
+                 tcp_options: Sequence['outputs.GetComputeInstanceGroupHealthCheckTcpOptionResult'],
+                 timeout: int,
+                 unhealthy_threshold: int):
+        pulumi.set(__self__, "healthy_threshold", healthy_threshold)
+        pulumi.set(__self__, "http_options", http_options)
+        pulumi.set(__self__, "interval", interval)
+        pulumi.set(__self__, "tcp_options", tcp_options)
+        pulumi.set(__self__, "timeout", timeout)
+        pulumi.set(__self__, "unhealthy_threshold", unhealthy_threshold)
+
+    @property
+    @pulumi.getter(name="healthyThreshold")
+    def healthy_threshold(self) -> int:
+        return pulumi.get(self, "healthy_threshold")
+
+    @property
+    @pulumi.getter(name="httpOptions")
+    def http_options(self) -> Sequence['outputs.GetComputeInstanceGroupHealthCheckHttpOptionResult']:
+        return pulumi.get(self, "http_options")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> int:
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter(name="tcpOptions")
+    def tcp_options(self) -> Sequence['outputs.GetComputeInstanceGroupHealthCheckTcpOptionResult']:
+        return pulumi.get(self, "tcp_options")
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> int:
+        return pulumi.get(self, "timeout")
+
+    @property
+    @pulumi.getter(name="unhealthyThreshold")
+    def unhealthy_threshold(self) -> int:
+        return pulumi.get(self, "unhealthy_threshold")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupHealthCheckHttpOptionResult(dict):
+    def __init__(__self__, *,
+                 path: str,
+                 port: int):
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupHealthCheckTcpOptionResult(dict):
+    def __init__(__self__, *,
+                 port: int):
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceResult(dict):
+    def __init__(__self__, *,
+                 fqdn: str,
+                 instance_id: str,
+                 name: str,
+                 network_interfaces: Sequence['outputs.GetComputeInstanceGroupInstanceNetworkInterfaceResult'],
+                 status: str,
+                 status_changed_at: str,
+                 status_message: str,
+                 zone_id: str):
+        pulumi.set(__self__, "fqdn", fqdn)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "network_interfaces", network_interfaces)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "status_changed_at", status_changed_at)
+        pulumi.set(__self__, "status_message", status_message)
+        pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> str:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="networkInterfaces")
+    def network_interfaces(self) -> Sequence['outputs.GetComputeInstanceGroupInstanceNetworkInterfaceResult']:
+        return pulumi.get(self, "network_interfaces")
+
+    @property
+    @pulumi.getter
+    def status(self) -> str:
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter(name="statusChangedAt")
+    def status_changed_at(self) -> str:
+        return pulumi.get(self, "status_changed_at")
+
+    @property
+    @pulumi.getter(name="statusMessage")
+    def status_message(self) -> str:
+        return pulumi.get(self, "status_message")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        return pulumi.get(self, "zone_id")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceNetworkInterfaceResult(dict):
+    def __init__(__self__, *,
+                 index: int,
+                 ip_address: str,
+                 ipv4: bool,
+                 ipv6: bool,
+                 ipv6_address: str,
+                 mac_address: str,
+                 nat: bool,
+                 nat_ip_address: str,
+                 nat_ip_version: str,
+                 subnet_id: str):
+        pulumi.set(__self__, "index", index)
+        pulumi.set(__self__, "ip_address", ip_address)
+        pulumi.set(__self__, "ipv4", ipv4)
+        pulumi.set(__self__, "ipv6", ipv6)
+        pulumi.set(__self__, "ipv6_address", ipv6_address)
+        pulumi.set(__self__, "mac_address", mac_address)
+        pulumi.set(__self__, "nat", nat)
+        pulumi.set(__self__, "nat_ip_address", nat_ip_address)
+        pulumi.set(__self__, "nat_ip_version", nat_ip_version)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def index(self) -> int:
+        return pulumi.get(self, "index")
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> str:
+        return pulumi.get(self, "ip_address")
+
+    @property
+    @pulumi.getter
+    def ipv4(self) -> bool:
+        return pulumi.get(self, "ipv4")
+
+    @property
+    @pulumi.getter
+    def ipv6(self) -> bool:
+        return pulumi.get(self, "ipv6")
+
+    @property
+    @pulumi.getter(name="ipv6Address")
+    def ipv6_address(self) -> str:
+        return pulumi.get(self, "ipv6_address")
+
+    @property
+    @pulumi.getter(name="macAddress")
+    def mac_address(self) -> str:
+        return pulumi.get(self, "mac_address")
+
+    @property
+    @pulumi.getter
+    def nat(self) -> bool:
+        return pulumi.get(self, "nat")
+
+    @property
+    @pulumi.getter(name="natIpAddress")
+    def nat_ip_address(self) -> str:
+        return pulumi.get(self, "nat_ip_address")
+
+    @property
+    @pulumi.getter(name="natIpVersion")
+    def nat_ip_version(self) -> str:
+        return pulumi.get(self, "nat_ip_version")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplateResult(dict):
+    def __init__(__self__, *,
+                 boot_disk: 'outputs.GetComputeInstanceGroupInstanceTemplateBootDiskResult',
+                 description: str,
+                 hostname: str,
+                 labels: Mapping[str, str],
+                 metadata: Mapping[str, str],
+                 name: str,
+                 network_interfaces: Sequence['outputs.GetComputeInstanceGroupInstanceTemplateNetworkInterfaceResult'],
+                 network_settings: Sequence['outputs.GetComputeInstanceGroupInstanceTemplateNetworkSettingResult'],
+                 platform_id: str,
+                 resources: 'outputs.GetComputeInstanceGroupInstanceTemplateResourcesResult',
+                 scheduling_policy: 'outputs.GetComputeInstanceGroupInstanceTemplateSchedulingPolicyResult',
+                 secondary_disks: Sequence['outputs.GetComputeInstanceGroupInstanceTemplateSecondaryDiskResult'],
+                 service_account_id: str,
+                 placement_policy: Optional['outputs.GetComputeInstanceGroupInstanceTemplatePlacementPolicyResult'] = None):
+        pulumi.set(__self__, "boot_disk", boot_disk)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "hostname", hostname)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "metadata", metadata)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "network_interfaces", network_interfaces)
+        pulumi.set(__self__, "network_settings", network_settings)
+        pulumi.set(__self__, "platform_id", platform_id)
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "scheduling_policy", scheduling_policy)
+        pulumi.set(__self__, "secondary_disks", secondary_disks)
+        pulumi.set(__self__, "service_account_id", service_account_id)
+        if placement_policy is not None:
+            pulumi.set(__self__, "placement_policy", placement_policy)
+
+    @property
+    @pulumi.getter(name="bootDisk")
+    def boot_disk(self) -> 'outputs.GetComputeInstanceGroupInstanceTemplateBootDiskResult':
+        return pulumi.get(self, "boot_disk")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def hostname(self) -> str:
+        return pulumi.get(self, "hostname")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Mapping[str, str]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def metadata(self) -> Mapping[str, str]:
+        return pulumi.get(self, "metadata")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="networkInterfaces")
+    def network_interfaces(self) -> Sequence['outputs.GetComputeInstanceGroupInstanceTemplateNetworkInterfaceResult']:
+        return pulumi.get(self, "network_interfaces")
+
+    @property
+    @pulumi.getter(name="networkSettings")
+    def network_settings(self) -> Sequence['outputs.GetComputeInstanceGroupInstanceTemplateNetworkSettingResult']:
+        return pulumi.get(self, "network_settings")
+
+    @property
+    @pulumi.getter(name="platformId")
+    def platform_id(self) -> str:
+        return pulumi.get(self, "platform_id")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.GetComputeInstanceGroupInstanceTemplateResourcesResult':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter(name="schedulingPolicy")
+    def scheduling_policy(self) -> 'outputs.GetComputeInstanceGroupInstanceTemplateSchedulingPolicyResult':
+        return pulumi.get(self, "scheduling_policy")
+
+    @property
+    @pulumi.getter(name="secondaryDisks")
+    def secondary_disks(self) -> Sequence['outputs.GetComputeInstanceGroupInstanceTemplateSecondaryDiskResult']:
+        return pulumi.get(self, "secondary_disks")
+
+    @property
+    @pulumi.getter(name="serviceAccountId")
+    def service_account_id(self) -> str:
+        return pulumi.get(self, "service_account_id")
+
+    @property
+    @pulumi.getter(name="placementPolicy")
+    def placement_policy(self) -> Optional['outputs.GetComputeInstanceGroupInstanceTemplatePlacementPolicyResult']:
+        return pulumi.get(self, "placement_policy")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplateBootDiskResult(dict):
+    def __init__(__self__, *,
+                 device_name: str,
+                 initialize_params: 'outputs.GetComputeInstanceGroupInstanceTemplateBootDiskInitializeParamsResult',
+                 mode: str):
+        pulumi.set(__self__, "device_name", device_name)
+        pulumi.set(__self__, "initialize_params", initialize_params)
+        pulumi.set(__self__, "mode", mode)
+
+    @property
+    @pulumi.getter(name="deviceName")
+    def device_name(self) -> str:
+        return pulumi.get(self, "device_name")
+
+    @property
+    @pulumi.getter(name="initializeParams")
+    def initialize_params(self) -> 'outputs.GetComputeInstanceGroupInstanceTemplateBootDiskInitializeParamsResult':
+        return pulumi.get(self, "initialize_params")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> str:
+        return pulumi.get(self, "mode")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplateBootDiskInitializeParamsResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 image_id: str,
+                 size: int,
+                 snapshot_id: str,
+                 type: str):
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "image_id", image_id)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "snapshot_id", snapshot_id)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> str:
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> str:
+        return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplateNetworkInterfaceResult(dict):
+    def __init__(__self__, *,
+                 ipv4: bool,
+                 ipv6: bool,
+                 nat: bool,
+                 network_id: str,
+                 security_group_ids: Sequence[str],
+                 subnet_ids: Sequence[str]):
+        pulumi.set(__self__, "ipv4", ipv4)
+        pulumi.set(__self__, "ipv6", ipv6)
+        pulumi.set(__self__, "nat", nat)
+        pulumi.set(__self__, "network_id", network_id)
+        pulumi.set(__self__, "security_group_ids", security_group_ids)
+        pulumi.set(__self__, "subnet_ids", subnet_ids)
+
+    @property
+    @pulumi.getter
+    def ipv4(self) -> bool:
+        return pulumi.get(self, "ipv4")
+
+    @property
+    @pulumi.getter
+    def ipv6(self) -> bool:
+        return pulumi.get(self, "ipv6")
+
+    @property
+    @pulumi.getter
+    def nat(self) -> bool:
+        return pulumi.get(self, "nat")
+
+    @property
+    @pulumi.getter(name="networkId")
+    def network_id(self) -> str:
+        return pulumi.get(self, "network_id")
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Sequence[str]:
+        return pulumi.get(self, "security_group_ids")
+
+    @property
+    @pulumi.getter(name="subnetIds")
+    def subnet_ids(self) -> Sequence[str]:
+        return pulumi.get(self, "subnet_ids")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplateNetworkSettingResult(dict):
+    def __init__(__self__, *,
+                 type: str):
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplatePlacementPolicyResult(dict):
+    def __init__(__self__, *,
+                 placement_group_id: str):
+        pulumi.set(__self__, "placement_group_id", placement_group_id)
+
+    @property
+    @pulumi.getter(name="placementGroupId")
+    def placement_group_id(self) -> str:
+        return pulumi.get(self, "placement_group_id")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplateResourcesResult(dict):
+    def __init__(__self__, *,
+                 core_fraction: int,
+                 cores: int,
+                 gpus: int,
+                 memory: float):
+        pulumi.set(__self__, "core_fraction", core_fraction)
+        pulumi.set(__self__, "cores", cores)
+        pulumi.set(__self__, "gpus", gpus)
+        pulumi.set(__self__, "memory", memory)
+
+    @property
+    @pulumi.getter(name="coreFraction")
+    def core_fraction(self) -> int:
+        return pulumi.get(self, "core_fraction")
+
+    @property
+    @pulumi.getter
+    def cores(self) -> int:
+        return pulumi.get(self, "cores")
+
+    @property
+    @pulumi.getter
+    def gpus(self) -> int:
+        return pulumi.get(self, "gpus")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> float:
+        return pulumi.get(self, "memory")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplateSchedulingPolicyResult(dict):
+    def __init__(__self__, *,
+                 preemptible: bool):
+        pulumi.set(__self__, "preemptible", preemptible)
+
+    @property
+    @pulumi.getter
+    def preemptible(self) -> bool:
+        return pulumi.get(self, "preemptible")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplateSecondaryDiskResult(dict):
+    def __init__(__self__, *,
+                 device_name: str,
+                 initialize_params: 'outputs.GetComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParamsResult',
+                 mode: str):
+        pulumi.set(__self__, "device_name", device_name)
+        pulumi.set(__self__, "initialize_params", initialize_params)
+        pulumi.set(__self__, "mode", mode)
+
+    @property
+    @pulumi.getter(name="deviceName")
+    def device_name(self) -> str:
+        return pulumi.get(self, "device_name")
+
+    @property
+    @pulumi.getter(name="initializeParams")
+    def initialize_params(self) -> 'outputs.GetComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParamsResult':
+        return pulumi.get(self, "initialize_params")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> str:
+        return pulumi.get(self, "mode")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParamsResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 image_id: str,
+                 size: int,
+                 snapshot_id: str,
+                 type: str):
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "image_id", image_id)
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "snapshot_id", snapshot_id)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="imageId")
+    def image_id(self) -> str:
+        return pulumi.get(self, "image_id")
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> str:
+        return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupLoadBalancerResult(dict):
+    def __init__(__self__, *,
+                 status_message: str,
+                 target_group_description: str,
+                 target_group_id: str,
+                 target_group_labels: Mapping[str, str],
+                 target_group_name: str):
+        pulumi.set(__self__, "status_message", status_message)
+        pulumi.set(__self__, "target_group_description", target_group_description)
+        pulumi.set(__self__, "target_group_id", target_group_id)
+        pulumi.set(__self__, "target_group_labels", target_group_labels)
+        pulumi.set(__self__, "target_group_name", target_group_name)
+
+    @property
+    @pulumi.getter(name="statusMessage")
+    def status_message(self) -> str:
+        return pulumi.get(self, "status_message")
+
+    @property
+    @pulumi.getter(name="targetGroupDescription")
+    def target_group_description(self) -> str:
+        return pulumi.get(self, "target_group_description")
+
+    @property
+    @pulumi.getter(name="targetGroupId")
+    def target_group_id(self) -> str:
+        return pulumi.get(self, "target_group_id")
+
+    @property
+    @pulumi.getter(name="targetGroupLabels")
+    def target_group_labels(self) -> Mapping[str, str]:
+        return pulumi.get(self, "target_group_labels")
+
+    @property
+    @pulumi.getter(name="targetGroupName")
+    def target_group_name(self) -> str:
+        return pulumi.get(self, "target_group_name")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupLoadBalancerStateResult(dict):
+    def __init__(__self__, *,
+                 status_message: str,
+                 target_group_id: str):
+        pulumi.set(__self__, "status_message", status_message)
+        pulumi.set(__self__, "target_group_id", target_group_id)
+
+    @property
+    @pulumi.getter(name="statusMessage")
+    def status_message(self) -> str:
+        return pulumi.get(self, "status_message")
+
+    @property
+    @pulumi.getter(name="targetGroupId")
+    def target_group_id(self) -> str:
+        return pulumi.get(self, "target_group_id")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupScalePolicyResult(dict):
+    def __init__(__self__, *,
+                 auto_scales: Sequence['outputs.GetComputeInstanceGroupScalePolicyAutoScaleResult'],
+                 fixed_scales: Sequence['outputs.GetComputeInstanceGroupScalePolicyFixedScaleResult'],
+                 test_auto_scales: Sequence['outputs.GetComputeInstanceGroupScalePolicyTestAutoScaleResult']):
+        pulumi.set(__self__, "auto_scales", auto_scales)
+        pulumi.set(__self__, "fixed_scales", fixed_scales)
+        pulumi.set(__self__, "test_auto_scales", test_auto_scales)
+
+    @property
+    @pulumi.getter(name="autoScales")
+    def auto_scales(self) -> Sequence['outputs.GetComputeInstanceGroupScalePolicyAutoScaleResult']:
+        return pulumi.get(self, "auto_scales")
+
+    @property
+    @pulumi.getter(name="fixedScales")
+    def fixed_scales(self) -> Sequence['outputs.GetComputeInstanceGroupScalePolicyFixedScaleResult']:
+        return pulumi.get(self, "fixed_scales")
+
+    @property
+    @pulumi.getter(name="testAutoScales")
+    def test_auto_scales(self) -> Sequence['outputs.GetComputeInstanceGroupScalePolicyTestAutoScaleResult']:
+        return pulumi.get(self, "test_auto_scales")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupScalePolicyAutoScaleResult(dict):
+    def __init__(__self__, *,
+                 cpu_utilization_target: float,
+                 custom_rules: Sequence['outputs.GetComputeInstanceGroupScalePolicyAutoScaleCustomRuleResult'],
+                 initial_size: int,
+                 max_size: int,
+                 measurement_duration: int,
+                 min_zone_size: int,
+                 stabilization_duration: int,
+                 warmup_duration: int):
+        pulumi.set(__self__, "cpu_utilization_target", cpu_utilization_target)
+        pulumi.set(__self__, "custom_rules", custom_rules)
+        pulumi.set(__self__, "initial_size", initial_size)
+        pulumi.set(__self__, "max_size", max_size)
+        pulumi.set(__self__, "measurement_duration", measurement_duration)
+        pulumi.set(__self__, "min_zone_size", min_zone_size)
+        pulumi.set(__self__, "stabilization_duration", stabilization_duration)
+        pulumi.set(__self__, "warmup_duration", warmup_duration)
+
+    @property
+    @pulumi.getter(name="cpuUtilizationTarget")
+    def cpu_utilization_target(self) -> float:
+        return pulumi.get(self, "cpu_utilization_target")
+
+    @property
+    @pulumi.getter(name="customRules")
+    def custom_rules(self) -> Sequence['outputs.GetComputeInstanceGroupScalePolicyAutoScaleCustomRuleResult']:
+        return pulumi.get(self, "custom_rules")
+
+    @property
+    @pulumi.getter(name="initialSize")
+    def initial_size(self) -> int:
+        return pulumi.get(self, "initial_size")
+
+    @property
+    @pulumi.getter(name="maxSize")
+    def max_size(self) -> int:
+        return pulumi.get(self, "max_size")
+
+    @property
+    @pulumi.getter(name="measurementDuration")
+    def measurement_duration(self) -> int:
+        return pulumi.get(self, "measurement_duration")
+
+    @property
+    @pulumi.getter(name="minZoneSize")
+    def min_zone_size(self) -> int:
+        return pulumi.get(self, "min_zone_size")
+
+    @property
+    @pulumi.getter(name="stabilizationDuration")
+    def stabilization_duration(self) -> int:
+        return pulumi.get(self, "stabilization_duration")
+
+    @property
+    @pulumi.getter(name="warmupDuration")
+    def warmup_duration(self) -> int:
+        return pulumi.get(self, "warmup_duration")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupScalePolicyAutoScaleCustomRuleResult(dict):
+    def __init__(__self__, *,
+                 labels: Mapping[str, str],
+                 metric_name: str,
+                 metric_type: str,
+                 rule_type: str,
+                 target: float):
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "metric_type", metric_type)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "target", target)
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Mapping[str, str]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter(name="metricType")
+    def metric_type(self) -> str:
+        return pulumi.get(self, "metric_type")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter
+    def target(self) -> float:
+        return pulumi.get(self, "target")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupScalePolicyFixedScaleResult(dict):
+    def __init__(__self__, *,
+                 size: int):
+        pulumi.set(__self__, "size", size)
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        return pulumi.get(self, "size")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupScalePolicyTestAutoScaleResult(dict):
+    def __init__(__self__, *,
+                 cpu_utilization_target: float,
+                 custom_rules: Sequence['outputs.GetComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleResult'],
+                 initial_size: int,
+                 max_size: int,
+                 measurement_duration: int,
+                 min_zone_size: int,
+                 stabilization_duration: int,
+                 warmup_duration: int):
+        pulumi.set(__self__, "cpu_utilization_target", cpu_utilization_target)
+        pulumi.set(__self__, "custom_rules", custom_rules)
+        pulumi.set(__self__, "initial_size", initial_size)
+        pulumi.set(__self__, "max_size", max_size)
+        pulumi.set(__self__, "measurement_duration", measurement_duration)
+        pulumi.set(__self__, "min_zone_size", min_zone_size)
+        pulumi.set(__self__, "stabilization_duration", stabilization_duration)
+        pulumi.set(__self__, "warmup_duration", warmup_duration)
+
+    @property
+    @pulumi.getter(name="cpuUtilizationTarget")
+    def cpu_utilization_target(self) -> float:
+        return pulumi.get(self, "cpu_utilization_target")
+
+    @property
+    @pulumi.getter(name="customRules")
+    def custom_rules(self) -> Sequence['outputs.GetComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleResult']:
+        return pulumi.get(self, "custom_rules")
+
+    @property
+    @pulumi.getter(name="initialSize")
+    def initial_size(self) -> int:
+        return pulumi.get(self, "initial_size")
+
+    @property
+    @pulumi.getter(name="maxSize")
+    def max_size(self) -> int:
+        return pulumi.get(self, "max_size")
+
+    @property
+    @pulumi.getter(name="measurementDuration")
+    def measurement_duration(self) -> int:
+        return pulumi.get(self, "measurement_duration")
+
+    @property
+    @pulumi.getter(name="minZoneSize")
+    def min_zone_size(self) -> int:
+        return pulumi.get(self, "min_zone_size")
+
+    @property
+    @pulumi.getter(name="stabilizationDuration")
+    def stabilization_duration(self) -> int:
+        return pulumi.get(self, "stabilization_duration")
+
+    @property
+    @pulumi.getter(name="warmupDuration")
+    def warmup_duration(self) -> int:
+        return pulumi.get(self, "warmup_duration")
+
+
+@pulumi.output_type
+class GetComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleResult(dict):
+    def __init__(__self__, *,
+                 labels: Mapping[str, str],
+                 metric_name: str,
+                 metric_type: str,
+                 rule_type: str,
+                 target: float):
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "metric_name", metric_name)
+        pulumi.set(__self__, "metric_type", metric_type)
+        pulumi.set(__self__, "rule_type", rule_type)
+        pulumi.set(__self__, "target", target)
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Mapping[str, str]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter(name="metricName")
+    def metric_name(self) -> str:
+        return pulumi.get(self, "metric_name")
+
+    @property
+    @pulumi.getter(name="metricType")
+    def metric_type(self) -> str:
+        return pulumi.get(self, "metric_type")
+
+    @property
+    @pulumi.getter(name="ruleType")
+    def rule_type(self) -> str:
+        return pulumi.get(self, "rule_type")
+
+    @property
+    @pulumi.getter
+    def target(self) -> float:
+        return pulumi.get(self, "target")
+
+
+@pulumi.output_type
+class GetComputeInstanceNetworkInterfaceResult(dict):
+    def __init__(__self__, *,
+                 index: int,
+                 ip_address: str,
+                 ipv4: bool,
+                 ipv6: bool,
+                 ipv6_address: str,
+                 mac_address: str,
+                 nat: bool,
+                 nat_ip_address: str,
+                 nat_ip_version: str,
+                 security_group_ids: Sequence[str],
+                 subnet_id: str):
+        pulumi.set(__self__, "index", index)
+        pulumi.set(__self__, "ip_address", ip_address)
+        pulumi.set(__self__, "ipv4", ipv4)
+        pulumi.set(__self__, "ipv6", ipv6)
+        pulumi.set(__self__, "ipv6_address", ipv6_address)
+        pulumi.set(__self__, "mac_address", mac_address)
+        pulumi.set(__self__, "nat", nat)
+        pulumi.set(__self__, "nat_ip_address", nat_ip_address)
+        pulumi.set(__self__, "nat_ip_version", nat_ip_version)
+        pulumi.set(__self__, "security_group_ids", security_group_ids)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def index(self) -> int:
+        return pulumi.get(self, "index")
+
+    @property
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> str:
+        return pulumi.get(self, "ip_address")
+
+    @property
+    @pulumi.getter
+    def ipv4(self) -> bool:
+        return pulumi.get(self, "ipv4")
+
+    @property
+    @pulumi.getter
+    def ipv6(self) -> bool:
+        return pulumi.get(self, "ipv6")
+
+    @property
+    @pulumi.getter(name="ipv6Address")
+    def ipv6_address(self) -> str:
+        return pulumi.get(self, "ipv6_address")
+
+    @property
+    @pulumi.getter(name="macAddress")
+    def mac_address(self) -> str:
+        return pulumi.get(self, "mac_address")
+
+    @property
+    @pulumi.getter
+    def nat(self) -> bool:
+        return pulumi.get(self, "nat")
+
+    @property
+    @pulumi.getter(name="natIpAddress")
+    def nat_ip_address(self) -> str:
+        return pulumi.get(self, "nat_ip_address")
+
+    @property
+    @pulumi.getter(name="natIpVersion")
+    def nat_ip_version(self) -> str:
+        return pulumi.get(self, "nat_ip_version")
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Sequence[str]:
+        return pulumi.get(self, "security_group_ids")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetComputeInstancePlacementPolicyResult(dict):
+    def __init__(__self__, *,
+                 placement_group_id: str):
+        pulumi.set(__self__, "placement_group_id", placement_group_id)
+
+    @property
+    @pulumi.getter(name="placementGroupId")
+    def placement_group_id(self) -> str:
+        return pulumi.get(self, "placement_group_id")
+
+
+@pulumi.output_type
+class GetComputeInstanceResourcesResult(dict):
+    def __init__(__self__, *,
+                 core_fraction: int,
+                 cores: int,
+                 gpus: int,
+                 memory: float):
+        pulumi.set(__self__, "core_fraction", core_fraction)
+        pulumi.set(__self__, "cores", cores)
+        pulumi.set(__self__, "gpus", gpus)
+        pulumi.set(__self__, "memory", memory)
+
+    @property
+    @pulumi.getter(name="coreFraction")
+    def core_fraction(self) -> int:
+        return pulumi.get(self, "core_fraction")
+
+    @property
+    @pulumi.getter
+    def cores(self) -> int:
+        return pulumi.get(self, "cores")
+
+    @property
+    @pulumi.getter
+    def gpus(self) -> int:
+        return pulumi.get(self, "gpus")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> float:
+        return pulumi.get(self, "memory")
+
+
+@pulumi.output_type
+class GetComputeInstanceSchedulingPolicyResult(dict):
+    def __init__(__self__, *,
+                 preemptible: Optional[bool] = None):
+        if preemptible is not None:
+            pulumi.set(__self__, "preemptible", preemptible)
+
+    @property
+    @pulumi.getter
+    def preemptible(self) -> Optional[bool]:
+        return pulumi.get(self, "preemptible")
+
+
+@pulumi.output_type
+class GetComputeInstanceSecondaryDiskResult(dict):
+    def __init__(__self__, *,
+                 auto_delete: bool,
+                 device_name: str,
+                 disk_id: str,
+                 mode: str):
+        pulumi.set(__self__, "auto_delete", auto_delete)
+        pulumi.set(__self__, "device_name", device_name)
+        pulumi.set(__self__, "disk_id", disk_id)
+        pulumi.set(__self__, "mode", mode)
+
+    @property
+    @pulumi.getter(name="autoDelete")
+    def auto_delete(self) -> bool:
+        return pulumi.get(self, "auto_delete")
+
+    @property
+    @pulumi.getter(name="deviceName")
+    def device_name(self) -> str:
+        return pulumi.get(self, "device_name")
+
+    @property
+    @pulumi.getter(name="diskId")
+    def disk_id(self) -> str:
+        return pulumi.get(self, "disk_id")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> str:
+        return pulumi.get(self, "mode")
+
+
+@pulumi.output_type
+class GetDataprocClusterClusterConfigResult(dict):
+    def __init__(__self__, *,
+                 hadoop: 'outputs.GetDataprocClusterClusterConfigHadoopResult',
+                 subcluster_specs: Sequence['outputs.GetDataprocClusterClusterConfigSubclusterSpecResult'],
+                 version_id: str):
+        pulumi.set(__self__, "hadoop", hadoop)
+        pulumi.set(__self__, "subcluster_specs", subcluster_specs)
+        pulumi.set(__self__, "version_id", version_id)
+
+    @property
+    @pulumi.getter
+    def hadoop(self) -> 'outputs.GetDataprocClusterClusterConfigHadoopResult':
+        return pulumi.get(self, "hadoop")
+
+    @property
+    @pulumi.getter(name="subclusterSpecs")
+    def subcluster_specs(self) -> Sequence['outputs.GetDataprocClusterClusterConfigSubclusterSpecResult']:
+        return pulumi.get(self, "subcluster_specs")
+
+    @property
+    @pulumi.getter(name="versionId")
+    def version_id(self) -> str:
+        return pulumi.get(self, "version_id")
+
+
+@pulumi.output_type
+class GetDataprocClusterClusterConfigHadoopResult(dict):
+    def __init__(__self__, *,
+                 properties: Mapping[str, str],
+                 services: Sequence[str],
+                 ssh_public_keys: Sequence[str]):
+        pulumi.set(__self__, "properties", properties)
+        pulumi.set(__self__, "services", services)
+        pulumi.set(__self__, "ssh_public_keys", ssh_public_keys)
+
+    @property
+    @pulumi.getter
+    def properties(self) -> Mapping[str, str]:
+        return pulumi.get(self, "properties")
+
+    @property
+    @pulumi.getter
+    def services(self) -> Sequence[str]:
+        return pulumi.get(self, "services")
+
+    @property
+    @pulumi.getter(name="sshPublicKeys")
+    def ssh_public_keys(self) -> Sequence[str]:
+        return pulumi.get(self, "ssh_public_keys")
+
+
+@pulumi.output_type
+class GetDataprocClusterClusterConfigSubclusterSpecResult(dict):
+    def __init__(__self__, *,
+                 hosts_count: int,
+                 id: str,
+                 name: str,
+                 resources: 'outputs.GetDataprocClusterClusterConfigSubclusterSpecResourcesResult',
+                 role: str,
+                 subnet_id: str):
+        pulumi.set(__self__, "hosts_count", hosts_count)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter(name="hostsCount")
+    def hosts_count(self) -> int:
+        return pulumi.get(self, "hosts_count")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.GetDataprocClusterClusterConfigSubclusterSpecResourcesResult':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetDataprocClusterClusterConfigSubclusterSpecResourcesResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+
+@pulumi.output_type
+class GetFunctionTriggerDlqResult(dict):
+    def __init__(__self__, *,
+                 queue_id: str,
+                 service_account_id: str):
+        pulumi.set(__self__, "queue_id", queue_id)
+        pulumi.set(__self__, "service_account_id", service_account_id)
+
+    @property
+    @pulumi.getter(name="queueId")
+    def queue_id(self) -> str:
+        return pulumi.get(self, "queue_id")
+
+    @property
+    @pulumi.getter(name="serviceAccountId")
+    def service_account_id(self) -> str:
+        return pulumi.get(self, "service_account_id")
+
+
+@pulumi.output_type
+class GetFunctionTriggerFunctionResult(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 retry_attempts: str,
+                 retry_interval: str,
+                 service_account_id: str,
+                 tag: str):
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "retry_attempts", retry_attempts)
+        pulumi.set(__self__, "retry_interval", retry_interval)
+        pulumi.set(__self__, "service_account_id", service_account_id)
+        pulumi.set(__self__, "tag", tag)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="retryAttempts")
+    def retry_attempts(self) -> str:
+        return pulumi.get(self, "retry_attempts")
+
+    @property
+    @pulumi.getter(name="retryInterval")
+    def retry_interval(self) -> str:
+        return pulumi.get(self, "retry_interval")
+
+    @property
+    @pulumi.getter(name="serviceAccountId")
+    def service_account_id(self) -> str:
+        return pulumi.get(self, "service_account_id")
+
+    @property
+    @pulumi.getter
+    def tag(self) -> str:
+        return pulumi.get(self, "tag")
+
+
+@pulumi.output_type
+class GetFunctionTriggerIotResult(dict):
+    def __init__(__self__, *,
+                 device_id: str,
+                 registry_id: str,
+                 topic: str):
+        pulumi.set(__self__, "device_id", device_id)
+        pulumi.set(__self__, "registry_id", registry_id)
+        pulumi.set(__self__, "topic", topic)
+
+    @property
+    @pulumi.getter(name="deviceId")
+    def device_id(self) -> str:
+        return pulumi.get(self, "device_id")
+
+    @property
+    @pulumi.getter(name="registryId")
+    def registry_id(self) -> str:
+        return pulumi.get(self, "registry_id")
+
+    @property
+    @pulumi.getter
+    def topic(self) -> str:
+        return pulumi.get(self, "topic")
+
+
+@pulumi.output_type
+class GetFunctionTriggerMessageQueueResult(dict):
+    def __init__(__self__, *,
+                 batch_cutoff: str,
+                 batch_size: str,
+                 queue_id: str,
+                 service_account_id: str,
+                 visibility_timeout: str):
+        pulumi.set(__self__, "batch_cutoff", batch_cutoff)
+        pulumi.set(__self__, "batch_size", batch_size)
+        pulumi.set(__self__, "queue_id", queue_id)
+        pulumi.set(__self__, "service_account_id", service_account_id)
+        pulumi.set(__self__, "visibility_timeout", visibility_timeout)
+
+    @property
+    @pulumi.getter(name="batchCutoff")
+    def batch_cutoff(self) -> str:
+        return pulumi.get(self, "batch_cutoff")
+
+    @property
+    @pulumi.getter(name="batchSize")
+    def batch_size(self) -> str:
+        return pulumi.get(self, "batch_size")
+
+    @property
+    @pulumi.getter(name="queueId")
+    def queue_id(self) -> str:
+        return pulumi.get(self, "queue_id")
+
+    @property
+    @pulumi.getter(name="serviceAccountId")
+    def service_account_id(self) -> str:
+        return pulumi.get(self, "service_account_id")
+
+    @property
+    @pulumi.getter(name="visibilityTimeout")
+    def visibility_timeout(self) -> str:
+        return pulumi.get(self, "visibility_timeout")
+
+
+@pulumi.output_type
+class GetFunctionTriggerObjectStorageResult(dict):
+    def __init__(__self__, *,
+                 bucket_id: str,
+                 create: bool,
+                 delete: bool,
+                 prefix: str,
+                 suffix: str,
+                 update: bool):
+        pulumi.set(__self__, "bucket_id", bucket_id)
+        pulumi.set(__self__, "create", create)
+        pulumi.set(__self__, "delete", delete)
+        pulumi.set(__self__, "prefix", prefix)
+        pulumi.set(__self__, "suffix", suffix)
+        pulumi.set(__self__, "update", update)
+
+    @property
+    @pulumi.getter(name="bucketId")
+    def bucket_id(self) -> str:
+        return pulumi.get(self, "bucket_id")
+
+    @property
+    @pulumi.getter
+    def create(self) -> bool:
+        return pulumi.get(self, "create")
+
+    @property
+    @pulumi.getter
+    def delete(self) -> bool:
+        return pulumi.get(self, "delete")
+
+    @property
+    @pulumi.getter
+    def prefix(self) -> str:
+        return pulumi.get(self, "prefix")
+
+    @property
+    @pulumi.getter
+    def suffix(self) -> str:
+        return pulumi.get(self, "suffix")
+
+    @property
+    @pulumi.getter
+    def update(self) -> bool:
+        return pulumi.get(self, "update")
+
+
+@pulumi.output_type
+class GetFunctionTriggerTimerResult(dict):
+    def __init__(__self__, *,
+                 cron_expression: str):
+        pulumi.set(__self__, "cron_expression", cron_expression)
+
+    @property
+    @pulumi.getter(name="cronExpression")
+    def cron_expression(self) -> str:
+        return pulumi.get(self, "cron_expression")
+
+
+@pulumi.output_type
+class GetIamPolicyBindingResult(dict):
+    def __init__(__self__, *,
+                 members: Sequence[str],
+                 role: str):
+        pulumi.set(__self__, "members", members)
+        pulumi.set(__self__, "role", role)
+
+    @property
+    @pulumi.getter
+    def members(self) -> Sequence[str]:
+        return pulumi.get(self, "members")
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        return pulumi.get(self, "role")
+
+
+@pulumi.output_type
+class GetKubernetesClusterKmsProviderResult(dict):
+    def __init__(__self__, *,
+                 key_id: str):
+        pulumi.set(__self__, "key_id", key_id)
+
+    @property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> str:
+        return pulumi.get(self, "key_id")
+
+
+@pulumi.output_type
+class GetKubernetesClusterMasterResult(dict):
+    def __init__(__self__, *,
+                 cluster_ca_certificate: str,
+                 external_v4_address: str,
+                 external_v4_endpoint: str,
+                 internal_v4_address: str,
+                 internal_v4_endpoint: str,
+                 maintenance_policy: 'outputs.GetKubernetesClusterMasterMaintenancePolicyResult',
+                 public_ip: bool,
+                 regional: 'outputs.GetKubernetesClusterMasterRegionalResult',
+                 security_group_ids: Sequence[str],
+                 version: str,
+                 version_info: 'outputs.GetKubernetesClusterMasterVersionInfoResult',
+                 zonal: 'outputs.GetKubernetesClusterMasterZonalResult'):
+        pulumi.set(__self__, "cluster_ca_certificate", cluster_ca_certificate)
+        pulumi.set(__self__, "external_v4_address", external_v4_address)
+        pulumi.set(__self__, "external_v4_endpoint", external_v4_endpoint)
+        pulumi.set(__self__, "internal_v4_address", internal_v4_address)
+        pulumi.set(__self__, "internal_v4_endpoint", internal_v4_endpoint)
+        pulumi.set(__self__, "maintenance_policy", maintenance_policy)
+        pulumi.set(__self__, "public_ip", public_ip)
+        pulumi.set(__self__, "regional", regional)
+        pulumi.set(__self__, "security_group_ids", security_group_ids)
+        pulumi.set(__self__, "version", version)
+        pulumi.set(__self__, "version_info", version_info)
+        pulumi.set(__self__, "zonal", zonal)
+
+    @property
+    @pulumi.getter(name="clusterCaCertificate")
+    def cluster_ca_certificate(self) -> str:
+        return pulumi.get(self, "cluster_ca_certificate")
+
+    @property
+    @pulumi.getter(name="externalV4Address")
+    def external_v4_address(self) -> str:
+        return pulumi.get(self, "external_v4_address")
+
+    @property
+    @pulumi.getter(name="externalV4Endpoint")
+    def external_v4_endpoint(self) -> str:
+        return pulumi.get(self, "external_v4_endpoint")
+
+    @property
+    @pulumi.getter(name="internalV4Address")
+    def internal_v4_address(self) -> str:
+        return pulumi.get(self, "internal_v4_address")
+
+    @property
+    @pulumi.getter(name="internalV4Endpoint")
+    def internal_v4_endpoint(self) -> str:
+        return pulumi.get(self, "internal_v4_endpoint")
+
+    @property
+    @pulumi.getter(name="maintenancePolicy")
+    def maintenance_policy(self) -> 'outputs.GetKubernetesClusterMasterMaintenancePolicyResult':
+        return pulumi.get(self, "maintenance_policy")
+
+    @property
+    @pulumi.getter(name="publicIp")
+    def public_ip(self) -> bool:
+        return pulumi.get(self, "public_ip")
+
+    @property
+    @pulumi.getter
+    def regional(self) -> 'outputs.GetKubernetesClusterMasterRegionalResult':
+        return pulumi.get(self, "regional")
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Sequence[str]:
+        return pulumi.get(self, "security_group_ids")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter(name="versionInfo")
+    def version_info(self) -> 'outputs.GetKubernetesClusterMasterVersionInfoResult':
+        return pulumi.get(self, "version_info")
+
+    @property
+    @pulumi.getter
+    def zonal(self) -> 'outputs.GetKubernetesClusterMasterZonalResult':
+        return pulumi.get(self, "zonal")
+
+
+@pulumi.output_type
+class GetKubernetesClusterMasterMaintenancePolicyResult(dict):
+    def __init__(__self__, *,
+                 auto_upgrade: bool,
+                 maintenance_windows: Sequence['outputs.GetKubernetesClusterMasterMaintenancePolicyMaintenanceWindowResult']):
+        pulumi.set(__self__, "auto_upgrade", auto_upgrade)
+        pulumi.set(__self__, "maintenance_windows", maintenance_windows)
+
+    @property
+    @pulumi.getter(name="autoUpgrade")
+    def auto_upgrade(self) -> bool:
+        return pulumi.get(self, "auto_upgrade")
+
+    @property
+    @pulumi.getter(name="maintenanceWindows")
+    def maintenance_windows(self) -> Sequence['outputs.GetKubernetesClusterMasterMaintenancePolicyMaintenanceWindowResult']:
+        return pulumi.get(self, "maintenance_windows")
+
+
+@pulumi.output_type
+class GetKubernetesClusterMasterMaintenancePolicyMaintenanceWindowResult(dict):
+    def __init__(__self__, *,
+                 day: str,
+                 duration: str,
+                 start_time: str):
+        pulumi.set(__self__, "day", day)
+        pulumi.set(__self__, "duration", duration)
+        pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter
+    def day(self) -> str:
+        return pulumi.get(self, "day")
+
+    @property
+    @pulumi.getter
+    def duration(self) -> str:
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class GetKubernetesClusterMasterRegionalResult(dict):
+    def __init__(__self__, *,
+                 region: str):
+        pulumi.set(__self__, "region", region)
+
+    @property
+    @pulumi.getter
+    def region(self) -> str:
+        return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class GetKubernetesClusterMasterVersionInfoResult(dict):
+    def __init__(__self__, *,
+                 current_version: str,
+                 new_revision_available: bool,
+                 new_revision_summary: str,
+                 version_deprecated: bool):
+        pulumi.set(__self__, "current_version", current_version)
+        pulumi.set(__self__, "new_revision_available", new_revision_available)
+        pulumi.set(__self__, "new_revision_summary", new_revision_summary)
+        pulumi.set(__self__, "version_deprecated", version_deprecated)
+
+    @property
+    @pulumi.getter(name="currentVersion")
+    def current_version(self) -> str:
+        return pulumi.get(self, "current_version")
+
+    @property
+    @pulumi.getter(name="newRevisionAvailable")
+    def new_revision_available(self) -> bool:
+        return pulumi.get(self, "new_revision_available")
+
+    @property
+    @pulumi.getter(name="newRevisionSummary")
+    def new_revision_summary(self) -> str:
+        return pulumi.get(self, "new_revision_summary")
+
+    @property
+    @pulumi.getter(name="versionDeprecated")
+    def version_deprecated(self) -> bool:
+        return pulumi.get(self, "version_deprecated")
+
+
+@pulumi.output_type
+class GetKubernetesClusterMasterZonalResult(dict):
+    def __init__(__self__, *,
+                 zone: str):
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupAllocationPolicyResult(dict):
+    def __init__(__self__, *,
+                 locations: Sequence['outputs.GetKubernetesNodeGroupAllocationPolicyLocationResult']):
+        pulumi.set(__self__, "locations", locations)
+
+    @property
+    @pulumi.getter
+    def locations(self) -> Sequence['outputs.GetKubernetesNodeGroupAllocationPolicyLocationResult']:
+        return pulumi.get(self, "locations")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupAllocationPolicyLocationResult(dict):
+    def __init__(__self__, *,
+                 subnet_id: str,
+                 zone: str):
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupDeployPolicyResult(dict):
+    def __init__(__self__, *,
+                 max_expansion: int,
+                 max_unavailable: int):
+        pulumi.set(__self__, "max_expansion", max_expansion)
+        pulumi.set(__self__, "max_unavailable", max_unavailable)
+
+    @property
+    @pulumi.getter(name="maxExpansion")
+    def max_expansion(self) -> int:
+        return pulumi.get(self, "max_expansion")
+
+    @property
+    @pulumi.getter(name="maxUnavailable")
+    def max_unavailable(self) -> int:
+        return pulumi.get(self, "max_unavailable")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupInstanceTemplateResult(dict):
+    def __init__(__self__, *,
+                 boot_disk: 'outputs.GetKubernetesNodeGroupInstanceTemplateBootDiskResult',
+                 metadata: Mapping[str, str],
+                 nat: bool,
+                 platform_id: str,
+                 resources: 'outputs.GetKubernetesNodeGroupInstanceTemplateResourcesResult',
+                 scheduling_policy: 'outputs.GetKubernetesNodeGroupInstanceTemplateSchedulingPolicyResult'):
+        pulumi.set(__self__, "boot_disk", boot_disk)
+        pulumi.set(__self__, "metadata", metadata)
+        pulumi.set(__self__, "nat", nat)
+        pulumi.set(__self__, "platform_id", platform_id)
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "scheduling_policy", scheduling_policy)
+
+    @property
+    @pulumi.getter(name="bootDisk")
+    def boot_disk(self) -> 'outputs.GetKubernetesNodeGroupInstanceTemplateBootDiskResult':
+        return pulumi.get(self, "boot_disk")
+
+    @property
+    @pulumi.getter
+    def metadata(self) -> Mapping[str, str]:
+        return pulumi.get(self, "metadata")
+
+    @property
+    @pulumi.getter
+    def nat(self) -> bool:
+        return pulumi.get(self, "nat")
+
+    @property
+    @pulumi.getter(name="platformId")
+    def platform_id(self) -> str:
+        return pulumi.get(self, "platform_id")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.GetKubernetesNodeGroupInstanceTemplateResourcesResult':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter(name="schedulingPolicy")
+    def scheduling_policy(self) -> 'outputs.GetKubernetesNodeGroupInstanceTemplateSchedulingPolicyResult':
+        return pulumi.get(self, "scheduling_policy")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupInstanceTemplateBootDiskResult(dict):
+    def __init__(__self__, *,
+                 size: int,
+                 type: str):
+        pulumi.set(__self__, "size", size)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        return pulumi.get(self, "size")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupInstanceTemplateResourcesResult(dict):
+    def __init__(__self__, *,
+                 core_fraction: int,
+                 cores: int,
+                 gpus: int,
+                 memory: float):
+        pulumi.set(__self__, "core_fraction", core_fraction)
+        pulumi.set(__self__, "cores", cores)
+        pulumi.set(__self__, "gpus", gpus)
+        pulumi.set(__self__, "memory", memory)
+
+    @property
+    @pulumi.getter(name="coreFraction")
+    def core_fraction(self) -> int:
+        return pulumi.get(self, "core_fraction")
+
+    @property
+    @pulumi.getter
+    def cores(self) -> int:
+        return pulumi.get(self, "cores")
+
+    @property
+    @pulumi.getter
+    def gpus(self) -> int:
+        return pulumi.get(self, "gpus")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> float:
+        return pulumi.get(self, "memory")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupInstanceTemplateSchedulingPolicyResult(dict):
+    def __init__(__self__, *,
+                 preemptible: bool):
+        pulumi.set(__self__, "preemptible", preemptible)
+
+    @property
+    @pulumi.getter
+    def preemptible(self) -> bool:
+        return pulumi.get(self, "preemptible")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupMaintenancePolicyResult(dict):
+    def __init__(__self__, *,
+                 auto_repair: bool,
+                 auto_upgrade: bool,
+                 maintenance_windows: Sequence['outputs.GetKubernetesNodeGroupMaintenancePolicyMaintenanceWindowResult']):
+        pulumi.set(__self__, "auto_repair", auto_repair)
+        pulumi.set(__self__, "auto_upgrade", auto_upgrade)
+        pulumi.set(__self__, "maintenance_windows", maintenance_windows)
+
+    @property
+    @pulumi.getter(name="autoRepair")
+    def auto_repair(self) -> bool:
+        return pulumi.get(self, "auto_repair")
+
+    @property
+    @pulumi.getter(name="autoUpgrade")
+    def auto_upgrade(self) -> bool:
+        return pulumi.get(self, "auto_upgrade")
+
+    @property
+    @pulumi.getter(name="maintenanceWindows")
+    def maintenance_windows(self) -> Sequence['outputs.GetKubernetesNodeGroupMaintenancePolicyMaintenanceWindowResult']:
+        return pulumi.get(self, "maintenance_windows")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupMaintenancePolicyMaintenanceWindowResult(dict):
+    def __init__(__self__, *,
+                 day: str,
+                 duration: str,
+                 start_time: str):
+        pulumi.set(__self__, "day", day)
+        pulumi.set(__self__, "duration", duration)
+        pulumi.set(__self__, "start_time", start_time)
+
+    @property
+    @pulumi.getter
+    def day(self) -> str:
+        return pulumi.get(self, "day")
+
+    @property
+    @pulumi.getter
+    def duration(self) -> str:
+        return pulumi.get(self, "duration")
+
+    @property
+    @pulumi.getter(name="startTime")
+    def start_time(self) -> str:
+        return pulumi.get(self, "start_time")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupScalePolicyResult(dict):
+    def __init__(__self__, *,
+                 auto_scale: 'outputs.GetKubernetesNodeGroupScalePolicyAutoScaleResult',
+                 fixed_scale: 'outputs.GetKubernetesNodeGroupScalePolicyFixedScaleResult'):
+        pulumi.set(__self__, "auto_scale", auto_scale)
+        pulumi.set(__self__, "fixed_scale", fixed_scale)
+
+    @property
+    @pulumi.getter(name="autoScale")
+    def auto_scale(self) -> 'outputs.GetKubernetesNodeGroupScalePolicyAutoScaleResult':
+        return pulumi.get(self, "auto_scale")
+
+    @property
+    @pulumi.getter(name="fixedScale")
+    def fixed_scale(self) -> 'outputs.GetKubernetesNodeGroupScalePolicyFixedScaleResult':
+        return pulumi.get(self, "fixed_scale")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupScalePolicyAutoScaleResult(dict):
+    def __init__(__self__, *,
+                 initial: int,
+                 max: int,
+                 min: int):
+        pulumi.set(__self__, "initial", initial)
+        pulumi.set(__self__, "max", max)
+        pulumi.set(__self__, "min", min)
+
+    @property
+    @pulumi.getter
+    def initial(self) -> int:
+        return pulumi.get(self, "initial")
+
+    @property
+    @pulumi.getter
+    def max(self) -> int:
+        return pulumi.get(self, "max")
+
+    @property
+    @pulumi.getter
+    def min(self) -> int:
+        return pulumi.get(self, "min")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupScalePolicyFixedScaleResult(dict):
+    def __init__(__self__, *,
+                 size: int):
+        pulumi.set(__self__, "size", size)
+
+    @property
+    @pulumi.getter
+    def size(self) -> int:
+        return pulumi.get(self, "size")
+
+
+@pulumi.output_type
+class GetKubernetesNodeGroupVersionInfoResult(dict):
+    def __init__(__self__, *,
+                 current_version: str,
+                 new_revision_available: bool,
+                 new_revision_summary: str,
+                 version_deprecated: bool):
+        pulumi.set(__self__, "current_version", current_version)
+        pulumi.set(__self__, "new_revision_available", new_revision_available)
+        pulumi.set(__self__, "new_revision_summary", new_revision_summary)
+        pulumi.set(__self__, "version_deprecated", version_deprecated)
+
+    @property
+    @pulumi.getter(name="currentVersion")
+    def current_version(self) -> str:
+        return pulumi.get(self, "current_version")
+
+    @property
+    @pulumi.getter(name="newRevisionAvailable")
+    def new_revision_available(self) -> bool:
+        return pulumi.get(self, "new_revision_available")
+
+    @property
+    @pulumi.getter(name="newRevisionSummary")
+    def new_revision_summary(self) -> str:
+        return pulumi.get(self, "new_revision_summary")
+
+    @property
+    @pulumi.getter(name="versionDeprecated")
+    def version_deprecated(self) -> bool:
+        return pulumi.get(self, "version_deprecated")
+
+
+@pulumi.output_type
+class GetLbNetworkLoadBalancerAttachedTargetGroupResult(dict):
+    def __init__(__self__, *,
+                 healthchecks: Sequence['outputs.GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckResult'],
+                 target_group_id: str):
+        pulumi.set(__self__, "healthchecks", healthchecks)
+        pulumi.set(__self__, "target_group_id", target_group_id)
+
+    @property
+    @pulumi.getter
+    def healthchecks(self) -> Sequence['outputs.GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckResult']:
+        return pulumi.get(self, "healthchecks")
+
+    @property
+    @pulumi.getter(name="targetGroupId")
+    def target_group_id(self) -> str:
+        return pulumi.get(self, "target_group_id")
+
+
+@pulumi.output_type
+class GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckResult(dict):
+    def __init__(__self__, *,
+                 healthy_threshold: int,
+                 http_options: 'outputs.GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptionsResult',
+                 interval: int,
+                 name: str,
+                 tcp_options: 'outputs.GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptionsResult',
+                 timeout: int,
+                 unhealthy_threshold: int):
+        pulumi.set(__self__, "healthy_threshold", healthy_threshold)
+        pulumi.set(__self__, "http_options", http_options)
+        pulumi.set(__self__, "interval", interval)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "tcp_options", tcp_options)
+        pulumi.set(__self__, "timeout", timeout)
+        pulumi.set(__self__, "unhealthy_threshold", unhealthy_threshold)
+
+    @property
+    @pulumi.getter(name="healthyThreshold")
+    def healthy_threshold(self) -> int:
+        return pulumi.get(self, "healthy_threshold")
+
+    @property
+    @pulumi.getter(name="httpOptions")
+    def http_options(self) -> 'outputs.GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptionsResult':
+        return pulumi.get(self, "http_options")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> int:
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="tcpOptions")
+    def tcp_options(self) -> 'outputs.GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptionsResult':
+        return pulumi.get(self, "tcp_options")
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> int:
+        return pulumi.get(self, "timeout")
+
+    @property
+    @pulumi.getter(name="unhealthyThreshold")
+    def unhealthy_threshold(self) -> int:
+        return pulumi.get(self, "unhealthy_threshold")
+
+
+@pulumi.output_type
+class GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptionsResult(dict):
+    def __init__(__self__, *,
+                 path: str,
+                 port: int):
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def path(self) -> str:
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+
+@pulumi.output_type
+class GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptionsResult(dict):
+    def __init__(__self__, *,
+                 port: int):
+        pulumi.set(__self__, "port", port)
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+
+@pulumi.output_type
+class GetLbNetworkLoadBalancerListenerResult(dict):
+    def __init__(__self__, *,
+                 external_address_spec: 'outputs.GetLbNetworkLoadBalancerListenerExternalAddressSpecResult',
+                 internal_address_spec: 'outputs.GetLbNetworkLoadBalancerListenerInternalAddressSpecResult',
+                 name: str,
+                 port: int,
+                 protocol: str,
+                 target_port: int):
+        pulumi.set(__self__, "external_address_spec", external_address_spec)
+        pulumi.set(__self__, "internal_address_spec", internal_address_spec)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "target_port", target_port)
+
+    @property
+    @pulumi.getter(name="externalAddressSpec")
+    def external_address_spec(self) -> 'outputs.GetLbNetworkLoadBalancerListenerExternalAddressSpecResult':
+        return pulumi.get(self, "external_address_spec")
+
+    @property
+    @pulumi.getter(name="internalAddressSpec")
+    def internal_address_spec(self) -> 'outputs.GetLbNetworkLoadBalancerListenerInternalAddressSpecResult':
+        return pulumi.get(self, "internal_address_spec")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="targetPort")
+    def target_port(self) -> int:
+        return pulumi.get(self, "target_port")
+
+
+@pulumi.output_type
+class GetLbNetworkLoadBalancerListenerExternalAddressSpecResult(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 ip_version: str):
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "ip_version", ip_version)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="ipVersion")
+    def ip_version(self) -> str:
+        return pulumi.get(self, "ip_version")
+
+
+@pulumi.output_type
+class GetLbNetworkLoadBalancerListenerInternalAddressSpecResult(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 ip_version: str,
+                 subnet_id: str):
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "ip_version", ip_version)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="ipVersion")
+    def ip_version(self) -> str:
+        return pulumi.get(self, "ip_version")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetLbTargetGroupTargetResult(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 subnet_id: str):
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterAccessResult(dict):
+    def __init__(__self__, *,
+                 data_lens: bool,
+                 metrika: bool,
+                 serverless: bool,
+                 web_sql: bool):
+        pulumi.set(__self__, "data_lens", data_lens)
+        pulumi.set(__self__, "metrika", metrika)
+        pulumi.set(__self__, "serverless", serverless)
+        pulumi.set(__self__, "web_sql", web_sql)
+
+    @property
+    @pulumi.getter(name="dataLens")
+    def data_lens(self) -> bool:
+        return pulumi.get(self, "data_lens")
+
+    @property
+    @pulumi.getter
+    def metrika(self) -> bool:
+        return pulumi.get(self, "metrika")
+
+    @property
+    @pulumi.getter
+    def serverless(self) -> bool:
+        return pulumi.get(self, "serverless")
+
+    @property
+    @pulumi.getter(name="webSql")
+    def web_sql(self) -> bool:
+        return pulumi.get(self, "web_sql")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterBackupWindowStartResult(dict):
+    def __init__(__self__, *,
+                 hours: int,
+                 minutes: int):
+        pulumi.set(__self__, "hours", hours)
+        pulumi.set(__self__, "minutes", minutes)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> int:
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> int:
+        return pulumi.get(self, "minutes")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseResult(dict):
+    def __init__(__self__, *,
+                 config: 'outputs.GetMdbClickhouseClusterClickhouseConfigResult',
+                 resources: 'outputs.GetMdbClickhouseClusterClickhouseResourcesResult'):
+        pulumi.set(__self__, "config", config)
+        pulumi.set(__self__, "resources", resources)
+
+    @property
+    @pulumi.getter
+    def config(self) -> 'outputs.GetMdbClickhouseClusterClickhouseConfigResult':
+        return pulumi.get(self, "config")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.GetMdbClickhouseClusterClickhouseResourcesResult':
+        return pulumi.get(self, "resources")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigResult(dict):
+    def __init__(__self__, *,
+                 kafkas: Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigKafkaResult'],
+                 merge_tree: 'outputs.GetMdbClickhouseClusterClickhouseConfigMergeTreeResult',
+                 rabbitmq: 'outputs.GetMdbClickhouseClusterClickhouseConfigRabbitmqResult',
+                 background_pool_size: Optional[int] = None,
+                 background_schedule_pool_size: Optional[int] = None,
+                 compressions: Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigCompressionResult']] = None,
+                 geobase_uri: Optional[str] = None,
+                 graphite_rollups: Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupResult']] = None,
+                 kafka_topics: Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopicResult']] = None,
+                 keep_alive_timeout: Optional[int] = None,
+                 log_level: Optional[str] = None,
+                 mark_cache_size: Optional[int] = None,
+                 max_concurrent_queries: Optional[int] = None,
+                 max_connections: Optional[int] = None,
+                 max_partition_size_to_drop: Optional[int] = None,
+                 max_table_size_to_drop: Optional[int] = None,
+                 metric_log_enabled: Optional[bool] = None,
+                 metric_log_retention_size: Optional[int] = None,
+                 metric_log_retention_time: Optional[int] = None,
+                 part_log_retention_size: Optional[int] = None,
+                 part_log_retention_time: Optional[int] = None,
+                 query_log_retention_size: Optional[int] = None,
+                 query_log_retention_time: Optional[int] = None,
+                 query_thread_log_enabled: Optional[bool] = None,
+                 query_thread_log_retention_size: Optional[int] = None,
+                 query_thread_log_retention_time: Optional[int] = None,
+                 text_log_enabled: Optional[bool] = None,
+                 text_log_level: Optional[str] = None,
+                 text_log_retention_size: Optional[int] = None,
+                 text_log_retention_time: Optional[int] = None,
+                 timezone: Optional[str] = None,
+                 trace_log_enabled: Optional[bool] = None,
+                 trace_log_retention_size: Optional[int] = None,
+                 trace_log_retention_time: Optional[int] = None,
+                 uncompressed_cache_size: Optional[int] = None):
+        pulumi.set(__self__, "kafkas", kafkas)
+        pulumi.set(__self__, "merge_tree", merge_tree)
+        pulumi.set(__self__, "rabbitmq", rabbitmq)
+        if background_pool_size is not None:
+            pulumi.set(__self__, "background_pool_size", background_pool_size)
+        if background_schedule_pool_size is not None:
+            pulumi.set(__self__, "background_schedule_pool_size", background_schedule_pool_size)
+        if compressions is not None:
+            pulumi.set(__self__, "compressions", compressions)
+        if geobase_uri is not None:
+            pulumi.set(__self__, "geobase_uri", geobase_uri)
+        if graphite_rollups is not None:
+            pulumi.set(__self__, "graphite_rollups", graphite_rollups)
+        if kafka_topics is not None:
+            pulumi.set(__self__, "kafka_topics", kafka_topics)
+        if keep_alive_timeout is not None:
+            pulumi.set(__self__, "keep_alive_timeout", keep_alive_timeout)
+        if log_level is not None:
+            pulumi.set(__self__, "log_level", log_level)
+        if mark_cache_size is not None:
+            pulumi.set(__self__, "mark_cache_size", mark_cache_size)
+        if max_concurrent_queries is not None:
+            pulumi.set(__self__, "max_concurrent_queries", max_concurrent_queries)
+        if max_connections is not None:
+            pulumi.set(__self__, "max_connections", max_connections)
+        if max_partition_size_to_drop is not None:
+            pulumi.set(__self__, "max_partition_size_to_drop", max_partition_size_to_drop)
+        if max_table_size_to_drop is not None:
+            pulumi.set(__self__, "max_table_size_to_drop", max_table_size_to_drop)
+        if metric_log_enabled is not None:
+            pulumi.set(__self__, "metric_log_enabled", metric_log_enabled)
+        if metric_log_retention_size is not None:
+            pulumi.set(__self__, "metric_log_retention_size", metric_log_retention_size)
+        if metric_log_retention_time is not None:
+            pulumi.set(__self__, "metric_log_retention_time", metric_log_retention_time)
+        if part_log_retention_size is not None:
+            pulumi.set(__self__, "part_log_retention_size", part_log_retention_size)
+        if part_log_retention_time is not None:
+            pulumi.set(__self__, "part_log_retention_time", part_log_retention_time)
+        if query_log_retention_size is not None:
+            pulumi.set(__self__, "query_log_retention_size", query_log_retention_size)
+        if query_log_retention_time is not None:
+            pulumi.set(__self__, "query_log_retention_time", query_log_retention_time)
+        if query_thread_log_enabled is not None:
+            pulumi.set(__self__, "query_thread_log_enabled", query_thread_log_enabled)
+        if query_thread_log_retention_size is not None:
+            pulumi.set(__self__, "query_thread_log_retention_size", query_thread_log_retention_size)
+        if query_thread_log_retention_time is not None:
+            pulumi.set(__self__, "query_thread_log_retention_time", query_thread_log_retention_time)
+        if text_log_enabled is not None:
+            pulumi.set(__self__, "text_log_enabled", text_log_enabled)
+        if text_log_level is not None:
+            pulumi.set(__self__, "text_log_level", text_log_level)
+        if text_log_retention_size is not None:
+            pulumi.set(__self__, "text_log_retention_size", text_log_retention_size)
+        if text_log_retention_time is not None:
+            pulumi.set(__self__, "text_log_retention_time", text_log_retention_time)
+        if timezone is not None:
+            pulumi.set(__self__, "timezone", timezone)
+        if trace_log_enabled is not None:
+            pulumi.set(__self__, "trace_log_enabled", trace_log_enabled)
+        if trace_log_retention_size is not None:
+            pulumi.set(__self__, "trace_log_retention_size", trace_log_retention_size)
+        if trace_log_retention_time is not None:
+            pulumi.set(__self__, "trace_log_retention_time", trace_log_retention_time)
+        if uncompressed_cache_size is not None:
+            pulumi.set(__self__, "uncompressed_cache_size", uncompressed_cache_size)
+
+    @property
+    @pulumi.getter
+    def kafkas(self) -> Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigKafkaResult']:
+        return pulumi.get(self, "kafkas")
+
+    @property
+    @pulumi.getter(name="mergeTree")
+    def merge_tree(self) -> 'outputs.GetMdbClickhouseClusterClickhouseConfigMergeTreeResult':
+        return pulumi.get(self, "merge_tree")
+
+    @property
+    @pulumi.getter
+    def rabbitmq(self) -> 'outputs.GetMdbClickhouseClusterClickhouseConfigRabbitmqResult':
+        return pulumi.get(self, "rabbitmq")
+
+    @property
+    @pulumi.getter(name="backgroundPoolSize")
+    def background_pool_size(self) -> Optional[int]:
+        return pulumi.get(self, "background_pool_size")
+
+    @property
+    @pulumi.getter(name="backgroundSchedulePoolSize")
+    def background_schedule_pool_size(self) -> Optional[int]:
+        return pulumi.get(self, "background_schedule_pool_size")
+
+    @property
+    @pulumi.getter
+    def compressions(self) -> Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigCompressionResult']]:
+        return pulumi.get(self, "compressions")
+
+    @property
+    @pulumi.getter(name="geobaseUri")
+    def geobase_uri(self) -> Optional[str]:
+        return pulumi.get(self, "geobase_uri")
+
+    @property
+    @pulumi.getter(name="graphiteRollups")
+    def graphite_rollups(self) -> Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupResult']]:
+        return pulumi.get(self, "graphite_rollups")
+
+    @property
+    @pulumi.getter(name="kafkaTopics")
+    def kafka_topics(self) -> Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopicResult']]:
+        return pulumi.get(self, "kafka_topics")
+
+    @property
+    @pulumi.getter(name="keepAliveTimeout")
+    def keep_alive_timeout(self) -> Optional[int]:
+        return pulumi.get(self, "keep_alive_timeout")
+
+    @property
+    @pulumi.getter(name="logLevel")
+    def log_level(self) -> Optional[str]:
+        return pulumi.get(self, "log_level")
+
+    @property
+    @pulumi.getter(name="markCacheSize")
+    def mark_cache_size(self) -> Optional[int]:
+        return pulumi.get(self, "mark_cache_size")
+
+    @property
+    @pulumi.getter(name="maxConcurrentQueries")
+    def max_concurrent_queries(self) -> Optional[int]:
+        return pulumi.get(self, "max_concurrent_queries")
+
+    @property
+    @pulumi.getter(name="maxConnections")
+    def max_connections(self) -> Optional[int]:
+        return pulumi.get(self, "max_connections")
+
+    @property
+    @pulumi.getter(name="maxPartitionSizeToDrop")
+    def max_partition_size_to_drop(self) -> Optional[int]:
+        return pulumi.get(self, "max_partition_size_to_drop")
+
+    @property
+    @pulumi.getter(name="maxTableSizeToDrop")
+    def max_table_size_to_drop(self) -> Optional[int]:
+        return pulumi.get(self, "max_table_size_to_drop")
+
+    @property
+    @pulumi.getter(name="metricLogEnabled")
+    def metric_log_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "metric_log_enabled")
+
+    @property
+    @pulumi.getter(name="metricLogRetentionSize")
+    def metric_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "metric_log_retention_size")
+
+    @property
+    @pulumi.getter(name="metricLogRetentionTime")
+    def metric_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "metric_log_retention_time")
+
+    @property
+    @pulumi.getter(name="partLogRetentionSize")
+    def part_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "part_log_retention_size")
+
+    @property
+    @pulumi.getter(name="partLogRetentionTime")
+    def part_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "part_log_retention_time")
+
+    @property
+    @pulumi.getter(name="queryLogRetentionSize")
+    def query_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "query_log_retention_size")
+
+    @property
+    @pulumi.getter(name="queryLogRetentionTime")
+    def query_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "query_log_retention_time")
+
+    @property
+    @pulumi.getter(name="queryThreadLogEnabled")
+    def query_thread_log_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "query_thread_log_enabled")
+
+    @property
+    @pulumi.getter(name="queryThreadLogRetentionSize")
+    def query_thread_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "query_thread_log_retention_size")
+
+    @property
+    @pulumi.getter(name="queryThreadLogRetentionTime")
+    def query_thread_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "query_thread_log_retention_time")
+
+    @property
+    @pulumi.getter(name="textLogEnabled")
+    def text_log_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "text_log_enabled")
+
+    @property
+    @pulumi.getter(name="textLogLevel")
+    def text_log_level(self) -> Optional[str]:
+        return pulumi.get(self, "text_log_level")
+
+    @property
+    @pulumi.getter(name="textLogRetentionSize")
+    def text_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "text_log_retention_size")
+
+    @property
+    @pulumi.getter(name="textLogRetentionTime")
+    def text_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "text_log_retention_time")
+
+    @property
+    @pulumi.getter
+    def timezone(self) -> Optional[str]:
+        return pulumi.get(self, "timezone")
+
+    @property
+    @pulumi.getter(name="traceLogEnabled")
+    def trace_log_enabled(self) -> Optional[bool]:
+        return pulumi.get(self, "trace_log_enabled")
+
+    @property
+    @pulumi.getter(name="traceLogRetentionSize")
+    def trace_log_retention_size(self) -> Optional[int]:
+        return pulumi.get(self, "trace_log_retention_size")
+
+    @property
+    @pulumi.getter(name="traceLogRetentionTime")
+    def trace_log_retention_time(self) -> Optional[int]:
+        return pulumi.get(self, "trace_log_retention_time")
+
+    @property
+    @pulumi.getter(name="uncompressedCacheSize")
+    def uncompressed_cache_size(self) -> Optional[int]:
+        return pulumi.get(self, "uncompressed_cache_size")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigCompressionResult(dict):
+    def __init__(__self__, *,
+                 method: str,
+                 min_part_size: int,
+                 min_part_size_ratio: float):
+        pulumi.set(__self__, "method", method)
+        pulumi.set(__self__, "min_part_size", min_part_size)
+        pulumi.set(__self__, "min_part_size_ratio", min_part_size_ratio)
+
+    @property
+    @pulumi.getter
+    def method(self) -> str:
+        return pulumi.get(self, "method")
+
+    @property
+    @pulumi.getter(name="minPartSize")
+    def min_part_size(self) -> int:
+        return pulumi.get(self, "min_part_size")
+
+    @property
+    @pulumi.getter(name="minPartSizeRatio")
+    def min_part_size_ratio(self) -> float:
+        return pulumi.get(self, "min_part_size_ratio")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigGraphiteRollupResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 patterns: Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternResult']] = None):
+        pulumi.set(__self__, "name", name)
+        if patterns is not None:
+            pulumi.set(__self__, "patterns", patterns)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def patterns(self) -> Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternResult']]:
+        return pulumi.get(self, "patterns")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternResult(dict):
+    def __init__(__self__, *,
+                 function: str,
+                 regexp: Optional[str] = None,
+                 retentions: Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionResult']] = None):
+        pulumi.set(__self__, "function", function)
+        if regexp is not None:
+            pulumi.set(__self__, "regexp", regexp)
+        if retentions is not None:
+            pulumi.set(__self__, "retentions", retentions)
+
+    @property
+    @pulumi.getter
+    def function(self) -> str:
+        return pulumi.get(self, "function")
+
+    @property
+    @pulumi.getter
+    def regexp(self) -> Optional[str]:
+        return pulumi.get(self, "regexp")
+
+    @property
+    @pulumi.getter
+    def retentions(self) -> Optional[Sequence['outputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionResult']]:
+        return pulumi.get(self, "retentions")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionResult(dict):
+    def __init__(__self__, *,
+                 age: int,
+                 precision: int):
+        pulumi.set(__self__, "age", age)
+        pulumi.set(__self__, "precision", precision)
+
+    @property
+    @pulumi.getter
+    def age(self) -> int:
+        return pulumi.get(self, "age")
+
+    @property
+    @pulumi.getter
+    def precision(self) -> int:
+        return pulumi.get(self, "precision")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigKafkaResult(dict):
+    def __init__(__self__, *,
+                 sasl_mechanism: Optional[str] = None,
+                 sasl_password: Optional[str] = None,
+                 sasl_username: Optional[str] = None,
+                 security_protocol: Optional[str] = None):
+        if sasl_mechanism is not None:
+            pulumi.set(__self__, "sasl_mechanism", sasl_mechanism)
+        if sasl_password is not None:
+            pulumi.set(__self__, "sasl_password", sasl_password)
+        if sasl_username is not None:
+            pulumi.set(__self__, "sasl_username", sasl_username)
+        if security_protocol is not None:
+            pulumi.set(__self__, "security_protocol", security_protocol)
+
+    @property
+    @pulumi.getter(name="saslMechanism")
+    def sasl_mechanism(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_mechanism")
+
+    @property
+    @pulumi.getter(name="saslPassword")
+    def sasl_password(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_password")
+
+    @property
+    @pulumi.getter(name="saslUsername")
+    def sasl_username(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_username")
+
+    @property
+    @pulumi.getter(name="securityProtocol")
+    def security_protocol(self) -> Optional[str]:
+        return pulumi.get(self, "security_protocol")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigKafkaTopicResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 settings: Optional['outputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettingsResult'] = None):
+        pulumi.set(__self__, "name", name)
+        if settings is not None:
+            pulumi.set(__self__, "settings", settings)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def settings(self) -> Optional['outputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettingsResult']:
+        return pulumi.get(self, "settings")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettingsResult(dict):
+    def __init__(__self__, *,
+                 sasl_mechanism: Optional[str] = None,
+                 sasl_password: Optional[str] = None,
+                 sasl_username: Optional[str] = None,
+                 security_protocol: Optional[str] = None):
+        if sasl_mechanism is not None:
+            pulumi.set(__self__, "sasl_mechanism", sasl_mechanism)
+        if sasl_password is not None:
+            pulumi.set(__self__, "sasl_password", sasl_password)
+        if sasl_username is not None:
+            pulumi.set(__self__, "sasl_username", sasl_username)
+        if security_protocol is not None:
+            pulumi.set(__self__, "security_protocol", security_protocol)
+
+    @property
+    @pulumi.getter(name="saslMechanism")
+    def sasl_mechanism(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_mechanism")
+
+    @property
+    @pulumi.getter(name="saslPassword")
+    def sasl_password(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_password")
+
+    @property
+    @pulumi.getter(name="saslUsername")
+    def sasl_username(self) -> Optional[str]:
+        return pulumi.get(self, "sasl_username")
+
+    @property
+    @pulumi.getter(name="securityProtocol")
+    def security_protocol(self) -> Optional[str]:
+        return pulumi.get(self, "security_protocol")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigMergeTreeResult(dict):
+    def __init__(__self__, *,
+                 max_bytes_to_merge_at_min_space_in_pool: Optional[int] = None,
+                 max_replicated_merges_in_queue: Optional[int] = None,
+                 number_of_free_entries_in_pool_to_lower_max_size_of_merge: Optional[int] = None,
+                 parts_to_delay_insert: Optional[int] = None,
+                 parts_to_throw_insert: Optional[int] = None,
+                 replicated_deduplication_window: Optional[int] = None,
+                 replicated_deduplication_window_seconds: Optional[int] = None):
+        if max_bytes_to_merge_at_min_space_in_pool is not None:
+            pulumi.set(__self__, "max_bytes_to_merge_at_min_space_in_pool", max_bytes_to_merge_at_min_space_in_pool)
+        if max_replicated_merges_in_queue is not None:
+            pulumi.set(__self__, "max_replicated_merges_in_queue", max_replicated_merges_in_queue)
+        if number_of_free_entries_in_pool_to_lower_max_size_of_merge is not None:
+            pulumi.set(__self__, "number_of_free_entries_in_pool_to_lower_max_size_of_merge", number_of_free_entries_in_pool_to_lower_max_size_of_merge)
+        if parts_to_delay_insert is not None:
+            pulumi.set(__self__, "parts_to_delay_insert", parts_to_delay_insert)
+        if parts_to_throw_insert is not None:
+            pulumi.set(__self__, "parts_to_throw_insert", parts_to_throw_insert)
+        if replicated_deduplication_window is not None:
+            pulumi.set(__self__, "replicated_deduplication_window", replicated_deduplication_window)
+        if replicated_deduplication_window_seconds is not None:
+            pulumi.set(__self__, "replicated_deduplication_window_seconds", replicated_deduplication_window_seconds)
+
+    @property
+    @pulumi.getter(name="maxBytesToMergeAtMinSpaceInPool")
+    def max_bytes_to_merge_at_min_space_in_pool(self) -> Optional[int]:
+        return pulumi.get(self, "max_bytes_to_merge_at_min_space_in_pool")
+
+    @property
+    @pulumi.getter(name="maxReplicatedMergesInQueue")
+    def max_replicated_merges_in_queue(self) -> Optional[int]:
+        return pulumi.get(self, "max_replicated_merges_in_queue")
+
+    @property
+    @pulumi.getter(name="numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge")
+    def number_of_free_entries_in_pool_to_lower_max_size_of_merge(self) -> Optional[int]:
+        return pulumi.get(self, "number_of_free_entries_in_pool_to_lower_max_size_of_merge")
+
+    @property
+    @pulumi.getter(name="partsToDelayInsert")
+    def parts_to_delay_insert(self) -> Optional[int]:
+        return pulumi.get(self, "parts_to_delay_insert")
+
+    @property
+    @pulumi.getter(name="partsToThrowInsert")
+    def parts_to_throw_insert(self) -> Optional[int]:
+        return pulumi.get(self, "parts_to_throw_insert")
+
+    @property
+    @pulumi.getter(name="replicatedDeduplicationWindow")
+    def replicated_deduplication_window(self) -> Optional[int]:
+        return pulumi.get(self, "replicated_deduplication_window")
+
+    @property
+    @pulumi.getter(name="replicatedDeduplicationWindowSeconds")
+    def replicated_deduplication_window_seconds(self) -> Optional[int]:
+        return pulumi.get(self, "replicated_deduplication_window_seconds")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseConfigRabbitmqResult(dict):
+    def __init__(__self__, *,
+                 password: Optional[str] = None,
+                 username: Optional[str] = None):
+        if password is not None:
+            pulumi.set(__self__, "password", password)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter
+    def password(self) -> Optional[str]:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def username(self) -> Optional[str]:
+        return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterClickhouseResourcesResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterDatabaseResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterFormatSchemaResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 type: str,
+                 uri: str):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "uri", uri)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def uri(self) -> str:
+        return pulumi.get(self, "uri")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterHostResult(dict):
+    def __init__(__self__, *,
+                 assign_public_ip: bool,
+                 fqdn: str,
+                 shard_name: str,
+                 subnet_id: str,
+                 type: str,
+                 zone: str):
+        pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+        pulumi.set(__self__, "fqdn", fqdn)
+        pulumi.set(__self__, "shard_name", shard_name)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> bool:
+        return pulumi.get(self, "assign_public_ip")
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> str:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter(name="shardName")
+    def shard_name(self) -> str:
+        return pulumi.get(self, "shard_name")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterMlModelResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 type: str,
+                 uri: str):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "uri", uri)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def uri(self) -> str:
+        return pulumi.get(self, "uri")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterShardGroupResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 name: str,
+                 shard_names: Sequence[str]):
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "shard_names", shard_names)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="shardNames")
+    def shard_names(self) -> Sequence[str]:
+        return pulumi.get(self, "shard_names")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterUserResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 permissions: Sequence['outputs.GetMdbClickhouseClusterUserPermissionResult'],
+                 quotas: Sequence['outputs.GetMdbClickhouseClusterUserQuotaResult'],
+                 settings: 'outputs.GetMdbClickhouseClusterUserSettingsResult'):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "permissions", permissions)
+        pulumi.set(__self__, "quotas", quotas)
+        pulumi.set(__self__, "settings", settings)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Sequence['outputs.GetMdbClickhouseClusterUserPermissionResult']:
+        return pulumi.get(self, "permissions")
+
+    @property
+    @pulumi.getter
+    def quotas(self) -> Sequence['outputs.GetMdbClickhouseClusterUserQuotaResult']:
+        return pulumi.get(self, "quotas")
+
+    @property
+    @pulumi.getter
+    def settings(self) -> 'outputs.GetMdbClickhouseClusterUserSettingsResult':
+        return pulumi.get(self, "settings")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterUserPermissionResult(dict):
+    def __init__(__self__, *,
+                 database_name: str):
+        pulumi.set(__self__, "database_name", database_name)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        return pulumi.get(self, "database_name")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterUserQuotaResult(dict):
+    def __init__(__self__, *,
+                 errors: int,
+                 execution_time: int,
+                 interval_duration: int,
+                 queries: int,
+                 read_rows: int,
+                 result_rows: int):
+        pulumi.set(__self__, "errors", errors)
+        pulumi.set(__self__, "execution_time", execution_time)
+        pulumi.set(__self__, "interval_duration", interval_duration)
+        pulumi.set(__self__, "queries", queries)
+        pulumi.set(__self__, "read_rows", read_rows)
+        pulumi.set(__self__, "result_rows", result_rows)
+
+    @property
+    @pulumi.getter
+    def errors(self) -> int:
+        return pulumi.get(self, "errors")
+
+    @property
+    @pulumi.getter(name="executionTime")
+    def execution_time(self) -> int:
+        return pulumi.get(self, "execution_time")
+
+    @property
+    @pulumi.getter(name="intervalDuration")
+    def interval_duration(self) -> int:
+        return pulumi.get(self, "interval_duration")
+
+    @property
+    @pulumi.getter
+    def queries(self) -> int:
+        return pulumi.get(self, "queries")
+
+    @property
+    @pulumi.getter(name="readRows")
+    def read_rows(self) -> int:
+        return pulumi.get(self, "read_rows")
+
+    @property
+    @pulumi.getter(name="resultRows")
+    def result_rows(self) -> int:
+        return pulumi.get(self, "result_rows")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterUserSettingsResult(dict):
+    def __init__(__self__, *,
+                 add_http_cors_header: bool,
+                 allow_ddl: bool,
+                 compile: bool,
+                 compile_expressions: bool,
+                 connect_timeout: int,
+                 count_distinct_implementation: str,
+                 distinct_overflow_mode: str,
+                 distributed_aggregation_memory_efficient: bool,
+                 distributed_ddl_task_timeout: int,
+                 distributed_product_mode: str,
+                 empty_result_for_aggregation_by_empty_set: bool,
+                 enable_http_compression: bool,
+                 fallback_to_stale_replicas_for_distributed_queries: bool,
+                 force_index_by_date: bool,
+                 force_primary_key: bool,
+                 group_by_overflow_mode: str,
+                 group_by_two_level_threshold: int,
+                 group_by_two_level_threshold_bytes: int,
+                 http_connection_timeout: int,
+                 http_headers_progress_interval: int,
+                 http_receive_timeout: int,
+                 http_send_timeout: int,
+                 input_format_defaults_for_omitted_fields: bool,
+                 input_format_values_interpret_expressions: bool,
+                 insert_quorum: int,
+                 insert_quorum_timeout: int,
+                 join_overflow_mode: str,
+                 join_use_nulls: bool,
+                 joined_subquery_requires_alias: bool,
+                 low_cardinality_allow_in_native_format: bool,
+                 max_ast_depth: int,
+                 max_ast_elements: int,
+                 max_block_size: int,
+                 max_bytes_before_external_group_by: int,
+                 max_bytes_before_external_sort: int,
+                 max_bytes_in_distinct: int,
+                 max_bytes_in_join: int,
+                 max_bytes_in_set: int,
+                 max_bytes_to_read: int,
+                 max_bytes_to_sort: int,
+                 max_bytes_to_transfer: int,
+                 max_columns_to_read: int,
+                 max_execution_time: int,
+                 max_expanded_ast_elements: int,
+                 max_insert_block_size: int,
+                 max_memory_usage: int,
+                 max_memory_usage_for_user: int,
+                 max_network_bandwidth: int,
+                 max_network_bandwidth_for_user: int,
+                 max_query_size: int,
+                 max_replica_delay_for_distributed_queries: int,
+                 max_result_bytes: int,
+                 max_result_rows: int,
+                 max_rows_in_distinct: int,
+                 max_rows_in_join: int,
+                 max_rows_in_set: int,
+                 max_rows_to_group_by: int,
+                 max_rows_to_read: int,
+                 max_rows_to_sort: int,
+                 max_rows_to_transfer: int,
+                 max_temporary_columns: int,
+                 max_temporary_non_const_columns: int,
+                 max_threads: int,
+                 merge_tree_max_bytes_to_use_cache: int,
+                 merge_tree_max_rows_to_use_cache: int,
+                 merge_tree_min_bytes_for_concurrent_read: int,
+                 merge_tree_min_rows_for_concurrent_read: int,
+                 min_bytes_to_use_direct_io: int,
+                 min_count_to_compile: int,
+                 min_count_to_compile_expression: int,
+                 min_execution_speed: int,
+                 min_execution_speed_bytes: int,
+                 min_insert_block_size_bytes: int,
+                 min_insert_block_size_rows: int,
+                 output_format_json_quote64bit_integers: bool,
+                 output_format_json_quote_denormals: bool,
+                 priority: int,
+                 quota_mode: str,
+                 read_overflow_mode: str,
+                 readonly: int,
+                 receive_timeout: int,
+                 replication_alter_partitions_sync: int,
+                 result_overflow_mode: str,
+                 select_sequential_consistency: bool,
+                 send_progress_in_http_headers: bool,
+                 send_timeout: int,
+                 set_overflow_mode: str,
+                 skip_unavailable_shards: bool,
+                 sort_overflow_mode: str,
+                 timeout_overflow_mode: str,
+                 transfer_overflow_mode: str,
+                 transform_null_in: bool,
+                 use_uncompressed_cache: bool):
+        pulumi.set(__self__, "add_http_cors_header", add_http_cors_header)
+        pulumi.set(__self__, "allow_ddl", allow_ddl)
+        pulumi.set(__self__, "compile", compile)
+        pulumi.set(__self__, "compile_expressions", compile_expressions)
+        pulumi.set(__self__, "connect_timeout", connect_timeout)
+        pulumi.set(__self__, "count_distinct_implementation", count_distinct_implementation)
+        pulumi.set(__self__, "distinct_overflow_mode", distinct_overflow_mode)
+        pulumi.set(__self__, "distributed_aggregation_memory_efficient", distributed_aggregation_memory_efficient)
+        pulumi.set(__self__, "distributed_ddl_task_timeout", distributed_ddl_task_timeout)
+        pulumi.set(__self__, "distributed_product_mode", distributed_product_mode)
+        pulumi.set(__self__, "empty_result_for_aggregation_by_empty_set", empty_result_for_aggregation_by_empty_set)
+        pulumi.set(__self__, "enable_http_compression", enable_http_compression)
+        pulumi.set(__self__, "fallback_to_stale_replicas_for_distributed_queries", fallback_to_stale_replicas_for_distributed_queries)
+        pulumi.set(__self__, "force_index_by_date", force_index_by_date)
+        pulumi.set(__self__, "force_primary_key", force_primary_key)
+        pulumi.set(__self__, "group_by_overflow_mode", group_by_overflow_mode)
+        pulumi.set(__self__, "group_by_two_level_threshold", group_by_two_level_threshold)
+        pulumi.set(__self__, "group_by_two_level_threshold_bytes", group_by_two_level_threshold_bytes)
+        pulumi.set(__self__, "http_connection_timeout", http_connection_timeout)
+        pulumi.set(__self__, "http_headers_progress_interval", http_headers_progress_interval)
+        pulumi.set(__self__, "http_receive_timeout", http_receive_timeout)
+        pulumi.set(__self__, "http_send_timeout", http_send_timeout)
+        pulumi.set(__self__, "input_format_defaults_for_omitted_fields", input_format_defaults_for_omitted_fields)
+        pulumi.set(__self__, "input_format_values_interpret_expressions", input_format_values_interpret_expressions)
+        pulumi.set(__self__, "insert_quorum", insert_quorum)
+        pulumi.set(__self__, "insert_quorum_timeout", insert_quorum_timeout)
+        pulumi.set(__self__, "join_overflow_mode", join_overflow_mode)
+        pulumi.set(__self__, "join_use_nulls", join_use_nulls)
+        pulumi.set(__self__, "joined_subquery_requires_alias", joined_subquery_requires_alias)
+        pulumi.set(__self__, "low_cardinality_allow_in_native_format", low_cardinality_allow_in_native_format)
+        pulumi.set(__self__, "max_ast_depth", max_ast_depth)
+        pulumi.set(__self__, "max_ast_elements", max_ast_elements)
+        pulumi.set(__self__, "max_block_size", max_block_size)
+        pulumi.set(__self__, "max_bytes_before_external_group_by", max_bytes_before_external_group_by)
+        pulumi.set(__self__, "max_bytes_before_external_sort", max_bytes_before_external_sort)
+        pulumi.set(__self__, "max_bytes_in_distinct", max_bytes_in_distinct)
+        pulumi.set(__self__, "max_bytes_in_join", max_bytes_in_join)
+        pulumi.set(__self__, "max_bytes_in_set", max_bytes_in_set)
+        pulumi.set(__self__, "max_bytes_to_read", max_bytes_to_read)
+        pulumi.set(__self__, "max_bytes_to_sort", max_bytes_to_sort)
+        pulumi.set(__self__, "max_bytes_to_transfer", max_bytes_to_transfer)
+        pulumi.set(__self__, "max_columns_to_read", max_columns_to_read)
+        pulumi.set(__self__, "max_execution_time", max_execution_time)
+        pulumi.set(__self__, "max_expanded_ast_elements", max_expanded_ast_elements)
+        pulumi.set(__self__, "max_insert_block_size", max_insert_block_size)
+        pulumi.set(__self__, "max_memory_usage", max_memory_usage)
+        pulumi.set(__self__, "max_memory_usage_for_user", max_memory_usage_for_user)
+        pulumi.set(__self__, "max_network_bandwidth", max_network_bandwidth)
+        pulumi.set(__self__, "max_network_bandwidth_for_user", max_network_bandwidth_for_user)
+        pulumi.set(__self__, "max_query_size", max_query_size)
+        pulumi.set(__self__, "max_replica_delay_for_distributed_queries", max_replica_delay_for_distributed_queries)
+        pulumi.set(__self__, "max_result_bytes", max_result_bytes)
+        pulumi.set(__self__, "max_result_rows", max_result_rows)
+        pulumi.set(__self__, "max_rows_in_distinct", max_rows_in_distinct)
+        pulumi.set(__self__, "max_rows_in_join", max_rows_in_join)
+        pulumi.set(__self__, "max_rows_in_set", max_rows_in_set)
+        pulumi.set(__self__, "max_rows_to_group_by", max_rows_to_group_by)
+        pulumi.set(__self__, "max_rows_to_read", max_rows_to_read)
+        pulumi.set(__self__, "max_rows_to_sort", max_rows_to_sort)
+        pulumi.set(__self__, "max_rows_to_transfer", max_rows_to_transfer)
+        pulumi.set(__self__, "max_temporary_columns", max_temporary_columns)
+        pulumi.set(__self__, "max_temporary_non_const_columns", max_temporary_non_const_columns)
+        pulumi.set(__self__, "max_threads", max_threads)
+        pulumi.set(__self__, "merge_tree_max_bytes_to_use_cache", merge_tree_max_bytes_to_use_cache)
+        pulumi.set(__self__, "merge_tree_max_rows_to_use_cache", merge_tree_max_rows_to_use_cache)
+        pulumi.set(__self__, "merge_tree_min_bytes_for_concurrent_read", merge_tree_min_bytes_for_concurrent_read)
+        pulumi.set(__self__, "merge_tree_min_rows_for_concurrent_read", merge_tree_min_rows_for_concurrent_read)
+        pulumi.set(__self__, "min_bytes_to_use_direct_io", min_bytes_to_use_direct_io)
+        pulumi.set(__self__, "min_count_to_compile", min_count_to_compile)
+        pulumi.set(__self__, "min_count_to_compile_expression", min_count_to_compile_expression)
+        pulumi.set(__self__, "min_execution_speed", min_execution_speed)
+        pulumi.set(__self__, "min_execution_speed_bytes", min_execution_speed_bytes)
+        pulumi.set(__self__, "min_insert_block_size_bytes", min_insert_block_size_bytes)
+        pulumi.set(__self__, "min_insert_block_size_rows", min_insert_block_size_rows)
+        pulumi.set(__self__, "output_format_json_quote64bit_integers", output_format_json_quote64bit_integers)
+        pulumi.set(__self__, "output_format_json_quote_denormals", output_format_json_quote_denormals)
+        pulumi.set(__self__, "priority", priority)
+        pulumi.set(__self__, "quota_mode", quota_mode)
+        pulumi.set(__self__, "read_overflow_mode", read_overflow_mode)
+        pulumi.set(__self__, "readonly", readonly)
+        pulumi.set(__self__, "receive_timeout", receive_timeout)
+        pulumi.set(__self__, "replication_alter_partitions_sync", replication_alter_partitions_sync)
+        pulumi.set(__self__, "result_overflow_mode", result_overflow_mode)
+        pulumi.set(__self__, "select_sequential_consistency", select_sequential_consistency)
+        pulumi.set(__self__, "send_progress_in_http_headers", send_progress_in_http_headers)
+        pulumi.set(__self__, "send_timeout", send_timeout)
+        pulumi.set(__self__, "set_overflow_mode", set_overflow_mode)
+        pulumi.set(__self__, "skip_unavailable_shards", skip_unavailable_shards)
+        pulumi.set(__self__, "sort_overflow_mode", sort_overflow_mode)
+        pulumi.set(__self__, "timeout_overflow_mode", timeout_overflow_mode)
+        pulumi.set(__self__, "transfer_overflow_mode", transfer_overflow_mode)
+        pulumi.set(__self__, "transform_null_in", transform_null_in)
+        pulumi.set(__self__, "use_uncompressed_cache", use_uncompressed_cache)
+
+    @property
+    @pulumi.getter(name="addHttpCorsHeader")
+    def add_http_cors_header(self) -> bool:
+        return pulumi.get(self, "add_http_cors_header")
+
+    @property
+    @pulumi.getter(name="allowDdl")
+    def allow_ddl(self) -> bool:
+        return pulumi.get(self, "allow_ddl")
+
+    @property
+    @pulumi.getter
+    def compile(self) -> bool:
+        return pulumi.get(self, "compile")
+
+    @property
+    @pulumi.getter(name="compileExpressions")
+    def compile_expressions(self) -> bool:
+        return pulumi.get(self, "compile_expressions")
+
+    @property
+    @pulumi.getter(name="connectTimeout")
+    def connect_timeout(self) -> int:
+        return pulumi.get(self, "connect_timeout")
+
+    @property
+    @pulumi.getter(name="countDistinctImplementation")
+    def count_distinct_implementation(self) -> str:
+        return pulumi.get(self, "count_distinct_implementation")
+
+    @property
+    @pulumi.getter(name="distinctOverflowMode")
+    def distinct_overflow_mode(self) -> str:
+        return pulumi.get(self, "distinct_overflow_mode")
+
+    @property
+    @pulumi.getter(name="distributedAggregationMemoryEfficient")
+    def distributed_aggregation_memory_efficient(self) -> bool:
+        return pulumi.get(self, "distributed_aggregation_memory_efficient")
+
+    @property
+    @pulumi.getter(name="distributedDdlTaskTimeout")
+    def distributed_ddl_task_timeout(self) -> int:
+        return pulumi.get(self, "distributed_ddl_task_timeout")
+
+    @property
+    @pulumi.getter(name="distributedProductMode")
+    def distributed_product_mode(self) -> str:
+        return pulumi.get(self, "distributed_product_mode")
+
+    @property
+    @pulumi.getter(name="emptyResultForAggregationByEmptySet")
+    def empty_result_for_aggregation_by_empty_set(self) -> bool:
+        return pulumi.get(self, "empty_result_for_aggregation_by_empty_set")
+
+    @property
+    @pulumi.getter(name="enableHttpCompression")
+    def enable_http_compression(self) -> bool:
+        return pulumi.get(self, "enable_http_compression")
+
+    @property
+    @pulumi.getter(name="fallbackToStaleReplicasForDistributedQueries")
+    def fallback_to_stale_replicas_for_distributed_queries(self) -> bool:
+        return pulumi.get(self, "fallback_to_stale_replicas_for_distributed_queries")
+
+    @property
+    @pulumi.getter(name="forceIndexByDate")
+    def force_index_by_date(self) -> bool:
+        return pulumi.get(self, "force_index_by_date")
+
+    @property
+    @pulumi.getter(name="forcePrimaryKey")
+    def force_primary_key(self) -> bool:
+        return pulumi.get(self, "force_primary_key")
+
+    @property
+    @pulumi.getter(name="groupByOverflowMode")
+    def group_by_overflow_mode(self) -> str:
+        return pulumi.get(self, "group_by_overflow_mode")
+
+    @property
+    @pulumi.getter(name="groupByTwoLevelThreshold")
+    def group_by_two_level_threshold(self) -> int:
+        return pulumi.get(self, "group_by_two_level_threshold")
+
+    @property
+    @pulumi.getter(name="groupByTwoLevelThresholdBytes")
+    def group_by_two_level_threshold_bytes(self) -> int:
+        return pulumi.get(self, "group_by_two_level_threshold_bytes")
+
+    @property
+    @pulumi.getter(name="httpConnectionTimeout")
+    def http_connection_timeout(self) -> int:
+        return pulumi.get(self, "http_connection_timeout")
+
+    @property
+    @pulumi.getter(name="httpHeadersProgressInterval")
+    def http_headers_progress_interval(self) -> int:
+        return pulumi.get(self, "http_headers_progress_interval")
+
+    @property
+    @pulumi.getter(name="httpReceiveTimeout")
+    def http_receive_timeout(self) -> int:
+        return pulumi.get(self, "http_receive_timeout")
+
+    @property
+    @pulumi.getter(name="httpSendTimeout")
+    def http_send_timeout(self) -> int:
+        return pulumi.get(self, "http_send_timeout")
+
+    @property
+    @pulumi.getter(name="inputFormatDefaultsForOmittedFields")
+    def input_format_defaults_for_omitted_fields(self) -> bool:
+        return pulumi.get(self, "input_format_defaults_for_omitted_fields")
+
+    @property
+    @pulumi.getter(name="inputFormatValuesInterpretExpressions")
+    def input_format_values_interpret_expressions(self) -> bool:
+        return pulumi.get(self, "input_format_values_interpret_expressions")
+
+    @property
+    @pulumi.getter(name="insertQuorum")
+    def insert_quorum(self) -> int:
+        return pulumi.get(self, "insert_quorum")
+
+    @property
+    @pulumi.getter(name="insertQuorumTimeout")
+    def insert_quorum_timeout(self) -> int:
+        return pulumi.get(self, "insert_quorum_timeout")
+
+    @property
+    @pulumi.getter(name="joinOverflowMode")
+    def join_overflow_mode(self) -> str:
+        return pulumi.get(self, "join_overflow_mode")
+
+    @property
+    @pulumi.getter(name="joinUseNulls")
+    def join_use_nulls(self) -> bool:
+        return pulumi.get(self, "join_use_nulls")
+
+    @property
+    @pulumi.getter(name="joinedSubqueryRequiresAlias")
+    def joined_subquery_requires_alias(self) -> bool:
+        return pulumi.get(self, "joined_subquery_requires_alias")
+
+    @property
+    @pulumi.getter(name="lowCardinalityAllowInNativeFormat")
+    def low_cardinality_allow_in_native_format(self) -> bool:
+        return pulumi.get(self, "low_cardinality_allow_in_native_format")
+
+    @property
+    @pulumi.getter(name="maxAstDepth")
+    def max_ast_depth(self) -> int:
+        return pulumi.get(self, "max_ast_depth")
+
+    @property
+    @pulumi.getter(name="maxAstElements")
+    def max_ast_elements(self) -> int:
+        return pulumi.get(self, "max_ast_elements")
+
+    @property
+    @pulumi.getter(name="maxBlockSize")
+    def max_block_size(self) -> int:
+        return pulumi.get(self, "max_block_size")
+
+    @property
+    @pulumi.getter(name="maxBytesBeforeExternalGroupBy")
+    def max_bytes_before_external_group_by(self) -> int:
+        return pulumi.get(self, "max_bytes_before_external_group_by")
+
+    @property
+    @pulumi.getter(name="maxBytesBeforeExternalSort")
+    def max_bytes_before_external_sort(self) -> int:
+        return pulumi.get(self, "max_bytes_before_external_sort")
+
+    @property
+    @pulumi.getter(name="maxBytesInDistinct")
+    def max_bytes_in_distinct(self) -> int:
+        return pulumi.get(self, "max_bytes_in_distinct")
+
+    @property
+    @pulumi.getter(name="maxBytesInJoin")
+    def max_bytes_in_join(self) -> int:
+        return pulumi.get(self, "max_bytes_in_join")
+
+    @property
+    @pulumi.getter(name="maxBytesInSet")
+    def max_bytes_in_set(self) -> int:
+        return pulumi.get(self, "max_bytes_in_set")
+
+    @property
+    @pulumi.getter(name="maxBytesToRead")
+    def max_bytes_to_read(self) -> int:
+        return pulumi.get(self, "max_bytes_to_read")
+
+    @property
+    @pulumi.getter(name="maxBytesToSort")
+    def max_bytes_to_sort(self) -> int:
+        return pulumi.get(self, "max_bytes_to_sort")
+
+    @property
+    @pulumi.getter(name="maxBytesToTransfer")
+    def max_bytes_to_transfer(self) -> int:
+        return pulumi.get(self, "max_bytes_to_transfer")
+
+    @property
+    @pulumi.getter(name="maxColumnsToRead")
+    def max_columns_to_read(self) -> int:
+        return pulumi.get(self, "max_columns_to_read")
+
+    @property
+    @pulumi.getter(name="maxExecutionTime")
+    def max_execution_time(self) -> int:
+        return pulumi.get(self, "max_execution_time")
+
+    @property
+    @pulumi.getter(name="maxExpandedAstElements")
+    def max_expanded_ast_elements(self) -> int:
+        return pulumi.get(self, "max_expanded_ast_elements")
+
+    @property
+    @pulumi.getter(name="maxInsertBlockSize")
+    def max_insert_block_size(self) -> int:
+        return pulumi.get(self, "max_insert_block_size")
+
+    @property
+    @pulumi.getter(name="maxMemoryUsage")
+    def max_memory_usage(self) -> int:
+        return pulumi.get(self, "max_memory_usage")
+
+    @property
+    @pulumi.getter(name="maxMemoryUsageForUser")
+    def max_memory_usage_for_user(self) -> int:
+        return pulumi.get(self, "max_memory_usage_for_user")
+
+    @property
+    @pulumi.getter(name="maxNetworkBandwidth")
+    def max_network_bandwidth(self) -> int:
+        return pulumi.get(self, "max_network_bandwidth")
+
+    @property
+    @pulumi.getter(name="maxNetworkBandwidthForUser")
+    def max_network_bandwidth_for_user(self) -> int:
+        return pulumi.get(self, "max_network_bandwidth_for_user")
+
+    @property
+    @pulumi.getter(name="maxQuerySize")
+    def max_query_size(self) -> int:
+        return pulumi.get(self, "max_query_size")
+
+    @property
+    @pulumi.getter(name="maxReplicaDelayForDistributedQueries")
+    def max_replica_delay_for_distributed_queries(self) -> int:
+        return pulumi.get(self, "max_replica_delay_for_distributed_queries")
+
+    @property
+    @pulumi.getter(name="maxResultBytes")
+    def max_result_bytes(self) -> int:
+        return pulumi.get(self, "max_result_bytes")
+
+    @property
+    @pulumi.getter(name="maxResultRows")
+    def max_result_rows(self) -> int:
+        return pulumi.get(self, "max_result_rows")
+
+    @property
+    @pulumi.getter(name="maxRowsInDistinct")
+    def max_rows_in_distinct(self) -> int:
+        return pulumi.get(self, "max_rows_in_distinct")
+
+    @property
+    @pulumi.getter(name="maxRowsInJoin")
+    def max_rows_in_join(self) -> int:
+        return pulumi.get(self, "max_rows_in_join")
+
+    @property
+    @pulumi.getter(name="maxRowsInSet")
+    def max_rows_in_set(self) -> int:
+        return pulumi.get(self, "max_rows_in_set")
+
+    @property
+    @pulumi.getter(name="maxRowsToGroupBy")
+    def max_rows_to_group_by(self) -> int:
+        return pulumi.get(self, "max_rows_to_group_by")
+
+    @property
+    @pulumi.getter(name="maxRowsToRead")
+    def max_rows_to_read(self) -> int:
+        return pulumi.get(self, "max_rows_to_read")
+
+    @property
+    @pulumi.getter(name="maxRowsToSort")
+    def max_rows_to_sort(self) -> int:
+        return pulumi.get(self, "max_rows_to_sort")
+
+    @property
+    @pulumi.getter(name="maxRowsToTransfer")
+    def max_rows_to_transfer(self) -> int:
+        return pulumi.get(self, "max_rows_to_transfer")
+
+    @property
+    @pulumi.getter(name="maxTemporaryColumns")
+    def max_temporary_columns(self) -> int:
+        return pulumi.get(self, "max_temporary_columns")
+
+    @property
+    @pulumi.getter(name="maxTemporaryNonConstColumns")
+    def max_temporary_non_const_columns(self) -> int:
+        return pulumi.get(self, "max_temporary_non_const_columns")
+
+    @property
+    @pulumi.getter(name="maxThreads")
+    def max_threads(self) -> int:
+        return pulumi.get(self, "max_threads")
+
+    @property
+    @pulumi.getter(name="mergeTreeMaxBytesToUseCache")
+    def merge_tree_max_bytes_to_use_cache(self) -> int:
+        return pulumi.get(self, "merge_tree_max_bytes_to_use_cache")
+
+    @property
+    @pulumi.getter(name="mergeTreeMaxRowsToUseCache")
+    def merge_tree_max_rows_to_use_cache(self) -> int:
+        return pulumi.get(self, "merge_tree_max_rows_to_use_cache")
+
+    @property
+    @pulumi.getter(name="mergeTreeMinBytesForConcurrentRead")
+    def merge_tree_min_bytes_for_concurrent_read(self) -> int:
+        return pulumi.get(self, "merge_tree_min_bytes_for_concurrent_read")
+
+    @property
+    @pulumi.getter(name="mergeTreeMinRowsForConcurrentRead")
+    def merge_tree_min_rows_for_concurrent_read(self) -> int:
+        return pulumi.get(self, "merge_tree_min_rows_for_concurrent_read")
+
+    @property
+    @pulumi.getter(name="minBytesToUseDirectIo")
+    def min_bytes_to_use_direct_io(self) -> int:
+        return pulumi.get(self, "min_bytes_to_use_direct_io")
+
+    @property
+    @pulumi.getter(name="minCountToCompile")
+    def min_count_to_compile(self) -> int:
+        return pulumi.get(self, "min_count_to_compile")
+
+    @property
+    @pulumi.getter(name="minCountToCompileExpression")
+    def min_count_to_compile_expression(self) -> int:
+        return pulumi.get(self, "min_count_to_compile_expression")
+
+    @property
+    @pulumi.getter(name="minExecutionSpeed")
+    def min_execution_speed(self) -> int:
+        return pulumi.get(self, "min_execution_speed")
+
+    @property
+    @pulumi.getter(name="minExecutionSpeedBytes")
+    def min_execution_speed_bytes(self) -> int:
+        return pulumi.get(self, "min_execution_speed_bytes")
+
+    @property
+    @pulumi.getter(name="minInsertBlockSizeBytes")
+    def min_insert_block_size_bytes(self) -> int:
+        return pulumi.get(self, "min_insert_block_size_bytes")
+
+    @property
+    @pulumi.getter(name="minInsertBlockSizeRows")
+    def min_insert_block_size_rows(self) -> int:
+        return pulumi.get(self, "min_insert_block_size_rows")
+
+    @property
+    @pulumi.getter(name="outputFormatJsonQuote64bitIntegers")
+    def output_format_json_quote64bit_integers(self) -> bool:
+        return pulumi.get(self, "output_format_json_quote64bit_integers")
+
+    @property
+    @pulumi.getter(name="outputFormatJsonQuoteDenormals")
+    def output_format_json_quote_denormals(self) -> bool:
+        return pulumi.get(self, "output_format_json_quote_denormals")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> int:
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter(name="quotaMode")
+    def quota_mode(self) -> str:
+        return pulumi.get(self, "quota_mode")
+
+    @property
+    @pulumi.getter(name="readOverflowMode")
+    def read_overflow_mode(self) -> str:
+        return pulumi.get(self, "read_overflow_mode")
+
+    @property
+    @pulumi.getter
+    def readonly(self) -> int:
+        return pulumi.get(self, "readonly")
+
+    @property
+    @pulumi.getter(name="receiveTimeout")
+    def receive_timeout(self) -> int:
+        return pulumi.get(self, "receive_timeout")
+
+    @property
+    @pulumi.getter(name="replicationAlterPartitionsSync")
+    def replication_alter_partitions_sync(self) -> int:
+        return pulumi.get(self, "replication_alter_partitions_sync")
+
+    @property
+    @pulumi.getter(name="resultOverflowMode")
+    def result_overflow_mode(self) -> str:
+        return pulumi.get(self, "result_overflow_mode")
+
+    @property
+    @pulumi.getter(name="selectSequentialConsistency")
+    def select_sequential_consistency(self) -> bool:
+        return pulumi.get(self, "select_sequential_consistency")
+
+    @property
+    @pulumi.getter(name="sendProgressInHttpHeaders")
+    def send_progress_in_http_headers(self) -> bool:
+        return pulumi.get(self, "send_progress_in_http_headers")
+
+    @property
+    @pulumi.getter(name="sendTimeout")
+    def send_timeout(self) -> int:
+        return pulumi.get(self, "send_timeout")
+
+    @property
+    @pulumi.getter(name="setOverflowMode")
+    def set_overflow_mode(self) -> str:
+        return pulumi.get(self, "set_overflow_mode")
+
+    @property
+    @pulumi.getter(name="skipUnavailableShards")
+    def skip_unavailable_shards(self) -> bool:
+        return pulumi.get(self, "skip_unavailable_shards")
+
+    @property
+    @pulumi.getter(name="sortOverflowMode")
+    def sort_overflow_mode(self) -> str:
+        return pulumi.get(self, "sort_overflow_mode")
+
+    @property
+    @pulumi.getter(name="timeoutOverflowMode")
+    def timeout_overflow_mode(self) -> str:
+        return pulumi.get(self, "timeout_overflow_mode")
+
+    @property
+    @pulumi.getter(name="transferOverflowMode")
+    def transfer_overflow_mode(self) -> str:
+        return pulumi.get(self, "transfer_overflow_mode")
+
+    @property
+    @pulumi.getter(name="transformNullIn")
+    def transform_null_in(self) -> bool:
+        return pulumi.get(self, "transform_null_in")
+
+    @property
+    @pulumi.getter(name="useUncompressedCache")
+    def use_uncompressed_cache(self) -> bool:
+        return pulumi.get(self, "use_uncompressed_cache")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterZookeeperResult(dict):
+    def __init__(__self__, *,
+                 resources: 'outputs.GetMdbClickhouseClusterZookeeperResourcesResult'):
+        pulumi.set(__self__, "resources", resources)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.GetMdbClickhouseClusterZookeeperResourcesResult':
+        return pulumi.get(self, "resources")
+
+
+@pulumi.output_type
+class GetMdbClickhouseClusterZookeeperResourcesResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterConfigResult(dict):
+    def __init__(__self__, *,
+                 kafka: 'outputs.GetMdbKafkaClusterConfigKafkaResult',
+                 version: str,
+                 zones: Sequence[str],
+                 assign_public_ip: Optional[bool] = None,
+                 brokers_count: Optional[int] = None,
+                 zookeeper: Optional['outputs.GetMdbKafkaClusterConfigZookeeperResult'] = None):
+        pulumi.set(__self__, "kafka", kafka)
+        pulumi.set(__self__, "version", version)
+        pulumi.set(__self__, "zones", zones)
+        if assign_public_ip is not None:
+            pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+        if brokers_count is not None:
+            pulumi.set(__self__, "brokers_count", brokers_count)
+        if zookeeper is not None:
+            pulumi.set(__self__, "zookeeper", zookeeper)
+
+    @property
+    @pulumi.getter
+    def kafka(self) -> 'outputs.GetMdbKafkaClusterConfigKafkaResult':
+        return pulumi.get(self, "kafka")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+    @property
+    @pulumi.getter
+    def zones(self) -> Sequence[str]:
+        return pulumi.get(self, "zones")
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> Optional[bool]:
+        return pulumi.get(self, "assign_public_ip")
+
+    @property
+    @pulumi.getter(name="brokersCount")
+    def brokers_count(self) -> Optional[int]:
+        return pulumi.get(self, "brokers_count")
+
+    @property
+    @pulumi.getter
+    def zookeeper(self) -> Optional['outputs.GetMdbKafkaClusterConfigZookeeperResult']:
+        return pulumi.get(self, "zookeeper")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterConfigKafkaResult(dict):
+    def __init__(__self__, *,
+                 resources: 'outputs.GetMdbKafkaClusterConfigKafkaResourcesResult',
+                 kafka_config: Optional['outputs.GetMdbKafkaClusterConfigKafkaKafkaConfigResult'] = None):
+        pulumi.set(__self__, "resources", resources)
+        if kafka_config is not None:
+            pulumi.set(__self__, "kafka_config", kafka_config)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.GetMdbKafkaClusterConfigKafkaResourcesResult':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter(name="kafkaConfig")
+    def kafka_config(self) -> Optional['outputs.GetMdbKafkaClusterConfigKafkaKafkaConfigResult']:
+        return pulumi.get(self, "kafka_config")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterConfigKafkaKafkaConfigResult(dict):
+    def __init__(__self__, *,
+                 compression_type: Optional[str] = None,
+                 log_flush_interval_messages: Optional[int] = None,
+                 log_flush_interval_ms: Optional[int] = None,
+                 log_flush_scheduler_interval_ms: Optional[int] = None,
+                 log_preallocate: Optional[bool] = None,
+                 log_retention_bytes: Optional[int] = None,
+                 log_retention_hours: Optional[int] = None,
+                 log_retention_minutes: Optional[int] = None,
+                 log_retention_ms: Optional[int] = None,
+                 log_segment_bytes: Optional[int] = None):
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if log_flush_interval_messages is not None:
+            pulumi.set(__self__, "log_flush_interval_messages", log_flush_interval_messages)
+        if log_flush_interval_ms is not None:
+            pulumi.set(__self__, "log_flush_interval_ms", log_flush_interval_ms)
+        if log_flush_scheduler_interval_ms is not None:
+            pulumi.set(__self__, "log_flush_scheduler_interval_ms", log_flush_scheduler_interval_ms)
+        if log_preallocate is not None:
+            pulumi.set(__self__, "log_preallocate", log_preallocate)
+        if log_retention_bytes is not None:
+            pulumi.set(__self__, "log_retention_bytes", log_retention_bytes)
+        if log_retention_hours is not None:
+            pulumi.set(__self__, "log_retention_hours", log_retention_hours)
+        if log_retention_minutes is not None:
+            pulumi.set(__self__, "log_retention_minutes", log_retention_minutes)
+        if log_retention_ms is not None:
+            pulumi.set(__self__, "log_retention_ms", log_retention_ms)
+        if log_segment_bytes is not None:
+            pulumi.set(__self__, "log_segment_bytes", log_segment_bytes)
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[str]:
+        return pulumi.get(self, "compression_type")
+
+    @property
+    @pulumi.getter(name="logFlushIntervalMessages")
+    def log_flush_interval_messages(self) -> Optional[int]:
+        return pulumi.get(self, "log_flush_interval_messages")
+
+    @property
+    @pulumi.getter(name="logFlushIntervalMs")
+    def log_flush_interval_ms(self) -> Optional[int]:
+        return pulumi.get(self, "log_flush_interval_ms")
+
+    @property
+    @pulumi.getter(name="logFlushSchedulerIntervalMs")
+    def log_flush_scheduler_interval_ms(self) -> Optional[int]:
+        return pulumi.get(self, "log_flush_scheduler_interval_ms")
+
+    @property
+    @pulumi.getter(name="logPreallocate")
+    def log_preallocate(self) -> Optional[bool]:
+        return pulumi.get(self, "log_preallocate")
+
+    @property
+    @pulumi.getter(name="logRetentionBytes")
+    def log_retention_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "log_retention_bytes")
+
+    @property
+    @pulumi.getter(name="logRetentionHours")
+    def log_retention_hours(self) -> Optional[int]:
+        return pulumi.get(self, "log_retention_hours")
+
+    @property
+    @pulumi.getter(name="logRetentionMinutes")
+    def log_retention_minutes(self) -> Optional[int]:
+        return pulumi.get(self, "log_retention_minutes")
+
+    @property
+    @pulumi.getter(name="logRetentionMs")
+    def log_retention_ms(self) -> Optional[int]:
+        return pulumi.get(self, "log_retention_ms")
+
+    @property
+    @pulumi.getter(name="logSegmentBytes")
+    def log_segment_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "log_segment_bytes")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterConfigKafkaResourcesResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterConfigZookeeperResult(dict):
+    def __init__(__self__, *,
+                 resources: 'outputs.GetMdbKafkaClusterConfigZookeeperResourcesResult'):
+        pulumi.set(__self__, "resources", resources)
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.GetMdbKafkaClusterConfigZookeeperResourcesResult':
+        return pulumi.get(self, "resources")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterConfigZookeeperResourcesResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterTopicResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 partitions: int,
+                 replication_factor: int,
+                 topic_config: Optional['outputs.GetMdbKafkaClusterTopicTopicConfigResult'] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "partitions", partitions)
+        pulumi.set(__self__, "replication_factor", replication_factor)
+        if topic_config is not None:
+            pulumi.set(__self__, "topic_config", topic_config)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def partitions(self) -> int:
+        return pulumi.get(self, "partitions")
+
+    @property
+    @pulumi.getter(name="replicationFactor")
+    def replication_factor(self) -> int:
+        return pulumi.get(self, "replication_factor")
+
+    @property
+    @pulumi.getter(name="topicConfig")
+    def topic_config(self) -> Optional['outputs.GetMdbKafkaClusterTopicTopicConfigResult']:
+        return pulumi.get(self, "topic_config")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterTopicTopicConfigResult(dict):
+    def __init__(__self__, *,
+                 cleanup_policy: Optional[str] = None,
+                 compression_type: Optional[str] = None,
+                 delete_retention_ms: Optional[int] = None,
+                 file_delete_delay_ms: Optional[int] = None,
+                 flush_messages: Optional[int] = None,
+                 flush_ms: Optional[int] = None,
+                 max_message_bytes: Optional[int] = None,
+                 min_compaction_lag_ms: Optional[int] = None,
+                 min_insync_replicas: Optional[int] = None,
+                 preallocate: Optional[bool] = None,
+                 retention_bytes: Optional[int] = None,
+                 retention_ms: Optional[int] = None,
+                 segment_bytes: Optional[int] = None):
+        if cleanup_policy is not None:
+            pulumi.set(__self__, "cleanup_policy", cleanup_policy)
+        if compression_type is not None:
+            pulumi.set(__self__, "compression_type", compression_type)
+        if delete_retention_ms is not None:
+            pulumi.set(__self__, "delete_retention_ms", delete_retention_ms)
+        if file_delete_delay_ms is not None:
+            pulumi.set(__self__, "file_delete_delay_ms", file_delete_delay_ms)
+        if flush_messages is not None:
+            pulumi.set(__self__, "flush_messages", flush_messages)
+        if flush_ms is not None:
+            pulumi.set(__self__, "flush_ms", flush_ms)
+        if max_message_bytes is not None:
+            pulumi.set(__self__, "max_message_bytes", max_message_bytes)
+        if min_compaction_lag_ms is not None:
+            pulumi.set(__self__, "min_compaction_lag_ms", min_compaction_lag_ms)
+        if min_insync_replicas is not None:
+            pulumi.set(__self__, "min_insync_replicas", min_insync_replicas)
+        if preallocate is not None:
+            pulumi.set(__self__, "preallocate", preallocate)
+        if retention_bytes is not None:
+            pulumi.set(__self__, "retention_bytes", retention_bytes)
+        if retention_ms is not None:
+            pulumi.set(__self__, "retention_ms", retention_ms)
+        if segment_bytes is not None:
+            pulumi.set(__self__, "segment_bytes", segment_bytes)
+
+    @property
+    @pulumi.getter(name="cleanupPolicy")
+    def cleanup_policy(self) -> Optional[str]:
+        return pulumi.get(self, "cleanup_policy")
+
+    @property
+    @pulumi.getter(name="compressionType")
+    def compression_type(self) -> Optional[str]:
+        return pulumi.get(self, "compression_type")
+
+    @property
+    @pulumi.getter(name="deleteRetentionMs")
+    def delete_retention_ms(self) -> Optional[int]:
+        return pulumi.get(self, "delete_retention_ms")
+
+    @property
+    @pulumi.getter(name="fileDeleteDelayMs")
+    def file_delete_delay_ms(self) -> Optional[int]:
+        return pulumi.get(self, "file_delete_delay_ms")
+
+    @property
+    @pulumi.getter(name="flushMessages")
+    def flush_messages(self) -> Optional[int]:
+        return pulumi.get(self, "flush_messages")
+
+    @property
+    @pulumi.getter(name="flushMs")
+    def flush_ms(self) -> Optional[int]:
+        return pulumi.get(self, "flush_ms")
+
+    @property
+    @pulumi.getter(name="maxMessageBytes")
+    def max_message_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "max_message_bytes")
+
+    @property
+    @pulumi.getter(name="minCompactionLagMs")
+    def min_compaction_lag_ms(self) -> Optional[int]:
+        return pulumi.get(self, "min_compaction_lag_ms")
+
+    @property
+    @pulumi.getter(name="minInsyncReplicas")
+    def min_insync_replicas(self) -> Optional[int]:
+        return pulumi.get(self, "min_insync_replicas")
+
+    @property
+    @pulumi.getter
+    def preallocate(self) -> Optional[bool]:
+        return pulumi.get(self, "preallocate")
+
+    @property
+    @pulumi.getter(name="retentionBytes")
+    def retention_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "retention_bytes")
+
+    @property
+    @pulumi.getter(name="retentionMs")
+    def retention_ms(self) -> Optional[int]:
+        return pulumi.get(self, "retention_ms")
+
+    @property
+    @pulumi.getter(name="segmentBytes")
+    def segment_bytes(self) -> Optional[int]:
+        return pulumi.get(self, "segment_bytes")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterUserResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 password: str,
+                 permissions: Optional[Sequence['outputs.GetMdbKafkaClusterUserPermissionResult']] = None):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "password", password)
+        if permissions is not None:
+            pulumi.set(__self__, "permissions", permissions)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Optional[Sequence['outputs.GetMdbKafkaClusterUserPermissionResult']]:
+        return pulumi.get(self, "permissions")
+
+
+@pulumi.output_type
+class GetMdbKafkaClusterUserPermissionResult(dict):
+    def __init__(__self__, *,
+                 role: str,
+                 topic_name: str):
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "topic_name", topic_name)
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="topicName")
+    def topic_name(self) -> str:
+        return pulumi.get(self, "topic_name")
+
+
+@pulumi.output_type
+class GetMdbMongodbClusterClusterConfigResult(dict):
+    def __init__(__self__, *,
+                 access: 'outputs.GetMdbMongodbClusterClusterConfigAccessResult',
+                 backup_window_start: 'outputs.GetMdbMongodbClusterClusterConfigBackupWindowStartResult',
+                 feature_compatibility_version: str,
+                 version: str):
+        pulumi.set(__self__, "access", access)
+        pulumi.set(__self__, "backup_window_start", backup_window_start)
+        pulumi.set(__self__, "feature_compatibility_version", feature_compatibility_version)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def access(self) -> 'outputs.GetMdbMongodbClusterClusterConfigAccessResult':
+        return pulumi.get(self, "access")
+
+    @property
+    @pulumi.getter(name="backupWindowStart")
+    def backup_window_start(self) -> 'outputs.GetMdbMongodbClusterClusterConfigBackupWindowStartResult':
+        return pulumi.get(self, "backup_window_start")
+
+    @property
+    @pulumi.getter(name="featureCompatibilityVersion")
+    def feature_compatibility_version(self) -> str:
+        return pulumi.get(self, "feature_compatibility_version")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetMdbMongodbClusterClusterConfigAccessResult(dict):
+    def __init__(__self__, *,
+                 data_lens: bool):
+        pulumi.set(__self__, "data_lens", data_lens)
+
+    @property
+    @pulumi.getter(name="dataLens")
+    def data_lens(self) -> bool:
+        return pulumi.get(self, "data_lens")
+
+
+@pulumi.output_type
+class GetMdbMongodbClusterClusterConfigBackupWindowStartResult(dict):
+    def __init__(__self__, *,
+                 hours: Optional[int] = None,
+                 minutes: Optional[int] = None):
+        if hours is not None:
+            pulumi.set(__self__, "hours", hours)
+        if minutes is not None:
+            pulumi.set(__self__, "minutes", minutes)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> Optional[int]:
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> Optional[int]:
+        return pulumi.get(self, "minutes")
+
+
+@pulumi.output_type
+class GetMdbMongodbClusterDatabaseResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetMdbMongodbClusterHostResult(dict):
+    def __init__(__self__, *,
+                 assign_public_ip: bool,
+                 health: str,
+                 name: str,
+                 role: str,
+                 shard_name: str,
+                 subnet_id: str,
+                 type: str,
+                 zone_id: str):
+        pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+        pulumi.set(__self__, "health", health)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "shard_name", shard_name)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> bool:
+        return pulumi.get(self, "assign_public_ip")
+
+    @property
+    @pulumi.getter
+    def health(self) -> str:
+        return pulumi.get(self, "health")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="shardName")
+    def shard_name(self) -> str:
+        return pulumi.get(self, "shard_name")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        return pulumi.get(self, "zone_id")
+
+
+@pulumi.output_type
+class GetMdbMongodbClusterResourcesResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+
+@pulumi.output_type
+class GetMdbMongodbClusterUserResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 permissions: Sequence['outputs.GetMdbMongodbClusterUserPermissionResult']):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "permissions", permissions)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Sequence['outputs.GetMdbMongodbClusterUserPermissionResult']:
+        return pulumi.get(self, "permissions")
+
+
+@pulumi.output_type
+class GetMdbMongodbClusterUserPermissionResult(dict):
+    def __init__(__self__, *,
+                 database_name: str,
+                 roles: Optional[Sequence[str]] = None):
+        pulumi.set(__self__, "database_name", database_name)
+        if roles is not None:
+            pulumi.set(__self__, "roles", roles)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        return pulumi.get(self, "database_name")
+
+    @property
+    @pulumi.getter
+    def roles(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "roles")
+
+
+@pulumi.output_type
+class GetMdbMysqlClusterAccessResult(dict):
+    def __init__(__self__, *,
+                 data_lens: bool,
+                 web_sql: bool):
+        pulumi.set(__self__, "data_lens", data_lens)
+        pulumi.set(__self__, "web_sql", web_sql)
+
+    @property
+    @pulumi.getter(name="dataLens")
+    def data_lens(self) -> bool:
+        return pulumi.get(self, "data_lens")
+
+    @property
+    @pulumi.getter(name="webSql")
+    def web_sql(self) -> bool:
+        return pulumi.get(self, "web_sql")
+
+
+@pulumi.output_type
+class GetMdbMysqlClusterBackupWindowStartResult(dict):
+    def __init__(__self__, *,
+                 hours: Optional[int] = None,
+                 minutes: Optional[int] = None):
+        if hours is not None:
+            pulumi.set(__self__, "hours", hours)
+        if minutes is not None:
+            pulumi.set(__self__, "minutes", minutes)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> Optional[int]:
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> Optional[int]:
+        return pulumi.get(self, "minutes")
+
+
+@pulumi.output_type
+class GetMdbMysqlClusterDatabaseResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetMdbMysqlClusterHostResult(dict):
+    def __init__(__self__, *,
+                 fqdn: str,
+                 subnet_id: str,
+                 zone: str,
+                 assign_public_ip: Optional[bool] = None):
+        pulumi.set(__self__, "fqdn", fqdn)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "zone", zone)
+        if assign_public_ip is not None:
+            pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> str:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> Optional[bool]:
+        return pulumi.get(self, "assign_public_ip")
+
+
+@pulumi.output_type
+class GetMdbMysqlClusterResourcesResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+
+@pulumi.output_type
+class GetMdbMysqlClusterUserResult(dict):
+    def __init__(__self__, *,
+                 authentication_plugin: str,
+                 connection_limits: 'outputs.GetMdbMysqlClusterUserConnectionLimitsResult',
+                 global_permissions: Sequence[str],
+                 name: str,
+                 password: str,
+                 permissions: Sequence['outputs.GetMdbMysqlClusterUserPermissionResult']):
+        pulumi.set(__self__, "authentication_plugin", authentication_plugin)
+        pulumi.set(__self__, "connection_limits", connection_limits)
+        pulumi.set(__self__, "global_permissions", global_permissions)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "permissions", permissions)
+
+    @property
+    @pulumi.getter(name="authenticationPlugin")
+    def authentication_plugin(self) -> str:
+        return pulumi.get(self, "authentication_plugin")
+
+    @property
+    @pulumi.getter(name="connectionLimits")
+    def connection_limits(self) -> 'outputs.GetMdbMysqlClusterUserConnectionLimitsResult':
+        return pulumi.get(self, "connection_limits")
+
+    @property
+    @pulumi.getter(name="globalPermissions")
+    def global_permissions(self) -> Sequence[str]:
+        return pulumi.get(self, "global_permissions")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Sequence['outputs.GetMdbMysqlClusterUserPermissionResult']:
+        return pulumi.get(self, "permissions")
+
+
+@pulumi.output_type
+class GetMdbMysqlClusterUserConnectionLimitsResult(dict):
+    def __init__(__self__, *,
+                 max_connections_per_hour: int,
+                 max_questions_per_hour: int,
+                 max_updates_per_hour: int,
+                 max_user_connections: int):
+        pulumi.set(__self__, "max_connections_per_hour", max_connections_per_hour)
+        pulumi.set(__self__, "max_questions_per_hour", max_questions_per_hour)
+        pulumi.set(__self__, "max_updates_per_hour", max_updates_per_hour)
+        pulumi.set(__self__, "max_user_connections", max_user_connections)
+
+    @property
+    @pulumi.getter(name="maxConnectionsPerHour")
+    def max_connections_per_hour(self) -> int:
+        return pulumi.get(self, "max_connections_per_hour")
+
+    @property
+    @pulumi.getter(name="maxQuestionsPerHour")
+    def max_questions_per_hour(self) -> int:
+        return pulumi.get(self, "max_questions_per_hour")
+
+    @property
+    @pulumi.getter(name="maxUpdatesPerHour")
+    def max_updates_per_hour(self) -> int:
+        return pulumi.get(self, "max_updates_per_hour")
+
+    @property
+    @pulumi.getter(name="maxUserConnections")
+    def max_user_connections(self) -> int:
+        return pulumi.get(self, "max_user_connections")
+
+
+@pulumi.output_type
+class GetMdbMysqlClusterUserPermissionResult(dict):
+    def __init__(__self__, *,
+                 database_name: str,
+                 roles: Optional[Sequence[str]] = None):
+        pulumi.set(__self__, "database_name", database_name)
+        if roles is not None:
+            pulumi.set(__self__, "roles", roles)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        return pulumi.get(self, "database_name")
+
+    @property
+    @pulumi.getter
+    def roles(self) -> Optional[Sequence[str]]:
+        return pulumi.get(self, "roles")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterConfigResult(dict):
+    def __init__(__self__, *,
+                 access: 'outputs.GetMdbPostgresqlClusterConfigAccessResult',
+                 autofailover: bool,
+                 backup_window_start: 'outputs.GetMdbPostgresqlClusterConfigBackupWindowStartResult',
+                 performance_diagnostics: 'outputs.GetMdbPostgresqlClusterConfigPerformanceDiagnosticsResult',
+                 pooler_config: 'outputs.GetMdbPostgresqlClusterConfigPoolerConfigResult',
+                 postgresql_config: Mapping[str, str],
+                 resources: 'outputs.GetMdbPostgresqlClusterConfigResourcesResult',
+                 version: str):
+        pulumi.set(__self__, "access", access)
+        pulumi.set(__self__, "autofailover", autofailover)
+        pulumi.set(__self__, "backup_window_start", backup_window_start)
+        pulumi.set(__self__, "performance_diagnostics", performance_diagnostics)
+        pulumi.set(__self__, "pooler_config", pooler_config)
+        pulumi.set(__self__, "postgresql_config", postgresql_config)
+        pulumi.set(__self__, "resources", resources)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def access(self) -> 'outputs.GetMdbPostgresqlClusterConfigAccessResult':
+        return pulumi.get(self, "access")
+
+    @property
+    @pulumi.getter
+    def autofailover(self) -> bool:
+        return pulumi.get(self, "autofailover")
+
+    @property
+    @pulumi.getter(name="backupWindowStart")
+    def backup_window_start(self) -> 'outputs.GetMdbPostgresqlClusterConfigBackupWindowStartResult':
+        return pulumi.get(self, "backup_window_start")
+
+    @property
+    @pulumi.getter(name="performanceDiagnostics")
+    def performance_diagnostics(self) -> 'outputs.GetMdbPostgresqlClusterConfigPerformanceDiagnosticsResult':
+        return pulumi.get(self, "performance_diagnostics")
+
+    @property
+    @pulumi.getter(name="poolerConfig")
+    def pooler_config(self) -> 'outputs.GetMdbPostgresqlClusterConfigPoolerConfigResult':
+        return pulumi.get(self, "pooler_config")
+
+    @property
+    @pulumi.getter(name="postgresqlConfig")
+    def postgresql_config(self) -> Mapping[str, str]:
+        return pulumi.get(self, "postgresql_config")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> 'outputs.GetMdbPostgresqlClusterConfigResourcesResult':
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterConfigAccessResult(dict):
+    def __init__(__self__, *,
+                 data_lens: bool,
+                 web_sql: bool):
+        pulumi.set(__self__, "data_lens", data_lens)
+        pulumi.set(__self__, "web_sql", web_sql)
+
+    @property
+    @pulumi.getter(name="dataLens")
+    def data_lens(self) -> bool:
+        return pulumi.get(self, "data_lens")
+
+    @property
+    @pulumi.getter(name="webSql")
+    def web_sql(self) -> bool:
+        return pulumi.get(self, "web_sql")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterConfigBackupWindowStartResult(dict):
+    def __init__(__self__, *,
+                 hours: int,
+                 minutes: int):
+        pulumi.set(__self__, "hours", hours)
+        pulumi.set(__self__, "minutes", minutes)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> int:
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> int:
+        return pulumi.get(self, "minutes")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterConfigPerformanceDiagnosticsResult(dict):
+    def __init__(__self__, *,
+                 enabled: bool,
+                 sessions_sampling_interval: int,
+                 statements_sampling_interval: int):
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "sessions_sampling_interval", sessions_sampling_interval)
+        pulumi.set(__self__, "statements_sampling_interval", statements_sampling_interval)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="sessionsSamplingInterval")
+    def sessions_sampling_interval(self) -> int:
+        return pulumi.get(self, "sessions_sampling_interval")
+
+    @property
+    @pulumi.getter(name="statementsSamplingInterval")
+    def statements_sampling_interval(self) -> int:
+        return pulumi.get(self, "statements_sampling_interval")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterConfigPoolerConfigResult(dict):
+    def __init__(__self__, *,
+                 pool_discard: bool,
+                 pooling_mode: str):
+        pulumi.set(__self__, "pool_discard", pool_discard)
+        pulumi.set(__self__, "pooling_mode", pooling_mode)
+
+    @property
+    @pulumi.getter(name="poolDiscard")
+    def pool_discard(self) -> bool:
+        return pulumi.get(self, "pool_discard")
+
+    @property
+    @pulumi.getter(name="poolingMode")
+    def pooling_mode(self) -> str:
+        return pulumi.get(self, "pooling_mode")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterConfigResourcesResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type_id: str,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type_id", disk_type_id)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskTypeId")
+    def disk_type_id(self) -> str:
+        return pulumi.get(self, "disk_type_id")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterDatabaseResult(dict):
+    def __init__(__self__, *,
+                 extensions: Sequence['outputs.GetMdbPostgresqlClusterDatabaseExtensionResult'],
+                 lc_collate: str,
+                 lc_type: str,
+                 name: str,
+                 owner: str):
+        pulumi.set(__self__, "extensions", extensions)
+        pulumi.set(__self__, "lc_collate", lc_collate)
+        pulumi.set(__self__, "lc_type", lc_type)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "owner", owner)
+
+    @property
+    @pulumi.getter
+    def extensions(self) -> Sequence['outputs.GetMdbPostgresqlClusterDatabaseExtensionResult']:
+        return pulumi.get(self, "extensions")
+
+    @property
+    @pulumi.getter(name="lcCollate")
+    def lc_collate(self) -> str:
+        return pulumi.get(self, "lc_collate")
+
+    @property
+    @pulumi.getter(name="lcType")
+    def lc_type(self) -> str:
+        return pulumi.get(self, "lc_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def owner(self) -> str:
+        return pulumi.get(self, "owner")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterDatabaseExtensionResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 version: str):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterHostResult(dict):
+    def __init__(__self__, *,
+                 assign_public_ip: bool,
+                 fqdn: str,
+                 priority: int,
+                 replication_source: str,
+                 role: str,
+                 subnet_id: str,
+                 zone: str):
+        pulumi.set(__self__, "assign_public_ip", assign_public_ip)
+        pulumi.set(__self__, "fqdn", fqdn)
+        pulumi.set(__self__, "priority", priority)
+        pulumi.set(__self__, "replication_source", replication_source)
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="assignPublicIp")
+    def assign_public_ip(self) -> bool:
+        return pulumi.get(self, "assign_public_ip")
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> str:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> int:
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter(name="replicationSource")
+    def replication_source(self) -> str:
+        return pulumi.get(self, "replication_source")
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        return pulumi.get(self, "role")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterUserResult(dict):
+    def __init__(__self__, *,
+                 grants: Sequence[str],
+                 name: str,
+                 password: str,
+                 permissions: Sequence['outputs.GetMdbPostgresqlClusterUserPermissionResult'],
+                 settings: Mapping[str, str],
+                 conn_limit: Optional[int] = None,
+                 login: Optional[bool] = None):
+        pulumi.set(__self__, "grants", grants)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "password", password)
+        pulumi.set(__self__, "permissions", permissions)
+        pulumi.set(__self__, "settings", settings)
+        if conn_limit is not None:
+            pulumi.set(__self__, "conn_limit", conn_limit)
+        if login is not None:
+            pulumi.set(__self__, "login", login)
+
+    @property
+    @pulumi.getter
+    def grants(self) -> Sequence[str]:
+        return pulumi.get(self, "grants")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def password(self) -> str:
+        return pulumi.get(self, "password")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Sequence['outputs.GetMdbPostgresqlClusterUserPermissionResult']:
+        return pulumi.get(self, "permissions")
+
+    @property
+    @pulumi.getter
+    def settings(self) -> Mapping[str, str]:
+        return pulumi.get(self, "settings")
+
+    @property
+    @pulumi.getter(name="connLimit")
+    def conn_limit(self) -> Optional[int]:
+        return pulumi.get(self, "conn_limit")
+
+    @property
+    @pulumi.getter
+    def login(self) -> Optional[bool]:
+        return pulumi.get(self, "login")
+
+
+@pulumi.output_type
+class GetMdbPostgresqlClusterUserPermissionResult(dict):
+    def __init__(__self__, *,
+                 database_name: str):
+        pulumi.set(__self__, "database_name", database_name)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> str:
+        return pulumi.get(self, "database_name")
+
+
+@pulumi.output_type
+class GetMdbRedisClusterConfigResult(dict):
+    def __init__(__self__, *,
+                 maxmemory_policy: str,
+                 timeout: int,
+                 version: str):
+        pulumi.set(__self__, "maxmemory_policy", maxmemory_policy)
+        pulumi.set(__self__, "timeout", timeout)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="maxmemoryPolicy")
+    def maxmemory_policy(self) -> str:
+        return pulumi.get(self, "maxmemory_policy")
+
+    @property
+    @pulumi.getter
+    def timeout(self) -> int:
+        return pulumi.get(self, "timeout")
+
+    @property
+    @pulumi.getter
+    def version(self) -> str:
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetMdbRedisClusterHostResult(dict):
+    def __init__(__self__, *,
+                 fqdn: str,
+                 shard_name: str,
+                 subnet_id: str,
+                 zone: str):
+        pulumi.set(__self__, "fqdn", fqdn)
+        pulumi.set(__self__, "shard_name", shard_name)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter
+    def fqdn(self) -> str:
+        return pulumi.get(self, "fqdn")
+
+    @property
+    @pulumi.getter(name="shardName")
+    def shard_name(self) -> str:
+        return pulumi.get(self, "shard_name")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetMdbRedisClusterResourcesResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 resource_preset_id: str):
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "resource_preset_id", resource_preset_id)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="resourcePresetId")
+    def resource_preset_id(self) -> str:
+        return pulumi.get(self, "resource_preset_id")
+
+
+@pulumi.output_type
+class GetVpcAddressExternalIpv4AddressResult(dict):
+    def __init__(__self__, *,
+                 address: str,
+                 ddos_protection_provider: str,
+                 outgoing_smtp_capability: str,
+                 zone_id: str):
+        pulumi.set(__self__, "address", address)
+        pulumi.set(__self__, "ddos_protection_provider", ddos_protection_provider)
+        pulumi.set(__self__, "outgoing_smtp_capability", outgoing_smtp_capability)
+        pulumi.set(__self__, "zone_id", zone_id)
+
+    @property
+    @pulumi.getter
+    def address(self) -> str:
+        return pulumi.get(self, "address")
+
+    @property
+    @pulumi.getter(name="ddosProtectionProvider")
+    def ddos_protection_provider(self) -> str:
+        return pulumi.get(self, "ddos_protection_provider")
+
+    @property
+    @pulumi.getter(name="outgoingSmtpCapability")
+    def outgoing_smtp_capability(self) -> str:
+        return pulumi.get(self, "outgoing_smtp_capability")
+
+    @property
+    @pulumi.getter(name="zoneId")
+    def zone_id(self) -> str:
+        return pulumi.get(self, "zone_id")
+
+
+@pulumi.output_type
+class GetVpcRouteTableStaticRouteResult(dict):
+    def __init__(__self__, *,
+                 destination_prefix: str,
+                 next_hop_address: str):
+        pulumi.set(__self__, "destination_prefix", destination_prefix)
+        pulumi.set(__self__, "next_hop_address", next_hop_address)
+
+    @property
+    @pulumi.getter(name="destinationPrefix")
+    def destination_prefix(self) -> str:
+        return pulumi.get(self, "destination_prefix")
+
+    @property
+    @pulumi.getter(name="nextHopAddress")
+    def next_hop_address(self) -> str:
+        return pulumi.get(self, "next_hop_address")
+
+
+@pulumi.output_type
+class GetVpcSecurityGroupEgressResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 from_port: int,
+                 id: str,
+                 labels: Mapping[str, str],
+                 port: int,
+                 predefined_target: str,
+                 protocol: str,
+                 security_group_id: str,
+                 to_port: int,
+                 v4_cidr_blocks: Sequence[str],
+                 v6_cidr_blocks: Sequence[str]):
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "from_port", from_port)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "predefined_target", predefined_target)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "security_group_id", security_group_id)
+        pulumi.set(__self__, "to_port", to_port)
+        pulumi.set(__self__, "v4_cidr_blocks", v4_cidr_blocks)
+        pulumi.set(__self__, "v6_cidr_blocks", v6_cidr_blocks)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="fromPort")
+    def from_port(self) -> int:
+        return pulumi.get(self, "from_port")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Mapping[str, str]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="predefinedTarget")
+    def predefined_target(self) -> str:
+        return pulumi.get(self, "predefined_target")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> str:
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="toPort")
+    def to_port(self) -> int:
+        return pulumi.get(self, "to_port")
+
+    @property
+    @pulumi.getter(name="v4CidrBlocks")
+    def v4_cidr_blocks(self) -> Sequence[str]:
+        return pulumi.get(self, "v4_cidr_blocks")
+
+    @property
+    @pulumi.getter(name="v6CidrBlocks")
+    def v6_cidr_blocks(self) -> Sequence[str]:
+        return pulumi.get(self, "v6_cidr_blocks")
+
+
+@pulumi.output_type
+class GetVpcSecurityGroupIngressResult(dict):
+    def __init__(__self__, *,
+                 description: str,
+                 from_port: int,
+                 id: str,
+                 labels: Mapping[str, str],
+                 port: int,
+                 predefined_target: str,
+                 protocol: str,
+                 security_group_id: str,
+                 to_port: int,
+                 v4_cidr_blocks: Sequence[str],
+                 v6_cidr_blocks: Sequence[str]):
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "from_port", from_port)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "predefined_target", predefined_target)
+        pulumi.set(__self__, "protocol", protocol)
+        pulumi.set(__self__, "security_group_id", security_group_id)
+        pulumi.set(__self__, "to_port", to_port)
+        pulumi.set(__self__, "v4_cidr_blocks", v4_cidr_blocks)
+        pulumi.set(__self__, "v6_cidr_blocks", v6_cidr_blocks)
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="fromPort")
+    def from_port(self) -> int:
+        return pulumi.get(self, "from_port")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Mapping[str, str]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def port(self) -> int:
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter(name="predefinedTarget")
+    def predefined_target(self) -> str:
+        return pulumi.get(self, "predefined_target")
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> str:
+        return pulumi.get(self, "protocol")
+
+    @property
+    @pulumi.getter(name="securityGroupId")
+    def security_group_id(self) -> str:
+        return pulumi.get(self, "security_group_id")
+
+    @property
+    @pulumi.getter(name="toPort")
+    def to_port(self) -> int:
+        return pulumi.get(self, "to_port")
+
+    @property
+    @pulumi.getter(name="v4CidrBlocks")
+    def v4_cidr_blocks(self) -> Sequence[str]:
+        return pulumi.get(self, "v4_cidr_blocks")
+
+    @property
+    @pulumi.getter(name="v6CidrBlocks")
+    def v6_cidr_blocks(self) -> Sequence[str]:
+        return pulumi.get(self, "v6_cidr_blocks")
 
 
 @pulumi.output_type

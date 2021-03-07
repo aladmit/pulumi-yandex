@@ -5,10 +5,89 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export * from "./computeDisk";
+export * from "./computeDiskPlacementGroup";
+export * from "./computeImage";
+export * from "./computeInstance";
+export * from "./computeInstanceGroup";
+export * from "./computePlacementGroup";
+export * from "./computeSnapshot";
+export * from "./containerRegistry";
+export * from "./containerRegistryIamBinding";
+export * from "./dataprocCluster";
+export * from "./function";
+export * from "./functionIamBinding";
+export * from "./functionTrigger";
+export * from "./getClientconfig";
+export * from "./getComputeDisk";
+export * from "./getComputeDiskPlacementGroup";
+export * from "./getComputeImage";
+export * from "./getComputeInstance";
+export * from "./getComputeInstanceGroup";
+export * from "./getComputePlacementGroup";
+export * from "./getComputeSnapshot";
+export * from "./getContainerRegistry";
+export * from "./getDataprocCluster";
+export * from "./getFunction";
+export * from "./getFunctionTrigger";
+export * from "./getIamPolicy";
+export * from "./getIamRole";
+export * from "./getIamServiceAccount";
+export * from "./getIamUser";
+export * from "./getIotCoreDevice";
+export * from "./getIotCoreRegistry";
+export * from "./getKubernetesCluster";
+export * from "./getKubernetesNodeGroup";
+export * from "./getLbNetworkLoadBalancer";
+export * from "./getLbTargetGroup";
+export * from "./getMdbClickhouseCluster";
+export * from "./getMdbKafkaCluster";
+export * from "./getMdbMongodbCluster";
+export * from "./getMdbMysqlCluster";
+export * from "./getMdbPostgresqlCluster";
+export * from "./getMdbRedisCluster";
+export * from "./getMessageQueue";
+export * from "./getResourcemanagerCloud";
+export * from "./getResourcemanagerFolder";
+export * from "./getVpcAddress";
 export * from "./getVpcNetwork";
+export * from "./getVpcRouteTable";
+export * from "./getVpcSecurityGroup";
 export * from "./getVpcSubnet";
+export * from "./iamServiceAccountApiKey";
+export * from "./iamServiceAccountIamBinding";
+export * from "./iamServiceAccountIamMember";
+export * from "./iamServiceAccountIamPolicy";
+export * from "./iamServiceAccountKey";
+export * from "./iamServiceAccountStaticAccessKey";
+export * from "./iamServiceCccount";
+export * from "./iotCoreDevice";
+export * from "./iotCoreRegistry";
+export * from "./kmsSecretCiphertext";
+export * from "./kmsSymmetricKey";
+export * from "./kubernetesCluster";
+export * from "./kubernetesNodeGroup";
+export * from "./lbNetworkLoad_balancer";
+export * from "./lbTargetGroup";
+export * from "./mdbClickhouseCluster";
+export * from "./mdbKafkaCluster";
+export * from "./mdbMongodbCluster";
+export * from "./mdbMysqlCluster";
+export * from "./mdbPostgresqlCluster";
+export * from "./mdbRedisCluster";
+export * from "./messageQueue";
 export * from "./provider";
+export * from "./resourcemanagerCloudIamBinding";
+export * from "./resourcemanagerCloudIamMember";
+export * from "./resourcemanagerFolderIamBinding";
+export * from "./resourcemanagerFolderIamMember";
+export * from "./resourcemanagerFolderIamPolicy";
+export * from "./storageBucket";
+export * from "./storageObjet";
+export * from "./vpcAddress";
 export * from "./vpcNetwork";
+export * from "./vpcRouteTable";
+export * from "./vpcSecurityGroup";
 export * from "./vpcSubnet";
 
 // Export sub-modules:
@@ -21,15 +100,150 @@ export {
 };
 
 // Import resources to register:
+import { ComputeDisk } from "./computeDisk";
+import { ComputeDiskPlacementGroup } from "./computeDiskPlacementGroup";
+import { ComputeImage } from "./computeImage";
+import { ComputeInstance } from "./computeInstance";
+import { ComputeInstanceGroup } from "./computeInstanceGroup";
+import { ComputePlacementGroup } from "./computePlacementGroup";
+import { ComputeSnapshot } from "./computeSnapshot";
+import { ContainerRegistry } from "./containerRegistry";
+import { ContainerRegistryIamBinding } from "./containerRegistryIamBinding";
+import { DataprocCluster } from "./dataprocCluster";
+import { Function } from "./function";
+import { FunctionIamBinding } from "./functionIamBinding";
+import { FunctionTrigger } from "./functionTrigger";
+import { IamServiceAccountApiKey } from "./iamServiceAccountApiKey";
+import { IamServiceAccountIamBinding } from "./iamServiceAccountIamBinding";
+import { IamServiceAccountIamMember } from "./iamServiceAccountIamMember";
+import { IamServiceAccountIamPolicy } from "./iamServiceAccountIamPolicy";
+import { IamServiceAccountKey } from "./iamServiceAccountKey";
+import { IamServiceAccountStaticAccessKey } from "./iamServiceAccountStaticAccessKey";
+import { IamServiceCccount } from "./iamServiceCccount";
+import { IotCoreDevice } from "./iotCoreDevice";
+import { IotCoreRegistry } from "./iotCoreRegistry";
+import { KmsSecretCiphertext } from "./kmsSecretCiphertext";
+import { KmsSymmetricKey } from "./kmsSymmetricKey";
+import { KubernetesCluster } from "./kubernetesCluster";
+import { KubernetesNodeGroup } from "./kubernetesNodeGroup";
+import { LbNetworkLoad_balancer } from "./lbNetworkLoad_balancer";
+import { LbTargetGroup } from "./lbTargetGroup";
+import { MdbClickhouseCluster } from "./mdbClickhouseCluster";
+import { MdbKafkaCluster } from "./mdbKafkaCluster";
+import { MdbMongodbCluster } from "./mdbMongodbCluster";
+import { MdbMysqlCluster } from "./mdbMysqlCluster";
+import { MdbPostgresqlCluster } from "./mdbPostgresqlCluster";
+import { MdbRedisCluster } from "./mdbRedisCluster";
+import { MessageQueue } from "./messageQueue";
+import { ResourcemanagerCloudIamBinding } from "./resourcemanagerCloudIamBinding";
+import { ResourcemanagerCloudIamMember } from "./resourcemanagerCloudIamMember";
+import { ResourcemanagerFolderIamBinding } from "./resourcemanagerFolderIamBinding";
+import { ResourcemanagerFolderIamMember } from "./resourcemanagerFolderIamMember";
+import { ResourcemanagerFolderIamPolicy } from "./resourcemanagerFolderIamPolicy";
+import { StorageBucket } from "./storageBucket";
+import { StorageObjet } from "./storageObjet";
+import { VpcAddress } from "./vpcAddress";
 import { VpcNetwork } from "./vpcNetwork";
+import { VpcRouteTable } from "./vpcRouteTable";
+import { VpcSecurityGroup } from "./vpcSecurityGroup";
 import { VpcSubnet } from "./vpcSubnet";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "yandex:index/computeDisk:ComputeDisk":
+                return new ComputeDisk(name, <any>undefined, { urn })
+            case "yandex:index/computeDiskPlacementGroup:ComputeDiskPlacementGroup":
+                return new ComputeDiskPlacementGroup(name, <any>undefined, { urn })
+            case "yandex:index/computeImage:ComputeImage":
+                return new ComputeImage(name, <any>undefined, { urn })
+            case "yandex:index/computeInstance:ComputeInstance":
+                return new ComputeInstance(name, <any>undefined, { urn })
+            case "yandex:index/computeInstanceGroup:ComputeInstanceGroup":
+                return new ComputeInstanceGroup(name, <any>undefined, { urn })
+            case "yandex:index/computePlacementGroup:ComputePlacementGroup":
+                return new ComputePlacementGroup(name, <any>undefined, { urn })
+            case "yandex:index/computeSnapshot:ComputeSnapshot":
+                return new ComputeSnapshot(name, <any>undefined, { urn })
+            case "yandex:index/containerRegistry:ContainerRegistry":
+                return new ContainerRegistry(name, <any>undefined, { urn })
+            case "yandex:index/containerRegistryIamBinding:ContainerRegistryIamBinding":
+                return new ContainerRegistryIamBinding(name, <any>undefined, { urn })
+            case "yandex:index/dataprocCluster:DataprocCluster":
+                return new DataprocCluster(name, <any>undefined, { urn })
+            case "yandex:index/function:Function":
+                return new Function(name, <any>undefined, { urn })
+            case "yandex:index/functionIamBinding:FunctionIamBinding":
+                return new FunctionIamBinding(name, <any>undefined, { urn })
+            case "yandex:index/functionTrigger:FunctionTrigger":
+                return new FunctionTrigger(name, <any>undefined, { urn })
+            case "yandex:index/iamServiceAccountApiKey:IamServiceAccountApiKey":
+                return new IamServiceAccountApiKey(name, <any>undefined, { urn })
+            case "yandex:index/iamServiceAccountIamBinding:IamServiceAccountIamBinding":
+                return new IamServiceAccountIamBinding(name, <any>undefined, { urn })
+            case "yandex:index/iamServiceAccountIamMember:IamServiceAccountIamMember":
+                return new IamServiceAccountIamMember(name, <any>undefined, { urn })
+            case "yandex:index/iamServiceAccountIamPolicy:IamServiceAccountIamPolicy":
+                return new IamServiceAccountIamPolicy(name, <any>undefined, { urn })
+            case "yandex:index/iamServiceAccountKey:IamServiceAccountKey":
+                return new IamServiceAccountKey(name, <any>undefined, { urn })
+            case "yandex:index/iamServiceAccountStaticAccessKey:IamServiceAccountStaticAccessKey":
+                return new IamServiceAccountStaticAccessKey(name, <any>undefined, { urn })
+            case "yandex:index/iamServiceCccount:IamServiceCccount":
+                return new IamServiceCccount(name, <any>undefined, { urn })
+            case "yandex:index/iotCoreDevice:IotCoreDevice":
+                return new IotCoreDevice(name, <any>undefined, { urn })
+            case "yandex:index/iotCoreRegistry:IotCoreRegistry":
+                return new IotCoreRegistry(name, <any>undefined, { urn })
+            case "yandex:index/kmsSecretCiphertext:KmsSecretCiphertext":
+                return new KmsSecretCiphertext(name, <any>undefined, { urn })
+            case "yandex:index/kmsSymmetricKey:KmsSymmetricKey":
+                return new KmsSymmetricKey(name, <any>undefined, { urn })
+            case "yandex:index/kubernetesCluster:KubernetesCluster":
+                return new KubernetesCluster(name, <any>undefined, { urn })
+            case "yandex:index/kubernetesNodeGroup:KubernetesNodeGroup":
+                return new KubernetesNodeGroup(name, <any>undefined, { urn })
+            case "yandex:index/lbNetworkLoad_balancer:LbNetworkLoad_balancer":
+                return new LbNetworkLoad_balancer(name, <any>undefined, { urn })
+            case "yandex:index/lbTargetGroup:LbTargetGroup":
+                return new LbTargetGroup(name, <any>undefined, { urn })
+            case "yandex:index/mdbClickhouseCluster:MdbClickhouseCluster":
+                return new MdbClickhouseCluster(name, <any>undefined, { urn })
+            case "yandex:index/mdbKafkaCluster:MdbKafkaCluster":
+                return new MdbKafkaCluster(name, <any>undefined, { urn })
+            case "yandex:index/mdbMongodbCluster:MdbMongodbCluster":
+                return new MdbMongodbCluster(name, <any>undefined, { urn })
+            case "yandex:index/mdbMysqlCluster:MdbMysqlCluster":
+                return new MdbMysqlCluster(name, <any>undefined, { urn })
+            case "yandex:index/mdbPostgresqlCluster:MdbPostgresqlCluster":
+                return new MdbPostgresqlCluster(name, <any>undefined, { urn })
+            case "yandex:index/mdbRedisCluster:MdbRedisCluster":
+                return new MdbRedisCluster(name, <any>undefined, { urn })
+            case "yandex:index/messageQueue:MessageQueue":
+                return new MessageQueue(name, <any>undefined, { urn })
+            case "yandex:index/resourcemanagerCloudIamBinding:ResourcemanagerCloudIamBinding":
+                return new ResourcemanagerCloudIamBinding(name, <any>undefined, { urn })
+            case "yandex:index/resourcemanagerCloudIamMember:ResourcemanagerCloudIamMember":
+                return new ResourcemanagerCloudIamMember(name, <any>undefined, { urn })
+            case "yandex:index/resourcemanagerFolderIamBinding:ResourcemanagerFolderIamBinding":
+                return new ResourcemanagerFolderIamBinding(name, <any>undefined, { urn })
+            case "yandex:index/resourcemanagerFolderIamMember:ResourcemanagerFolderIamMember":
+                return new ResourcemanagerFolderIamMember(name, <any>undefined, { urn })
+            case "yandex:index/resourcemanagerFolderIamPolicy:ResourcemanagerFolderIamPolicy":
+                return new ResourcemanagerFolderIamPolicy(name, <any>undefined, { urn })
+            case "yandex:index/storageBucket:StorageBucket":
+                return new StorageBucket(name, <any>undefined, { urn })
+            case "yandex:index/storageObjet:StorageObjet":
+                return new StorageObjet(name, <any>undefined, { urn })
+            case "yandex:index/vpcAddress:VpcAddress":
+                return new VpcAddress(name, <any>undefined, { urn })
             case "yandex:index/vpcNetwork:VpcNetwork":
                 return new VpcNetwork(name, <any>undefined, { urn })
+            case "yandex:index/vpcRouteTable:VpcRouteTable":
+                return new VpcRouteTable(name, <any>undefined, { urn })
+            case "yandex:index/vpcSecurityGroup:VpcSecurityGroup":
+                return new VpcSecurityGroup(name, <any>undefined, { urn })
             case "yandex:index/vpcSubnet:VpcSubnet":
                 return new VpcSubnet(name, <any>undefined, { urn })
             default:
@@ -37,7 +251,52 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("yandex", "index/computeDisk", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/computeDiskPlacementGroup", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/computeImage", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/computeInstance", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/computeInstanceGroup", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/computePlacementGroup", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/computeSnapshot", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/containerRegistry", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/containerRegistryIamBinding", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/dataprocCluster", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/function", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/functionIamBinding", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/functionTrigger", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/iamServiceAccountApiKey", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/iamServiceAccountIamBinding", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/iamServiceAccountIamMember", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/iamServiceAccountIamPolicy", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/iamServiceAccountKey", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/iamServiceAccountStaticAccessKey", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/iamServiceCccount", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/iotCoreDevice", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/iotCoreRegistry", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/kmsSecretCiphertext", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/kmsSymmetricKey", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/kubernetesCluster", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/kubernetesNodeGroup", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/lbNetworkLoad_balancer", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/lbTargetGroup", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/mdbClickhouseCluster", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/mdbKafkaCluster", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/mdbMongodbCluster", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/mdbMysqlCluster", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/mdbPostgresqlCluster", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/mdbRedisCluster", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/messageQueue", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/resourcemanagerCloudIamBinding", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/resourcemanagerCloudIamMember", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/resourcemanagerFolderIamBinding", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/resourcemanagerFolderIamMember", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/resourcemanagerFolderIamPolicy", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/storageBucket", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/storageObjet", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/vpcAddress", _module)
 pulumi.runtime.registerResourceModule("yandex", "index/vpcNetwork", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/vpcRouteTable", _module)
+pulumi.runtime.registerResourceModule("yandex", "index/vpcSecurityGroup", _module)
 pulumi.runtime.registerResourceModule("yandex", "index/vpcSubnet", _module)
 
 import { Provider } from "./provider";

@@ -3,10 +3,89 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 # Export this package's modules as members:
+from .compute_disk import *
+from .compute_disk_placement_group import *
+from .compute_image import *
+from .compute_instance import *
+from .compute_instance_group import *
+from .compute_placement_group import *
+from .compute_snapshot import *
+from .container_registry import *
+from .container_registry_iam_binding import *
+from .dataproc_cluster import *
+from .function import *
+from .function_iam_binding import *
+from .function_trigger import *
+from .get_clientconfig import *
+from .get_compute_disk import *
+from .get_compute_disk_placement_group import *
+from .get_compute_image import *
+from .get_compute_instance import *
+from .get_compute_instance_group import *
+from .get_compute_placement_group import *
+from .get_compute_snapshot import *
+from .get_container_registry import *
+from .get_dataproc_cluster import *
+from .get_function import *
+from .get_function_trigger import *
+from .get_iam_policy import *
+from .get_iam_role import *
+from .get_iam_service_account import *
+from .get_iam_user import *
+from .get_iot_core_device import *
+from .get_iot_core_registry import *
+from .get_kubernetes_cluster import *
+from .get_kubernetes_node_group import *
+from .get_lb_network_load_balancer import *
+from .get_lb_target_group import *
+from .get_mdb_clickhouse_cluster import *
+from .get_mdb_kafka_cluster import *
+from .get_mdb_mongodb_cluster import *
+from .get_mdb_mysql_cluster import *
+from .get_mdb_postgresql_cluster import *
+from .get_mdb_redis_cluster import *
+from .get_message_queue import *
+from .get_resourcemanager_cloud import *
+from .get_resourcemanager_folder import *
+from .get_vpc_address import *
 from .get_vpc_network import *
+from .get_vpc_route_table import *
+from .get_vpc_security_group import *
 from .get_vpc_subnet import *
+from .iam_service_account_api_key import *
+from .iam_service_account_iam_binding import *
+from .iam_service_account_iam_member import *
+from .iam_service_account_iam_policy import *
+from .iam_service_account_key import *
+from .iam_service_account_static_access_key import *
+from .iam_service_cccount import *
+from .iot_core_device import *
+from .iot_core_registry import *
+from .kms_secret_ciphertext import *
+from .kms_symmetric_key import *
+from .kubernetes_cluster import *
+from .kubernetes_node_group import *
+from .lb_network_load_balancer import *
+from .lb_target_group import *
+from .mdb_clickhouse_cluster import *
+from .mdb_kafka_cluster import *
+from .mdb_mongodb_cluster import *
+from .mdb_mysql_cluster import *
+from .mdb_postgresql_cluster import *
+from .mdb_redis_cluster import *
+from .message_queue import *
 from .provider import *
+from .resourcemanager_cloud_iam_binding import *
+from .resourcemanager_cloud_iam_member import *
+from .resourcemanager_folder_iam_binding import *
+from .resourcemanager_folder_iam_member import *
+from .resourcemanager_folder_iam_policy import *
+from .storage_bucket import *
+from .storage_objet import *
+from .vpc_address import *
 from .vpc_network import *
+from .vpc_route_table import *
+from .vpc_security_group import *
 from .vpc_subnet import *
 from ._inputs import *
 from . import outputs
@@ -28,8 +107,98 @@ def _register_module():
             return Module._version
 
         def construct(self, name: str, typ: str, urn: str) -> pulumi.Resource:
-            if typ == "yandex:index/vpcNetwork:VpcNetwork":
+            if typ == "yandex:index/computeDisk:ComputeDisk":
+                return ComputeDisk(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/computeDiskPlacementGroup:ComputeDiskPlacementGroup":
+                return ComputeDiskPlacementGroup(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/computeImage:ComputeImage":
+                return ComputeImage(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/computeInstance:ComputeInstance":
+                return ComputeInstance(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/computeInstanceGroup:ComputeInstanceGroup":
+                return ComputeInstanceGroup(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/computePlacementGroup:ComputePlacementGroup":
+                return ComputePlacementGroup(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/computeSnapshot:ComputeSnapshot":
+                return ComputeSnapshot(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/containerRegistry:ContainerRegistry":
+                return ContainerRegistry(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/containerRegistryIamBinding:ContainerRegistryIamBinding":
+                return ContainerRegistryIamBinding(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/dataprocCluster:DataprocCluster":
+                return DataprocCluster(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/function:Function":
+                return Function(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/functionIamBinding:FunctionIamBinding":
+                return FunctionIamBinding(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/functionTrigger:FunctionTrigger":
+                return FunctionTrigger(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/iamServiceAccountApiKey:IamServiceAccountApiKey":
+                return IamServiceAccountApiKey(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/iamServiceAccountIamBinding:IamServiceAccountIamBinding":
+                return IamServiceAccountIamBinding(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/iamServiceAccountIamMember:IamServiceAccountIamMember":
+                return IamServiceAccountIamMember(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/iamServiceAccountIamPolicy:IamServiceAccountIamPolicy":
+                return IamServiceAccountIamPolicy(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/iamServiceAccountKey:IamServiceAccountKey":
+                return IamServiceAccountKey(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/iamServiceAccountStaticAccessKey:IamServiceAccountStaticAccessKey":
+                return IamServiceAccountStaticAccessKey(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/iamServiceCccount:IamServiceCccount":
+                return IamServiceCccount(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/iotCoreDevice:IotCoreDevice":
+                return IotCoreDevice(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/iotCoreRegistry:IotCoreRegistry":
+                return IotCoreRegistry(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/kmsSecretCiphertext:KmsSecretCiphertext":
+                return KmsSecretCiphertext(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/kmsSymmetricKey:KmsSymmetricKey":
+                return KmsSymmetricKey(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/kubernetesCluster:KubernetesCluster":
+                return KubernetesCluster(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/kubernetesNodeGroup:KubernetesNodeGroup":
+                return KubernetesNodeGroup(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/lbNetworkLoad_balancer:LbNetworkLoad_balancer":
+                return LbNetworkLoad_balancer(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/lbTargetGroup:LbTargetGroup":
+                return LbTargetGroup(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/mdbClickhouseCluster:MdbClickhouseCluster":
+                return MdbClickhouseCluster(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/mdbKafkaCluster:MdbKafkaCluster":
+                return MdbKafkaCluster(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/mdbMongodbCluster:MdbMongodbCluster":
+                return MdbMongodbCluster(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/mdbMysqlCluster:MdbMysqlCluster":
+                return MdbMysqlCluster(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/mdbPostgresqlCluster:MdbPostgresqlCluster":
+                return MdbPostgresqlCluster(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/mdbRedisCluster:MdbRedisCluster":
+                return MdbRedisCluster(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/messageQueue:MessageQueue":
+                return MessageQueue(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/resourcemanagerCloudIamBinding:ResourcemanagerCloudIamBinding":
+                return ResourcemanagerCloudIamBinding(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/resourcemanagerCloudIamMember:ResourcemanagerCloudIamMember":
+                return ResourcemanagerCloudIamMember(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/resourcemanagerFolderIamBinding:ResourcemanagerFolderIamBinding":
+                return ResourcemanagerFolderIamBinding(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/resourcemanagerFolderIamMember:ResourcemanagerFolderIamMember":
+                return ResourcemanagerFolderIamMember(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/resourcemanagerFolderIamPolicy:ResourcemanagerFolderIamPolicy":
+                return ResourcemanagerFolderIamPolicy(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/storageBucket:StorageBucket":
+                return StorageBucket(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/storageObjet:StorageObjet":
+                return StorageObjet(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/vpcAddress:VpcAddress":
+                return VpcAddress(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/vpcNetwork:VpcNetwork":
                 return VpcNetwork(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/vpcRouteTable:VpcRouteTable":
+                return VpcRouteTable(name, pulumi.ResourceOptions(urn=urn))
+            elif typ == "yandex:index/vpcSecurityGroup:VpcSecurityGroup":
+                return VpcSecurityGroup(name, pulumi.ResourceOptions(urn=urn))
             elif typ == "yandex:index/vpcSubnet:VpcSubnet":
                 return VpcSubnet(name, pulumi.ResourceOptions(urn=urn))
             else:
@@ -37,7 +206,52 @@ def _register_module():
 
 
     _module_instance = Module()
+    pulumi.runtime.register_resource_module("yandex", "index/computeDisk", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/computeDiskPlacementGroup", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/computeImage", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/computeInstance", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/computeInstanceGroup", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/computePlacementGroup", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/computeSnapshot", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/containerRegistry", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/containerRegistryIamBinding", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/dataprocCluster", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/function", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/functionIamBinding", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/functionTrigger", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/iamServiceAccountApiKey", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/iamServiceAccountIamBinding", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/iamServiceAccountIamMember", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/iamServiceAccountIamPolicy", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/iamServiceAccountKey", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/iamServiceAccountStaticAccessKey", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/iamServiceCccount", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/iotCoreDevice", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/iotCoreRegistry", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/kmsSecretCiphertext", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/kmsSymmetricKey", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/kubernetesCluster", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/kubernetesNodeGroup", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/lbNetworkLoad_balancer", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/lbTargetGroup", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/mdbClickhouseCluster", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/mdbKafkaCluster", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/mdbMongodbCluster", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/mdbMysqlCluster", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/mdbPostgresqlCluster", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/mdbRedisCluster", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/messageQueue", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/resourcemanagerCloudIamBinding", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/resourcemanagerCloudIamMember", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/resourcemanagerFolderIamBinding", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/resourcemanagerFolderIamMember", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/resourcemanagerFolderIamPolicy", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/storageBucket", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/storageObjet", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/vpcAddress", _module_instance)
     pulumi.runtime.register_resource_module("yandex", "index/vpcNetwork", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/vpcRouteTable", _module_instance)
+    pulumi.runtime.register_resource_module("yandex", "index/vpcSecurityGroup", _module_instance)
     pulumi.runtime.register_resource_module("yandex", "index/vpcSubnet", _module_instance)
 
 

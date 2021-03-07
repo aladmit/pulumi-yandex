@@ -4,10 +4,2235 @@
 import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs } from "../types";
 
+export interface ComputeDiskDiskPlacementPolicy {
+    diskPlacementGroupId: string;
+}
+
+export interface ComputeInstanceBootDisk {
+    autoDelete?: boolean;
+    deviceName: string;
+    diskId: string;
+    initializeParams: outputs.ComputeInstanceBootDiskInitializeParams;
+    mode: string;
+}
+
+export interface ComputeInstanceBootDiskInitializeParams {
+    description: string;
+    imageId: string;
+    name: string;
+    size: number;
+    snapshotId: string;
+    type?: string;
+}
+
+export interface ComputeInstanceGroupAllocationPolicy {
+    zones: string[];
+}
+
+export interface ComputeInstanceGroupDeployPolicy {
+    maxCreating?: number;
+    maxDeleting?: number;
+    maxExpansion: number;
+    maxUnavailable: number;
+    startupDuration?: number;
+    strategy: string;
+}
+
+export interface ComputeInstanceGroupHealthCheck {
+    healthyThreshold?: number;
+    httpOptions?: outputs.ComputeInstanceGroupHealthCheckHttpOption[];
+    interval?: number;
+    tcpOptions?: outputs.ComputeInstanceGroupHealthCheckTcpOption[];
+    timeout?: number;
+    unhealthyThreshold?: number;
+}
+
+export interface ComputeInstanceGroupHealthCheckHttpOption {
+    path: string;
+    port: number;
+}
+
+export interface ComputeInstanceGroupHealthCheckTcpOption {
+    port: number;
+}
+
+export interface ComputeInstanceGroupInstance {
+    fqdn: string;
+    instanceId: string;
+    name: string;
+    networkInterfaces: outputs.ComputeInstanceGroupInstanceNetworkInterface[];
+    status: string;
+    statusChangedAt: string;
+    statusMessage: string;
+    zoneId: string;
+}
+
+export interface ComputeInstanceGroupInstanceNetworkInterface {
+    index: number;
+    ipAddress: string;
+    ipv4: boolean;
+    ipv6: boolean;
+    ipv6Address: string;
+    macAddress: string;
+    nat: boolean;
+    natIpAddress: string;
+    natIpVersion: string;
+    subnetId: string;
+}
+
+export interface ComputeInstanceGroupInstanceTemplate {
+    bootDisk: outputs.ComputeInstanceGroupInstanceTemplateBootDisk;
+    description?: string;
+    hostname?: string;
+    labels?: {[key: string]: string};
+    metadata?: {[key: string]: string};
+    name?: string;
+    networkInterfaces: outputs.ComputeInstanceGroupInstanceTemplateNetworkInterface[];
+    networkSettings?: outputs.ComputeInstanceGroupInstanceTemplateNetworkSetting[];
+    placementPolicy: outputs.ComputeInstanceGroupInstanceTemplatePlacementPolicy;
+    platformId?: string;
+    resources: outputs.ComputeInstanceGroupInstanceTemplateResources;
+    schedulingPolicy: outputs.ComputeInstanceGroupInstanceTemplateSchedulingPolicy;
+    secondaryDisks?: outputs.ComputeInstanceGroupInstanceTemplateSecondaryDisk[];
+    serviceAccountId?: string;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateBootDisk {
+    deviceName: string;
+    initializeParams: outputs.ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams;
+    mode?: string;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams {
+    description?: string;
+    imageId: string;
+    size: number;
+    snapshotId: string;
+    type?: string;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateNetworkInterface {
+    ipv4?: boolean;
+    ipv6: boolean;
+    nat: boolean;
+    networkId?: string;
+    securityGroupIds?: string[];
+    subnetIds?: string[];
+}
+
+export interface ComputeInstanceGroupInstanceTemplateNetworkSetting {
+    type?: string;
+}
+
+export interface ComputeInstanceGroupInstanceTemplatePlacementPolicy {
+    placementGroupId: string;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateResources {
+    coreFraction?: number;
+    cores: number;
+    gpus?: number;
+    memory: number;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateSchedulingPolicy {
+    preemptible?: boolean;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateSecondaryDisk {
+    deviceName?: string;
+    initializeParams: outputs.ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams;
+    mode?: string;
+}
+
+export interface ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams {
+    description?: string;
+    imageId?: string;
+    size?: number;
+    snapshotId?: string;
+    type?: string;
+}
+
+export interface ComputeInstanceGroupLoadBalancer {
+    statusMessage: string;
+    targetGroupDescription?: string;
+    targetGroupId: string;
+    targetGroupLabels?: {[key: string]: string};
+    targetGroupName?: string;
+}
+
+export interface ComputeInstanceGroupScalePolicy {
+    autoScale?: outputs.ComputeInstanceGroupScalePolicyAutoScale;
+    fixedScale?: outputs.ComputeInstanceGroupScalePolicyFixedScale;
+    testAutoScale?: outputs.ComputeInstanceGroupScalePolicyTestAutoScale;
+}
+
+export interface ComputeInstanceGroupScalePolicyAutoScale {
+    cpuUtilizationTarget?: number;
+    customRules?: outputs.ComputeInstanceGroupScalePolicyAutoScaleCustomRule[];
+    initialSize: number;
+    maxSize?: number;
+    measurementDuration: number;
+    minZoneSize?: number;
+    stabilizationDuration: number;
+    warmupDuration: number;
+}
+
+export interface ComputeInstanceGroupScalePolicyAutoScaleCustomRule {
+    labels?: {[key: string]: string};
+    metricName: string;
+    metricType: string;
+    ruleType: string;
+    target: number;
+}
+
+export interface ComputeInstanceGroupScalePolicyFixedScale {
+    size: number;
+}
+
+export interface ComputeInstanceGroupScalePolicyTestAutoScale {
+    cpuUtilizationTarget?: number;
+    customRules?: outputs.ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule[];
+    initialSize: number;
+    maxSize?: number;
+    measurementDuration: number;
+    minZoneSize?: number;
+    stabilizationDuration: number;
+    warmupDuration: number;
+}
+
+export interface ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule {
+    labels?: {[key: string]: string};
+    metricName: string;
+    metricType: string;
+    ruleType: string;
+    target: number;
+}
+
+export interface ComputeInstanceNetworkInterface {
+    index: number;
+    ipAddress: string;
+    ipv4?: boolean;
+    ipv6: boolean;
+    ipv6Address: string;
+    macAddress: string;
+    nat: boolean;
+    natIpAddress: string;
+    natIpVersion: string;
+    securityGroupIds: string[];
+    subnetId: string;
+}
+
+export interface ComputeInstancePlacementPolicy {
+    placementGroupId: string;
+}
+
+export interface ComputeInstanceResources {
+    coreFraction?: number;
+    cores: number;
+    gpus?: number;
+    memory: number;
+}
+
+export interface ComputeInstanceSchedulingPolicy {
+    preemptible?: boolean;
+}
+
+export interface ComputeInstanceSecondaryDisk {
+    autoDelete?: boolean;
+    deviceName: string;
+    diskId: string;
+    mode?: string;
+}
+
+export interface DataprocClusterClusterConfig {
+    hadoop?: outputs.DataprocClusterClusterConfigHadoop;
+    subclusterSpecs: outputs.DataprocClusterClusterConfigSubclusterSpec[];
+    versionId: string;
+}
+
+export interface DataprocClusterClusterConfigHadoop {
+    properties?: {[key: string]: string};
+    services?: string[];
+    sshPublicKeys?: string[];
+}
+
+export interface DataprocClusterClusterConfigSubclusterSpec {
+    hostsCount: number;
+    id: string;
+    name: string;
+    resources: outputs.DataprocClusterClusterConfigSubclusterSpecResources;
+    role: string;
+    subnetId: string;
+}
+
+export interface DataprocClusterClusterConfigSubclusterSpecResources {
+    diskSize: number;
+    diskTypeId?: string;
+    resourcePresetId: string;
+}
+
+export interface FunctionContent {
+    zipFilename: string;
+}
+
+export interface FunctionPackage {
+    bucketName: string;
+    objectName: string;
+    sha256?: string;
+}
+
+export interface FunctionTriggerDlq {
+    queueId: string;
+    serviceAccountId: string;
+}
+
+export interface FunctionTriggerFunction {
+    id: string;
+    retryAttempts?: string;
+    retryInterval?: string;
+    serviceAccountId?: string;
+    tag?: string;
+}
+
+export interface FunctionTriggerIot {
+    deviceId?: string;
+    registryId: string;
+    topic?: string;
+}
+
+export interface FunctionTriggerMessageQueue {
+    batchCutoff: string;
+    batchSize?: string;
+    queueId: string;
+    serviceAccountId: string;
+    visibilityTimeout?: string;
+}
+
+export interface FunctionTriggerObjectStorage {
+    bucketId: string;
+    create?: boolean;
+    delete?: boolean;
+    prefix?: string;
+    suffix?: string;
+    update?: boolean;
+}
+
+export interface FunctionTriggerTimer {
+    cronExpression: string;
+}
+
+export interface GetComputeDiskDiskPlacementPolicy {
+    diskPlacementGroupId: string;
+}
+
+export interface GetComputeInstanceBootDisk {
+    autoDelete: boolean;
+    deviceName: string;
+    diskId: string;
+    initializeParams: outputs.GetComputeInstanceBootDiskInitializeParam[];
+    mode: string;
+}
+
+export interface GetComputeInstanceBootDiskInitializeParam {
+    description: string;
+    imageId: string;
+    name: string;
+    size: number;
+    snapshotId: string;
+    type: string;
+}
+
+export interface GetComputeInstanceGroupAllocationPolicy {
+    zones: string[];
+}
+
+export interface GetComputeInstanceGroupDeployPolicy {
+    maxCreating: number;
+    maxDeleting: number;
+    maxExpansion: number;
+    maxUnavailable: number;
+    startupDuration: number;
+    strategy: string;
+}
+
+export interface GetComputeInstanceGroupHealthCheck {
+    healthyThreshold: number;
+    httpOptions: outputs.GetComputeInstanceGroupHealthCheckHttpOption[];
+    interval: number;
+    tcpOptions: outputs.GetComputeInstanceGroupHealthCheckTcpOption[];
+    timeout: number;
+    unhealthyThreshold: number;
+}
+
+export interface GetComputeInstanceGroupHealthCheckHttpOption {
+    path: string;
+    port: number;
+}
+
+export interface GetComputeInstanceGroupHealthCheckTcpOption {
+    port: number;
+}
+
+export interface GetComputeInstanceGroupInstance {
+    fqdn: string;
+    instanceId: string;
+    name: string;
+    networkInterfaces: outputs.GetComputeInstanceGroupInstanceNetworkInterface[];
+    status: string;
+    statusChangedAt: string;
+    statusMessage: string;
+    zoneId: string;
+}
+
+export interface GetComputeInstanceGroupInstanceNetworkInterface {
+    index: number;
+    ipAddress: string;
+    ipv4: boolean;
+    ipv6: boolean;
+    ipv6Address: string;
+    macAddress: string;
+    nat: boolean;
+    natIpAddress: string;
+    natIpVersion: string;
+    subnetId: string;
+}
+
+export interface GetComputeInstanceGroupInstanceTemplate {
+    bootDisk: outputs.GetComputeInstanceGroupInstanceTemplateBootDisk;
+    description: string;
+    hostname: string;
+    labels: {[key: string]: string};
+    metadata: {[key: string]: string};
+    name: string;
+    networkInterfaces: outputs.GetComputeInstanceGroupInstanceTemplateNetworkInterface[];
+    networkSettings: outputs.GetComputeInstanceGroupInstanceTemplateNetworkSetting[];
+    placementPolicy?: outputs.GetComputeInstanceGroupInstanceTemplatePlacementPolicy;
+    platformId: string;
+    resources: outputs.GetComputeInstanceGroupInstanceTemplateResources;
+    schedulingPolicy: outputs.GetComputeInstanceGroupInstanceTemplateSchedulingPolicy;
+    secondaryDisks: outputs.GetComputeInstanceGroupInstanceTemplateSecondaryDisk[];
+    serviceAccountId: string;
+}
+
+export interface GetComputeInstanceGroupInstanceTemplateBootDisk {
+    deviceName: string;
+    initializeParams: outputs.GetComputeInstanceGroupInstanceTemplateBootDiskInitializeParams;
+    mode: string;
+}
+
+export interface GetComputeInstanceGroupInstanceTemplateBootDiskInitializeParams {
+    description: string;
+    imageId: string;
+    size: number;
+    snapshotId: string;
+    type: string;
+}
+
+export interface GetComputeInstanceGroupInstanceTemplateNetworkInterface {
+    ipv4: boolean;
+    ipv6: boolean;
+    nat: boolean;
+    networkId: string;
+    securityGroupIds: string[];
+    subnetIds: string[];
+}
+
+export interface GetComputeInstanceGroupInstanceTemplateNetworkSetting {
+    type: string;
+}
+
+export interface GetComputeInstanceGroupInstanceTemplatePlacementPolicy {
+    placementGroupId: string;
+}
+
+export interface GetComputeInstanceGroupInstanceTemplateResources {
+    coreFraction: number;
+    cores: number;
+    gpus: number;
+    memory: number;
+}
+
+export interface GetComputeInstanceGroupInstanceTemplateSchedulingPolicy {
+    preemptible: boolean;
+}
+
+export interface GetComputeInstanceGroupInstanceTemplateSecondaryDisk {
+    deviceName: string;
+    initializeParams: outputs.GetComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams;
+    mode: string;
+}
+
+export interface GetComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams {
+    description: string;
+    imageId: string;
+    size: number;
+    snapshotId: string;
+    type: string;
+}
+
+export interface GetComputeInstanceGroupLoadBalancer {
+    statusMessage: string;
+    targetGroupDescription: string;
+    targetGroupId: string;
+    targetGroupLabels: {[key: string]: string};
+    targetGroupName: string;
+}
+
+export interface GetComputeInstanceGroupLoadBalancerState {
+    statusMessage: string;
+    targetGroupId: string;
+}
+
+export interface GetComputeInstanceGroupScalePolicy {
+    autoScales: outputs.GetComputeInstanceGroupScalePolicyAutoScale[];
+    fixedScales: outputs.GetComputeInstanceGroupScalePolicyFixedScale[];
+    testAutoScales: outputs.GetComputeInstanceGroupScalePolicyTestAutoScale[];
+}
+
+export interface GetComputeInstanceGroupScalePolicyAutoScale {
+    cpuUtilizationTarget: number;
+    customRules: outputs.GetComputeInstanceGroupScalePolicyAutoScaleCustomRule[];
+    initialSize: number;
+    maxSize: number;
+    measurementDuration: number;
+    minZoneSize: number;
+    stabilizationDuration: number;
+    warmupDuration: number;
+}
+
+export interface GetComputeInstanceGroupScalePolicyAutoScaleCustomRule {
+    labels: {[key: string]: string};
+    metricName: string;
+    metricType: string;
+    ruleType: string;
+    target: number;
+}
+
+export interface GetComputeInstanceGroupScalePolicyFixedScale {
+    size: number;
+}
+
+export interface GetComputeInstanceGroupScalePolicyTestAutoScale {
+    cpuUtilizationTarget: number;
+    customRules: outputs.GetComputeInstanceGroupScalePolicyTestAutoScaleCustomRule[];
+    initialSize: number;
+    maxSize: number;
+    measurementDuration: number;
+    minZoneSize: number;
+    stabilizationDuration: number;
+    warmupDuration: number;
+}
+
+export interface GetComputeInstanceGroupScalePolicyTestAutoScaleCustomRule {
+    labels: {[key: string]: string};
+    metricName: string;
+    metricType: string;
+    ruleType: string;
+    target: number;
+}
+
+export interface GetComputeInstanceNetworkInterface {
+    index: number;
+    ipAddress: string;
+    ipv4: boolean;
+    ipv6: boolean;
+    ipv6Address: string;
+    macAddress: string;
+    nat: boolean;
+    natIpAddress: string;
+    natIpVersion: string;
+    securityGroupIds: string[];
+    subnetId: string;
+}
+
+export interface GetComputeInstancePlacementPolicy {
+    placementGroupId: string;
+}
+
+export interface GetComputeInstanceResources {
+    coreFraction: number;
+    cores: number;
+    gpus: number;
+    memory: number;
+}
+
+export interface GetComputeInstanceSchedulingPolicy {
+    preemptible?: boolean;
+}
+
+export interface GetComputeInstanceSecondaryDisk {
+    autoDelete: boolean;
+    deviceName: string;
+    diskId: string;
+    mode: string;
+}
+
+export interface GetDataprocClusterClusterConfig {
+    hadoop: outputs.GetDataprocClusterClusterConfigHadoop;
+    subclusterSpecs: outputs.GetDataprocClusterClusterConfigSubclusterSpec[];
+    versionId: string;
+}
+
+export interface GetDataprocClusterClusterConfigHadoop {
+    properties: {[key: string]: string};
+    services: string[];
+    sshPublicKeys: string[];
+}
+
+export interface GetDataprocClusterClusterConfigSubclusterSpec {
+    hostsCount: number;
+    id: string;
+    name: string;
+    resources: outputs.GetDataprocClusterClusterConfigSubclusterSpecResources;
+    role: string;
+    subnetId: string;
+}
+
+export interface GetDataprocClusterClusterConfigSubclusterSpecResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetFunctionTriggerDlq {
+    queueId: string;
+    serviceAccountId: string;
+}
+
+export interface GetFunctionTriggerFunction {
+    id: string;
+    retryAttempts: string;
+    retryInterval: string;
+    serviceAccountId: string;
+    tag: string;
+}
+
+export interface GetFunctionTriggerIot {
+    deviceId: string;
+    registryId: string;
+    topic: string;
+}
+
+export interface GetFunctionTriggerMessageQueue {
+    batchCutoff: string;
+    batchSize: string;
+    queueId: string;
+    serviceAccountId: string;
+    visibilityTimeout: string;
+}
+
+export interface GetFunctionTriggerObjectStorage {
+    bucketId: string;
+    create: boolean;
+    delete: boolean;
+    prefix: string;
+    suffix: string;
+    update: boolean;
+}
+
+export interface GetFunctionTriggerTimer {
+    cronExpression: string;
+}
+
+export interface GetIamPolicyBinding {
+    members: string[];
+    role: string;
+}
+
+export interface GetKubernetesClusterKmsProvider {
+    keyId: string;
+}
+
+export interface GetKubernetesClusterMaster {
+    clusterCaCertificate: string;
+    externalV4Address: string;
+    externalV4Endpoint: string;
+    internalV4Address: string;
+    internalV4Endpoint: string;
+    maintenancePolicy: outputs.GetKubernetesClusterMasterMaintenancePolicy;
+    publicIp: boolean;
+    regional: outputs.GetKubernetesClusterMasterRegional;
+    securityGroupIds: string[];
+    version: string;
+    versionInfo: outputs.GetKubernetesClusterMasterVersionInfo;
+    zonal: outputs.GetKubernetesClusterMasterZonal;
+}
+
+export interface GetKubernetesClusterMasterMaintenancePolicy {
+    autoUpgrade: boolean;
+    maintenanceWindows: outputs.GetKubernetesClusterMasterMaintenancePolicyMaintenanceWindow[];
+}
+
+export interface GetKubernetesClusterMasterMaintenancePolicyMaintenanceWindow {
+    day: string;
+    duration: string;
+    startTime: string;
+}
+
+export interface GetKubernetesClusterMasterRegional {
+    region: string;
+}
+
+export interface GetKubernetesClusterMasterVersionInfo {
+    currentVersion: string;
+    newRevisionAvailable: boolean;
+    newRevisionSummary: string;
+    versionDeprecated: boolean;
+}
+
+export interface GetKubernetesClusterMasterZonal {
+    zone: string;
+}
+
+export interface GetKubernetesNodeGroupAllocationPolicy {
+    locations: outputs.GetKubernetesNodeGroupAllocationPolicyLocation[];
+}
+
+export interface GetKubernetesNodeGroupAllocationPolicyLocation {
+    subnetId: string;
+    zone: string;
+}
+
+export interface GetKubernetesNodeGroupDeployPolicy {
+    maxExpansion: number;
+    maxUnavailable: number;
+}
+
+export interface GetKubernetesNodeGroupInstanceTemplate {
+    bootDisk: outputs.GetKubernetesNodeGroupInstanceTemplateBootDisk;
+    metadata: {[key: string]: string};
+    nat: boolean;
+    platformId: string;
+    resources: outputs.GetKubernetesNodeGroupInstanceTemplateResources;
+    schedulingPolicy: outputs.GetKubernetesNodeGroupInstanceTemplateSchedulingPolicy;
+}
+
+export interface GetKubernetesNodeGroupInstanceTemplateBootDisk {
+    size: number;
+    type: string;
+}
+
+export interface GetKubernetesNodeGroupInstanceTemplateResources {
+    coreFraction: number;
+    cores: number;
+    gpus: number;
+    memory: number;
+}
+
+export interface GetKubernetesNodeGroupInstanceTemplateSchedulingPolicy {
+    preemptible: boolean;
+}
+
+export interface GetKubernetesNodeGroupMaintenancePolicy {
+    autoRepair: boolean;
+    autoUpgrade: boolean;
+    maintenanceWindows: outputs.GetKubernetesNodeGroupMaintenancePolicyMaintenanceWindow[];
+}
+
+export interface GetKubernetesNodeGroupMaintenancePolicyMaintenanceWindow {
+    day: string;
+    duration: string;
+    startTime: string;
+}
+
+export interface GetKubernetesNodeGroupScalePolicy {
+    autoScale: outputs.GetKubernetesNodeGroupScalePolicyAutoScale;
+    fixedScale: outputs.GetKubernetesNodeGroupScalePolicyFixedScale;
+}
+
+export interface GetKubernetesNodeGroupScalePolicyAutoScale {
+    initial: number;
+    max: number;
+    min: number;
+}
+
+export interface GetKubernetesNodeGroupScalePolicyFixedScale {
+    size: number;
+}
+
+export interface GetKubernetesNodeGroupVersionInfo {
+    currentVersion: string;
+    newRevisionAvailable: boolean;
+    newRevisionSummary: string;
+    versionDeprecated: boolean;
+}
+
+export interface GetLbNetworkLoadBalancerAttachedTargetGroup {
+    healthchecks: outputs.GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheck[];
+    targetGroupId: string;
+}
+
+export interface GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheck {
+    healthyThreshold: number;
+    httpOptions: outputs.GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptions;
+    interval: number;
+    name: string;
+    tcpOptions: outputs.GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptions;
+    timeout: number;
+    unhealthyThreshold: number;
+}
+
+export interface GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptions {
+    path: string;
+    port: number;
+}
+
+export interface GetLbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptions {
+    port: number;
+}
+
+export interface GetLbNetworkLoadBalancerListener {
+    externalAddressSpec: outputs.GetLbNetworkLoadBalancerListenerExternalAddressSpec;
+    internalAddressSpec: outputs.GetLbNetworkLoadBalancerListenerInternalAddressSpec;
+    name: string;
+    port: number;
+    protocol: string;
+    targetPort: number;
+}
+
+export interface GetLbNetworkLoadBalancerListenerExternalAddressSpec {
+    address: string;
+    ipVersion: string;
+}
+
+export interface GetLbNetworkLoadBalancerListenerInternalAddressSpec {
+    address: string;
+    ipVersion: string;
+    subnetId: string;
+}
+
+export interface GetLbTargetGroupTarget {
+    address: string;
+    subnetId: string;
+}
+
+export interface GetMdbClickhouseClusterAccess {
+    dataLens: boolean;
+    metrika: boolean;
+    serverless: boolean;
+    webSql: boolean;
+}
+
+export interface GetMdbClickhouseClusterBackupWindowStart {
+    hours: number;
+    minutes: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouse {
+    config: outputs.GetMdbClickhouseClusterClickhouseConfig;
+    resources: outputs.GetMdbClickhouseClusterClickhouseResources;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfig {
+    backgroundPoolSize?: number;
+    backgroundSchedulePoolSize?: number;
+    compressions?: outputs.GetMdbClickhouseClusterClickhouseConfigCompression[];
+    geobaseUri?: string;
+    graphiteRollups?: outputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollup[];
+    kafkaTopics?: outputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopic[];
+    kafkas: outputs.GetMdbClickhouseClusterClickhouseConfigKafka[];
+    keepAliveTimeout?: number;
+    logLevel?: string;
+    markCacheSize?: number;
+    maxConcurrentQueries?: number;
+    maxConnections?: number;
+    maxPartitionSizeToDrop?: number;
+    maxTableSizeToDrop?: number;
+    mergeTree: outputs.GetMdbClickhouseClusterClickhouseConfigMergeTree;
+    metricLogEnabled?: boolean;
+    metricLogRetentionSize?: number;
+    metricLogRetentionTime?: number;
+    partLogRetentionSize?: number;
+    partLogRetentionTime?: number;
+    queryLogRetentionSize?: number;
+    queryLogRetentionTime?: number;
+    queryThreadLogEnabled?: boolean;
+    queryThreadLogRetentionSize?: number;
+    queryThreadLogRetentionTime?: number;
+    rabbitmq: outputs.GetMdbClickhouseClusterClickhouseConfigRabbitmq;
+    textLogEnabled?: boolean;
+    textLogLevel?: string;
+    textLogRetentionSize?: number;
+    textLogRetentionTime?: number;
+    timezone?: string;
+    traceLogEnabled?: boolean;
+    traceLogRetentionSize?: number;
+    traceLogRetentionTime?: number;
+    uncompressedCacheSize?: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigCompression {
+    method: string;
+    minPartSize: number;
+    minPartSizeRatio: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigGraphiteRollup {
+    name: string;
+    patterns?: outputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPattern[];
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPattern {
+    function: string;
+    regexp?: string;
+    retentions?: outputs.GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention[];
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention {
+    age: number;
+    precision: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigKafka {
+    saslMechanism?: string;
+    saslPassword?: string;
+    saslUsername?: string;
+    securityProtocol?: string;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigKafkaTopic {
+    name: string;
+    settings?: outputs.GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettings;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigKafkaTopicSettings {
+    saslMechanism?: string;
+    saslPassword?: string;
+    saslUsername?: string;
+    securityProtocol?: string;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigMergeTree {
+    maxBytesToMergeAtMinSpaceInPool?: number;
+    maxReplicatedMergesInQueue?: number;
+    numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge?: number;
+    partsToDelayInsert?: number;
+    partsToThrowInsert?: number;
+    replicatedDeduplicationWindow?: number;
+    replicatedDeduplicationWindowSeconds?: number;
+}
+
+export interface GetMdbClickhouseClusterClickhouseConfigRabbitmq {
+    password?: string;
+    username?: string;
+}
+
+export interface GetMdbClickhouseClusterClickhouseResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetMdbClickhouseClusterDatabase {
+    name: string;
+}
+
+export interface GetMdbClickhouseClusterFormatSchema {
+    name: string;
+    type: string;
+    uri: string;
+}
+
+export interface GetMdbClickhouseClusterHost {
+    assignPublicIp: boolean;
+    fqdn: string;
+    shardName: string;
+    subnetId: string;
+    type: string;
+    zone: string;
+}
+
+export interface GetMdbClickhouseClusterMlModel {
+    name: string;
+    type: string;
+    uri: string;
+}
+
+export interface GetMdbClickhouseClusterShardGroup {
+    description: string;
+    name: string;
+    shardNames: string[];
+}
+
+export interface GetMdbClickhouseClusterUser {
+    name: string;
+    permissions: outputs.GetMdbClickhouseClusterUserPermission[];
+    quotas: outputs.GetMdbClickhouseClusterUserQuota[];
+    settings: outputs.GetMdbClickhouseClusterUserSettings;
+}
+
+export interface GetMdbClickhouseClusterUserPermission {
+    databaseName: string;
+}
+
+export interface GetMdbClickhouseClusterUserQuota {
+    errors: number;
+    executionTime: number;
+    intervalDuration: number;
+    queries: number;
+    readRows: number;
+    resultRows: number;
+}
+
+export interface GetMdbClickhouseClusterUserSettings {
+    addHttpCorsHeader: boolean;
+    allowDdl: boolean;
+    compile: boolean;
+    compileExpressions: boolean;
+    connectTimeout: number;
+    countDistinctImplementation: string;
+    distinctOverflowMode: string;
+    distributedAggregationMemoryEfficient: boolean;
+    distributedDdlTaskTimeout: number;
+    distributedProductMode: string;
+    emptyResultForAggregationByEmptySet: boolean;
+    enableHttpCompression: boolean;
+    fallbackToStaleReplicasForDistributedQueries: boolean;
+    forceIndexByDate: boolean;
+    forcePrimaryKey: boolean;
+    groupByOverflowMode: string;
+    groupByTwoLevelThreshold: number;
+    groupByTwoLevelThresholdBytes: number;
+    httpConnectionTimeout: number;
+    httpHeadersProgressInterval: number;
+    httpReceiveTimeout: number;
+    httpSendTimeout: number;
+    inputFormatDefaultsForOmittedFields: boolean;
+    inputFormatValuesInterpretExpressions: boolean;
+    insertQuorum: number;
+    insertQuorumTimeout: number;
+    joinOverflowMode: string;
+    joinUseNulls: boolean;
+    joinedSubqueryRequiresAlias: boolean;
+    lowCardinalityAllowInNativeFormat: boolean;
+    maxAstDepth: number;
+    maxAstElements: number;
+    maxBlockSize: number;
+    maxBytesBeforeExternalGroupBy: number;
+    maxBytesBeforeExternalSort: number;
+    maxBytesInDistinct: number;
+    maxBytesInJoin: number;
+    maxBytesInSet: number;
+    maxBytesToRead: number;
+    maxBytesToSort: number;
+    maxBytesToTransfer: number;
+    maxColumnsToRead: number;
+    maxExecutionTime: number;
+    maxExpandedAstElements: number;
+    maxInsertBlockSize: number;
+    maxMemoryUsage: number;
+    maxMemoryUsageForUser: number;
+    maxNetworkBandwidth: number;
+    maxNetworkBandwidthForUser: number;
+    maxQuerySize: number;
+    maxReplicaDelayForDistributedQueries: number;
+    maxResultBytes: number;
+    maxResultRows: number;
+    maxRowsInDistinct: number;
+    maxRowsInJoin: number;
+    maxRowsInSet: number;
+    maxRowsToGroupBy: number;
+    maxRowsToRead: number;
+    maxRowsToSort: number;
+    maxRowsToTransfer: number;
+    maxTemporaryColumns: number;
+    maxTemporaryNonConstColumns: number;
+    maxThreads: number;
+    mergeTreeMaxBytesToUseCache: number;
+    mergeTreeMaxRowsToUseCache: number;
+    mergeTreeMinBytesForConcurrentRead: number;
+    mergeTreeMinRowsForConcurrentRead: number;
+    minBytesToUseDirectIo: number;
+    minCountToCompile: number;
+    minCountToCompileExpression: number;
+    minExecutionSpeed: number;
+    minExecutionSpeedBytes: number;
+    minInsertBlockSizeBytes: number;
+    minInsertBlockSizeRows: number;
+    outputFormatJsonQuote64bitIntegers: boolean;
+    outputFormatJsonQuoteDenormals: boolean;
+    priority: number;
+    quotaMode: string;
+    readOverflowMode: string;
+    readonly: number;
+    receiveTimeout: number;
+    replicationAlterPartitionsSync: number;
+    resultOverflowMode: string;
+    selectSequentialConsistency: boolean;
+    sendProgressInHttpHeaders: boolean;
+    sendTimeout: number;
+    setOverflowMode: string;
+    skipUnavailableShards: boolean;
+    sortOverflowMode: string;
+    timeoutOverflowMode: string;
+    transferOverflowMode: string;
+    transformNullIn: boolean;
+    useUncompressedCache: boolean;
+}
+
+export interface GetMdbClickhouseClusterZookeeper {
+    resources: outputs.GetMdbClickhouseClusterZookeeperResources;
+}
+
+export interface GetMdbClickhouseClusterZookeeperResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetMdbKafkaClusterConfig {
+    assignPublicIp?: boolean;
+    brokersCount?: number;
+    kafka: outputs.GetMdbKafkaClusterConfigKafka;
+    version: string;
+    zones: string[];
+    zookeeper?: outputs.GetMdbKafkaClusterConfigZookeeper;
+}
+
+export interface GetMdbKafkaClusterConfigKafka {
+    kafkaConfig?: outputs.GetMdbKafkaClusterConfigKafkaKafkaConfig;
+    resources: outputs.GetMdbKafkaClusterConfigKafkaResources;
+}
+
+export interface GetMdbKafkaClusterConfigKafkaKafkaConfig {
+    compressionType?: string;
+    logFlushIntervalMessages?: number;
+    logFlushIntervalMs?: number;
+    logFlushSchedulerIntervalMs?: number;
+    logPreallocate?: boolean;
+    logRetentionBytes?: number;
+    logRetentionHours?: number;
+    logRetentionMinutes?: number;
+    logRetentionMs?: number;
+    logSegmentBytes?: number;
+}
+
+export interface GetMdbKafkaClusterConfigKafkaResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetMdbKafkaClusterConfigZookeeper {
+    resources: outputs.GetMdbKafkaClusterConfigZookeeperResources;
+}
+
+export interface GetMdbKafkaClusterConfigZookeeperResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetMdbKafkaClusterTopic {
+    name: string;
+    partitions: number;
+    replicationFactor: number;
+    topicConfig?: outputs.GetMdbKafkaClusterTopicTopicConfig;
+}
+
+export interface GetMdbKafkaClusterTopicTopicConfig {
+    cleanupPolicy?: string;
+    compressionType?: string;
+    deleteRetentionMs?: number;
+    fileDeleteDelayMs?: number;
+    flushMessages?: number;
+    flushMs?: number;
+    maxMessageBytes?: number;
+    minCompactionLagMs?: number;
+    minInsyncReplicas?: number;
+    preallocate?: boolean;
+    retentionBytes?: number;
+    retentionMs?: number;
+    segmentBytes?: number;
+}
+
+export interface GetMdbKafkaClusterUser {
+    name: string;
+    password: string;
+    permissions?: outputs.GetMdbKafkaClusterUserPermission[];
+}
+
+export interface GetMdbKafkaClusterUserPermission {
+    role: string;
+    topicName: string;
+}
+
+export interface GetMdbMongodbClusterClusterConfig {
+    access: outputs.GetMdbMongodbClusterClusterConfigAccess;
+    backupWindowStart: outputs.GetMdbMongodbClusterClusterConfigBackupWindowStart;
+    featureCompatibilityVersion: string;
+    version: string;
+}
+
+export interface GetMdbMongodbClusterClusterConfigAccess {
+    dataLens: boolean;
+}
+
+export interface GetMdbMongodbClusterClusterConfigBackupWindowStart {
+    hours?: number;
+    minutes?: number;
+}
+
+export interface GetMdbMongodbClusterDatabase {
+    name: string;
+}
+
+export interface GetMdbMongodbClusterHost {
+    assignPublicIp: boolean;
+    health: string;
+    name: string;
+    role: string;
+    shardName: string;
+    subnetId: string;
+    type: string;
+    zoneId: string;
+}
+
+export interface GetMdbMongodbClusterResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetMdbMongodbClusterUser {
+    name: string;
+    permissions: outputs.GetMdbMongodbClusterUserPermission[];
+}
+
+export interface GetMdbMongodbClusterUserPermission {
+    databaseName: string;
+    roles?: string[];
+}
+
+export interface GetMdbMysqlClusterAccess {
+    dataLens: boolean;
+    webSql: boolean;
+}
+
+export interface GetMdbMysqlClusterBackupWindowStart {
+    hours?: number;
+    minutes?: number;
+}
+
+export interface GetMdbMysqlClusterDatabase {
+    name: string;
+}
+
+export interface GetMdbMysqlClusterHost {
+    assignPublicIp?: boolean;
+    fqdn: string;
+    subnetId: string;
+    zone: string;
+}
+
+export interface GetMdbMysqlClusterResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetMdbMysqlClusterUser {
+    authenticationPlugin: string;
+    connectionLimits: outputs.GetMdbMysqlClusterUserConnectionLimits;
+    globalPermissions: string[];
+    name: string;
+    password: string;
+    permissions: outputs.GetMdbMysqlClusterUserPermission[];
+}
+
+export interface GetMdbMysqlClusterUserConnectionLimits {
+    maxConnectionsPerHour: number;
+    maxQuestionsPerHour: number;
+    maxUpdatesPerHour: number;
+    maxUserConnections: number;
+}
+
+export interface GetMdbMysqlClusterUserPermission {
+    databaseName: string;
+    roles?: string[];
+}
+
+export interface GetMdbPostgresqlClusterConfig {
+    access: outputs.GetMdbPostgresqlClusterConfigAccess;
+    autofailover: boolean;
+    backupWindowStart: outputs.GetMdbPostgresqlClusterConfigBackupWindowStart;
+    performanceDiagnostics: outputs.GetMdbPostgresqlClusterConfigPerformanceDiagnostics;
+    poolerConfig: outputs.GetMdbPostgresqlClusterConfigPoolerConfig;
+    postgresqlConfig: {[key: string]: string};
+    resources: outputs.GetMdbPostgresqlClusterConfigResources;
+    version: string;
+}
+
+export interface GetMdbPostgresqlClusterConfigAccess {
+    dataLens: boolean;
+    webSql: boolean;
+}
+
+export interface GetMdbPostgresqlClusterConfigBackupWindowStart {
+    hours: number;
+    minutes: number;
+}
+
+export interface GetMdbPostgresqlClusterConfigPerformanceDiagnostics {
+    enabled: boolean;
+    sessionsSamplingInterval: number;
+    statementsSamplingInterval: number;
+}
+
+export interface GetMdbPostgresqlClusterConfigPoolerConfig {
+    poolDiscard: boolean;
+    poolingMode: string;
+}
+
+export interface GetMdbPostgresqlClusterConfigResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface GetMdbPostgresqlClusterDatabase {
+    extensions: outputs.GetMdbPostgresqlClusterDatabaseExtension[];
+    lcCollate: string;
+    lcType: string;
+    name: string;
+    owner: string;
+}
+
+export interface GetMdbPostgresqlClusterDatabaseExtension {
+    name: string;
+    version: string;
+}
+
+export interface GetMdbPostgresqlClusterHost {
+    assignPublicIp: boolean;
+    fqdn: string;
+    priority: number;
+    replicationSource: string;
+    role: string;
+    subnetId: string;
+    zone: string;
+}
+
+export interface GetMdbPostgresqlClusterUser {
+    connLimit?: number;
+    grants: string[];
+    login?: boolean;
+    name: string;
+    password: string;
+    permissions: outputs.GetMdbPostgresqlClusterUserPermission[];
+    settings: {[key: string]: string};
+}
+
+export interface GetMdbPostgresqlClusterUserPermission {
+    databaseName: string;
+}
+
+export interface GetMdbRedisClusterConfig {
+    maxmemoryPolicy: string;
+    timeout: number;
+    version: string;
+}
+
+export interface GetMdbRedisClusterHost {
+    fqdn: string;
+    shardName: string;
+    subnetId: string;
+    zone: string;
+}
+
+export interface GetMdbRedisClusterResources {
+    diskSize: number;
+    resourcePresetId: string;
+}
+
+export interface GetVpcAddressExternalIpv4Address {
+    address: string;
+    ddosProtectionProvider: string;
+    outgoingSmtpCapability: string;
+    zoneId: string;
+}
+
+export interface GetVpcRouteTableStaticRoute {
+    destinationPrefix: string;
+    nextHopAddress: string;
+}
+
+export interface GetVpcSecurityGroupEgress {
+    description: string;
+    fromPort: number;
+    id: string;
+    labels: {[key: string]: string};
+    port: number;
+    predefinedTarget: string;
+    protocol: string;
+    securityGroupId: string;
+    toPort: number;
+    v4CidrBlocks: string[];
+    v6CidrBlocks: string[];
+}
+
+export interface GetVpcSecurityGroupIngress {
+    description: string;
+    fromPort: number;
+    id: string;
+    labels: {[key: string]: string};
+    port: number;
+    predefinedTarget: string;
+    protocol: string;
+    securityGroupId: string;
+    toPort: number;
+    v4CidrBlocks: string[];
+    v6CidrBlocks: string[];
+}
+
 export interface GetVpcSubnetDhcpOptions {
     domainName: string;
     domainNameServers: string[];
     ntpServers: string[];
+}
+
+export interface KubernetesClusterKmsProvider {
+    keyId?: string;
+}
+
+export interface KubernetesClusterMaster {
+    clusterCaCertificate: string;
+    externalV4Address: string;
+    externalV4Endpoint: string;
+    internalV4Address: string;
+    internalV4Endpoint: string;
+    maintenancePolicy: outputs.KubernetesClusterMasterMaintenancePolicy;
+    publicIp: boolean;
+    regional: outputs.KubernetesClusterMasterRegional;
+    securityGroupIds?: string[];
+    version: string;
+    versionInfo: outputs.KubernetesClusterMasterVersionInfo;
+    zonal: outputs.KubernetesClusterMasterZonal;
+}
+
+export interface KubernetesClusterMasterMaintenancePolicy {
+    autoUpgrade: boolean;
+    maintenanceWindows?: outputs.KubernetesClusterMasterMaintenancePolicyMaintenanceWindow[];
+}
+
+export interface KubernetesClusterMasterMaintenancePolicyMaintenanceWindow {
+    day: string;
+    duration: string;
+    startTime: string;
+}
+
+export interface KubernetesClusterMasterRegional {
+    locations: outputs.KubernetesClusterMasterRegionalLocation[];
+    region: string;
+}
+
+export interface KubernetesClusterMasterRegionalLocation {
+    subnetId?: string;
+    zone?: string;
+}
+
+export interface KubernetesClusterMasterVersionInfo {
+    currentVersion: string;
+    newRevisionAvailable: boolean;
+    newRevisionSummary: string;
+    versionDeprecated: boolean;
+}
+
+export interface KubernetesClusterMasterZonal {
+    subnetId?: string;
+    zone: string;
+}
+
+export interface KubernetesNodeGroupAllocationPolicy {
+    locations: outputs.KubernetesNodeGroupAllocationPolicyLocation[];
+}
+
+export interface KubernetesNodeGroupAllocationPolicyLocation {
+    subnetId: string;
+    zone: string;
+}
+
+export interface KubernetesNodeGroupDeployPolicy {
+    maxExpansion: number;
+    maxUnavailable: number;
+}
+
+export interface KubernetesNodeGroupInstanceTemplate {
+    bootDisk: outputs.KubernetesNodeGroupInstanceTemplateBootDisk;
+    metadata: {[key: string]: string};
+    nat: boolean;
+    platformId: string;
+    resources: outputs.KubernetesNodeGroupInstanceTemplateResources;
+    schedulingPolicy: outputs.KubernetesNodeGroupInstanceTemplateSchedulingPolicy;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateBootDisk {
+    size: number;
+    type: string;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateResources {
+    coreFraction: number;
+    cores: number;
+    gpus?: number;
+    memory: number;
+}
+
+export interface KubernetesNodeGroupInstanceTemplateSchedulingPolicy {
+    preemptible: boolean;
+}
+
+export interface KubernetesNodeGroupMaintenancePolicy {
+    autoRepair: boolean;
+    autoUpgrade: boolean;
+    maintenanceWindows?: outputs.KubernetesNodeGroupMaintenancePolicyMaintenanceWindow[];
+}
+
+export interface KubernetesNodeGroupMaintenancePolicyMaintenanceWindow {
+    day: string;
+    duration: string;
+    startTime: string;
+}
+
+export interface KubernetesNodeGroupScalePolicy {
+    autoScale?: outputs.KubernetesNodeGroupScalePolicyAutoScale;
+    fixedScale?: outputs.KubernetesNodeGroupScalePolicyFixedScale;
+}
+
+export interface KubernetesNodeGroupScalePolicyAutoScale {
+    initial: number;
+    max: number;
+    min: number;
+}
+
+export interface KubernetesNodeGroupScalePolicyFixedScale {
+    size: number;
+}
+
+export interface KubernetesNodeGroupVersionInfo {
+    currentVersion: string;
+    newRevisionAvailable: boolean;
+    newRevisionSummary: string;
+    versionDeprecated: boolean;
+}
+
+export interface LbNetworkLoad_balancerAttachedTargetGroup {
+    healthchecks: outputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheck[];
+    targetGroupId: string;
+}
+
+export interface LbNetworkLoad_balancerAttachedTargetGroupHealthcheck {
+    healthyThreshold?: number;
+    httpOptions?: outputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheckHttpOptions;
+    interval?: number;
+    name: string;
+    tcpOptions?: outputs.LbNetworkLoad_balancerAttachedTargetGroupHealthcheckTcpOptions;
+    timeout?: number;
+    unhealthyThreshold?: number;
+}
+
+export interface LbNetworkLoad_balancerAttachedTargetGroupHealthcheckHttpOptions {
+    path?: string;
+    port: number;
+}
+
+export interface LbNetworkLoad_balancerAttachedTargetGroupHealthcheckTcpOptions {
+    port: number;
+}
+
+export interface LbNetworkLoad_balancerListener {
+    externalAddressSpec?: outputs.LbNetworkLoad_balancerListenerExternalAddressSpec;
+    internalAddressSpec?: outputs.LbNetworkLoad_balancerListenerInternalAddressSpec;
+    name: string;
+    port: number;
+    protocol: string;
+    targetPort: number;
+}
+
+export interface LbNetworkLoad_balancerListenerExternalAddressSpec {
+    address: string;
+    ipVersion?: string;
+}
+
+export interface LbNetworkLoad_balancerListenerInternalAddressSpec {
+    address: string;
+    ipVersion?: string;
+    subnetId: string;
+}
+
+export interface LbTargetGroupTarget {
+    address: string;
+    subnetId: string;
+}
+
+export interface MdbClickhouseClusterAccess {
+    dataLens?: boolean;
+    metrika?: boolean;
+    serverless?: boolean;
+    webSql?: boolean;
+}
+
+export interface MdbClickhouseClusterBackupWindowStart {
+    hours?: number;
+    minutes?: number;
+}
+
+export interface MdbClickhouseClusterClickhouse {
+    config: outputs.MdbClickhouseClusterClickhouseConfig;
+    resources: outputs.MdbClickhouseClusterClickhouseResources;
+}
+
+export interface MdbClickhouseClusterClickhouseConfig {
+    backgroundPoolSize: number;
+    backgroundSchedulePoolSize: number;
+    compressions?: outputs.MdbClickhouseClusterClickhouseConfigCompression[];
+    geobaseUri: string;
+    graphiteRollups?: outputs.MdbClickhouseClusterClickhouseConfigGraphiteRollup[];
+    kafka: outputs.MdbClickhouseClusterClickhouseConfigKafka;
+    kafkaTopics?: outputs.MdbClickhouseClusterClickhouseConfigKafkaTopic[];
+    keepAliveTimeout: number;
+    logLevel: string;
+    markCacheSize: number;
+    maxConcurrentQueries: number;
+    maxConnections: number;
+    maxPartitionSizeToDrop: number;
+    maxTableSizeToDrop: number;
+    mergeTree: outputs.MdbClickhouseClusterClickhouseConfigMergeTree;
+    metricLogEnabled: boolean;
+    metricLogRetentionSize: number;
+    metricLogRetentionTime: number;
+    partLogRetentionSize: number;
+    partLogRetentionTime: number;
+    queryLogRetentionSize: number;
+    queryLogRetentionTime: number;
+    queryThreadLogEnabled: boolean;
+    queryThreadLogRetentionSize: number;
+    queryThreadLogRetentionTime: number;
+    rabbitmq: outputs.MdbClickhouseClusterClickhouseConfigRabbitmq;
+    textLogEnabled: boolean;
+    textLogLevel: string;
+    textLogRetentionSize: number;
+    textLogRetentionTime: number;
+    timezone: string;
+    traceLogEnabled: boolean;
+    traceLogRetentionSize: number;
+    traceLogRetentionTime: number;
+    uncompressedCacheSize: number;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigCompression {
+    method: string;
+    minPartSize: number;
+    minPartSizeRatio: number;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigGraphiteRollup {
+    name: string;
+    patterns?: outputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern[];
+}
+
+export interface MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern {
+    function: string;
+    regexp: string;
+    retentions?: outputs.MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention[];
+}
+
+export interface MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention {
+    age: number;
+    precision: number;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigKafka {
+    saslMechanism: string;
+    saslPassword: string;
+    saslUsername: string;
+    securityProtocol: string;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigKafkaTopic {
+    name: string;
+    settings?: outputs.MdbClickhouseClusterClickhouseConfigKafkaTopicSettings;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigKafkaTopicSettings {
+    saslMechanism?: string;
+    saslPassword?: string;
+    saslUsername?: string;
+    securityProtocol?: string;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigMergeTree {
+    maxBytesToMergeAtMinSpaceInPool: number;
+    maxReplicatedMergesInQueue: number;
+    numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge: number;
+    partsToDelayInsert: number;
+    partsToThrowInsert: number;
+    replicatedDeduplicationWindow: number;
+    replicatedDeduplicationWindowSeconds: number;
+}
+
+export interface MdbClickhouseClusterClickhouseConfigRabbitmq {
+    password: string;
+    username: string;
+}
+
+export interface MdbClickhouseClusterClickhouseResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface MdbClickhouseClusterDatabase {
+    name: string;
+}
+
+export interface MdbClickhouseClusterFormatSchema {
+    name: string;
+    type: string;
+    uri: string;
+}
+
+export interface MdbClickhouseClusterHost {
+    assignPublicIp?: boolean;
+    fqdn: string;
+    shardName: string;
+    subnetId: string;
+    type: string;
+    zone: string;
+}
+
+export interface MdbClickhouseClusterMlModel {
+    name: string;
+    type: string;
+    uri: string;
+}
+
+export interface MdbClickhouseClusterShardGroup {
+    description?: string;
+    name: string;
+    shardNames: string[];
+}
+
+export interface MdbClickhouseClusterUser {
+    name: string;
+    password: string;
+    permissions: outputs.MdbClickhouseClusterUserPermission[];
+    quotas: outputs.MdbClickhouseClusterUserQuota[];
+    settings: outputs.MdbClickhouseClusterUserSettings;
+}
+
+export interface MdbClickhouseClusterUserPermission {
+    databaseName: string;
+}
+
+export interface MdbClickhouseClusterUserQuota {
+    errors: number;
+    executionTime: number;
+    intervalDuration: number;
+    queries: number;
+    readRows: number;
+    resultRows: number;
+}
+
+export interface MdbClickhouseClusterUserSettings {
+    addHttpCorsHeader: boolean;
+    allowDdl: boolean;
+    compile: boolean;
+    compileExpressions: boolean;
+    connectTimeout: number;
+    countDistinctImplementation: string;
+    distinctOverflowMode: string;
+    distributedAggregationMemoryEfficient: boolean;
+    distributedDdlTaskTimeout: number;
+    distributedProductMode: string;
+    emptyResultForAggregationByEmptySet: boolean;
+    enableHttpCompression: boolean;
+    fallbackToStaleReplicasForDistributedQueries: boolean;
+    forceIndexByDate: boolean;
+    forcePrimaryKey: boolean;
+    groupByOverflowMode: string;
+    groupByTwoLevelThreshold: number;
+    groupByTwoLevelThresholdBytes: number;
+    httpConnectionTimeout: number;
+    httpHeadersProgressInterval: number;
+    httpReceiveTimeout: number;
+    httpSendTimeout: number;
+    inputFormatDefaultsForOmittedFields: boolean;
+    inputFormatValuesInterpretExpressions: boolean;
+    insertQuorum: number;
+    insertQuorumTimeout: number;
+    joinOverflowMode: string;
+    joinUseNulls: boolean;
+    joinedSubqueryRequiresAlias: boolean;
+    lowCardinalityAllowInNativeFormat: boolean;
+    maxAstDepth: number;
+    maxAstElements: number;
+    maxBlockSize: number;
+    maxBytesBeforeExternalGroupBy: number;
+    maxBytesBeforeExternalSort: number;
+    maxBytesInDistinct: number;
+    maxBytesInJoin: number;
+    maxBytesInSet: number;
+    maxBytesToRead: number;
+    maxBytesToSort: number;
+    maxBytesToTransfer: number;
+    maxColumnsToRead: number;
+    maxExecutionTime: number;
+    maxExpandedAstElements: number;
+    maxInsertBlockSize: number;
+    maxMemoryUsage: number;
+    maxMemoryUsageForUser: number;
+    maxNetworkBandwidth: number;
+    maxNetworkBandwidthForUser: number;
+    maxQuerySize: number;
+    maxReplicaDelayForDistributedQueries: number;
+    maxResultBytes: number;
+    maxResultRows: number;
+    maxRowsInDistinct: number;
+    maxRowsInJoin: number;
+    maxRowsInSet: number;
+    maxRowsToGroupBy: number;
+    maxRowsToRead: number;
+    maxRowsToSort: number;
+    maxRowsToTransfer: number;
+    maxTemporaryColumns: number;
+    maxTemporaryNonConstColumns: number;
+    maxThreads: number;
+    mergeTreeMaxBytesToUseCache: number;
+    mergeTreeMaxRowsToUseCache: number;
+    mergeTreeMinBytesForConcurrentRead: number;
+    mergeTreeMinRowsForConcurrentRead: number;
+    minBytesToUseDirectIo: number;
+    minCountToCompile: number;
+    minCountToCompileExpression: number;
+    minExecutionSpeed: number;
+    minExecutionSpeedBytes: number;
+    minInsertBlockSizeBytes: number;
+    minInsertBlockSizeRows: number;
+    outputFormatJsonQuote64bitIntegers: boolean;
+    outputFormatJsonQuoteDenormals: boolean;
+    priority: number;
+    quotaMode: string;
+    readOverflowMode: string;
+    readonly: number;
+    receiveTimeout: number;
+    replicationAlterPartitionsSync: number;
+    resultOverflowMode: string;
+    selectSequentialConsistency: boolean;
+    sendProgressInHttpHeaders: boolean;
+    sendTimeout: number;
+    setOverflowMode: string;
+    skipUnavailableShards: boolean;
+    sortOverflowMode: string;
+    timeoutOverflowMode: string;
+    transferOverflowMode: string;
+    transformNullIn: boolean;
+    useUncompressedCache: boolean;
+}
+
+export interface MdbClickhouseClusterZookeeper {
+    resources: outputs.MdbClickhouseClusterZookeeperResources;
+}
+
+export interface MdbClickhouseClusterZookeeperResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface MdbKafkaClusterConfig {
+    assignPublicIp?: boolean;
+    brokersCount?: number;
+    kafka: outputs.MdbKafkaClusterConfigKafka;
+    version: string;
+    zones: string[];
+    zookeeper?: outputs.MdbKafkaClusterConfigZookeeper;
+}
+
+export interface MdbKafkaClusterConfigKafka {
+    kafkaConfig?: outputs.MdbKafkaClusterConfigKafkaKafkaConfig;
+    resources: outputs.MdbKafkaClusterConfigKafkaResources;
+}
+
+export interface MdbKafkaClusterConfigKafkaKafkaConfig {
+    compressionType?: string;
+    logFlushIntervalMessages?: number;
+    logFlushIntervalMs?: number;
+    logFlushSchedulerIntervalMs?: number;
+    logPreallocate?: boolean;
+    logRetentionBytes?: number;
+    logRetentionHours?: number;
+    logRetentionMinutes?: number;
+    logRetentionMs?: number;
+    logSegmentBytes?: number;
+}
+
+export interface MdbKafkaClusterConfigKafkaResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface MdbKafkaClusterConfigZookeeper {
+    resources: outputs.MdbKafkaClusterConfigZookeeperResources;
+}
+
+export interface MdbKafkaClusterConfigZookeeperResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface MdbKafkaClusterTopic {
+    name: string;
+    partitions: number;
+    replicationFactor: number;
+    topicConfig?: outputs.MdbKafkaClusterTopicTopicConfig;
+}
+
+export interface MdbKafkaClusterTopicTopicConfig {
+    cleanupPolicy?: string;
+    compressionType?: string;
+    deleteRetentionMs?: number;
+    fileDeleteDelayMs?: number;
+    flushMessages?: number;
+    flushMs?: number;
+    maxMessageBytes?: number;
+    minCompactionLagMs?: number;
+    minInsyncReplicas?: number;
+    preallocate?: boolean;
+    retentionBytes?: number;
+    retentionMs?: number;
+    segmentBytes?: number;
+}
+
+export interface MdbKafkaClusterUser {
+    name: string;
+    password: string;
+    permissions?: outputs.MdbKafkaClusterUserPermission[];
+}
+
+export interface MdbKafkaClusterUserPermission {
+    role: string;
+    topicName: string;
+}
+
+export interface MdbMongodbClusterClusterConfig {
+    access: outputs.MdbMongodbClusterClusterConfigAccess;
+    backupWindowStart: outputs.MdbMongodbClusterClusterConfigBackupWindowStart;
+    featureCompatibilityVersion: string;
+    version: string;
+}
+
+export interface MdbMongodbClusterClusterConfigAccess {
+    dataLens: boolean;
+}
+
+export interface MdbMongodbClusterClusterConfigBackupWindowStart {
+    hours?: number;
+    minutes?: number;
+}
+
+export interface MdbMongodbClusterDatabase {
+    name: string;
+}
+
+export interface MdbMongodbClusterHost {
+    assignPublicIp: boolean;
+    health: string;
+    name: string;
+    role: string;
+    shardName: string;
+    subnetId: string;
+    type: string;
+    zoneId: string;
+}
+
+export interface MdbMongodbClusterResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface MdbMongodbClusterUser {
+    name: string;
+    password: string;
+    permissions: outputs.MdbMongodbClusterUserPermission[];
+}
+
+export interface MdbMongodbClusterUserPermission {
+    databaseName: string;
+    roles?: string[];
+}
+
+export interface MdbMysqlClusterAccess {
+    dataLens?: boolean;
+    webSql?: boolean;
+}
+
+export interface MdbMysqlClusterBackupWindowStart {
+    hours?: number;
+    minutes?: number;
+}
+
+export interface MdbMysqlClusterDatabase {
+    name: string;
+}
+
+export interface MdbMysqlClusterHost {
+    assignPublicIp?: boolean;
+    fqdn: string;
+    subnetId: string;
+    zone: string;
+}
+
+export interface MdbMysqlClusterResources {
+    diskSize: number;
+    diskTypeId: string;
+    resourcePresetId: string;
+}
+
+export interface MdbMysqlClusterRestore {
+    backupId: string;
+    time?: string;
+}
+
+export interface MdbMysqlClusterUser {
+    authenticationPlugin: string;
+    connectionLimits: outputs.MdbMysqlClusterUserConnectionLimits;
+    globalPermissions: string[];
+    name: string;
+    password: string;
+    permissions: outputs.MdbMysqlClusterUserPermission[];
+}
+
+export interface MdbMysqlClusterUserConnectionLimits {
+    maxConnectionsPerHour?: number;
+    maxQuestionsPerHour?: number;
+    maxUpdatesPerHour?: number;
+    maxUserConnections?: number;
+}
+
+export interface MdbMysqlClusterUserPermission {
+    databaseName: string;
+    roles?: string[];
+}
+
+export interface MdbPostgresqlClusterConfig {
+    access: outputs.MdbPostgresqlClusterConfigAccess;
+    autofailover: boolean;
+    backupWindowStart: outputs.MdbPostgresqlClusterConfigBackupWindowStart;
+    performanceDiagnostics: outputs.MdbPostgresqlClusterConfigPerformanceDiagnostics;
+    poolerConfig?: outputs.MdbPostgresqlClusterConfigPoolerConfig;
+    postgresqlConfig: {[key: string]: string};
+    resources: outputs.MdbPostgresqlClusterConfigResources;
+    version: string;
+}
+
+export interface MdbPostgresqlClusterConfigAccess {
+    dataLens?: boolean;
+    webSql: boolean;
+}
+
+export interface MdbPostgresqlClusterConfigBackupWindowStart {
+    hours?: number;
+    minutes?: number;
+}
+
+export interface MdbPostgresqlClusterConfigPerformanceDiagnostics {
+    enabled: boolean;
+    sessionsSamplingInterval: number;
+    statementsSamplingInterval: number;
+}
+
+export interface MdbPostgresqlClusterConfigPoolerConfig {
+    poolDiscard?: boolean;
+    poolingMode?: string;
+}
+
+export interface MdbPostgresqlClusterConfigResources {
+    diskSize: number;
+    diskTypeId?: string;
+    resourcePresetId: string;
+}
+
+export interface MdbPostgresqlClusterDatabase {
+    extensions?: outputs.MdbPostgresqlClusterDatabaseExtension[];
+    lcCollate?: string;
+    lcType?: string;
+    name: string;
+    owner: string;
+}
+
+export interface MdbPostgresqlClusterDatabaseExtension {
+    name: string;
+    version?: string;
+}
+
+export interface MdbPostgresqlClusterHost {
+    assignPublicIp?: boolean;
+    fqdn: string;
+    name?: string;
+    priority?: number;
+    replicationSource: string;
+    replicationSourceName?: string;
+    role: string;
+    subnetId: string;
+    zone: string;
+}
+
+export interface MdbPostgresqlClusterRestore {
+    backupId: string;
+    time?: string;
+    timeInclusive?: boolean;
+}
+
+export interface MdbPostgresqlClusterUser {
+    connLimit: number;
+    grants?: string[];
+    login?: boolean;
+    name: string;
+    password: string;
+    permissions: outputs.MdbPostgresqlClusterUserPermission[];
+    settings: {[key: string]: string};
+}
+
+export interface MdbPostgresqlClusterUserPermission {
+    databaseName: string;
+}
+
+export interface MdbRedisClusterConfig {
+    maxmemoryPolicy: string;
+    password: string;
+    timeout: number;
+    version: string;
+}
+
+export interface MdbRedisClusterHost {
+    fqdn: string;
+    shardName: string;
+    subnetId: string;
+    zone: string;
+}
+
+export interface MdbRedisClusterResources {
+    diskSize: number;
+    resourcePresetId: string;
+}
+
+export interface StorageBucketCorsRule {
+    allowedHeaders?: string[];
+    allowedMethods: string[];
+    allowedOrigins: string[];
+    exposeHeaders?: string[];
+    maxAgeSeconds?: number;
+}
+
+export interface StorageBucketGrant {
+    id?: string;
+    permissions: string[];
+    type: string;
+    uri?: string;
+}
+
+export interface StorageBucketLifecycleRule {
+    abortIncompleteMultipartUploadDays?: number;
+    enabled: boolean;
+    expiration?: outputs.StorageBucketLifecycleRuleExpiration;
+    id: string;
+    noncurrentVersionExpiration?: outputs.StorageBucketLifecycleRuleNoncurrentVersionExpiration;
+    noncurrentVersionTransitions?: outputs.StorageBucketLifecycleRuleNoncurrentVersionTransition[];
+    prefix?: string;
+    transitions?: outputs.StorageBucketLifecycleRuleTransition[];
+}
+
+export interface StorageBucketLifecycleRuleExpiration {
+    date?: string;
+    days?: number;
+    expiredObjectDeleteMarker?: boolean;
+}
+
+export interface StorageBucketLifecycleRuleNoncurrentVersionExpiration {
+    days?: number;
+}
+
+export interface StorageBucketLifecycleRuleNoncurrentVersionTransition {
+    days?: number;
+    storageClass: string;
+}
+
+export interface StorageBucketLifecycleRuleTransition {
+    date?: string;
+    days?: number;
+    storageClass: string;
+}
+
+export interface StorageBucketLogging {
+    targetBucket: string;
+    targetPrefix?: string;
+}
+
+export interface StorageBucketServerSideEncryptionConfiguration {
+    rule: outputs.StorageBucketServerSideEncryptionConfigurationRule;
+}
+
+export interface StorageBucketServerSideEncryptionConfigurationRule {
+    applyServerSideEncryptionByDefault: outputs.StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault;
+}
+
+export interface StorageBucketServerSideEncryptionConfigurationRuleApplyServerSideEncryptionByDefault {
+    kmsMasterKeyId: string;
+    sseAlgorithm: string;
+}
+
+export interface StorageBucketVersioning {
+    enabled?: boolean;
+}
+
+export interface StorageBucketWebsite {
+    errorDocument?: string;
+    indexDocument?: string;
+}
+
+export interface VpcAddressExternalIpv4Address {
+    address: string;
+    ddosProtectionProvider: string;
+    outgoingSmtpCapability: string;
+    zoneId: string;
+}
+
+export interface VpcRouteTableStaticRoute {
+    destinationPrefix?: string;
+    nextHopAddress?: string;
+}
+
+export interface VpcSecurityGroupEgress {
+    description?: string;
+    fromPort?: number;
+    id: string;
+    labels?: {[key: string]: string};
+    port?: number;
+    predefinedTarget?: string;
+    protocol: string;
+    securityGroupId?: string;
+    toPort?: number;
+    v4CidrBlocks?: string[];
+    v6CidrBlocks?: string[];
+}
+
+export interface VpcSecurityGroupIngress {
+    description?: string;
+    fromPort?: number;
+    id: string;
+    labels?: {[key: string]: string};
+    port?: number;
+    predefinedTarget?: string;
+    protocol: string;
+    securityGroupId?: string;
+    toPort?: number;
+    v4CidrBlocks?: string[];
+    v6CidrBlocks?: string[];
 }
 
 export interface VpcSubnetDhcpOptions {
