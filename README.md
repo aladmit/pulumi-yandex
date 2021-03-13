@@ -20,7 +20,7 @@ or `yarn`:
 
 ## Configuration
 
-```typescript
+```
 import * as pulumi from "@pulumi/pulumi";
 import * as yandex from "@aladmit/yandex;
 
@@ -35,7 +35,6 @@ const provider = new yandex.Provider("yandex", {
     folderId: "folder_id_here",
     zone: "ru-central1-a"
 });
-
 
 export const vpc = yandex.getVpcSubnet({
     name: "default-ru-central1-c"
