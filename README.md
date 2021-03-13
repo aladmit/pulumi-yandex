@@ -1,86 +1,57 @@
-# Terraform Bridge Provider Boilerplate
+# Unofficial Pulumi Yandex.Cloud Resource Provider
 
-This repository contains boilerplate code for building a new Pulumi provider which wraps an existing
-Terraform provider, if the existing provider uses _Go Modules_.
+This resource provider for Pulumi lets you create, deploy and manage resources in Yandex.Cloud. Provider does everything [official terraform provider](https://github.com/yandex-cloud/terraform-provider-yandex) does. 
 
-Modify this README to describe:
+I don't have resources at the moment to support full documentation for all resources, but you always can use [official terraform provider documentation](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs), everything works the same.
 
-- The type of resources the provider manages
-- Add a build status image from Travis at the top of the README
-- Update package names in the information below
-- Add any important documentation of concepts (e.g. the "serverless" components in the AWS provider).
+> Its published only as javascript/typescript package. Packages for other languages will be published later.
 
-## Creating a Pulumi Terraform Bridge Provider
+## How to install provider
 
-First, clone this repo with the name of the desired provider in place of `yandex`:
+Add provider to your package.json
 
 ```
-git clone https://github.com/pulumi/pulumi-tf-provider-boilerplate pulumi-yandex
-```
-
-Second, replace references to `yandex` with the name of your provider:
-
-```
-make prepare NAME=foo REPOSITORY=github.com/pulumi/pulumi-foo
-```
-
-Next, list the configuration points for the provider in the area of the README.
-
-
-> Note: If the name of the desired Pulumi provider differs from the name of the Terraform provider, you will need to carefully distinguish between the references - see https://github.com/pulumi/pulumi-azure for an example.
-
-### Add dependencies
-
-In order to properly build the sdks, the following tools are expected:
-- `pulumictl` (See the project's README for installation instructions: https://github.com/pulumi/pulumictl)
-
-In the root of the repository, run:
-
-- `GO111MODULE=on go get github.com/pulumi/pulumi-terraform@master`
-- `(cd provider && go get github.com/terraform-providers/terraform-provider-foo)`  (where `foo` is the name of the provider - note the parenthesis to run this in a subshell)
-- `(cd provider && go mod download)`
-
-### Build the provider:
-
-- Edit `provider/resources.go` to map each resource, and specify provider information
-- `make build_sdks`
-
-## Installing
-
-This package is available in many languages in the standard packaging formats.
-
-### Node.js (Java/TypeScript)
-
-To use from JavaScript or TypeScript in Node.js, install using either `npm`:
-
-    $ npm install @pulumi/xyx
+    $ npm install @aladmit/yandex
 
 or `yarn`:
 
-    $ yarn add @pulumi/xyx
-
-### Python
-
-To use from Python, install using `pip`:
-
-    $ pip install pulumi_xyx
-
-### Go
-
-To use from Go, use `go get` to grab the latest version of the library
-
-    $ go get github.com/aladmit/pulumi-yandex/sdk/go/...
+    $ yarn add @aladmit/yandex
+```
 
 ## Configuration
 
+```
+import * as pulumi from "@pulumi/pulumi";
+import * as yandex from "@aladmit/yandex;
+
+export const vpc = yandex.getVpcSubnet({
+    name: "default-ru-central1-c"
+});
+
+// Its posibble to configure provider by keys or environment variables
+const provider = new yandex.Provider("yandex", {
+    token: "auth_token_here",
+    cloudId: "cloud_id_here",
+    folderId: "folder_id_here",
+    zone: "ru-central1-a"
+});
+
+export const vpc = yandex.getVpcSubnet({
+    name: "default-ru-central1-c"
+}, { provider: provider });
+```
+
 The following configuration points are available for the `yandex` provider:
 
-- `yandex:apiKey` (environment: `XYZ_API_KEY`) - the API key for `yandex`
-- `yandex:region` (environment: `XYZ_REGION`) - the region in which to deploy resources
-
-## Reference
-
-For detailed reference documentation, please visit [the API docs][1].
-
-
-[1]: https://www.pulumi.com/docs/reference/pkg/x/
+| Configuratino key              | Environment VAR               | Description                                                                                                                                                                                                       |
+| -                              | -                             | -                                                                                                                                                                                                                 |
+| `token`                        | `YC_TOKEN`                    | Security token or IAM token used for authentication in Yandex.Cloud                                                                                                                                               |
+| `service_account_key_file`     | `YC_SERVICE_ACCOUNT_KEY_FILE` | Contains either a path to or the contents of the Service Account file in JSON format.                                                                                                                             |
+| `cloud_id` (Required)          | `YC_CLOUD_ID`                 | The ID of the cloud to apply any resources to.                                                                                                                                                                    |
+| `folder_id`(Required)          | `YC_FOLDER_ID`                | The ID of the folder to operate under, if not specified by a given resource.                                                                                                                                      |
+| `zone` (Optional)              | `YC_ZONE`                     | The default availability zone to operate under, if not specified by a given resource.                                                                                                                             |
+| `storage_access_key`(Optional) | `YC_STORAGE_ACCESS_KEY`       | Yandex.Cloud storage service access key, which is used when a storage data/resource doesn't have an access key explicitly specified.                                                                              |
+| `storage_secret_key`(Optional) | `YC_STORAGE_SECRET_KEY`       | Yandex.Cloud storage service secret key, which is used when a storage data/resource doesn't have a secret key explicitly specified.                                                                               |
+| `ymq_access_key` (Optional)    | `YC_MESSAGE_QUEUE_ACCESS_KEY` | Yandex.Cloud Message Queue service access key, which is used when a YMQ queue resource doesn't have an access key explicitly specified.                                                                           |
+| `ymq_secret_key` (Optional)    | `YC_MESSAGE_QUEUE_SECRET_KEY` | Yandex.Cloud Message Queue service secret key, which is used when a YMQ queue resource doesn't have a secret key explicitly specified.                                                                            |
+| `max_retries` (Optional)       |                               | This is the maximum number of times an API call is retried, in the case where requests are being throttled or experiencing transient failures. The delay between the subsequent API calls increases exponentially |
